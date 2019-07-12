@@ -6,7 +6,7 @@
 
 #define _CGAMEOBJECT_H_
 
-class GameObject : Noncopyable
+class GameObject
 {
 
 public:
