@@ -1,6 +1,12 @@
 #include "stdafx.h"
 #include "Sprite.h"
 
+/*
+頂点バッファのデータ形式を定義する構造体を宣言。
+作成する頂点バッファを「D3D11_BUFFER_DESC」で定義。
+サブリソースの初期化データを「D3D11_SUBRESOURCE_DATA　構造体」で定義。
+「ID3D11Device::CreateBuffer　メソッド」で頂点バッファを作成。
+*/
 
 Sprite::Sprite()
 {
@@ -10,6 +16,36 @@ Sprite::Sprite()
 Sprite::~Sprite()
 {
 
+}
+
+//更新関数。
+void Sprite::Update(const CVector3& trans, const CQuaternion& rot, const CVector3& scale, CVector2 pivot)
+{
+	//ローカルピボット。
+	CVector2 localPivot = pivot;
+	localPivot.x -= 0.5f;
+	localPivot.y -= 0.5f;
+	localPivot.x *= -2.0f;
+	localPivot.y *= -2.0f;
+
+	//画像のサイズ。
+	CVector2 halfSize = m_size;
+	halfSize.x *= 0.5f;
+	halfSize.y *= 0.5f;
+
+	CMatrix mPivotTrans;                        //平行移動行列。
+	mPivotTrans.MakeTranslation(                //ピボットとSizeを使って平行移動行列の計算。
+		{ halfSize.x * localPivot.x, halfSize.y * localPivot.y, 0.0f }
+	);
+
+	CMatrix mTrans, mRot, mScale;
+	mTrans.MakeTranslation(trans);				//平行移動行列。
+	mRot.MakeRotationFromQuaternion(rot);		//回転行列。
+	mScale.MakeScaling(scale);					//拡大行列。
+	m_world.Mul(mPivotTrans, mScale);           //行列の乗算。
+	m_world.Mul(m_world, mRot);
+	m_world.Mul(m_world, mTrans);
+	
 }
 
 //頂点バッファの初期化。
@@ -56,13 +92,21 @@ void Sprite::InitVertexBuffer(float w, float h)
 
 	//D3D11_BUFFER_DESC 設定開始。
 	D3D11_BUFFER_DESC DBD;
-	DBD.ByteWidth = sizeof(vertex);       //頂点バッファのサイズ。(上で作ったやつ)。
-	DBD.Usage = D3D11_USAGE_DEFAULT;      //読み書き方法。デフォルトで。
-	DBD.CPUAccessFlags = 0;               //そのまんまCPUアクセスフラグ。アクセス不要の場合は０。
-	DBD.MiscFlags = 0;                    //その他フラグ。未使用は０。
-	DBD.StructureByteStride = 0;          //バッファが構造化バッファを表す場合の、バッファ構造内の各要素のサイズ（バイト単位）。
+	DBD.ByteWidth = sizeof(vertex);             //頂点バッファのサイズ。(上で作ったやつ)。
+	DBD.Usage = D3D11_USAGE_DEFAULT;            //読み書き方法。デフォルトで。
+	DBD.CPUAccessFlags = 0;                     //そのまんまCPUアクセスフラグ。アクセス不要の場合は０。
+	DBD.MiscFlags = 0;                          //その他フラグ。未使用は０。
+	DBD.StructureByteStride = 0;                //バッファが構造化バッファを表す場合の、バッファ構造内の各要素のサイズ（バイト単位）。
+	DBD.BindFlags = D3D11_BIND_VERTEX_BUFFER;	//これから作成するバッファが頂点バッファであることを指定する。
 
-	
+	//D3D11_SUBRESOURCE_DATA 設定開始。
+	D3D11_SUBRESOURCE_DATA DSD;
+	DSD.pSysMem = vertex;                       //バッファ、データの初期値。
+	DSD.SysMemPitch = 0;                        //メモリのピッチ（バイト数）。
+	DSD.SysMemSlicePitch = 0;                   //深度レベル（バイト数）。
+
+	//頂点バッファの作成。
+	g_graphicsEngine->GetD3DDevice()->CreateBuffer(&DBD, &DSD, &m_vertexBuffer);
 }
 
 //インデックスバッファの初期化。
@@ -74,15 +118,46 @@ void Sprite::InitIndexBuffer()
 	2,1,3		//三角形二つ目
 	};
 
-}
 
-//サンプラステートの初期化。
+	//頂点バッファ同様、インデックスバッファを作成するためにはD3D11_BUFFER_DESCとD3D11_SUBRESOURCE_DATAを設定する必要がある。
+
+	//D3D11_BUFFER_DESC設定。
+	D3D11_BUFFER_DESC IDBD;
+	IDBD.Usage = D3D11_USAGE_DEFAULT;               //バッファの読み込み（default）。
+	IDBD.ByteWidth = sizeof(index);                 //バッファのサイズ。頂点番号数。
+	IDBD.BindFlags = D3D11_BIND_INDEX_BUFFER;       //インデックスバッファ。
+	IDBD.CPUAccessFlags = 0;                        //CPUアクセスフラグ。
+	IDBD.MiscFlags = 0;                             //その他フラグ。
+	IDBD.StructureByteStride = 0;                   //構造化バッファの場合、その構造体のサイズ（バイト数）。
+
+	//D3D11_SUBRESOURCE_DATA設定開始。
+	D3D11_SUBRESOURCE_DATA IDSD;
+	IDSD.pSysMem = index;                           //バッファ、データの初期値。
+	IDSD.SysMemPitch = 0;                           //メモリのピッチ。
+	IDSD.SysMemSlicePitch = 0;                      //深度レベル。
+
+	//インデックスバッファの作成。
+	g_graphicsEngine->GetD3DDevice()->CreateBuffer(&IDBD, &IDSD, &m_indexBuffer);
+
+} 
+
+//サンプラーステートの初期化。(どのようにテクスチャがサンプルされるかを定義)。
 void Sprite::InitSampleState()
 {
 
+	D3D11_SAMPLER_DESC DSD;
+	DSD.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
+	DSD.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
+	DSD.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
+	DSD.MaxAnisotropy = 1;
+	DSD.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+
+	//サンプラーステートの作成。
+	g_graphicsEngine->GetD3DDevice()->CreateSamplerState(&DSD, &m_samplerState);
+
 }
 
-//
+//cpp側からシェーダに渡す情報を構造体にしたもの。
 void Sprite::InitConstantBuffer()
 {
 	D3D11_BUFFER_DESC desc;
@@ -93,6 +168,7 @@ void Sprite::InitConstantBuffer()
 	desc.CPUAccessFlags = 0;                                          //そのまんまCPUアクセスフラグ。アクセス不要の場合は０。
 	desc.MiscFlags = 0;                                               //その他フラグ。未使用は０。
 	desc.StructureByteStride = 0;                                     //バッファが構造化バッファを表す場合の、バッファ構造内の各要素のサイズ（バイト単位）。
+
 }
 
 //Init関数。

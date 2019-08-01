@@ -49,11 +49,16 @@ public:
 	//定数バッファの初期化。
 	void InitConstantBuffer();
 
+	CVector2 m_size = CVector2::Zero();            //画像のサイズ。
+
+	CMatrix	m_world = CMatrix::Identity();			//ワールド行列。
+
 	ID3D11Buffer* m_vertexBuffer = NULL;           //頂点バッファ。
 	ID3D11Buffer* m_indexBuffer = NULL;            //インデックスバッファ。
 	Effect m_effect;                               //エフェクト。
 	ID3D11RenderTargetView* m_texture = NULL;      //テクスチャ。
 	ID3D11SamplerState* m_samplerState = NULL;     //サンプラーステート。
+
 
 	//頂点バッファの初期化。
 	void InitVertexBuffer(float w, float h);
