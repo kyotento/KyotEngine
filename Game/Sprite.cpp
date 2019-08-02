@@ -1,12 +1,15 @@
 #include "stdafx.h"
 #include "Sprite.h"
 
-/*
-頂点バッファのデータ形式を定義する構造体を宣言。
-作成する頂点バッファを「D3D11_BUFFER_DESC」で定義。
-サブリソースの初期化データを「D3D11_SUBRESOURCE_DATA　構造体」で定義。
-「ID3D11Device::CreateBuffer　メソッド」で頂点バッファを作成。
-*/
+/// <summary>
+/// 2Dを描画するためのクラス
+/// </summary>
+/// <remarks>
+/// 頂点バッファのデータ形式を定義する構造体を宣言。
+/// 作成する頂点バッファを「D3D11_BUFFER_DESC」で定義。
+/// サブリソースの初期化データを「D3D11_SUBRESOURCE_DATA　構造体」で定義。
+///「ID3D11Device::CreateBuffer　メソッド」で頂点バッファを作成。
+/// </remarks>
 
 Sprite::Sprite()
 {
@@ -15,7 +18,6 @@ Sprite::Sprite()
 
 Sprite::~Sprite()
 {
-
 }
 
 //更新関数。
@@ -28,7 +30,7 @@ void Sprite::Update(const CVector3& trans, const CQuaternion& rot, const CVector
 	localPivot.x *= -2.0f;
 	localPivot.y *= -2.0f;
 
-	//画像のサイズ。
+	//画像のハーフサイズ。
 	CVector2 halfSize = m_size;
 	halfSize.x *= 0.5f;
 	halfSize.y *= 0.5f;
@@ -142,22 +144,22 @@ void Sprite::InitIndexBuffer()
 } 
 
 //サンプラーステートの初期化。(どのようにテクスチャがサンプルされるかを定義)。
-void Sprite::InitSampleState()
+void Sprite::InitSamplerState()
 {
 
 	D3D11_SAMPLER_DESC DSD;
-	DSD.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
-	DSD.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
-	DSD.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
+	DSD.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;			//U方向ラップ。
+	DSD.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;			//V方向ラップ。
+	DSD.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;			//W方向ラップ。
 	DSD.MaxAnisotropy = 1;
-	DSD.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+	DSD.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;		//テクスチャファイル。
 
 	//サンプラーステートの作成。
 	g_graphicsEngine->GetD3DDevice()->CreateSamplerState(&DSD, &m_samplerState);
 
 }
 
-//cpp側からシェーダに渡す情報を構造体にしたもの。
+//定数バッファ。cpp側からシェーダに渡す情報を構造体にしたもの。
 void Sprite::InitConstantBuffer()
 {
 	D3D11_BUFFER_DESC desc;
@@ -171,17 +173,84 @@ void Sprite::InitConstantBuffer()
 
 }
 
-//Init関数。
-void Sprite::Init(const wchar_t* TextureFilePath, float w, float h)
+//Init関数。シェーダーロード用。
+void Sprite::Init(ID3D11ShaderResourceView* srv, float w, float h)
 {
+	m_size.x = w;
+	m_size.y = h;
 	//頂点バッファの初期化。
-	InitVertexBuffer(w,h);
+	InitVertexBuffer(w, h);
 	//インデックスバッファの初期化。
 	InitIndexBuffer();
 	//サンプラステートの初期化。
-	InitSampleState();
-	//エフェクトファイルのロード。
-	//m_effect.Load("Assets/shader/");
+	InitSamplerState();
+
+	//頂点シェーダーをロード。
+	/*
+		第一引数はロードするシェーダーソースファイルのファイルパス。
+		第二引数はエントリーポイントとなる関数の名前。 
+		第三引数はロードしたシェーダーのタイプ。
+	*/
+	m_vsShader.Load(
+		"Assets/shader/sprite.fx",
+		"VS",
+		Shader::EnType::VS	//頂点シェーダー。
+	);
+	//ピクセルシェーダーをロード。
+	m_psShader.Load(
+		"Assets/shader/sprite.fx",
+		"PS",
+		Shader::EnType::PS	//ピクセルシェーダー。
+	);
+
+	//定数バッファを初期化。
+	InitConstantBuffer();
+
+
+	m_texture = srv;
+	if (m_texture != nullptr) {
+		//m_texture->AddRef();
+	}
+
+}
+
+//Init関数。テクスチャロード。
+void Sprite::Init(const wchar_t* TextureFilePath, float w, float h)
+{
+	//画像サイズ。
+	m_size.x = w;
+	m_size.y = h;
+
+	//頂点バッファの初期化。
+	InitVertexBuffer(w, h);
+	//インデックスバッファの初期化。
+	InitIndexBuffer();
+	//サンプラステートの初期化。
+	InitSamplerState();
+
+	//ファイル名を使って、テクスチャをロードして、ShaderResrouceViewを作成する。
+	HRESULT hr = DirectX::CreateDDSTextureFromFileEx(
+		g_graphicsEngine->GetD3DDevice(),	//D3Dデバイス
+		L"Assets/modelData/utc_all2.dds",	//読み込むテクスチャのファイルパス。
+		0,				                    //テクスチャの最大サイズ。0だとテクスチャサイズがそのまま読み込まれる
+		D3D11_USAGE_DEFAULT,		    	//リソースの使用用途。
+		D3D11_BIND_SHADER_RESOURCE,	        //リソースのバインド方法。
+		0,									//0でよい。
+		0,									//0でよい。
+		false,								//falseでいい。
+		nullptr,							//nullptrでいい。
+		&m_texture					        //SRV
+	);
+
+	//定数バッファを初期化。
+	InitConstantBuffer();
+
+
+}
+
+//描画処理。
+void Sprite::Draw()
+{
 
 
 }
