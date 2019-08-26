@@ -2,6 +2,12 @@
 class Camera
 {
 public:
+
+	enum EnUpdateProjMatrixFunc {
+		enUpdateProjMatrixFunc_Perspective,		//!<透視射影行列
+		enUpdateProjMatrixFunc_Ortho,			//!<平行投影
+	};
+
 	/*!
 	 * @brief	カメラ行列、プロジェクション行列の更新。
 	 *@details
@@ -99,3 +105,5 @@ private:
 };
 
 extern Camera g_camera3D;		//!<3Dカメラ。
+extern Camera* camera3d;
+extern Camera* camera2d;

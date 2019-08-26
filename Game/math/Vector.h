@@ -42,6 +42,17 @@ public:
 		static const CVector2 zero = { 0.0f,  0.0f };
 		return zero;
 	}
+
+	/// <summary>
+	/// 代入演算子。
+	/// </summary>
+	/// <param name="_v"></param>
+	/// <returns></returns>
+	CVector2& operator=(const CVector2& _v)
+	{
+		vec = _v.vec;
+		return *this;
+	}
 };
 /*!
  * @brief	ベクトル。
@@ -336,6 +347,11 @@ public:
 		struct { float x, y, z, w; };
 		float v[4];
 	};
+	static const CVector4 Red;
+	static const CVector4 Black;
+	static const CVector4 Yellow;
+	static const CVector4 Green;
+	static const CVector4 Zero;
 public:
 	operator DirectX::XMVECTOR() const
 	{

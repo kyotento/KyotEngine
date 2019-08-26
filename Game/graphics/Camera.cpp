@@ -3,6 +3,9 @@
 
 Camera g_camera3D;		//3Dカメラ。
 
+Camera* camera3d = NULL;
+Camera* camera2d = NULL;
+
 void Camera::Update()
 {
 	//ビュー行列を計算。

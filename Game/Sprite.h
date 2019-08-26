@@ -2,6 +2,7 @@
 
 #include "Effect.h"
 #include "graphics/Shader.h"
+#include "graphics/Camera.h"
 class Sprite
 {
 public:
@@ -9,7 +10,11 @@ public:
 	Sprite();
 	~Sprite();
 
-	static const CVector2 Default_Pivot;		//デフォルトのピボット。
+	/// <summary>
+	/// defaultのPovot。
+	/// </summary>
+	static const CVector2	DEFAULT_PIVOT;					//!<ピボット。
+
 
 	/// <summary>
 	/// 頂点バッファの座標
@@ -74,6 +79,8 @@ public:
 
 	CMatrix	m_world = CMatrix::Identity();					//ワールド行列。
 
+	Camera::EnUpdateProjMatrixFunc m_cameraMode = Camera::enUpdateProjMatrixFunc_Ortho;
+
 	ID3D11Buffer* m_vertexBuffer = NULL;					  //頂点バッファ。
 	ID3D11Buffer* m_indexBuffer = NULL;						  //インデックスバッファ。
 	ID3D11DepthStencilState* m_depthStencilState = NULL;
@@ -81,6 +88,7 @@ public:
 	ID3D11DepthStencilState*	zspriteRender = NULL;
 	ID3D11BlendState* pBlendState = NULL;					//ブレンドステート。
 	ID3D11RasterizerState*	rspriteRender = NULL;
+	ID3D11Buffer*				m__cb = nullptr;							//定数バッファ。
 
 	ID3D11ShaderResourceView* m_texture = NULL;				//テクスチャ。
 	ID3D11SamplerState* m_samplerState = NULL;				 //サンプラーステート。
@@ -88,6 +96,7 @@ public:
 	Shader m_vsShader;										 //頂点シェーダー。
 	Shader m_psShader;										 //ピクセルシェーダー。
 
+	CVector4					m_mulCol = { 1.f,1.f,1.f,1.f };
 	/// <summary>
 	/// 頂点バッファの初期化
 	/// </summary>

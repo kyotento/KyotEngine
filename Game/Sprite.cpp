@@ -20,6 +20,9 @@ Sprite::~Sprite()
 {
 }
 
+
+const CVector2	Sprite::DEFAULT_PIVOT = { 0.5f, 0.5f };
+
 //更新関数。
 void Sprite::Update(const CVector3& trans, const CQuaternion& rot, const CVector3& scale, CVector2 pivot)
 {
@@ -306,35 +309,50 @@ void Sprite::Init(const wchar_t* TextureFilePath, float w, float h)
 //描画処理。
 void Sprite::Draw()
 {		
-	//デバイスコンテキストを取得。
-	auto deviceContext = g_graphicsEngine->GetD3DDeviceContext();
-	//デバイスコンテキストに描画コマンドを積む。
-	//頂点バッファを設定。
-	unsigned int stride = sizeof(SVertex);	//頂点バッファのストライド
-	unsigned int offset = 0;						//頂点バッファのオフセット。
-	deviceContext->IASetVertexBuffers(0, 1, &m_vertexBuffer, &stride, &offset);
-	//プリミティブのトポロジーを設定。
-	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	//頂点シェーダーを設定。
-	deviceContext->VSSetShader(
-		(ID3D11VertexShader*)m_vsShader.GetBody(),	//頂点シェーダー。
-		NULL,										//NULLでいい。
-		0											//0
-	);
-	//ピクセルシェーダーを設定。
-	deviceContext->PSSetShader(
-		(ID3D11PixelShader*)m_psShader.GetBody(),	//ピクセルシェーダー。
-		NULL,										//NULLでいい。
-		0											//0
-	);
-	//頂点レイアウトを設定。
-	deviceContext->IASetInputLayout(m_vsShader.GetInputLayout());
 
-	//ここまで設定した内容でドロー
-	deviceContext->Draw(
-		3,	//頂点数。
-		0	//描画開始の頂点番号。
+	unsigned int vertexSize = sizeof(SVertex);
+	unsigned int offset = 0;
+	GraphicsEngine* ge = g_graphicsEngine;
+	ge->GetD3DDeviceContext()->IASetVertexBuffers(
+		0,
+		1,
+		&m_vertexBuffer,
+		&vertexSize,
+		&offset
+	);
+	ge->GetD3DDeviceContext()->IASetIndexBuffer(
+		m_indexBuffer,
+		DXGI_FORMAT_R32_UINT,
+		0
 	);
 
+	float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+	g_graphicsEngine->GetD3DDeviceContext()->OMSetBlendState(pBlendState, blendFactor, 0xffffffff);
+	g_graphicsEngine->GetD3DDeviceContext()->PSSetShaderResources(0, 1, &m_texture);
+	g_graphicsEngine->GetD3DDeviceContext()->PSSetSamplers(0, 1, &m_samplerState);
+	g_graphicsEngine->GetD3DDeviceContext()->RSSetState(rspriteRender);
+
+	ConstantBuffer cb;
+	cb.WVP = m_world;
+	if (m_cameraMode == Camera::enUpdateProjMatrixFunc_Ortho) {
+		g_graphicsEngine->GetD3DDeviceContext()->OMSetDepthStencilState(spriteRender, 0);
+		cb.WVP.Mul(cb.WVP, camera2d->GetViewMatrix());
+		cb.WVP.Mul(cb.WVP, camera2d->GetProjectionMatrix());
+	}
+	else if (m_cameraMode == Camera::enUpdateProjMatrixFunc_Perspective) {
+		g_graphicsEngine->GetD3DDeviceContext()->OMSetDepthStencilState(zspriteRender, 0);
+		cb.WVP.Mul(cb.WVP, camera3d->GetViewMatrix());
+		cb.WVP.Mul(cb.WVP, camera3d->GetProjectionMatrix());
+	}
+	cb.mulCol = m_mulCol;
+	ge->GetD3DDeviceContext()->UpdateSubresource(m__cb, 0, NULL, &cb, 0, 0);
+	ge->GetD3DDeviceContext()->VSSetConstantBuffers(0, 1, &m__cb);
+	ge->GetD3DDeviceContext()->PSSetConstantBuffers(0, 1, &m__cb);
+	ge->GetD3DDeviceContext()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	ge->GetD3DDeviceContext()->DrawIndexed(
+		6,
+		0,
+		0
+	);
 
 }
