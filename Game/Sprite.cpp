@@ -173,6 +173,59 @@ void Sprite::InitConstantBuffer()
 
 }
 
+//ブレンドステート。
+void Sprite::BlendState()
+{
+	//ブレンドステートオブジェクトの作成。
+	D3D11_BLEND_DESC blendDesc;
+
+	blendDesc.AlphaToCoverageEnable = true;		//描画ターゲットにピクセル値を設定するときにα値を使用するか。
+
+	ID3D11Device* pd3d = g_graphicsEngine->GetD3DDevice();
+	blendDesc.RenderTarget[0].BlendEnable = true;
+	blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+	blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+	blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+	blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+	blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+	blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+	blendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_RED | D3D11_COLOR_WRITE_ENABLE_BLUE | D3D11_COLOR_WRITE_ENABLE_GREEN;
+	pd3d->CreateBlendState(&blendDesc, &pBlendState);
+	{
+		{
+			{
+				D3D11_DEPTH_STENCIL_DESC desc;
+				ZeroMemory(&desc, sizeof(desc));
+				ID3D11Device* pd3d = g_graphicsEngine->GetD3DDevice();
+				desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+				desc.DepthFunc = D3D11_COMPARISON_LESS;
+				desc.DepthEnable = true;
+				desc.StencilEnable = false;
+				pd3d->CreateDepthStencilState(&desc, &zspriteRender);
+			}
+			{
+				D3D11_DEPTH_STENCIL_DESC desc;
+				ZeroMemory(&desc, sizeof(desc));
+				ID3D11Device* pd3d = g_graphicsEngine->GetD3DDevice();
+				desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+				desc.DepthFunc = D3D11_COMPARISON_LESS;
+				desc.DepthEnable = false;
+				desc.StencilEnable = false;
+				pd3d->CreateDepthStencilState(&desc, &spriteRender);
+			}
+		}
+		{
+			D3D11_RASTERIZER_DESC desc = {};
+			ID3D11Device* pd3d = g_graphicsEngine->GetD3DDevice();
+			desc.CullMode = D3D11_CULL_FRONT;
+			desc.FillMode = D3D11_FILL_SOLID;
+			desc.DepthClipEnable = true;
+			desc.MultisampleEnable = true;
+			pd3d->CreateRasterizerState(&desc, &rspriteRender);
+		}
+	}
+}
+
 //Init関数。シェーダーロード用。
 void Sprite::Init(ID3D11ShaderResourceView* srv, float w, float h)
 {
@@ -245,6 +298,8 @@ void Sprite::Init(const wchar_t* TextureFilePath, float w, float h)
 	//定数バッファを初期化。
 	InitConstantBuffer();
 
+	//ブレンドステート。
+	BlendState();
 
 }
 
@@ -264,13 +319,13 @@ void Sprite::Draw()
 	deviceContext->VSSetShader(
 		(ID3D11VertexShader*)m_vsShader.GetBody(),	//頂点シェーダー。
 		NULL,										//NULLでいい。
-		0											//0でいい。
+		0											//0
 	);
 	//ピクセルシェーダーを設定。
 	deviceContext->PSSetShader(
 		(ID3D11PixelShader*)m_psShader.GetBody(),	//ピクセルシェーダー。
 		NULL,										//NULLでいい。
-		0											//0でいい。
+		0											//0
 	);
 	//頂点レイアウトを設定。
 	deviceContext->IASetInputLayout(m_vsShader.GetInputLayout());
@@ -278,7 +333,7 @@ void Sprite::Draw()
 	//ここまで設定した内容でドロー
 	deviceContext->Draw(
 		3,	//頂点数。
-		0	//描画開始の頂点番号。大抵０。
+		0	//描画開始の頂点番号。
 	);
 
 

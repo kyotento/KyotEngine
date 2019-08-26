@@ -34,6 +34,9 @@
     <Filter Include="Engine\system">
       <UniqueIdentifier>{48b58c60-bbe2-40d8-9d2f-e81d065b6820}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\graphics\sprite">
+      <UniqueIdentifier>{cece6428-5103-4a43-9598-5adb6ea4fa10}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -120,14 +123,17 @@
     <ClCompile Include="Noncopy.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Effect.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="SpBuffer.cpp">
       <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteRender.cpp">
+      <Filter>Engine\graphics\sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Engine\graphics\sprite</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -223,14 +229,17 @@
     <ClInclude Include="Noncopy.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Effect.h">
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="SpBuffer.h">
       <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteRender.h">
+      <Filter>Engine\graphics\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Engine\graphics\sprite</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

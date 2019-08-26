@@ -61,21 +61,32 @@ public:
 	void Draw();
 
 	/// <summary>
+	/// ブレンドの初期化。
+	/// </summary>
+	void BlendState();
+
+	/// <summary>
 	/// 定数バッファの初期化。
 	/// </summary>
 	void InitConstantBuffer();
 
-	CVector2 m_size = CVector2::Zero();            //画像のサイズ。
+	CVector2 m_size = CVector2::Zero();						//画像のサイズ。
 
-	CMatrix	m_world = CMatrix::Identity();			//ワールド行列。
+	CMatrix	m_world = CMatrix::Identity();					//ワールド行列。
 
-	ID3D11Buffer* m_vertexBuffer = NULL;           //頂点バッファ。
-	ID3D11Buffer* m_indexBuffer = NULL;            //インデックスバッファ。
-	ID3D11ShaderResourceView* m_texture = NULL;    //テクスチャ。
-	ID3D11SamplerState* m_samplerState = NULL;     //サンプラーステート。
-	Effect m_effect;                               //エフェクト。
-	Shader m_vsShader;                             //頂点シェーダー。
-	Shader m_psShader;							   //ピクセルシェーダー。
+	ID3D11Buffer* m_vertexBuffer = NULL;					  //頂点バッファ。
+	ID3D11Buffer* m_indexBuffer = NULL;						  //インデックスバッファ。
+	ID3D11DepthStencilState* m_depthStencilState = NULL;
+	ID3D11DepthStencilState*	spriteRender = NULL;
+	ID3D11DepthStencilState*	zspriteRender = NULL;
+	ID3D11BlendState* pBlendState = NULL;					//ブレンドステート。
+	ID3D11RasterizerState*	rspriteRender = NULL;
+
+	ID3D11ShaderResourceView* m_texture = NULL;				//テクスチャ。
+	ID3D11SamplerState* m_samplerState = NULL;				 //サンプラーステート。
+	Effect m_effect;										 //エフェクト。
+	Shader m_vsShader;										 //頂点シェーダー。
+	Shader m_psShader;										 //ピクセルシェーダー。
 
 	/// <summary>
 	/// 頂点バッファの初期化
