@@ -140,6 +140,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Title.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -246,6 +249,9 @@
       <Filter>Engine\graphics\sprite</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Title.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>

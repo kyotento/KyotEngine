@@ -42,6 +42,7 @@
 #include "GameObjectManager.h"
 #include "Noncopy.h"
 #include "Sprite.h"
+#include "SpriteRender.h"
 
 const float FRAME_BUFFER_W = 1280.0f;				//フレームバッファの幅。
 const float FRAME_BUFFER_H = 720.0f;				//フレームバッファの高さ。

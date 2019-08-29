@@ -2,7 +2,6 @@
 #include "GameObjectManager.h"
 
 
-
 GameObjectManager::GameObjectManager()
 {
 	for (int i = 0; i < priorityMax; i++) { //—Dæ“xB
