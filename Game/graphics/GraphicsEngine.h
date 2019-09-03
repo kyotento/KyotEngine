@@ -37,6 +37,7 @@ public:
 	/*!
 	 *@brief	描画終了。
 	 */
+
 	void EndRender();
 private:
 	D3D_FEATURE_LEVEL		m_featureLevel;				//Direct3D デバイスのターゲットとなる機能セット。

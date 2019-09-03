@@ -20,6 +20,12 @@ public:
 	{
 	}
 
+	GameObjectPriority GetPriority() const
+	{
+		return m_priority;
+	}
+
+
 	virtual ~GameObject();
 
 	/// <summary>
@@ -167,6 +173,24 @@ public:
 	void SetNameKey(unsigned int snk)
 	{
 		m_nameKey = snk;
+	}
+
+	/// <summary>
+	/// 死亡リストに積まれたか否かの設定をする。
+	/// </summary>
+	/// <param name="srdl">死亡リストに積まれたか</param>
+	void SetRegistDeadList(bool srdl)
+	{
+		m_isRegistDeadList = srdl;
+	}
+
+	/// <summary>
+	/// 死亡リストフラグの値を返す。
+	/// </summary>
+	/// <returns>死亡リストに積まれたか</returns>
+	bool GetRegistDeadList()
+	{
+		return m_isRegistDeadList;
 	}
 
 	/// <summary>
