@@ -38,16 +38,16 @@ void GameObjectManager::Execute()
 	g_graphicsEngine->BegineRender();
 
 	//フレームバッファののレンダリングターゲットをバックアップしておく。
-	auto d3dDeviceContext = g_graphicsEngine->GetD3DDeviceContext();
-	d3dDeviceContext->OMGetRenderTargets(
-		1,
-		&m_frameBufferRenderTargetView,
-		&m_frameBufferDepthStencilView
-	);
+	//auto d3dDeviceContext = g_graphicsEngine->GetD3DDeviceContext();
+	//d3dDeviceContext->OMGetRenderTargets(
+	//	1,
+	//	&m_frameBufferRenderTargetView,
+	//	&m_frameBufferDepthStencilView
+	//);
 
 	//ビューポートもバックアップを取っておく。
-	unsigned int numViewport = 1;
-	d3dDeviceContext->RSGetViewports(&numViewport, &m_frameBufferViewports);
+	//unsigned int numViewport = 1;
+	//d3dDeviceContext->RSGetViewports(&numViewport, &m_frameBufferViewports);
 
 
 	//レンダリング。

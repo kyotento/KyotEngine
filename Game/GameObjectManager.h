@@ -77,7 +77,7 @@ public:
 	void AddGameObject(GameObjectPriority priority, GameObject* gameobject, const char* objName = nullptr)
 	{
 
-		if (!gameobject->GetRegistration) {
+		if (!gameobject->GetRegistration()) {
 
 			unsigned int namekey = MakeGameObjectNameKey(objName);
 			m_gameObjectListArray.at(priority).push_back(gameobject);
@@ -85,7 +85,7 @@ public:
 			gameobject->SetPriority(priority);
 			gameobject->SetStart(false);
 			gameobject->SetNameKey(namekey);
-			if (gameobject->IsDead)
+			if (gameobject->IsDead())
 			{
 				gameobject->SetDeadFlag(false);
 			}
@@ -109,13 +109,14 @@ public:
 	T* NewGameObject(GameObjectPriority priority, const char* objectName, TArgs... ctorArgs)
 	{
 
-		T* newObject = new T(ctorArgs);
+		T* newObject = new T(ctorArgs...);
 		newObject->SetNewGameObjectManager();
 		m_gameObjectListArray.at(priority).push_back(newObject);
 		unsigned int hash = MakeGameObjectNameKey(objectName);
 		newObject->SetRegistration(true);
 		newObject->SetPriority(priority);
-		newObject->SetNameKey(namekey);
+		newObject->SetNameKey(hash);
+
 		return newObject;
 
 	}

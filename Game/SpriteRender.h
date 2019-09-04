@@ -1,5 +1,5 @@
 #pragma once
-class SpriteRender
+class SpriteRender : public GameObject
 {
 public:
 	SpriteRender();
