@@ -499,7 +499,9 @@ public:
 
 class CQuaternion : public CVector4{
 public:
-	CQuaternion() {}
+	CQuaternion() {
+		vec = { 0.0f,  0.0f, 0.0f, 1.0f };
+	}
 	CQuaternion(float x, float y, float z, float w) :
 		CVector4(x, y, z, w)
 	{

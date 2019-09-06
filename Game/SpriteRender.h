@@ -1,4 +1,6 @@
 #pragma once
+#include "Sprite.h"
+#include "graphics/Camera.h"
 class SpriteRender : public GameObject
 {
 public:
@@ -62,7 +64,7 @@ public:
 	/// <summary>
 	/// 更新処理。
 	/// </summary>
-	void Update();
+	void Render()override;
 
 private:
 	Camera::EnUpdateProjMatrixFunc m_projMatrixFunc = Camera::enUpdateProjMatrixFunc_Ortho;
@@ -77,6 +79,7 @@ private:
 	CVector3 m_scale = { 1.f,1.f,1.f };			//スケール。
 	CQuaternion m_rotation;						//回転。
 
-	Sprite m_sprite;							//Sprite。
+	Sprite m_sprite;					//Sprite。
+	//Camera m_camera;
 };
 

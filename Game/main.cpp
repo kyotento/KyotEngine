@@ -2,6 +2,7 @@
 #include "system/system.h"
 #include "Player.h"
 #include "level/Level.h"
+#include "Game.h"
 
 ///////////////////////////////////////////////////////////////////
 // ウィンドウプログラムのメイン関数。
@@ -18,6 +19,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	
 	//プレイヤー
 	Player player;
+	Game game;
+	player.Start();
+	game.Start();
 
 	//ゲームループ。
 	while (DispatchWindowMessage() == true)
@@ -30,12 +34,17 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		}
 		//物理エンジンの更新。
 		g_physics.Update();
+		//	Executeを更新。
+		IGameObjectManager().Execute();
 		//プレイヤーの更新。
 		player.Update();
+		//Gameのアップデート。
+		game.Update();
 		//プレイヤーの描画。
 		player.Draw();
 		//カメラの更新。
 		g_camera3D.Update();
+		camera2d.Update();
 		//描画終了。
 		g_graphicsEngine->EndRender();
 	}

@@ -33,6 +33,14 @@ public:
 	};
 
 	/// <summary>
+	/// Init関数で使うものが作られている。
+	/// </summary>
+	/// <param name="w">幅</param>
+	/// <param name="h">高さ</param>
+	void CommonProcessing(float w, float h);
+
+
+	/// <summary>
 	/// シェーダーロード
 	/// </summary>
 	/// <param name="srv">レンダリング中にシェーダーがアクセスできるサブリソースを指定</param>
@@ -63,7 +71,7 @@ public:
 	/// <summary>
 	/// 描画処理。
 	/// </summary>
-	void Draw();
+	void Draw(Camera* camera);
 
 	/// <summary>
 	/// ブレンドの初期化。
@@ -75,11 +83,17 @@ public:
 	/// </summary>
 	void InitConstantBuffer();
 
+	/// <summary>
+	/// ラスタライザステートの設定。
+	/// </summary>
+	void RasterizerState();
+
 	CVector2 m_size = CVector2::Zero();						//画像のサイズ。
 
 	CMatrix	m_world = CMatrix::Identity();					//ワールド行列。
 
 	Camera::EnUpdateProjMatrixFunc m_cameraMode = Camera::enUpdateProjMatrixFunc_Ortho;
+	bool a = 0;
 
 	ID3D11Buffer* m_vertexBuffer = NULL;					  //頂点バッファ。
 	ID3D11Buffer* m_indexBuffer = NULL;						  //インデックスバッファ。
@@ -89,6 +103,7 @@ public:
 	ID3D11BlendState* pBlendState = NULL;					//ブレンドステート。
 	ID3D11RasterizerState*	rspriteRender = NULL;
 	ID3D11Buffer*				m__cb = nullptr;							//定数バッファ。
+	ID3D11RasterizerState* rasterizerState = NULL;			//ラスタライザステート。
 
 	ID3D11ShaderResourceView* m_texture = NULL;				//テクスチャ。
 	ID3D11SamplerState* m_samplerState = NULL;				 //サンプラーステート。
@@ -113,6 +128,13 @@ public:
 	/// サンプルステートの初期化
 	/// </summary>
 	void InitSamplerState();
+
+
+private:
+
+	CVector3 m_enUpdateProjMatrixFunc_OrthoPosition = { 0.f,0.f,-100.f };
+
+	Camera m_camera;
 
 };
 

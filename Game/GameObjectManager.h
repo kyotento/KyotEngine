@@ -33,6 +33,17 @@ public:
 	*/
 	//Execute。GOMのアップデートのようなもの。
 
+	/// <summary>
+/// インスタンスの取得。
+/// </summary>
+/// <returns>インスタンス</returns>
+	static GameObjectManager& Instance()
+	{
+		static GameObjectManager instance;
+		return instance;
+	}
+
+
 
 	/// <summary>
 	/// ゲームオブジェクトの名前キーを作成。
@@ -149,6 +160,10 @@ public:
 		}
 
 	}
+	/// <summary>
+	/// 更新関数。
+	/// </summary>
+	void Execute();
 
 private:
 
@@ -157,7 +172,6 @@ private:
 
 	void Start();
 	void Update();
-	void Execute();
 
 	typedef std::list<GameObject*>	GameObjectList;                     //リストの親分。
 	std::vector<GameObjectList>	m_gameObjectListArray;					//ゲームオブジェクトの優先度付きリスト。
@@ -173,6 +187,16 @@ private:
 
 
 /// <summary>
+/// 
+/// </summary>
+/// <returns></returns>
+static inline GameObjectManager& IGameObjectManager()
+{
+	return GameObjectManager::Instance();
+}
+
+
+/// <summary>
 /// ゲームオブジェクトの生成を簡単にできるようにするための関数。
 /// </summary>
 /// <param name="priority">実行優先度</param>
@@ -182,9 +206,10 @@ private:
 template<class T, class... TArgs>
 static inline T* NewGO(GameObjectPriority priority, const char* objectName, TArgs... ctorArgs)
 {
-	return GameObjectManager().NewGameObject<T>((GameObjectPriority)priority, objectName, ctorArgs...);
+	return IGameObjectManager().NewGameObject<T>((GameObjectPriority)priority, objectName, ctorArgs...);
 
 }
+
 
 /// <summary>
 /// ゲームオブジェクトの削除を簡単にできるようにするための関数。
@@ -192,5 +217,5 @@ static inline T* NewGO(GameObjectPriority priority, const char* objectName, TArg
 /// <param name="go">GAmeObject</param>
 static inline void DeleteGO(GameObject* gameobject)
 {
-	GameObjectManager().DeleteGameObject(gameobject);
+	IGameObjectManager().DeleteGameObject(gameobject);
 }

@@ -48,7 +48,10 @@ public:
 	/// <summary>
 	/// 
 	/// </summary>
-	virtual void Render();
+	virtual void Render()
+	{
+
+	}
 
 	/// <summary>
 	/// 死亡フラグを立てる。※エンジン外での実行禁止。
@@ -198,7 +201,7 @@ public:
 	/// </summary>
 	void RenderWrapper()
 	{
-		if (m_activeflag && m_startflag && m_deadflag && !m_isRegistDeadList)
+		if (m_activeflag && m_startflag && !m_deadflag && !m_isRegistDeadList)
 		{
 			Render();
 		}
@@ -209,7 +212,7 @@ public:
 	/// </summary>
 	void UpdateWrapper()
 	{
-		if (m_activeflag && m_startflag && m_deadflag && !m_isRegistDeadList)
+		if (m_activeflag && m_startflag && !m_deadflag && !m_isRegistDeadList)
 		{
 			Update();
 		}
@@ -220,7 +223,7 @@ public:
 	/// </summary>
 	void StartWrapper()
 	{
-		if (m_activeflag && m_startflag && m_deadflag && !m_isRegistDeadList) {
+		if (m_activeflag && !m_startflag && !m_deadflag && !m_isRegistDeadList) {
 			if (Start()) {
 				//初期化処理完了。
 				m_startflag = true;

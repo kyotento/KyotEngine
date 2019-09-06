@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#include "Sprite.h"
 #include "SpriteRender.h"
 
 
@@ -21,25 +20,34 @@ void SpriteRender::Init(const wchar_t* textureFilePath, float w, float h, bool i
 	
 }
 
-void SpriteRender::Update()
+void SpriteRender::Render()
 {
 	m_sprite.Update(m_position, m_rotation, m_scale, m_pivot);
-	if (m_Draw3D == false)
-	{
-		Camera::EnUpdateProjMatrixFunc m_projMatrixFunc = Camera::enUpdateProjMatrixFunc_Ortho;
 
-	}
 
 	if (m_Draw3D == true)
 	{
 		Camera::EnUpdateProjMatrixFunc m_projMatrixFunc = Camera::enUpdateProjMatrixFunc_Perspective;
+		/*m_camera.SetUpdateCameraMatrix(false);*/
+
+	}
+
+	if (m_Draw3D == false)
+	{
+		Camera::EnUpdateProjMatrixFunc m_projMatrixFunc = Camera::enUpdateProjMatrixFunc_Ortho;
+/*
+		camera2d.m_UpdateCameraMatrix*/
+		camera2d.SetUpdateCameraMatrix(true);
 
 	}
 
 	if (m_projMatrixFunc == Camera::enUpdateProjMatrixFunc_Perspective)
-		m_sprite.Draw();
+	{
+		m_sprite.Draw(&g_camera3D);
+	}
 
 	if (m_projMatrixFunc == Camera::enUpdateProjMatrixFunc_Ortho)
-		m_sprite.Draw();
-
+	{
+		m_sprite.Draw(&camera2d);
+	}
 }

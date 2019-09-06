@@ -13,6 +13,8 @@
 
 Sprite::Sprite()
 {
+
+	camera2d.SetPosition(m_enUpdateProjMatrixFunc_OrthoPosition);
 }
 
 
@@ -59,8 +61,8 @@ void Sprite::InitVertexBuffer(float w, float h)
 
 	//座標の設定。
 
-	float halfW = w * 0.5f;
-	float halfH = h * 0.5f;
+	float halfH = w * 0.5f;
+	float halfW = h * 0.5f;
 	SVertex vertex[4] = {
 		//頂点１
 		{
@@ -151,6 +153,7 @@ void Sprite::InitSamplerState()
 {
 
 	D3D11_SAMPLER_DESC DSD;
+	ZeroMemory(&DSD, sizeof(DSD));
 	DSD.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;			//U方向ラップ。
 	DSD.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;			//V方向ラップ。
 	DSD.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;			//W方向ラップ。
@@ -158,7 +161,7 @@ void Sprite::InitSamplerState()
 	DSD.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;		//テクスチャファイル。
 
 	//サンプラーステートの作成。
-	g_graphicsEngine->GetD3DDevice()->CreateSamplerState(&DSD, &m_samplerState);
+	HRESULT hr=g_graphicsEngine->GetD3DDevice()->CreateSamplerState(&DSD, &m_samplerState);
 
 }
 
@@ -174,6 +177,9 @@ void Sprite::InitConstantBuffer()
 	desc.MiscFlags = 0;                                               //その他フラグ。未使用は０。
 	desc.StructureByteStride = 0;                                     //バッファが構造化バッファを表す場合の、バッファ構造内の各要素のサイズ（バイト単位）。
 
+	//定数バッファの作成。
+	g_graphicsEngine->GetD3DDevice()->CreateBuffer(&desc, NULL, &m__cb);
+
 }
 
 //ブレンドステート。
@@ -182,6 +188,7 @@ void Sprite::BlendState()
 	//ブレンドステートオブジェクトの作成。
 	D3D11_BLEND_DESC blendDesc;
 
+	ZeroMemory(&blendDesc, sizeof(blendDesc));
 	blendDesc.AlphaToCoverageEnable = true;		//描画ターゲットにピクセル値を設定するときにα値を使用するか。
 
 	ID3D11Device* pd3d = g_graphicsEngine->GetD3DDevice();
@@ -229,8 +236,7 @@ void Sprite::BlendState()
 	}
 }
 
-//Init関数。シェーダーロード用。
-void Sprite::Init(ID3D11ShaderResourceView* srv, float w, float h)
+void Sprite::CommonProcessing(float w, float h)
 {
 	m_size.x = w;
 	m_size.y = h;
@@ -244,24 +250,52 @@ void Sprite::Init(ID3D11ShaderResourceView* srv, float w, float h)
 	//頂点シェーダーをロード。
 	/*
 		第一引数はロードするシェーダーソースファイルのファイルパス。
-		第二引数はエントリーポイントとなる関数の名前。 
+		第二引数はエントリーポイントとなる関数の名前。
 		第三引数はロードしたシェーダーのタイプ。
 	*/
 	m_vsShader.Load(
 		"Assets/shader/sprite.fx",
-		"VS",
+		"VSMain",
 		Shader::EnType::VS	//頂点シェーダー。
 	);
 	//ピクセルシェーダーをロード。
 	m_psShader.Load(
 		"Assets/shader/sprite.fx",
-		"PS",
+		"PSMain",
 		Shader::EnType::PS	//ピクセルシェーダー。
 	);
 
 	//定数バッファを初期化。
 	InitConstantBuffer();
+}
 
+
+void Sprite::RasterizerState()
+{
+	
+	D3D11_RASTERIZER_DESC rasterizerDesc =
+	{
+		D3D11_FILL_SOLID, // 
+		D3D11_CULL_NONE,      // 
+		FALSE,
+		0,
+		0.0f,
+		FALSE,
+		FALSE,
+		FALSE,
+		FALSE,
+		FALSE
+	};
+
+	g_graphicsEngine->GetD3DDevice()->CreateRasterizerState(&rasterizerDesc, &rasterizerState);
+
+}
+
+//Init関数。シェーダーロード用。
+void Sprite::Init(ID3D11ShaderResourceView* srv, float w, float h)
+{
+	
+	CommonProcessing(w, h);
 
 	m_texture = srv;
 	if (m_texture != nullptr) {
@@ -273,21 +307,23 @@ void Sprite::Init(ID3D11ShaderResourceView* srv, float w, float h)
 //Init関数。テクスチャロード。
 void Sprite::Init(const wchar_t* TextureFilePath, float w, float h)
 {
-	//画像サイズ。
-	m_size.x = w;
-	m_size.y = h;
+	////画像サイズ。
+	//m_size.x = w;
+	//m_size.y = h;
 
-	//頂点バッファの初期化。
-	InitVertexBuffer(w, h);
-	//インデックスバッファの初期化。
-	InitIndexBuffer();
-	//サンプラステートの初期化。
-	InitSamplerState();
+	////頂点バッファの初期化。
+	//InitVertexBuffer(w, h);
+	////インデックスバッファの初期化。
+	//InitIndexBuffer();
+	////サンプラステートの初期化。
+	//InitSamplerState();
+
+	CommonProcessing(w, h);
 
 	//ファイル名を使って、テクスチャをロードして、ShaderResrouceViewを作成する。
 	HRESULT hr = DirectX::CreateDDSTextureFromFileEx(
 		g_graphicsEngine->GetD3DDevice(),	//D3Dデバイス
-		L"Assets/modelData/utc_all2.dds",	//読み込むテクスチャのファイルパス。
+		TextureFilePath,					//読み込むテクスチャのファイルパス。
 		0,				                    //テクスチャの最大サイズ。0だとテクスチャサイズがそのまま読み込まれる
 		D3D11_USAGE_DEFAULT,		    	//リソースの使用用途。
 		D3D11_BIND_SHADER_RESOURCE,	        //リソースのバインド方法。
@@ -304,10 +340,13 @@ void Sprite::Init(const wchar_t* TextureFilePath, float w, float h)
 	//ブレンドステート。
 	BlendState();
 
+	//ラスタライザステート。
+	RasterizerState();
+
 }
 
 //描画処理。
-void Sprite::Draw()
+void Sprite::Draw(Camera* camera)
 {		
 
 	unsigned int vertexSize = sizeof(SVertex);
@@ -326,24 +365,44 @@ void Sprite::Draw()
 		0
 	);
 
+	//デバイスコンテキストを取得。
+	auto deviceContext = g_graphicsEngine->GetD3DDeviceContext();
+
+	//頂点シェーダーを設定。
+	deviceContext->VSSetShader(
+		(ID3D11VertexShader*)m_vsShader.GetBody(),	//頂点シェーダー。
+		NULL,										//NULLでいい。
+		0											//0でいい。
+	);
+	//ピクセルシェーダーを設定。
+	deviceContext->PSSetShader(
+		(ID3D11PixelShader*)m_psShader.GetBody(),	//ピクセルシェーダー。
+		NULL,										//NULLでいい。
+		0											//0でいい。
+	);
+	//頂点レイアウトを設定。
+	deviceContext->IASetInputLayout(m_vsShader.GetInputLayout());
+
 	float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
 	g_graphicsEngine->GetD3DDeviceContext()->OMSetBlendState(pBlendState, blendFactor, 0xffffffff);
 	g_graphicsEngine->GetD3DDeviceContext()->PSSetShaderResources(0, 1, &m_texture);
 	g_graphicsEngine->GetD3DDeviceContext()->PSSetSamplers(0, 1, &m_samplerState);
 	g_graphicsEngine->GetD3DDeviceContext()->RSSetState(rspriteRender);
+	//deviceContext->RSSetState(rasterizerState);
+
+	/*a = m_camera.GetSetUpdateCameraMatrix();*/
 
 	ConstantBuffer cb;
 	cb.WVP = m_world;
-	if (m_cameraMode == Camera::enUpdateProjMatrixFunc_Ortho) {
-		g_graphicsEngine->GetD3DDeviceContext()->OMSetDepthStencilState(spriteRender, 0);
-		cb.WVP.Mul(cb.WVP, camera2d->GetViewMatrix());
-		cb.WVP.Mul(cb.WVP, camera2d->GetProjectionMatrix());
-	}
-	else if (m_cameraMode == Camera::enUpdateProjMatrixFunc_Perspective) {
-		g_graphicsEngine->GetD3DDeviceContext()->OMSetDepthStencilState(zspriteRender, 0);
-		cb.WVP.Mul(cb.WVP, camera3d->GetViewMatrix());
-		cb.WVP.Mul(cb.WVP, camera3d->GetProjectionMatrix());
-	}
+
+	//g_graphicsEngine->GetD3DDeviceContext()->OMSetDepthStencilState(spriteRender, 0);
+	//cb.WVP.Mul(cb.WVP, camera2d.GetViewMatrix());
+	//cb.WVP.Mul(cb.WVP, camera2d.GetProjectionMatrix());
+
+	g_graphicsEngine->GetD3DDeviceContext()->OMSetDepthStencilState(zspriteRender, 0);
+	cb.WVP.Mul(cb.WVP, camera->GetViewMatrix());
+	cb.WVP.Mul(cb.WVP, camera->GetProjectionMatrix());
+	
 	cb.mulCol = m_mulCol;
 	ge->GetD3DDeviceContext()->UpdateSubresource(m__cb, 0, NULL, &cb, 0, 0);
 	ge->GetD3DDeviceContext()->VSSetConstantBuffers(0, 1, &m__cb);
@@ -354,5 +413,6 @@ void Sprite::Draw()
 		0,
 		0
 	);
+
 
 }

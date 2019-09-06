@@ -93,17 +93,44 @@ public:
 	{
 		m_viewAngle = angle;
 	}
+
+	/// <summary>
+	/// 平行投影か射法投影にするかを決める。
+	/// </summary>
+	/// <param name="a">a = 0 = 射法投影。 a = true = 平行投影</param>
+	void SetUpdateCameraMatrix(float a)
+	{
+		if (a) {
+			m_UpdateCameraMatrix = enUpdateProjMatrixFunc_Ortho;
+		}
+
+		if (a == false)
+		{
+			m_UpdateCameraMatrix = enUpdateProjMatrixFunc_Perspective;
+		}
+	}
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <returns></returns>
+	bool GetSetUpdateCameraMatrix()
+	{
+		return m_UpdateCameraMatrix;
+	}
+
 private:
 	CMatrix	m_viewMatrix = CMatrix::Identity();		//ビュー行列。
 	CMatrix m_projMatrix = CMatrix::Identity();		//プロジェクション行列。
-	CVector3 m_target = CVector3::Zero();			//注視点。
+	CVector3 m_target = { 0.f,0.f,10.f };			//注視点。
 	CVector3 m_position = CVector3::Zero();			//視点。
 	CVector3 m_up = CVector3::Up();					//上方向。
 	float m_viewAngle = CMath::DegToRad(60.0f);		//画角。
 	float m_far = 10000.0f;							//遠い平面までの距離。
 	float m_near = 1.0f;							//近平面までの距離。
+
+	EnUpdateProjMatrixFunc m_UpdateCameraMatrix = enUpdateProjMatrixFunc_Perspective;
 };
 
 extern Camera g_camera3D;		//!<3Dカメラ。
-extern Camera* camera3d;
-extern Camera* camera2d;
+extern Camera camera2d;			//2Dカメラ。
