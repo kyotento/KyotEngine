@@ -140,16 +140,18 @@
     <ClCompile Include="Sprite.cpp">
       <Filter>Engine\graphics\sprite</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="Title.cpp">
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="SkinModelRender.cpp" />
+    <ClCompile Include="SkinModelRender.cpp">
+      <Filter>Engine\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -255,19 +257,24 @@
     <ClInclude Include="Sprite.h">
       <Filter>Engine\graphics\sprite</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="Title.h">
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="SkinModelRender.h" />
+    <ClInclude Include="SkinModelRender.h">
+      <Filter>Engine\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Chef\chef_1.FBX">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
   </ItemGroup>

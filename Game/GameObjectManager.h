@@ -154,7 +154,7 @@ public:
 			gameobject->SetRegistration(false);
 			gameobject->SetRegistDeadList(true);
 
-			m_deleteObjectArray[m_currentDeleteObjectBufferNo].at(gameobject->GetPriority()).push_back(gameobject);
+			m_deleteObjectArray[m_currentDeleteObjectBufferNo].push_back(gameobject);
 			gameobject = nullptr;
 
 		}
@@ -175,7 +175,7 @@ private:
 
 	typedef std::list<GameObject*>	GameObjectList;                     //リストの親分。
 	std::vector<GameObjectList>	m_gameObjectListArray;					//ゲームオブジェクトの優先度付きリスト。
-	std::vector<GameObjectList>	m_deleteObjectArray[2];					//削除するオブジェクトのリスト。削除処理を行っている最中にDeleteGameObjectが呼ばれる可能性が高いので、ダブルバッファ化。
+	GameObjectList	m_deleteObjectArray[2];					//削除するオブジェクトのリスト。削除処理を行っている最中にDeleteGameObjectが呼ばれる可能性が高いので、ダブルバッファ化。
 
 
 

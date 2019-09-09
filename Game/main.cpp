@@ -41,7 +41,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		//Gameのアップデート。
 		game.Update();
 		//プレイヤーの描画。
-		player.Draw();
+		//player.Draw();
 		//カメラの更新。
 		g_camera3D.Update();
 		camera2d.Update();

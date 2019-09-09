@@ -13,22 +13,15 @@ Player::~Player()
 
 bool Player::Start()
 {
-	m_model = new SkinModel;// NewGO<SkinModel>(0, "a");
-	//cmoファイルの読み込み。
-	m_model->Init(L"Assets/modelData/unityChan.cmo");
+
+	m_skinModelRender = NewGO<SkinModelRender>(0, "player");
+	m_skinModelRender->Init(L"Assets/modelData/chef_1.cmo");
+	m_skinModelRender->SetPosition(m_position);
 
 	return true;
 }
 
 void Player::Update()
 {
-	//ワールド行列の更新。
-	m_model->UpdateWorldMatrix(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
-}
-void Player::Draw()
-{
-	m_model->Draw(
-		g_camera3D.GetViewMatrix(), 
-		g_camera3D.GetProjectionMatrix()
-	);
+
 }

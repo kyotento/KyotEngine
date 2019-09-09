@@ -8,6 +8,7 @@ public:
 
 	bool Start();
 	void Update();
+	void Render();
 
 	void Init(const wchar_t* filePath,
 		AnimationClip* animationClips = nullptr,
