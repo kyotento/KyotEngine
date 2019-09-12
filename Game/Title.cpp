@@ -25,14 +25,10 @@ bool Title::Start()
 
 void Title::Update()
 {
-	//if (Pad(0).IsPress(enButtonB))
-	//{
-	//	DeleteGO(m_spriteRender);
-	//}
 
 	if (g_pad[0].IsPress(enButtonB))
 	{
 		m_player = NewGO<Player>(0, "player");
-		DeleteGO(m_spriteRender);
+		DeleteGO(this);
 	}
 }

@@ -13,14 +13,13 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, "Game");
 
 	//カメラを初期化。
-	g_camera3D.SetPosition({ 0.0f, 100.0f, 300.0f });
+	g_camera3D.SetPosition({ 0.0f, 300.0f, -300.0f });
 	g_camera3D.SetTarget({ 0.0f, 100.0f, 0.0f });
 	g_camera3D.SetFar(10000.0f);
 	
 	//プレイヤー
 	Player player;
 	Game game;
-	player.Start();
 	game.Start();
 
 	//ゲームループ。
@@ -36,8 +35,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		g_physics.Update();
 		//	Executeを更新。
 		IGameObjectManager().Execute();
-		//プレイヤーの更新。
-		player.Update();
 		//Gameのアップデート。
 		game.Update();
 		//プレイヤーの描画。

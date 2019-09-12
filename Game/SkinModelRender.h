@@ -12,7 +12,7 @@ public:
 
 	void Init(const wchar_t* filePath,
 		AnimationClip* animationClips = nullptr,
-		int numAnimationClips = 0);
+		int numAnimationClips = 0, const char* psmain = "PSMain", const char* vsmain = "VSMain");
 
 	void InitAnimation(AnimationClip* animationClips, int numAnimationClips);
 

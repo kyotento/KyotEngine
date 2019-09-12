@@ -29,9 +29,10 @@ void SkinModelRender::Render()
 
 void SkinModelRender::Init(const wchar_t* filePath,
 	AnimationClip* animationClips,
-	int numAnimationClips)
+	int numAnimationClips, const char* psmain,
+	const char* vsmain)
 {
-	m_skinModel.Init(filePath);
+	m_skinModel.Init(filePath, m_psmain, m_vsmain);
 	InitAnimation(animationClips, numAnimationClips);
 }
 

@@ -152,6 +152,12 @@
     <ClCompile Include="Player.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="StageBase.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_1.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -267,6 +273,12 @@
       <Filter>Engine\graphics</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="StageBase.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_1.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>

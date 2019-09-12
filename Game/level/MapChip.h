@@ -22,5 +22,8 @@ public:
 private:
 	SkinModel m_model;		//!<モデル。
 	PhysicsStaticObject m_physicsStaticObject;	//!<静的物理オブジェクト。
+
+	const char* m_psmain;
+	const char* m_vsmain;
 	
 };

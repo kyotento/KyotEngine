@@ -104,7 +104,6 @@ public:
 		}
 	}
 
-
 	/// <summary>
 	/// ゲームオブジェクトのNew。
 	/// </summary>
@@ -160,10 +159,45 @@ public:
 		}
 
 	}
+
+	/// <summary>
+	/// ゲームオブジェクトの検索。(重いよ)。
+	/// </summary>
+	/// <param name="ObjectName">オブジェクトの名前</param>
+	/// <returns>オブジェクト</returns>
+	template<class T>
+	T* FIndGameObject(const char* ObjectName)
+	{
+		unsigned int nameKey = Util::MakeHash(ObjectName);
+		for (auto goList : m_gameObjectListArray)
+		{
+			for (auto go : goList)
+			{
+				if (go->m_nameKey == nameKey)
+				{
+					T* po = dynamic_cast<T*>(go);
+					if (po == nullptr)
+					{
+						//失敗。
+					}
+					return po;
+				}
+			}
+		}
+		//検索に引っかからなかったとき。
+		return nullptr;
+	}
+
+
 	/// <summary>
 	/// 更新関数。
 	/// </summary>
 	void Execute();
+
+	/// <summary>
+	/// 本当のDeleteです。
+	/// </summary>
+	void ExecuteDeleteGameObjects();
 
 private:
 
@@ -177,14 +211,11 @@ private:
 	std::vector<GameObjectList>	m_gameObjectListArray;					//ゲームオブジェクトの優先度付きリスト。
 	GameObjectList	m_deleteObjectArray[2];					//削除するオブジェクトのリスト。削除処理を行っている最中にDeleteGameObjectが呼ばれる可能性が高いので、ダブルバッファ化。
 
-
-
 	D3D11_VIEWPORT m_frameBufferViewports;								//フレームバッファのビューポート。
 	ID3D11RenderTargetView* m_frameBufferRenderTargetView = nullptr;	//フレームバッファのレンダリングターゲットビュー。
 	ID3D11DepthStencilView* m_frameBufferDepthStencilView = nullptr;	//フレームバッファのデプスステンシルビュー。
 
 };
-
 
 /// <summary>
 /// 
@@ -194,7 +225,6 @@ static inline GameObjectManager& IGameObjectManager()
 {
 	return GameObjectManager::Instance();
 }
-
 
 /// <summary>
 /// ゲームオブジェクトの生成を簡単にできるようにするための関数。
@@ -210,7 +240,6 @@ static inline T* NewGO(GameObjectPriority priority, const char* objectName, TArg
 
 }
 
-
 /// <summary>
 /// ゲームオブジェクトの削除を簡単にできるようにするための関数。
 /// </summary>
@@ -218,4 +247,13 @@ static inline T* NewGO(GameObjectPriority priority, const char* objectName, TArg
 static inline void DeleteGO(GameObject* gameobject)
 {
 	IGameObjectManager().DeleteGameObject(gameobject);
+}
+
+/// <summary>
+/// ゲームオブジェクトの検索を簡単にできるようにするための関数。
+/// </summary>
+template<class T>
+static inline T* FindGO(const char* objectName)
+{
+	return IGameObjectManager().FindGameObject<T>(objectName);
 }
