@@ -100,6 +100,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="character\CharacterController.cpp" />
+    <ClCompile Include="Desk.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -134,6 +135,7 @@
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteRender.cpp" />
     <ClCompile Include="StageBase.cpp" />
+    <ClCompile Include="StageObject.cpp" />
     <ClCompile Include="Stage_1.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -144,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character\CharacterController.h" />
+    <ClInclude Include="Desk.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
@@ -180,6 +183,7 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteRender.h" />
     <ClInclude Include="StageBase.h" />
+    <ClInclude Include="StageObject.h" />
     <ClInclude Include="Stage_1.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="system\system.h" />
@@ -187,6 +191,7 @@
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Chef\chef_1.FBX" />
+    <MeshContentTask Include="Assets\modelData\Desk\Desk.FBX" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)\Assets\modelData\%(Filename).cmo</ContentOutput>
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)\Assets\modelData\%(Filename).cmo</ContentOutput>

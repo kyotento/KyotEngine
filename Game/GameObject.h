@@ -231,6 +231,15 @@ public:
 		}
 	}
 
+	/// <summary>
+	/// 名前キーを持ってくる。
+	/// </summary>
+	/// <returns>名前キー</returns>
+	unsigned int GetNameKey()
+	{
+		return m_nameKey;
+	}
+
 protected://派生クラスで使えるよ。
 
 	GameObjectPriority m_priority;    //実行優先度。

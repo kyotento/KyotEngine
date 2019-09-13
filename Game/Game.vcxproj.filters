@@ -43,6 +43,12 @@
     <Filter Include="Assets\sprite">
       <UniqueIdentifier>{12fa952f-c5ba-4e58-b917-f67300020b04}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Field">
+      <UniqueIdentifier>{77c7987f-8f30-4a0b-8939-e4209e2c2a8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Field\Objects">
+      <UniqueIdentifier>{db5e9198-1295-48da-8fe1-7ba033118e31}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -152,11 +158,17 @@
     <ClCompile Include="Player.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="StageBase.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="Stage_1.cpp">
-      <Filter>Game</Filter>
+      <Filter>Game\Field</Filter>
+    </ClCompile>
+    <ClCompile Include="StageBase.cpp">
+      <Filter>Game\Field</Filter>
+    </ClCompile>
+    <ClCompile Include="StageObject.cpp">
+      <Filter>Game\Field\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Desk.cpp">
+      <Filter>Game\Field\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -275,11 +287,17 @@
     <ClInclude Include="Player.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="StageBase.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="Stage_1.h">
-      <Filter>Game</Filter>
+      <Filter>Game\Field</Filter>
+    </ClInclude>
+    <ClInclude Include="StageBase.h">
+      <Filter>Game\Field</Filter>
+    </ClInclude>
+    <ClInclude Include="StageObject.h">
+      <Filter>Game\Field\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Desk.h">
+      <Filter>Game\Field\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -287,6 +305,9 @@
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Chef\chef_1.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Desk\Desk.FBX">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
   </ItemGroup>

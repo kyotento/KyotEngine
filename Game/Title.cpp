@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Title.h"
-#include "Player.h"
 
 Title::Title()
 {
@@ -15,6 +14,7 @@ Title::~Title()
 
 bool Title::Start()
 {
+	m_game = FindGO<Game>("game");
 	m_spriteRender = NewGO<SpriteRender>(0, "sprite");
 	m_spriteRender->Init(L"Assets/sprite/Title.dds", 720, 1280 , false);
 	m_spriteRender->SetPosition(m_position);
@@ -28,7 +28,7 @@ void Title::Update()
 
 	if (g_pad[0].IsPress(enButtonB))
 	{
-		m_player = NewGO<Player>(0, "player");
+		m_game->SetTitleDeleteFlag(true);
 		DeleteGO(this);
 	}
 }

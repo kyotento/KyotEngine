@@ -1,5 +1,7 @@
 #pragma once
+#include "Game.h"
 class Player;
+class Game;
 class Title : public GameObject
 {
 public:
@@ -17,5 +19,6 @@ private:
 	SpriteRender* m_spriteRender = nullptr;		//SpriteÅB
 	Pad* m_pad = nullptr;
 	Player* m_player = nullptr;
+	Game* m_game = nullptr;
 };
 

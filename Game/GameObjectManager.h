@@ -173,7 +173,7 @@ public:
 		{
 			for (auto go : goList)
 			{
-				if (go->m_nameKey == nameKey)
+				if (go->GetNameKey() == nameKey)
 				{
 					T* po = dynamic_cast<T*>(go);
 					if (po == nullptr)
@@ -218,9 +218,9 @@ private:
 };
 
 /// <summary>
-/// 
+/// GameObjectManagerのインスタンスを作成。
 /// </summary>
-/// <returns></returns>
+/// <returns>インスタンス</returns>
 static inline GameObjectManager& IGameObjectManager()
 {
 	return GameObjectManager::Instance();
@@ -255,5 +255,5 @@ static inline void DeleteGO(GameObject* gameobject)
 template<class T>
 static inline T* FindGO(const char* objectName)
 {
-	return IGameObjectManager().FindGameObject<T>(objectName);
+	return IGameObjectManager().FIndGameObject<T>(objectName);
 }

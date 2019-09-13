@@ -18,9 +18,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	g_camera3D.SetFar(10000.0f);
 	
 	//プレイヤー
-	Player player;
-	Game game;
-	game.Start();
+	/*Player player;*/
+	NewGO<Game>(0, "game");
 
 	//ゲームループ。
 	while (DispatchWindowMessage() == true)
@@ -36,9 +35,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		//	Executeを更新。
 		IGameObjectManager().Execute();
 		//Gameのアップデート。
-		game.Update();
-		//プレイヤーの描画。
-		//player.Draw();
+		//game.Update();
 		//カメラの更新。
 		g_camera3D.Update();
 		camera2d.Update();
