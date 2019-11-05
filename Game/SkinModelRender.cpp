@@ -12,15 +12,18 @@ SkinModelRender::~SkinModelRender()
 
 bool SkinModelRender::Start()
 {
-	if (m_isShadowCaster) {
-		IGameObjectManager().AddShadowCaster(&m_skinModel);
-	}
+
 
 	return true;
 }
 
 void SkinModelRender::Update()
 {
+
+	if (m_isShadowCaster) {
+		IGameObjectManager().AddShadowCaster(&m_skinModel);
+	}
+
 	m_animation.Update(1/30.0f);
 	m_skinModel.UpdateWorldMatrix(m_position, m_rotation, m_scale);
 

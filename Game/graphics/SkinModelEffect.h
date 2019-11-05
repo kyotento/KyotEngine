@@ -19,7 +19,7 @@ protected:
 	ID3D11ShaderResourceView* m_albedoTex = nullptr;
 	ID3D11DepthStencilState* m_silhouettoDepthStepsilState = nullptr;	//シルエット描画用のデプスステンシルステート。
 
-	bool m_renderMode = 0;			//レンダーモード。
+	int m_renderMode = 0;			//レンダーモード。
 
 public:
 	ModelEffect();

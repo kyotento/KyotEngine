@@ -81,7 +81,7 @@ void GameObjectManager::Execute()
 	}
 
 
-//	g_graphicsEngine->EndRender();
+	g_graphicsEngine->EndRender();
 
 }
 

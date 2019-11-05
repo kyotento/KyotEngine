@@ -53,14 +53,14 @@ void __cdecl ModelEffect::Apply(ID3D11DeviceContext* deviceContext)
 	switch (m_renderMode)
 	{
 		
-	case 1:		//通常描画。
+	case enRenderMode_Normal:		//通常描画。
 		deviceContext->VSSetShader((ID3D11VertexShader*)m_pVSShader->GetBody(), NULL, 0);
 		deviceContext->PSSetShader((ID3D11PixelShader*)m_pPSShader->GetBody(), NULL, 0);
 		deviceContext->PSSetShaderResources(enSkinModelSRVReg_AlbedoTexture, 1, &m_albedoTex);
 
 		break;
 
-	case 2:	//シルエット描画。シャドウマップ。
+	case enRenderMode_CreateShadowMap:	//シルエット描画。シャドウマップ。
 
 		deviceContext->VSSetShader((ID3D11VertexShader*)m_vsShadowMap.GetBody(), NULL, 0);
 		deviceContext->PSSetShader((ID3D11PixelShader*)m_psShadowMap.GetBody(), NULL, 0);

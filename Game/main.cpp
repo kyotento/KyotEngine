@@ -39,7 +39,5 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		//カメラの更新。
 		g_camera3D.Update();
 		camera2d.Update();
-		//描画終了。
-		g_graphicsEngine->EndRender();
 	}
 }
