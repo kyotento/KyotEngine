@@ -1,4 +1,5 @@
 #pragma once
+#include "physics/PhysicsStaticObject.h"
 
 /// <summary>
 ///ステージ上に置かれるオブジェクトの基底クラス。 
@@ -13,13 +14,10 @@ public:
 	bool Start();
 	void Update();
 
-
-protected:
-
 	/// <summary>
-	/// 座標指定。
-	/// </summary>
-	/// <param name="a">座標</param>
+/// 座標指定。
+/// </summary>
+/// <param name="a">座標</param>
 	void SetPosition(CVector3 a)
 	{
 		m_position = a;
@@ -70,14 +68,34 @@ protected:
 		return m_rotation;
 	}
 
-	SkinModelRender* m_skinModelRender = nullptr;				//すきんもでる。
+protected:
 
-private:
+	SkinModelRender* m_skinModelRender = nullptr;				//すきんもでる。
+	SkinModelRender* m_skinModelRenderCollidion = nullptr;		//すきんもでる(当たり判定用ボックス限定)。
 
 	CVector3 m_position = CVector3::Zero();						//座標。
 	CVector3 m_scale = CVector3::One();							//スケール。
 
 	CQuaternion m_rotation = CQuaternion::Identity();			//回転。
+
+	PhysicsStaticObject m_physicsStaticObject;					//静的物理オブジェクト。
+																			/*
+																				1.Desk
+																				2.Delivery
+																				3.DishHold
+																				4.DustBox
+																				5.GasStove
+																				6.Kitchen
+																				7.OnionBox
+																				8.TomatoBox
+																				9.CuttingDesk
+
+																			*/
+
+
+private:
+
+
 
 
 

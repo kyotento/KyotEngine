@@ -118,6 +118,15 @@ public:
 	*@param[out]	scale		拡大率の格納先。
 	*/
 	void CalcWorldTRS(CVector3& trans, CQuaternion& rot, CVector3& scale);
+
+	/// <summary>
+	/// ワールド行列を取得する。
+	/// </summary>
+	/// <returns>骨のワールド行列</returns>
+	CMatrix GetMatrix()
+	{
+		return m_worldMatrix;
+	}
 	
 private:
 

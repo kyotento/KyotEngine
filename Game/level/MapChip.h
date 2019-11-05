@@ -21,6 +21,7 @@ public:
 	void Draw();
 private:
 	SkinModel m_model;		//!<モデル。
+	SkinModelRender* m_skinModelRender;
 	PhysicsStaticObject m_physicsStaticObject;	//!<静的物理オブジェクト。
 
 	const char* m_psmain;

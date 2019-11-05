@@ -12,22 +12,22 @@ protected:
 	Shader* m_pPSShader = nullptr;
 	Shader m_vsShader;
 	Shader m_psShader;
+	Shader m_vsShadowMap;			//シャドウマップ生成用の頂点シェーダー。
+	Shader m_psShadowMap;			//シャドウマップ生成用のピクセルシェーダー。
+	Shader m_psSilhouette;		//シルエット描画用ピクセルシェーダー。
 	bool isSkining;
 	ID3D11ShaderResourceView* m_albedoTex = nullptr;
+	ID3D11DepthStencilState* m_silhouettoDepthStepsilState = nullptr;	//シルエット描画用のデプスステンシルステート。
+
+	bool m_renderMode = 0;			//レンダーモード。
 
 public:
-	ModelEffect()
-	{
-		m_psShader.Load("Assets/shader/model.fx", "PSMain", Shader::EnType::PS);
-		
-		m_pPSShader = &m_psShader;
-	}
-	virtual ~ModelEffect()
-	{
-		if (m_albedoTex) {
-			m_albedoTex->Release();
-		}
-	}
+	ModelEffect();
+
+	//m_psShadowMap.Load();
+
+	virtual ~ModelEffect();
+
 	void __cdecl Apply(ID3D11DeviceContext* deviceContext) override;
 
 	void __cdecl GetVertexShaderBytecode(void const** pShaderByteCode, size_t* pByteCodeLength) override
@@ -48,6 +48,18 @@ public:
 	{
 		return wcscmp(name, m_materialName.c_str()) == 0;
 	}
+
+	void SetRenderMode(EnRenderMode renderMode)
+	{
+		m_renderMode = renderMode;
+	}
+
+
+private:
+	/// <summary>
+	/// シルエット描画用のデプスステンシルステートを初期化する。
+	/// </summary>
+	void InitSilhouettoDepthStepsilState();
 	
 };
 /*!
@@ -62,6 +74,7 @@ public:
 		m_pVSShader = &m_vsShader;
 		isSkining = false;
 	}
+
 };
 /*!
 *@brief
@@ -78,6 +91,10 @@ public:
 		m_pVSShader = &m_vsShader;
 		isSkining = true;
 	}
+
+private:
+	
+
 };
 
 /*!

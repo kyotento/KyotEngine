@@ -9,6 +9,35 @@ enum EnFbxUpAxis {
 	enFbxUpAxisY,		//Y-up
 	enFbxUpAxisZ,		//Z-up
 };
+
+const int directionLightNum = 1;		//ディレクションライトの数。(これを変えるときはシェーダー側も変更してあげる必要がある)。
+
+
+struct DirectionLight {
+	CVector4 direction[directionLightNum];
+	CVector4 color[directionLightNum];
+	CVector3 eyePos;
+	float specPos;
+};
+
+
+/// <summary>
+/// ディレクションライト素材。
+/// </summary>
+/// <remarks>
+/// direction = ライトの方向。
+/// color = ライトの色。
+/// </remarks>
+struct LightConstantBuffer
+{
+	DirectionLight		directionLight;		//ディレクションライト。
+	CVector3			dligDirection;
+	CVector4			dligColor;
+	CVector3			eyePos;				//カメラの視点。
+	float				specPow;			//スペキュラライトの絞り。
+	CVector3			environmentpow;		//環境光の強さ。
+};
+
 /*!
 *@brief	スキンモデルクラス。
 */
@@ -52,7 +81,7 @@ public:
 	*@param[in]	projMatrix		プロジェクション行列。
 	*  カメラ座標系の3Dモデルをスクリーン座標系に変換する行列です。
 	*/
-	void Draw( CMatrix viewMatrix, CMatrix projMatrix );
+	void Draw(EnRenderMode renderMode, CMatrix viewMatrix, CMatrix projMatrix );
 	/*!
 	*@brief	スケルトンの取得。
 	*/
@@ -72,6 +101,12 @@ public:
 			}
 		}
 	}
+
+	/// <summary>
+	/// ディレクションライトの初期化。
+	/// </summary>
+	void InitDirectionLight();
+
 	/*!
 	*@brief	SRVのレジスタ番号。
 	*/
@@ -93,7 +128,7 @@ private:
 	*@param[in]	filePath		ロードするcmoファイルのファイルパス。
 	*/
 	void InitSkeleton(const wchar_t* filePath);
-	
+
 private:
 	//定数バッファ。
 	struct SVSConstantBuffer {
@@ -107,6 +142,11 @@ private:
 	CMatrix				m_worldMatrix;					//!<ワールド行列。
 	DirectX::Model*		m_modelDx;						//!<DirectXTKが提供するモデルクラス。
 	ID3D11SamplerState* m_samplerState = nullptr;		//!<サンプラステート。
+	ID3D11Buffer*		m_lightConstantBuffer = nullptr;//ライト用の定数バッファ。
+	DirectionLight		m_directionLight;				//ディレクションライト。
+
+
+	const int directionLightNum = 1;		//ディレクションライトの数。
 
 	const char* m_vsmain;
 	const char* m_psmain;

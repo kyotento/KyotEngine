@@ -2,6 +2,7 @@
 #define _CGAMEOBJECTMANAGER_H_
 #include "GameObject.h"
 #include "util/Util.h"
+#include "ShadowMap.h"
 class GameObjectManager /*: public Noncopy*/
 {
 public:
@@ -43,6 +44,10 @@ public:
 		return instance;
 	}
 
+
+	void AddShadowCaster(SkinModel* model) {
+		m_shadowMap.RegistShadowCaster(model);
+	}
 
 
 	/// <summary>
@@ -112,8 +117,8 @@ public:
 	/// <param name="...ctorArgs">可変長引数(コンストラクタに渡す)</param>
 	/// <returns>オブジェクト</returns>
 	/// <remarks>
-	/// Newする。
-	/// 
+	/// ※エラーでここに飛ばされる方へ。
+	/// ①　ちゃんと#includeしてる？？。
 	/// </remarks>
 	template<class T, class... TArgs>
 	T* NewGameObject(GameObjectPriority priority, const char* objectName, TArgs... ctorArgs)
@@ -190,6 +195,30 @@ public:
 
 
 	/// <summary>
+	/// オブジェクトの検索。
+	/// </summary>
+	/// <param name="objectName">オブジェクトの名前</param>
+	/// <param name="funk"></param>
+	template<class T>
+	void FindGameObjects(const char* objectName, std::function<bool(T*go)> func)
+	{
+		unsigned int nameKey = Util::MakeHash(objectName);
+		for (auto goList : m_gameObjectListArray) {
+			for (auto go : goList) {
+				if (go->GetNameKey() == nameKey) {
+					//見つけた。
+					T* p = dynamic_cast<T*>(go);
+					if (func(p) == false) {
+						//クエリ中断。
+						return;
+					}
+				}
+			}
+		}
+	}
+
+
+	/// <summary>
 	/// 更新関数。
 	/// </summary>
 	void Execute();
@@ -199,7 +228,15 @@ public:
 	/// </summary>
 	void ExecuteDeleteGameObjects();
 
+
+	ShadowMap* GetShadowMap()
+	{
+		return &m_shadowMap;
+	}
+
 private:
+
+	ShadowMap m_shadowMap;			//シャドウマップ。
 
 	int priorityMax = 32;                           //優先度の上限値。
 	int m_currentDeleteObjectBufferNo = 0;			//現在の削除オブジェクトのバッファ番号。
@@ -214,6 +251,8 @@ private:
 	D3D11_VIEWPORT m_frameBufferViewports;								//フレームバッファのビューポート。
 	ID3D11RenderTargetView* m_frameBufferRenderTargetView = nullptr;	//フレームバッファのレンダリングターゲットビュー。
 	ID3D11DepthStencilView* m_frameBufferDepthStencilView = nullptr;	//フレームバッファのデプスステンシルビュー。
+
+
 
 };
 
@@ -256,4 +295,10 @@ template<class T>
 static inline T* FindGO(const char* objectName)
 {
 	return IGameObjectManager().FIndGameObject<T>(objectName);
+}
+
+template<class T>
+static inline void QueryGOs(const char* objectName, std::function<bool(T*go)>func)
+{
+	return IGameObjectManager().FindGameObjects<T>(objectName, func);
 }

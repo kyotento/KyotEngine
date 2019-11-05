@@ -3,8 +3,8 @@
 
 SkinModelRender::SkinModelRender()
 {
-}
 
+}
 
 SkinModelRender::~SkinModelRender()
 {
@@ -12,19 +12,26 @@ SkinModelRender::~SkinModelRender()
 
 bool SkinModelRender::Start()
 {
+	if (m_isShadowCaster) {
+		IGameObjectManager().AddShadowCaster(&m_skinModel);
+	}
 
 	return true;
 }
 
 void SkinModelRender::Update()
 {
+	m_animation.Update(1/30.0f);
 	m_skinModel.UpdateWorldMatrix(m_position, m_rotation, m_scale);
+
 }
 
 void SkinModelRender::Render()
 {
-	m_skinModel.Draw(g_camera3D.GetViewMatrix(),g_camera3D.GetProjectionMatrix());
+	//todo InitÇ≥ÇÍÇ»Ç©Ç¡ÇΩÇÁDrawÇåƒÇŒÇ»Ç¢ÇÊÇ§Ç…Ç∑ÇÈÅB 
+	m_skinModel.Draw(enRenderMode_Normal,g_camera3D.GetViewMatrix(),g_camera3D.GetProjectionMatrix());
 	
+
 }
 
 void SkinModelRender::Init(const wchar_t* filePath,

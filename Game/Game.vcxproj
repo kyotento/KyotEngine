@@ -71,7 +71,7 @@
       <ContentOutput>$(ProjectDir)\Assets\sprite\%(Filename).dds</ContentOutput>
     </ImageContentTask>
     <MeshContentTask>
-      <ContentOutput>$(ProjectDir)\Assets\modelData\%(Filename).cmo</ContentOutput>
+      <ContentOutput>%(RelativeDir)\%(Filename).cmo</ContentOutput>
     </MeshContentTask>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -95,16 +95,28 @@
       <ContentOutput>$(ProjectDir)\Assets\sprite\%(Filename).dds</ContentOutput>
     </ImageContentTask>
     <MeshContentTask>
-      <ContentOutput>$(ProjectDir)\Assets\modelData\%(Filename).cmo</ContentOutput>
+      <ContentOutput>%(RelativeDir)\%(Filename).cmo</ContentOutput>
     </MeshContentTask>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="character\CharacterController.cpp" />
+    <ClCompile Include="CuttingBoard.cpp" />
+    <ClCompile Include="CuttingDesk.cpp" />
+    <ClCompile Include="Delivery.cpp" />
     <ClCompile Include="Desk.cpp" />
+    <ClCompile Include="DishHold.cpp" />
+    <ClCompile Include="DustBox.cpp" />
     <ClCompile Include="Effect.cpp" />
+    <ClCompile Include="Belongings.cpp" />
+    <ClCompile Include="FoodBox.cpp" />
+    <ClCompile Include="Foods.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
+    <ClCompile Include="GasStove.cpp" />
+    <ClCompile Include="Gauge.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="graphics\animation\Animation.cpp" />
     <ClCompile Include="graphics\animation\AnimationClip.cpp" />
     <ClCompile Include="graphics\animation\AnimationPlayController.cpp" />
@@ -117,6 +129,9 @@
     <ClCompile Include="graphics\SkinModelDataManager.cpp" />
     <ClCompile Include="graphics\SkinModelEffect.cpp" />
     <ClCompile Include="HID\Pad.cpp" />
+    <ClCompile Include="Kitchen.cpp" />
+    <ClCompile Include="KitchenWare.cpp" />
+    <ClCompile Include="Knife.cpp" />
     <ClCompile Include="level\Level.cpp" />
     <ClCompile Include="level\MapChip.cpp" />
     <ClCompile Include="main.cpp" />
@@ -124,18 +139,31 @@
     <ClCompile Include="math\Matrix.cpp" />
     <ClCompile Include="math\Vector.cpp" />
     <ClCompile Include="Noncopy.cpp" />
+    <ClCompile Include="ObjectAbove.cpp" />
+    <ClCompile Include="Onion.cpp" />
+    <ClCompile Include="OnionBox.cpp" />
     <ClCompile Include="physics\MeshCollider.cpp" />
     <ClCompile Include="physics\Physics.cpp" />
+    <ClCompile Include="physics\PhysicsStaticObject.cpp" />
     <ClCompile Include="physics\RigidBody.cpp" />
     <ClCompile Include="physics\CapsuleCollider.cpp" />
-    <ClCompile Include="physics\PhysicsStaticObject.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Player_1.cpp" />
+    <ClCompile Include="Player_2.cpp" />
+    <ClCompile Include="Player_3.cpp" />
+    <ClCompile Include="Player_4.cpp" />
+    <ClCompile Include="Pot.cpp" />
+    <ClCompile Include="RenderTarget.cpp" />
+    <ClCompile Include="SceneItemManager.cpp" />
+    <ClCompile Include="ShadowMap.cpp" />
     <ClCompile Include="SkinModelRender.cpp" />
+    <ClCompile Include="SoupBase.cpp" />
     <ClCompile Include="SpBuffer.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteRender.cpp" />
     <ClCompile Include="StageBase.cpp" />
     <ClCompile Include="StageObject.cpp" />
+    <ClCompile Include="StageSelect.cpp" />
     <ClCompile Include="Stage_1.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -143,14 +171,32 @@
     </ClCompile>
     <ClCompile Include="system\system.cpp" />
     <ClCompile Include="Title.cpp" />
+    <ClCompile Include="Tomato.cpp" />
+    <ClCompile Include="TomatoBox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character\CharacterController.h" />
+    <ClInclude Include="CIndexBuffer.h" />
+    <ClInclude Include="ConstantBuffer.h" />
+    <ClInclude Include="CuttingBoard.h" />
+    <ClInclude Include="CuttingDesk.h" />
+    <ClInclude Include="CVertexBuffer.h" />
+    <ClInclude Include="Delivery.h" />
     <ClInclude Include="Desk.h" />
+    <ClInclude Include="DishHold.h" />
+    <ClInclude Include="DustBox.h" />
     <ClInclude Include="Effect.h" />
+    <ClInclude Include="Belongings.h" />
+    <ClInclude Include="FoodBox.h" />
+    <ClInclude Include="Foods.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectManager.h" />
+    <ClInclude Include="GasStove.h" />
+    <ClInclude Include="Gauge.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="GPUBuffer.h" />
     <ClInclude Include="graphics\animation\Animation.h" />
     <ClInclude Include="graphics\animation\AnimationClip.h" />
     <ClInclude Include="graphics\animation\AnimationPlayController.h" />
@@ -164,12 +210,19 @@
     <ClInclude Include="graphics\SkinModelEffect.h" />
     <ClInclude Include="graphics\SkinModelShaderConst.h" />
     <ClInclude Include="HID\Pad.h" />
+    <ClInclude Include="Kitchen.h" />
+    <ClInclude Include="KitchenWare.h" />
+    <ClInclude Include="Knife.h" />
     <ClInclude Include="level\Level.h" />
     <ClInclude Include="level\MapChip.h" />
     <ClInclude Include="math\kMath.h" />
     <ClInclude Include="math\Matrix.h" />
     <ClInclude Include="math\Vector.h" />
     <ClInclude Include="Noncopy.h" />
+    <ClInclude Include="ObjectAbove.h" />
+    <ClInclude Include="Onion.h" />
+    <ClInclude Include="OnionBox.h" />
+    <ClInclude Include="PhysicsDebugDraw.h" />
     <ClInclude Include="physics\ICollider.h" />
     <ClInclude Include="physics\MeshCollider.h" />
     <ClInclude Include="physics\Physics.h" />
@@ -178,20 +231,54 @@
     <ClInclude Include="physics\CollisionAttr.h" />
     <ClInclude Include="physics\PhysicsStaticObject.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Player_1.h" />
+    <ClInclude Include="Player_2.h" />
+    <ClInclude Include="Player_3.h" />
+    <ClInclude Include="Player_4.h" />
+    <ClInclude Include="Pot.h" />
+    <ClInclude Include="Primitive.h" />
+    <ClInclude Include="RenderTarget.h" />
+    <ClInclude Include="SceneItemManager.h" />
+    <ClInclude Include="ShadowMap.h" />
     <ClInclude Include="SkinModelRender.h" />
+    <ClInclude Include="SoupBase.h" />
     <ClInclude Include="SpBuffer.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteRender.h" />
     <ClInclude Include="StageBase.h" />
     <ClInclude Include="StageObject.h" />
+    <ClInclude Include="StageSelect.h" />
     <ClInclude Include="Stage_1.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="system\system.h" />
     <ClInclude Include="Title.h" />
+    <ClInclude Include="Tomato.h" />
+    <ClInclude Include="TomatoBox.h" />
+    <ClInclude Include="VertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Chef\chef_1.FBX" />
+    <MeshContentTask Include="Assets\modelData\Chef\chef_2.FBX" />
+    <MeshContentTask Include="Assets\modelData\ColidionBox\collidionBox.FBX" />
+    <MeshContentTask Include="Assets\modelData\ColidionBox\collidionBoxLong.FBX" />
+    <MeshContentTask Include="Assets\modelData\cutting_board\cutting_board.FBX" />
+    <MeshContentTask Include="Assets\modelData\cutting_board\cutting_desk.FBX" />
+    <MeshContentTask Include="Assets\modelData\Delivery\derivery.FBX" />
     <MeshContentTask Include="Assets\modelData\Desk\Desk.FBX" />
+    <MeshContentTask Include="Assets\modelData\DishHold\DishHold.FBX" />
+    <MeshContentTask Include="Assets\modelData\DustBox\DustBox.FBX" />
+    <MeshContentTask Include="Assets\modelData\FoodBox\Onion\OnionBox.FBX" />
+    <MeshContentTask Include="Assets\modelData\FoodBox\Tomato\TomatoBox.FBX" />
+    <MeshContentTask Include="Assets\modelData\Food\Onion\onion.FBX" />
+    <MeshContentTask Include="Assets\modelData\Food\Tomato\Tomato.FBX" />
+    <MeshContentTask Include="Assets\modelData\Food\Tomato\TomatoCutting.FBX" />
+    <MeshContentTask Include="Assets\modelData\Gas_stove\gas_stove.FBX" />
+    <MeshContentTask Include="Assets\modelData\kari_floor.FBX" />
+    <MeshContentTask Include="Assets\modelData\kitchen\kitchen.FBX" />
+    <MeshContentTask Include="Assets\modelData\Knife\Knife.FBX" />
+    <MeshContentTask Include="Assets\modelData\Pot\Pot.FBX" />
+    <MeshContentTask Include="Assets\modelData\Pot\SoupBase\onion\soupBase_onion.FBX" />
+    <MeshContentTask Include="Assets\modelData\Pot\SoupBase\tomato\soupBase_tomato.FBX" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)\Assets\modelData\%(Filename).cmo</ContentOutput>
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)\Assets\modelData\%(Filename).cmo</ContentOutput>
@@ -199,6 +286,13 @@
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\Title.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\level\stage_1.tkl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\gauge\gauge.png" />
+    <ImageContentTask Include="Assets\sprite\gauge\gauge_sheet.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

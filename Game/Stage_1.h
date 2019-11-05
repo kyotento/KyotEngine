@@ -1,5 +1,6 @@
 #pragma once
 #include "StageBase.h"
+#include "StageObject.h"
 
 class Stage_1 : public StageBase
 {

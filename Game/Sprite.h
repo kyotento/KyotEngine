@@ -66,7 +66,7 @@ public:
 	///                    { 0 , 0 }     画像の左上。
 	///					   { 0.5, 0.5 } 画面の中心。
 	///					   { 1 , 1 }     画面の右下。
-	void Update(const CVector3& trans, const CQuaternion& rot, const CVector3& scale, CVector2 pivot = { 0.5f, 0.5f });
+	void Update(const CVector3& trans, const CQuaternion& rot, const CVector3& scale, CVector2 pivot = DEFAULT_PIVOT);
 
 	/// <summary>
 	/// 描画処理。
@@ -111,7 +111,7 @@ public:
 	Shader m_vsShader;										 //頂点シェーダー。
 	Shader m_psShader;										 //ピクセルシェーダー。
 
-	CVector4					m_mulCol = { 1.f,1.f,1.f,1.f };
+	CVector4  m_mulCol = { 1.f,1.f,1.f,1.f };
 	/// <summary>
 	/// 頂点バッファの初期化
 	/// </summary>

@@ -1,4 +1,5 @@
 #pragma once
+#include "ShadowMap.h"
 
 class SkinModelRender : public GameObject
 {
@@ -48,9 +49,29 @@ public:
 		m_scale = scale;
 	}
 
+	/// <summary>
+	/// スキンモデルを持ってくる。
+	/// </summary>
+	/// <returns>スキンモデル</returns>
+	SkinModel& GetSkinModel()
+	{
+		return m_skinModel;
+	}
+
+	/// <summary>
+	/// シャドーキャスターフラグをセットする。
+	/// </summary>
+	/// <param name="flag"></param>
+	void SetShadowCasterFlag(bool flag)
+	{
+		m_isShadowCaster = flag;
+	}
+
+
 private:
 
 	int m_numAnimationClips = 0;
+	bool m_isShadowCaster = true;		//シャドーキャスターフラグ。
 
 	const char* m_psmain;
 	const char* m_vsmain;

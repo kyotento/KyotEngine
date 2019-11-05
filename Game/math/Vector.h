@@ -127,6 +127,20 @@ public:
 	{
 		Set(_v.x(), _v.y(), _v.z());
 	}
+
+	template<>
+	void CopyTo(btVector3& dst) const
+	{
+		dst.setX(x);
+		dst.setY(y);
+		dst.setZ(z);
+	}
+	void Set(btVector3& _v)
+	{
+		this->x = _v.x();
+		this->y = _v.y();
+		this->z = _v.z();
+	}
 	
 	/*!
 	 * @brief	ベクトルを加算。

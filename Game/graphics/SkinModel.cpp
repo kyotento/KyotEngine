@@ -13,10 +13,16 @@ SkinModel::~SkinModel()
 		//サンプラステートを解放。
 		m_samplerState->Release();
 	}
+
+	//ライト用定数バッファの開放。
+	if (m_lightConstantBuffer != nullptr)
+	{
+		m_lightConstantBuffer->Release();
+	}
+
 }
 void SkinModel::Init(const wchar_t* filePath,/* EnFbxUpAxis enFbxUpAxis,*/ const char* entryPS, const char* entryVS )
 {
-
 	m_psmain = entryPS;
 	m_vsmain = entryVS;
 
@@ -28,6 +34,9 @@ void SkinModel::Init(const wchar_t* filePath,/* EnFbxUpAxis enFbxUpAxis,*/ const
 
 	//サンプラステートの初期化。
 	InitSamplerState();
+
+	//ディレクションライトの初期化。
+	InitDirectionLight();
 
 	//SkinModelDataManagerを使用してCMOファイルのロード。
 	m_modelDx = g_skinModelDataManager.Load(filePath, m_skeleton);
@@ -44,6 +53,7 @@ void SkinModel::InitSkeleton(const wchar_t* filePath)
 	//.cmoファイルを.tksに置き換える。
 	skeletonFilePath.replace(pos, 4, L".tks");
 	//tksファイルをロードする。
+	//※ここで落ちた人へ。ファイルパス間違ってない？。
 	bool result = m_skeleton.Load(skeletonFilePath.c_str());
 	if ( result == false ) {
 		//スケルトンが読み込みに失敗した。
@@ -72,6 +82,11 @@ void SkinModel::InitConstantBuffer()
 																//CPUアクセスが不要な場合は0。
 	//作成。
 	g_graphicsEngine->GetD3DDevice()->CreateBuffer(&bufferDesc, NULL, &m_cb);
+
+	//ライト用の定数バッファを作成。
+	//作成するバッファのサイズを変更する。
+	bufferDesc.ByteWidth = sizeof(DirectionLight);				//DirectionLightは16byteの倍数になっているので、切り上げはやらない。
+	g_graphicsEngine->GetD3DDevice()->CreateBuffer(&bufferDesc, NULL, &m_lightConstantBuffer);
 }
 void SkinModel::InitSamplerState()
 {
@@ -84,6 +99,16 @@ void SkinModel::InitSamplerState()
 	desc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
 	g_graphicsEngine->GetD3DDevice()->CreateSamplerState(&desc, &m_samplerState);
 }
+
+void SkinModel::InitDirectionLight()
+{
+	for (int i = 0; i < directionLightNum;i++)
+	{
+		m_directionLight.direction[i] = { 0.707,-0.707,0.0f,0.0f };
+		m_directionLight.color[i] = { 1.f,1.f,1.f,1.f };
+	}
+}
+
 void SkinModel::UpdateWorldMatrix(CVector3 position, CQuaternion rotation, CVector3 scale)
 {
 	//3dsMaxと軸を合わせるためのバイアス。
@@ -109,7 +134,7 @@ void SkinModel::UpdateWorldMatrix(CVector3 position, CQuaternion rotation, CVect
 	//スケルトンの更新。
 	m_skeleton.Update(m_worldMatrix);
 }
-void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix)
+void SkinModel::Draw(EnRenderMode renderMode, CMatrix viewMatrix, CMatrix projMatrix)
 {
 	DirectX::CommonStates state(g_graphicsEngine->GetD3DDevice());
 
@@ -121,13 +146,24 @@ void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix)
 	vsCb.mProj = projMatrix;
 	vsCb.mView = viewMatrix;
 	d3dDeviceContext->UpdateSubresource(m_cb, 0, nullptr, &vsCb, 0, 0);
+	//視点を設定。
+	m_directionLight.eyePos = g_camera3D.GetPosition();
+	//鏡面反射光の絞りを設定。
+	m_directionLight.specPos = 2.f;
+	//ライト用の定数バッファを更新。
+	d3dDeviceContext->UpdateSubresource(m_lightConstantBuffer, 0, nullptr, &m_directionLight, 0, 0);
 	//定数バッファをGPUに転送。
 	d3dDeviceContext->VSSetConstantBuffers(0, 1, &m_cb);
-	d3dDeviceContext->PSSetConstantBuffers(0, 1, &m_cb);
+	d3dDeviceContext->PSSetConstantBuffers(0, 1, &m_lightConstantBuffer);
 	//サンプラステートを設定。
 	d3dDeviceContext->PSSetSamplers(0, 1, &m_samplerState);
 	//ボーン行列をGPUに転送。
 	m_skeleton.SendBoneMatrixArrayToGPU();
+
+	m_modelDx->UpdateEffects([&](DirectX::IEffect* material) {
+		auto modelMaterial = reinterpret_cast<ModelEffect*>(material);
+		modelMaterial->SetRenderMode(renderMode);
+	});
 
 	//描画。
 	m_modelDx->Draw(

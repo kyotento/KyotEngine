@@ -25,6 +25,8 @@ void Bone::CalcWorldTRS(CVector3& trans, CQuaternion& rot, CVector3& scale)
 	rot.SetRotation(mWorld);
 	m_rotation = rot;
 }
+
+
 Skeleton::Skeleton()
 {
 	//リザーブ。

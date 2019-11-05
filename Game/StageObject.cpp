@@ -1,26 +1,29 @@
 #include "stdafx.h"
 #include "StageObject.h"
-
+#include "Desk.h"
+#include "DishHold.h"
 
 StageObject::StageObject()
 {
+	m_skinModelRender = NewGO<SkinModelRender>(0, "skinmodel");
+
 }
 
 
 StageObject::~StageObject()
 {
-
-	DeleteGO(m_skinModelRender);
+	if (m_skinModelRender != nullptr) {
+		DeleteGO(m_skinModelRender);
+	}
+	if (m_skinModelRenderCollidion != nullptr) {
+		DeleteGO(m_skinModelRenderCollidion);
+	}
 }
 
 
 bool StageObject::Start()
 {
-	m_skinModelRender = NewGO<SkinModelRender>(0, "skinmodel");
 
-	m_skinModelRender->SetPosition(m_position);
-	m_skinModelRender->SetScale(m_scale);
-	m_skinModelRender->SetRotation(m_rotation);
 
 
 	return true;

@@ -53,6 +53,24 @@ public:
 	}
 
 	/// <summary>
+	/// スケールを設定する。
+	/// </summary>
+	/// <param name="scale">スケール</param>
+	void SetScale(const CVector3& scale)
+	{
+		m_scale = scale;
+	}
+
+	/// <summary>
+	/// スケールを取得する。
+	/// </summary>
+	/// <returns>スケール</returns>
+	const CVector3& GetScale() const
+	{
+		return m_scale;
+	}
+
+	/// <summary>
 	/// Pivotの設定。
 	/// </summary>
 	/// <param name="pivot">Pivot。</param>

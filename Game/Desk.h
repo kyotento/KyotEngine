@@ -1,6 +1,8 @@
 #pragma once
-#include "StageObject.h"
-class Desk : public StageObject
+#include "level/MapChip.h"
+#include "ObjectAbove.h"
+
+class Desk : public ObjectAbove
 {
 public:
 	Desk();
@@ -8,6 +10,11 @@ public:
 
 	bool Start();
 	void Update();
+	void StateChange();
+
+
+private:
+
 
 };
 

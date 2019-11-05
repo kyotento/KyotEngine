@@ -49,6 +49,33 @@
     <Filter Include="Game\Field\Objects">
       <UniqueIdentifier>{db5e9198-1295-48da-8fe1-7ba033118e31}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\level">
+      <UniqueIdentifier>{abbc76e9-4f54-44e9-94c5-57d4d20e5fd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Player">
+      <UniqueIdentifier>{dd6fd15b-e245-41c6-a585-58b7090c3f43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Field\Objects\ObjectAbove">
+      <UniqueIdentifier>{9559616f-5f17-4dbe-9321-60f45293dcf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Field\Objects\ObjectAbove\FoodBox">
+      <UniqueIdentifier>{6dda0e1a-f073-4688-bc99-6287c597b8bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Field\Objects\Belongings">
+      <UniqueIdentifier>{e0b563e7-0a3b-492c-8148-b485f55d636c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Field\Objects\Belongings\Foods">
+      <UniqueIdentifier>{e9c280d2-1759-4e08-a4e8-fe14885db6e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\sprite\gauge">
+      <UniqueIdentifier>{0e7f9460-dc9d-4e5c-99fd-7f06121db3e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\2D">
+      <UniqueIdentifier>{0e4170ad-d424-49d5-b393-7c8d05ce285b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Field\Objects\Belongings\KitchenWare">
+      <UniqueIdentifier>{43935b55-2a97-4b4b-a84b-3c07902152f0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -111,9 +138,6 @@
     <ClCompile Include="physics\CapsuleCollider.cpp">
       <Filter>Engine\physics</Filter>
     </ClCompile>
-    <ClCompile Include="physics\PhysicsStaticObject.cpp">
-      <Filter>Engine\physics</Filter>
-    </ClCompile>
     <ClCompile Include="character\CharacterController.cpp">
       <Filter>character</Filter>
     </ClCompile>
@@ -146,17 +170,11 @@
     <ClCompile Include="Sprite.cpp">
       <Filter>Engine\graphics\sprite</Filter>
     </ClCompile>
-    <ClCompile Include="Title.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="SkinModelRender.cpp">
       <Filter>Engine\graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Stage_1.cpp">
       <Filter>Game\Field</Filter>
@@ -167,8 +185,99 @@
     <ClCompile Include="StageObject.cpp">
       <Filter>Game\Field\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Desk.cpp">
+    <ClCompile Include="StageSelect.cpp">
+      <Filter>Game\Field</Filter>
+    </ClCompile>
+    <ClCompile Include="physics\PhysicsStaticObject.cpp">
+      <Filter>Engine\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="DustBox.cpp">
       <Filter>Game\Field\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_1.cpp">
+      <Filter>Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_2.cpp">
+      <Filter>Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_3.cpp">
+      <Filter>Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_4.cpp">
+      <Filter>Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CuttingBoard.cpp">
+      <Filter>Game\Field\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="FoodBox.cpp">
+      <Filter>Game\Field\Objects\ObjectAbove\FoodBox</Filter>
+    </ClCompile>
+    <ClCompile Include="TomatoBox.cpp">
+      <Filter>Game\Field\Objects\ObjectAbove\FoodBox</Filter>
+    </ClCompile>
+    <ClCompile Include="OnionBox.cpp">
+      <Filter>Game\Field\Objects\ObjectAbove\FoodBox</Filter>
+    </ClCompile>
+    <ClCompile Include="Knife.cpp">
+      <Filter>Game\Field\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneItemManager.cpp" />
+    <ClCompile Include="ObjectAbove.cpp">
+      <Filter>Game\Field\Objects\ObjectAbove</Filter>
+    </ClCompile>
+    <ClCompile Include="Desk.cpp">
+      <Filter>Game\Field\Objects\ObjectAbove</Filter>
+    </ClCompile>
+    <ClCompile Include="GasStove.cpp">
+      <Filter>Game\Field\Objects\ObjectAbove</Filter>
+    </ClCompile>
+    <ClCompile Include="DishHold.cpp">
+      <Filter>Game\Field\Objects\ObjectAbove</Filter>
+    </ClCompile>
+    <ClCompile Include="Kitchen.cpp">
+      <Filter>Game\Field\Objects\ObjectAbove</Filter>
+    </ClCompile>
+    <ClCompile Include="Delivery.cpp">
+      <Filter>Game\Field\Objects\ObjectAbove</Filter>
+    </ClCompile>
+    <ClCompile Include="Belongings.cpp">
+      <Filter>Game\Field\Objects\Belongings</Filter>
+    </ClCompile>
+    <ClCompile Include="Foods.cpp">
+      <Filter>Game\Field\Objects\Belongings\Foods</Filter>
+    </ClCompile>
+    <ClCompile Include="Onion.cpp">
+      <Filter>Game\Field\Objects\Belongings\Foods</Filter>
+    </ClCompile>
+    <ClCompile Include="Tomato.cpp">
+      <Filter>Game\Field\Objects\Belongings\Foods</Filter>
+    </ClCompile>
+    <ClCompile Include="CuttingDesk.cpp">
+      <Filter>Game\Field\Objects\ObjectAbove</Filter>
+    </ClCompile>
+    <ClCompile Include="Gauge.cpp">
+      <Filter>Game\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Title.cpp">
+      <Filter>Game\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="KitchenWare.cpp">
+      <Filter>Game\Field\Objects\Belongings\KitchenWare</Filter>
+    </ClCompile>
+    <ClCompile Include="Pot.cpp">
+      <Filter>Game\Field\Objects\Belongings\KitchenWare</Filter>
+    </ClCompile>
+    <ClCompile Include="SoupBase.cpp">
+      <Filter>Game\Field\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="ShadowMap.cpp">
+      <Filter>Engine\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderTarget.cpp">
+      <Filter>Engine\graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -275,17 +384,11 @@
     <ClInclude Include="Sprite.h">
       <Filter>Engine\graphics\sprite</Filter>
     </ClInclude>
-    <ClInclude Include="Title.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="SkinModelRender.h">
       <Filter>Engine\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Stage_1.h">
       <Filter>Game\Field</Filter>
@@ -296,8 +399,117 @@
     <ClInclude Include="StageObject.h">
       <Filter>Game\Field\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Desk.h">
+    <ClInclude Include="PhysicsDebugDraw.h">
+      <Filter>Engine\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Primitive.h">
+      <Filter>Engine\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="StageSelect.h">
+      <Filter>Game\Field</Filter>
+    </ClInclude>
+    <ClInclude Include="CIndexBuffer.h">
+      <Filter>Engine\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="CVertexBuffer.h">
+      <Filter>Engine\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstantBuffer.h">
+      <Filter>Engine\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="GPUBuffer.h">
+      <Filter>Engine\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexBuffer.h">
+      <Filter>Engine\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="DustBox.h">
       <Filter>Game\Field\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_1.h">
+      <Filter>Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_2.h">
+      <Filter>Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_3.h">
+      <Filter>Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_4.h">
+      <Filter>Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CuttingBoard.h">
+      <Filter>Game\Field\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="FoodBox.h">
+      <Filter>Game\Field\Objects\ObjectAbove\FoodBox</Filter>
+    </ClInclude>
+    <ClInclude Include="TomatoBox.h">
+      <Filter>Game\Field\Objects\ObjectAbove\FoodBox</Filter>
+    </ClInclude>
+    <ClInclude Include="OnionBox.h">
+      <Filter>Game\Field\Objects\ObjectAbove\FoodBox</Filter>
+    </ClInclude>
+    <ClInclude Include="Knife.h">
+      <Filter>Game\Field\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneItemManager.h" />
+    <ClInclude Include="ObjectAbove.h">
+      <Filter>Game\Field\Objects\ObjectAbove</Filter>
+    </ClInclude>
+    <ClInclude Include="Desk.h">
+      <Filter>Game\Field\Objects\ObjectAbove</Filter>
+    </ClInclude>
+    <ClInclude Include="GasStove.h">
+      <Filter>Game\Field\Objects\ObjectAbove</Filter>
+    </ClInclude>
+    <ClInclude Include="DishHold.h">
+      <Filter>Game\Field\Objects\ObjectAbove</Filter>
+    </ClInclude>
+    <ClInclude Include="Kitchen.h">
+      <Filter>Game\Field\Objects\ObjectAbove</Filter>
+    </ClInclude>
+    <ClInclude Include="Delivery.h">
+      <Filter>Game\Field\Objects\ObjectAbove</Filter>
+    </ClInclude>
+    <ClInclude Include="Belongings.h">
+      <Filter>Game\Field\Objects\Belongings</Filter>
+    </ClInclude>
+    <ClInclude Include="Foods.h">
+      <Filter>Game\Field\Objects\Belongings\Foods</Filter>
+    </ClInclude>
+    <ClInclude Include="Onion.h">
+      <Filter>Game\Field\Objects\Belongings\Foods</Filter>
+    </ClInclude>
+    <ClInclude Include="Tomato.h">
+      <Filter>Game\Field\Objects\Belongings\Foods</Filter>
+    </ClInclude>
+    <ClInclude Include="CuttingDesk.h">
+      <Filter>Game\Field\Objects\ObjectAbove</Filter>
+    </ClInclude>
+    <ClInclude Include="Gauge.h">
+      <Filter>Game\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Title.h">
+      <Filter>Game\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="KitchenWare.h">
+      <Filter>Game\Field\Objects\Belongings\KitchenWare</Filter>
+    </ClInclude>
+    <ClInclude Include="Pot.h">
+      <Filter>Game\Field\Objects\Belongings\KitchenWare</Filter>
+    </ClInclude>
+    <ClInclude Include="SoupBase.h">
+      <Filter>Game\Field\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="ShadowMap.h">
+      <Filter>Engine\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderTarget.h">
+      <Filter>Engine\graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -310,10 +522,81 @@
     <MeshContentTask Include="Assets\modelData\Desk\Desk.FBX">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\DishHold\DishHold.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\DustBox\DustBox.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Chef\chef_2.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\cutting_board\cutting_board.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\kitchen\kitchen.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Delivery\derivery.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\ColidionBox\collidionBox.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\ColidionBox\collidionBoxLong.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\FoodBox\Tomato\TomatoBox.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\FoodBox\Onion\OnionBox.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\kari_floor.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Gas_stove\gas_stove.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Food\Tomato\Tomato.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Knife\Knife.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Food\Onion\onion.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\cutting_board\cutting_desk.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Food\Tomato\TomatoCutting.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Pot\Pot.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Pot\SoupBase\tomato\soupBase_tomato.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Pot\SoupBase\onion\soupBase_onion.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\Title.png">
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\gauge\gauge.png">
+      <Filter>Assets\sprite\gauge</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\gauge\gauge_sheet.png">
+      <Filter>Assets\sprite\gauge</Filter>
+    </ImageContentTask>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\level\stage_1.tkl">
+      <Filter>Assets\level</Filter>
+    </None>
   </ItemGroup>
 </Project>
