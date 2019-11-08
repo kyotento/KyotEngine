@@ -36,16 +36,14 @@ cbuffer VSPSCb : register(b0){
 static const int directionLightNum = 1;		//ディレクションライトの数。
 
 struct DirectionLight {
-	float4 direction[directionLightNum];
-	float4 color[directionLightNum];
+	float4 direction[directionLightNum];	//ディレクションライトの向き。
+	float4 color[directionLightNum];		//ディレクションライトの色。
 };
 
 //ライト用定数バッファ。
 cbuffer LightConstantBuffer : register(b0)
 {
 	DirectionLight		directionLight;		//ディレクションライト。
-	float3				dligDirection;
-	float4				dligColor;
 	float3				eyePos;				//カメラの視点。
 	float				specPow;			//スペキュラライトの絞り。
 	float3				environmentpow;		//環境光の強さ。
@@ -197,11 +195,11 @@ float4 PSMain( PSInput In ) : SV_Target0
 {
 	float4 albedoColor = g_albedoTexture.Sample(g_sampler, In.TexCoord);
 	//ディレクションライトの拡散反射光を計算する。
-	float3 lig = max(0.0f, dot(In.Normal * -1.0f, dligDirection)) * dligColor;
+	float3 lig = max(0.0f, dot(In.Normal * -1.0f, directionLight.direction[0])) * directionLight.color[0];
 
+		//鏡面反射光。
 	//ディレクションライトの鏡面反射光を計算する。
 	{
-		//鏡面反射光。
 		for(int i = 0; i < directionLightNum; i++) {
 			//①反射ベクトルRを求める。
 			float3 R = directionLight.direction[i] + 2 * dot(In.Normal, -directionLight.direction[i]) * In.Normal;
@@ -212,7 +210,7 @@ float4 PSMain( PSInput In ) : SV_Target0
 			//①と②で求まったベクトルの内積を計算する。
 			float specPower = max(0, dot(R, -E));
 
-			//すぺきゅら反射をライトに加算する。
+			//スペキュラ反射をライトに加算する。
 			lig += directionLight.color[i].xyz * pow(specPower, 2);
 		}
 	}
@@ -242,7 +240,7 @@ float4 PSMain( PSInput In ) : SV_Target0
 //	}
 
 	//　環境光を当てる。
-	lig += 1.f/*float3(environmentpow)*/;
+//	lig += 1.f/*float3(environmentpow)*/;
 
 
 

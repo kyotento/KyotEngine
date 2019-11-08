@@ -14,8 +14,8 @@ const int directionLightNum = 1;		//ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg‚Ì”B(‚±‚ê‚ğ•Ï‚¦‚é‚Æ‚«‚
 
 
 struct DirectionLight {
-	CVector4 direction[directionLightNum];
-	CVector4 color[directionLightNum];
+	CVector4 direction[directionLightNum];	//ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg‚ÌŒü‚«B
+	CVector4 color[directionLightNum];		//ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg‚ÌFB
 	CVector3 eyePos;
 	float specPos;
 };
@@ -31,8 +31,6 @@ struct DirectionLight {
 struct LightConstantBuffer
 {
 	DirectionLight		directionLight;		//ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒgB
-	CVector3			dligDirection;
-	CVector4			dligColor;
 	CVector3			eyePos;				//ƒJƒƒ‰‚Ì‹“_B
 	float				specPow;			//ƒXƒyƒLƒ…ƒ‰ƒ‰ƒCƒg‚Ìi‚èB
 	CVector3			environmentpow;		//ŠÂ‹«Œõ‚Ì‹­‚³B

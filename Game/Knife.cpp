@@ -9,6 +9,7 @@ Knife::Knife()
 
 Knife::~Knife()
 {
+	DeleteGO(m_skinModelRender);
 }
 
 
@@ -24,6 +25,6 @@ bool Knife::Start()
 
 void Knife::Update()
 {
-
-	m_skinModelRender->SetPosition(m_position);
+	m_skinModelRender->SetPosition(m_position);		//座標を更新。
+	m_skinModelRender->SetRotation(m_rotation);		//回転を更新。
 }

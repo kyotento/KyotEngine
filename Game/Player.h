@@ -15,6 +15,7 @@
 #include "ObjectAbove.h"
 #include "Gauge.h"
 #include "Foods.h"
+#include "math/Vector.h"
 /// <summary>
 /// プレイヤーの基底クラス。
 /// </summary>

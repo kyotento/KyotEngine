@@ -397,14 +397,14 @@ void Player::PickUpObjects(int a)
 void Player::CuttingObject()
 {
 	//todo ゲージを描画して拡大率を操作する。　
-	m_gauge = NewGO<Gauge>(0, "gauge");
-//	m_objectAbove->SetGaugePosition(m_gauge);
-	//todo 絶　圧倒的仮。
-	CVector3 hoge = m_position;
-	hoge.y -= 150.f;
-	m_gauge->SetPosition(hoge);
-
-	m_objectAbove->TakeThings(m_belongings);
+//	m_gauge = NewGO<Gauge>(0, "gauge");
+////	m_objectAbove->SetGaugePosition(m_gauge);
+//	//todo 絶　圧倒的仮。
+//	CVector3 hoge = m_position;
+//	hoge.y -= 150.f;
+//	m_gauge->SetPosition(hoge);
+//
+//	m_objectAbove->TakeThings(m_belongings);
 //	m_gauge->Expansion();
 //	if (m_gauge->GetScale()) {		//2D拡大率１なら。
 		m_belongings->SetState(2);	//持てるものを切られている状態にする。
@@ -431,11 +431,14 @@ void Player::HoldingKnife()
 	pos.y = pp.m[3][1];
 	pos.z = pp.m[3][2];
 
+	CQuaternion rote;			//骨の回転を引き抜くよ。
+	rote.SetRotation(pp);		//ボーンの行列から回転行列を抽出。
 	
 	if (m_knifeflag == false) {
 		m_knife = NewGO<Knife>(0, "knife");
 		m_knifeflag = true;
 	}
-	m_knife->SetPosition(pos);
 
+	m_knife->SetPosition(pos);			//包丁に骨の座標を代入。
+	m_knife->SetRotation(rote);			//包丁に骨の回転を代入。
 }

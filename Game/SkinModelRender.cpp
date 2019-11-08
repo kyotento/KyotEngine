@@ -34,7 +34,6 @@ void SkinModelRender::Render()
 	//todo Init‚³‚ê‚È‚©‚Á‚½‚çDraw‚ğŒÄ‚Î‚È‚¢‚æ‚¤‚É‚·‚éB 
 	m_skinModel.Draw(enRenderMode_Normal,g_camera3D.GetViewMatrix(),g_camera3D.GetProjectionMatrix());
 	
-
 }
 
 void SkinModelRender::Init(const wchar_t* filePath,
