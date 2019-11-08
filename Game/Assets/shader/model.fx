@@ -10,11 +10,13 @@
 Texture2D<float4> g_albedoTexture : register(t0);	
 //ボーン行列
 StructuredBuffer<float4x4> boneMatrix : register(t1);
+//シャドウマップ。
+Texture2D<float4> g_shadowMap : register(t2);	
 
 /////////////////////////////////////////////////////////////
 // SamplerState
 /////////////////////////////////////////////////////////////
-sampler Sampler : register(s0);
+sampler g_sampler : register(s0);
 
 /////////////////////////////////////////////////////////////
 // 定数バッファ。
@@ -26,6 +28,9 @@ cbuffer VSPSCb : register(b0){
 	float4x4 mWorld;
 	float4x4 mView;
 	float4x4 mProj;
+	float4x4 mLightView;	//ライトビュー行列。
+	float4x4 mLightProj;	//ライトプロジェクション行列。
+//	int isShadowReciever;	//シャドウレシーバーフラグ。
 };
 
 static const int directionLightNum = 1;		//ディレクションライトの数。
@@ -70,6 +75,7 @@ struct VSInputNmTxWeights
     float3 Tangent	: TANGENT;				//接ベクトル。
     uint4  Indices  : BLENDINDICES0;		//この頂点に関連付けされているボーン番号。x,y,z,wの要素に入っている。4ボーンスキニング。
     float4 Weights  : BLENDWEIGHT0;			//この頂点に関連付けされているボーンへのスキンウェイト。x,y,z,wの要素に入っている。4ボーンスキニング。
+
 };
 
 /*!
@@ -81,6 +87,7 @@ struct PSInput{
 	float3 Tangent		: TANGENT;
 	float2 TexCoord 	: TEXCOORD0;
 	float3 worldPos		: TEXCOORD1;	//ワールド座標。
+	float4 posInLVP		: TEXCOORD2;	//ライトビュープロジェクション空間での座標。
 };
 
 /// <summary>
@@ -113,15 +120,31 @@ float4x4 CalcSkinMatrix(VSInputNmTxWeights In)
 PSInput VSMain( VSInputNmTxVcTangent In ) 
 {
 	PSInput psInput = (PSInput)0;
+	//ローカル座標系からワールド座標系に変換する。
 	float4 pos = mul(mWorld, In.Position);
+	float4 worldPos = mul(mWorld, In.Position);
 	pos = mul(mView, pos);
 	pos = mul(mProj, pos);
 	psInput.Position = pos;
 	psInput.TexCoord = In.TexCoord;
+	//psInput.Normal = normalize(mul(mWorld, In.Normal));
+	//psInput.Tangent = normalize(mul(mWorld, In.Tangent));
+
+//	if (isShadowReciever == 1) {
+		//ライトビュープロジェクション空間に変換。
+		psInput.posInLVP = mul(mLightView, worldPos);
+		psInput.posInLVP = mul(mLightProj,psInput.posInLVP);
+//	}
+
 	//UV座標はそのままピクセルシェーダーに渡す。
 	psInput.Normal = normalize(mul(mWorld, In.Normal));
-	//法線をそのままピクセルシェーダーに渡す。
+	////法線をそのままピクセルシェーダーに渡す。
 	psInput.Tangent = normalize(mul(mWorld, In.Tangent));
+
+	////UV座標はそのままピクセルシェーダーに渡す。
+	//psInput.TexCoord = In.TexCoord;
+	////法線はそのままピクセルシェーダーに渡す。
+	//psInput.Normal = In.Normal;
 	return psInput;
 }
 
@@ -158,7 +181,7 @@ PSInput VSMainSkin( VSInputNmTxWeights In )
 	}
 	psInput.Normal = normalize( mul(skinning, In.Normal) );
 	psInput.Tangent = normalize( mul(skinning, In.Tangent) );
-	//解説７　鏡面反射の計算のために、ワールド座標をピクセルシェーダーに渡す。
+	//鏡面反射の計算のために、ワールド座標をピクセルシェーダーに渡す。
 	psInput.worldPos = pos;
 	
 	pos = mul(mView, pos);
@@ -172,14 +195,13 @@ PSInput VSMainSkin( VSInputNmTxWeights In )
 //--------------------------------------------------------------------------------------
 float4 PSMain( PSInput In ) : SV_Target0
 {
-	float4 albedoColor = g_albedoTexture.Sample(Sampler, In.TexCoord);
+	float4 albedoColor = g_albedoTexture.Sample(g_sampler, In.TexCoord);
 	//ディレクションライトの拡散反射光を計算する。
 	float3 lig = max(0.0f, dot(In.Normal * -1.0f, dligDirection)) * dligColor;
 
 	//ディレクションライトの鏡面反射光を計算する。
 	{
-		//実習　鏡面反射を計算しなさい。
-
+		//鏡面反射光。
 		for(int i = 0; i < directionLightNum; i++) {
 			//①反射ベクトルRを求める。
 			float3 R = directionLight.direction[i] + 2 * dot(In.Normal, -directionLight.direction[i]) * In.Normal;
@@ -187,16 +209,42 @@ float4 PSMain( PSInput In ) : SV_Target0
 			//②始点からライトを当てる物体に伸びるベクトルEを求める。
 			float3 E = normalize(In.worldPos - eyePos);
 
-			//③　①と②で求まったベクトルの内積を計算する。
+			//①と②で求まったベクトルの内積を計算する。
 			float specPower = max(0, dot(R, -E));
 
-			//④　すぺきゅら反射をライトに加算する。
+			//すぺきゅら反射をライトに加算する。
 			lig += directionLight.color[i].xyz * pow(specPower, 2);
 		}
 	}
 
-	//⑤　環境光を当てる。
+//	if (isShadowReciever == 1) {	//シャドウレシーバー。
+	//LVP空間から見た時の最も手前の深度値をシャドウマップから取得する。
+		float2 shadowMapUV = In.posInLVP.xy / In.posInLVP.w;
+		shadowMapUV *= float2(0.5f, -0.5f);
+		shadowMapUV += 0.5f;
+		//シャドウマップの範囲内かどうかを判定する。
+		if (shadowMapUV.x < 1.0f
+			&& shadowMapUV.x > 0.0f
+			&& shadowMapUV.y < 1.0f
+			&& shadowMapUV.y > 0.0f
+			) {
+
+			///LVP空間での深度値を計算。
+			float zInLVP = In.posInLVP.z / In.posInLVP.w;
+			//シャドウマップに書き込まれている深度値を取得。
+			float zInShadowMap = g_shadowMap.Sample(g_sampler, shadowMapUV);
+
+			if (zInLVP > zInShadowMap + 0.01f) {// + 0.01fしているのは、シャドウアクネを回避するため。
+				//影が落ちているので、光を弱くする
+				lig *= 0.5f;
+			}
+		}
+//	}
+
+	//　環境光を当てる。
 	lig += 1.f/*float3(environmentpow)*/;
+
+
 
 	float4 finalColor = float4(0.0f, 0.0f, 0.0f, 1.0f);
 	finalColor.xyz = albedoColor.xyz * lig;
