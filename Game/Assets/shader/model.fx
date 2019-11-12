@@ -232,7 +232,7 @@ float4 PSMain( PSInput In ) : SV_Target0
 			//シャドウマップに書き込まれている深度値を取得。
 			float zInShadowMap = g_shadowMap.Sample(g_sampler, shadowMapUV);
 
-			if (zInLVP > zInShadowMap + 0.01f) {// + 0.01fしているのは、シャドウアクネを回避するため。
+			if (zInLVP > zInShadowMap + 0.001f) {// + 0.01fしているのは、シャドウアクネを回避するため。
 				//影が落ちているので、光を弱くする
 				lig *= 0.5f;
 			}
@@ -241,8 +241,6 @@ float4 PSMain( PSInput In ) : SV_Target0
 
 	//　環境光を当てる。
 //	lig += 1.f/*float3(environmentpow)*/;
-
-
 
 	float4 finalColor = float4(0.0f, 0.0f, 0.0f, 1.0f);
 	finalColor.xyz = albedoColor.xyz * lig;

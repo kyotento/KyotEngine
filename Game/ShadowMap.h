@@ -46,6 +46,22 @@ public:
 		m_shadowCasters.push_back(shadowCaster);
 	}
 
+
+	//シャドウマップのレンダリングターゲット。
+	ID3D11ShaderResourceView* GetShadowMapSRV()
+	{
+		return m_shadowMapRT.GetRenderTargetSRV();
+	}
+
+	/// <summary>
+	/// シャドウキャスターの配列を取得する。
+	/// </summary>
+	/// <returns></returns>
+	/*const*/ std::vector< SkinModel*> &GetShadowCasters()
+	{
+		return m_shadowCasters;
+	}
+
 private:
 	CVector3 m_lightCameraPosition = CVector3::Zero();	//ライトカメラの視点。
 	CVector3 m_lightCameraTarget = CVector3::Zero();	//ライトカメラの注視点。

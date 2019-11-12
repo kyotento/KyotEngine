@@ -24,13 +24,15 @@ void SkinModelRender::Update()
 		IGameObjectManager().AddShadowCaster(&m_skinModel);
 	}
 
-	m_animation.Update(1/30.0f);
+	m_animation.Update(1/60.0f);
 	m_skinModel.UpdateWorldMatrix(m_position, m_rotation, m_scale);
 
 }
 
 void SkinModelRender::Render()
 {
+	//todo シャドウマップをレジスタに渡す。
+	m_skinModel.SetShadowMap(IGameObjectManager().GetShadowMap()->GetShadowMapSRV());
 	//todo InitされなかったらDrawを呼ばないようにする。 
 	m_skinModel.Draw(enRenderMode_Normal,g_camera3D.GetViewMatrix(),g_camera3D.GetProjectionMatrix());
 	

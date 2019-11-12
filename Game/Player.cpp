@@ -15,6 +15,7 @@ Player::Player()
 	m_characon.Init(45.f, 50.f, m_characonPos);
 }
 
+//todo マジックナンバーをenumに。
 
 Player::~Player()
 {
@@ -48,13 +49,13 @@ void Player::Movement(int a)
 		m_move.y -= m_fallSpeed;
 		m_position = m_characon.Execute(1.0, m_move);
 
-		if (m_toHave == false) {
+		if (m_toHave == false) {		//何も持っていないとき。
 			m_state = enRun;	//移動状態。
 		}
 	}
 
 	else {
-		if (m_toHave == false) {
+		if (m_toHave == false) {		//何か持っているとき。
 			m_state = enIdle;	//待機状態。
 		}
 	}
@@ -105,39 +106,6 @@ void Player::ForwardDirectionRay(int a)
 
 		if (rayRC.hasHit())			//衝突しているなら。
 		{
-			////Desk。
-			//if (rayRC.m_collisionObject->getUserIndex() == 1) {
-			//	rayRC.m_collisionObject->getUserPointer();
-			//}
-			//
-			////Delivery。
-			//if (rayRC.m_collisionObject->getUserIndex() == 2) {
-			//	rayRC.m_collisionObject->getUserPointer();
-			//}
-			////DishHold。
-			//if (rayRC.m_collisionObject->getUserIndex() == 3) {
-			//	rayRC.m_collisionObject->getUserPointer();
-			//}
-			////DustBox。
-			//if (rayRC.m_collisionObject->getUserIndex() == 4) {
-			//	rayRC.m_collisionObject->getUserPointer();
-			//}
-			////GasStove。
-			//if (rayRC.m_collisionObject->getUserIndex() == 5) {
-			//	rayRC.m_collisionObject->getUserPointer();
-			//}
-			////Kitchen。
-			//if (rayRC.m_collisionObject->getUserIndex() == 6){
-			//	rayRC.m_collisionObject->getUserPointer(); 
-			//}
-			////OnionBox。
-			//if (rayRC.m_collisionObject->getUserIndex() == 7) {
-			//	rayRC.m_collisionObject->getUserPointer();
-			//}
-			////TomatoBox。
-			//if (rayRC.m_collisionObject->getUserIndex() == 8) {
-			//	rayRC.m_collisionObject->getUserPointer();
-			//}
 
 			for (int i = 1; i <= m_objectNum; i++)
 			{
@@ -362,10 +330,13 @@ void Player::PutObjects(int a)
 
 				if (m_belongings->GetIndentValue() == 0) {			//持っているものが食べ物のとき。
 					if (m_belongings->GetState() == 2) {			//持っているオブジェクトが切られているとき。
-					//	m_objectAbove->TakeThings(m_belongings);	//乗っているオブジェクトを検索する。
-						//todo 絶　乗っているものが調理器具だった場合、切ってあるものを置く。
-						if (m_belongings->GetIndentValue() == 1) {
+						Belongings* cacth = 0;
+						m_objectAbove->TakeThings(cacth);			//乗っているオブジェクトを検索する。
+						if (cacth->GetIndentValue() == 1) {			//乗っているものが調理器具だった場合。
 							//todo 絶　乗っている調理器具のKari関数を呼ぶ。そして持っているものを消す(条件付き)。
+							cacth->SetSoupBase(cacth);				//鍋にスープを入れる(それっぽいオブジェクトの生成)処理。
+					//		DeleteGO(m_belongings);
+							
 						}
 					}
 				}
@@ -382,13 +353,15 @@ void Player::PickUpObjects(int a)
 {
 	if (g_pad[a].IsTrigger(enButtonA))						//Aボタンを押したとき。
 	{
-		if (m_objectAbove != nullptr) {						//目の前にオブジェクトがあるとき。
-			if (m_objectAbove->GetState() == 1) {			//オブジェクトに何か乗っているとき。
-				m_objectAbove->TakeThings(m_belongings);	//乗っているオブジェクトを検索。
-				SetFoodPosition();							//持っているものの座標を指定。
-				m_objectAbove->SetState(0);					//物をとったオブジェクトのステートを変更する。
-				m_toHave = true;							//物を持つフラグ。
-				m_state = enIdleHave;						//ステート変更。
+		if(m_toHave == false){			//何も持っていないとき
+			if (m_objectAbove != nullptr) {						//目の前にオブジェクトがあるとき。
+				if (m_objectAbove->GetState() == 1) {			//オブジェクトに何か乗っているとき。
+					m_objectAbove->TakeThings(m_belongings);	//乗っているオブジェクトを検索。
+					SetFoodPosition();							//持っているものの座標を指定。
+					m_objectAbove->SetState(0);					//物をとったオブジェクトのステートを変更する。
+					m_toHave = true;							//物を持つフラグ。
+					m_state = enIdleHave;						//ステート変更。
+				}
 			}
 		}
 	}
@@ -435,7 +408,6 @@ void Player::HoldingKnife()
 	rote.SetRotation(pp);		//ボーンの行列から回転行列を抽出。
 	
 	if (m_knifeflag == false) {
-		m_knife = NewGO<Knife>(0, "knife");
 		m_knifeflag = true;
 	}
 

@@ -48,6 +48,11 @@ public:
 		return m_IdentificationValue;
 	}
 
+	/// <summary>
+	/// スープっぽいオブジェクトを生成する。
+	/// </summary>
+	/// <param name="bel">置いてあるもの</param>
+	void SetSoupBase(Belongings* bel);
 
 protected:
 
@@ -56,6 +61,7 @@ protected:
 	/// </summary>
 	/// <value>0=食べ物、1=調理器具</value>
 	int m_IdentificationValue = 0;			
+
 
 	/// <summary>	
 	/// 食べ物の状態。

@@ -105,6 +105,25 @@ public:
 	/// </summary>
 	void InitDirectionLight();
 
+	/// <summary>
+	/// シャドウマップ
+	/// </summary>
+	/// <param name="srv"></param>
+	void SetShadowMap(ID3D11ShaderResourceView* srv) {
+		m_shadowMapSRV = srv;
+	}
+
+	/// <summary>
+	/// マテリアルに対してクエリを行う。
+	/// </summary>
+	/// <param name="func">お問い合わせ関数</param>
+	void QueryMaterials(std::function<void(SkinModel*)> func)
+	{
+		m_modelDx->UpdateEffects([&](DirectX::IEffect* material) {
+			func(reinterpret_cast<SkinModel*>(material));
+		});
+	}
+
 	/*!
 	*@brief	SRVのレジスタ番号。
 	*/
@@ -130,9 +149,11 @@ private:
 private:
 	//定数バッファ。
 	struct SVSConstantBuffer {
-		CMatrix mWorld;
-		CMatrix mView;
-		CMatrix mProj;
+		CMatrix mWorld;			//ワールド行列。	
+		CMatrix mView;			//ビュー行列。
+		CMatrix mProj;			//プロジェクション行列。
+		CMatrix mLightView;		//todo ライトビュー行列。
+		CMatrix mLightProj;		//todo ライトプロジェクション行列。
 	};
 	EnFbxUpAxis			m_enFbxUpAxis = enFbxUpAxisZ;	//!<FBXの上方向。
 	ID3D11Buffer*		m_cb = nullptr;					//!<定数バッファ。
@@ -142,9 +163,9 @@ private:
 	ID3D11SamplerState* m_samplerState = nullptr;		//!<サンプラステート。
 	ID3D11Buffer*		m_lightConstantBuffer = nullptr;//ライト用の定数バッファ。
 	DirectionLight		m_directionLight;				//ディレクションライト。
+	ID3D11ShaderResourceView* m_shadowMapSRV = nullptr;
 
-
-	const int directionLightNum = 1;		//ディレクションライトの数。
+//	const int directionLightNum = 1;		//ディレクションライトの数。
 
 	const char* m_vsmain;
 	const char* m_psmain;

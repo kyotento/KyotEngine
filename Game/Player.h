@@ -16,6 +16,7 @@
 #include "Gauge.h"
 #include "Foods.h"
 #include "math/Vector.h"
+#include "SoupBase.h"
 /// <summary>
 /// プレイヤーの基底クラス。
 /// </summary>
@@ -141,18 +142,27 @@ public:
 		m_belongings = belon;
 	}
 
+	/// <summary>
+	///	ナイフのインスタンスを取得。
+	/// </summary>
+	/// <returns>ナイフ</returns>
+	Knife *GetKnife()
+	{
+		return m_knife;
+	}
+
 protected:
 
 	int m_objectNum = 9;									//オブジェクトの数。
 	int m_objNum = 0;										//オブジェクトナンバー格納庫。
 
 	bool m_toHave = false;									//何かを持っているかどうか。
-	bool m_knifeflag = false;									//ナイフがNewされたかどうか。
+	bool m_knifeflag = false;								//ナイフがNewされたかどうか。
 
 	float m_transitionTime = 0.1f;							//アニメーションが切り替わるときの遷移時間。
-	float m_moveSpeed = 15.f;								//移動速度。
+	float m_moveSpeed = 7.5f;								//移動速度。
 	float m_fallSpeed = 1.0f;								//落下速度。
-	float m_distance = 6.0f;								//Rayの飛ばせる距離。
+	float m_distance = 12.0f;								//Rayの飛ばせる距離。
 	float m_noLongerZero = 0.00001f;						//限りなく０に近い値。
 	float m_putTimer = 0.5f;								//持ったオブジェクトを置けるようになるまでの時間。
 
@@ -190,6 +200,7 @@ protected:
 	ObjectAbove* m_objectAbove = nullptr;	//物を置くことができるオブジェクト。
 	Gauge* m_gauge = nullptr;				//ゲージ。
 	Foods* m_foods = nullptr;				//食べ物。
+	SoupBase* m_soupBase = nullptr;			//スープ。
 
 private:
 

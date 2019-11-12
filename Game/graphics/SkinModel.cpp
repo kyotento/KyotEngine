@@ -102,10 +102,18 @@ void SkinModel::InitSamplerState()
 
 void SkinModel::InitDirectionLight()
 {
-	for (int i = 0; i < directionLightNum;i++)
+	//ディレクションライトの数分ループする。
+	for (int i = 0; i < directionLightNum; i++)
 	{
-		m_directionLight.direction[i] = { 0.707,-0.707,0.0f,0.0f };
-		m_directionLight.color[i] = { 1.f,1.f,1.f,1.f };
+		if (i == 0) {
+			m_directionLight.direction[i] = { -0.707,-0.707,0.0f,0.0f };
+			m_directionLight.color[i] = { 1.f,1.f,1.f,1.f };
+		}
+
+		//if (i == 1) {
+		//	m_directionLight.direction[i] = { -0.707,-0.707,0.0f,0.0f };
+		//	m_directionLight.color[i] = { 1.f,1.f,1.f,1.f };
+		//}
 	}
 }
 
@@ -140,16 +148,22 @@ void SkinModel::Draw(EnRenderMode renderMode, CMatrix viewMatrix, CMatrix projMa
 
 	ID3D11DeviceContext* d3dDeviceContext = g_graphicsEngine->GetD3DDeviceContext();
 
+	auto shadowMap = IGameObjectManager().GetShadowMap();		//シャドウマップを取得。
 	//定数バッファの内容を更新。
 	SVSConstantBuffer vsCb;
 	vsCb.mWorld = m_worldMatrix;
 	vsCb.mProj = projMatrix;
 	vsCb.mView = viewMatrix;
+	//ライトのカメラビュー、プロジェクション行列を送る。
+	vsCb.mLightProj = shadowMap->GetLightProjMatrix();
+	vsCb.mLightView = shadowMap->GetLighViewMatrix();
+	//メインメモリの内容をVRAMにコピー（VRAM：：　GPUがアクセスするメモリ）。
 	d3dDeviceContext->UpdateSubresource(m_cb, 0, nullptr, &vsCb, 0, 0);
 	//視点を設定。
 	m_directionLight.eyePos = g_camera3D.GetPosition();
 	//鏡面反射光の絞りを設定。
 	m_directionLight.specPos = 2.f;
+	
 	//ライト用の定数バッファを更新。
 	d3dDeviceContext->UpdateSubresource(m_lightConstantBuffer, 0, nullptr, &m_directionLight, 0, 0);
 	//定数バッファをGPUに転送。
@@ -159,7 +173,9 @@ void SkinModel::Draw(EnRenderMode renderMode, CMatrix viewMatrix, CMatrix projMa
 	d3dDeviceContext->PSSetSamplers(0, 1, &m_samplerState);
 	//ボーン行列をGPUに転送。
 	m_skeleton.SendBoneMatrixArrayToGPU();
-
+	//シャドウマップをレジスタに転送。(あってる？)
+	d3dDeviceContext->PSSetShaderResources(2, 1, &m_shadowMapSRV);
+	//エフェクトにクエリをかける。
 	m_modelDx->UpdateEffects([&](DirectX::IEffect* material) {
 		auto modelMaterial = reinterpret_cast<ModelEffect*>(material);
 		modelMaterial->SetRenderMode(renderMode);

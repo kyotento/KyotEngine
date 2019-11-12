@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "GameObjectManager.h"
 
-
 GameObjectManager::GameObjectManager()
 {
 	for (int i = 0; i < priorityMax; i++) { //優先度。
@@ -71,6 +70,8 @@ void GameObjectManager::Execute()
 	oldRenderTargetView->Release();
 	oldDepthStencilView->Release();
 
+	//todo todotodotodotodotodotodo9
+
 	//通常レンダリング。
 	for (GameObjectList objList : m_gameObjectListArray)
 	{
@@ -79,7 +80,6 @@ void GameObjectManager::Execute()
 			object->RenderWrapper();
 		}
 	}
-
 
 	g_graphicsEngine->EndRender();
 

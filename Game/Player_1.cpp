@@ -18,6 +18,9 @@ bool Player_1::Start()
 	m_skinModelRender->SetPosition(m_position);
 	m_skinModelRender->SetRotation(m_rotation);
 	m_skinModelRender->PlayAnimation(enanimationClip_Idle);
+
+	m_knife = NewGO<Knife>(0, "knife");
+
 	return true;
 }
 
@@ -28,4 +31,7 @@ void Player_1::Update()
 	ForwardDirectionRay(m_controllerNumber);
 	ActionProcessing(m_controllerNumber);
 
+	if (m_state != enanimationClip_Cut) {		//もし切っている状態じゃないとき。
+		m_knife->SetPosition(m_position);		//ナイフの座標を指定。
+	}
 }

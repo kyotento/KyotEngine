@@ -234,7 +234,21 @@ public:
 		return &m_shadowMap;
 	}
 
+
+	/// <summary>
+	/// マテリアルに対してクエリを行う。
+	/// </summary>
+	/// <param name="func">お問い合わせ関数</param>
+	void QueryMaterials(std::function<void(SkinModel*)> func)
+	{
+		m_modelDx->UpdateEffects([&](DirectX::IEffect* material) {
+			func(reinterpret_cast<SkinModel*>(material));
+		});
+	}
+
 private:
+
+	DirectX::Model*		m_modelDx;						//!<DirectXTKが提供するモデルクラス。
 
 	ShadowMap m_shadowMap;			//シャドウマップ。
 

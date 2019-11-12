@@ -9,8 +9,6 @@ class Foods : public Belongings
 public:
 	Foods();
 	~Foods();
-	
-
 
 protected:
 
