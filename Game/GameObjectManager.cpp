@@ -70,8 +70,6 @@ void GameObjectManager::Execute()
 	oldRenderTargetView->Release();
 	oldDepthStencilView->Release();
 
-	//todo todotodotodotodotodotodo9
-
 	//’ÊíƒŒƒ“ƒ_ƒŠƒ“ƒOB
 	for (GameObjectList objList : m_gameObjectListArray)
 	{

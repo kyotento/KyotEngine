@@ -234,7 +234,7 @@ float4 PSMain( PSInput In ) : SV_Target0
 
 			if (zInLVP > zInShadowMap + 0.001f) {// + 0.01fしているのは、シャドウアクネを回避するため。
 				//影が落ちているので、光を弱くする
-				lig *= 0.5f;
+				lig *= 0.4f;
 			}
 		}
 //	}

@@ -45,7 +45,7 @@ private:
 
 	float m_x = 0.0f;									//ゲージのX軸拡大率。
 
-	CVector2 m_pivot = { 0.5f,0.5f };					//基点。
+	CVector2 m_pivot = { 0.f,0.5f };					//基点。
 
 	CVector3 m_position = {0,0,0}/* CVector3::Zero()*/;				//ゲージと基盤の座標。
 	CVector3 m_scaleGauge = CVector3::Zero();			//ゲージの拡大率。

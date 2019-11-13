@@ -36,16 +36,19 @@ bool Gauge::Start()
 void Gauge::Expansion()
 {
 	//todo 絶　切った時に拡大する。Xが１になると切られた状態にする。0.2秒に一回切る。
-	if (m_x <= 1.f)
-	{
-		m_x += 0.2f;
-		m_spriteRenderGauge->SetScale({ m_x,1.f,1.f });
+	if (m_spriteRenderGauge != nullptr) {
+		if (m_x <= 1.f)		//拡大率が１以下のとき。
+		{
+			m_x += 0.2f;	//拡大する。
+			m_spriteRenderGauge->SetScale({ m_x,1.f,1.f });		//拡大を更新。
+		}
 	}
-
 }
 
 void Gauge::Update()
 {
-	m_spriteRender->SetPosition(m_position);
+	m_spriteRender->SetPosition(m_position);			//座標を更新。
+	m_spriteRenderGauge->SetPosition(m_position);		//ゲージの座標を更新。
+	m_spriteRenderGauge->SetScale(m_scaleGauge);		//ゲージのスケールを更新。
 
 }

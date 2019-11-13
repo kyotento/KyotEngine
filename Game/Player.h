@@ -70,7 +70,6 @@ public:
 	/// <summary>
 	/// 包丁をもたせる。
 	/// </summary>
-	/// <param name="a">コントローラー番号</param>
 	void HoldingKnife();
 
 	/// <summary>
@@ -196,6 +195,7 @@ protected:
 	Knife* m_knife = nullptr;				//ナイフ。
 	Skeleton* m_skelton = nullptr;			//サンズ(スケルトン)。
 	Belongings* m_belongings = nullptr;		//持つことができるもの。
+	Belongings* m_cacth = nullptr;			//物を置くことのできるオブジェクトに乗ってある、持つことのできるオブジェクトを検索したものを格納するためのもの。
 	Tomato* m_tomato = nullptr;				//トマト。
 	ObjectAbove* m_objectAbove = nullptr;	//物を置くことができるオブジェクト。
 	Gauge* m_gauge = nullptr;				//ゲージ。

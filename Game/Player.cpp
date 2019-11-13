@@ -330,13 +330,12 @@ void Player::PutObjects(int a)
 
 				if (m_belongings->GetIndentValue() == 0) {			//持っているものが食べ物のとき。
 					if (m_belongings->GetState() == 2) {			//持っているオブジェクトが切られているとき。
-						Belongings* cacth = 0;
-						m_objectAbove->TakeThings(cacth);			//乗っているオブジェクトを検索する。
-						if (cacth->GetIndentValue() == 1) {			//乗っているものが調理器具だった場合。
-							//todo 絶　乗っている調理器具のKari関数を呼ぶ。そして持っているものを消す(条件付き)。
-							cacth->SetSoupBase(cacth);				//鍋にスープを入れる(それっぽいオブジェクトの生成)処理。
-					//		DeleteGO(m_belongings);
-							
+						m_objectAbove->TakeThings(m_cacth);			//乗っているオブジェクトを検索する。
+						if (m_cacth->GetIndentValue() == 1) {			//乗っているものが調理器具だった場合。
+							//todo 絶　持っているものを消す(条件付き)。
+							m_cacth->SetSoupBase(m_cacth);				//鍋にスープを入れる(それっぽいオブジェクトの生成)処理。
+							DeleteGO(m_belongings);						//持っているものを消す。
+							m_state = enIdle;							//状態を待機状態に変更。
 						}
 					}
 				}
@@ -385,31 +384,27 @@ void Player::CuttingObject()
 	
 }
 
-//todo 技　包丁をプレイヤーに持たせる。
+//包丁をプレイヤーに持たせる処理。
 void Player::HoldingKnife()
 {
-	int a;
-	m_skelton = &m_skinModelRender->GetSkinModel().GetSkeleton();
+	int a;			//骨の配列の番号を保持するためのもの。
+	m_skelton = &m_skinModelRender->GetSkinModel().GetSkeleton();		//ほねのインスタンスを取得。
 	a = m_skelton->FindBoneID(L"Bone008");		//包丁を持つBoneの名前。
-	Bone* m_bone;
+	Bone* m_bone;			//骨っこジャーキー。
 
 	//座標を引き抜く。
-	CVector3 pos;
+	CVector3 pos;		//骨の座標。
 
-	m_bone = m_skelton->GetBone(a);
+	m_bone = m_skelton->GetBone(a);			//骨の情報を渡す。
 
-	CMatrix pp;
-	pp = m_bone->GetMatrix();
-	pos.x = pp.m[3][0];
-	pos.y = pp.m[3][1];
-	pos.z = pp.m[3][2];
+	CMatrix pp;						//ボーンの行列を保持するやつ。
+	pp = m_bone->GetMatrix();		//ボーンの行列を代入。
+	pos.x = pp.m[3][0];				//X軸。
+	pos.y = pp.m[3][1];				//Y軸。
+	pos.z = pp.m[3][2];				//Z軸。
 
 	CQuaternion rote;			//骨の回転を引き抜くよ。
 	rote.SetRotation(pp);		//ボーンの行列から回転行列を抽出。
-	
-	if (m_knifeflag == false) {
-		m_knifeflag = true;
-	}
 
 	m_knife->SetPosition(pos);			//包丁に骨の座標を代入。
 	m_knife->SetRotation(rote);			//包丁に骨の回転を代入。

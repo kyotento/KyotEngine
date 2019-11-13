@@ -1,5 +1,5 @@
 /// <summary>
-/// 食べ物の基底クラス。
+/// 持てるものの基底クラス。
 /// </summary>
 #pragma once
 #include "StageObject.h"
