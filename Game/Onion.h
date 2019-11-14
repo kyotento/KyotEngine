@@ -1,7 +1,7 @@
 #pragma once
-#include "Foods.h"
+#include "Belongings.h"
 
-class Onion : public Foods
+class Onion : public Belongings
 {
 public:
 	Onion();

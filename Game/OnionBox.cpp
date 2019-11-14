@@ -24,7 +24,7 @@ bool OnionBox::Start()
 	m_physicsStaticObject.CreateMeshObject(m_skinModelRenderCollidion->GetSkinModel(), m_position, m_rotation);
 	DeleteGO(m_skinModelRenderCollidion);
 
-	m_physicsStaticObject.SetUserIndex(7);
+	m_physicsStaticObject.SetUserIndex(enOnionBox);
 	m_physicsStaticObject.SetUserPointer(this);
 
 	return true;

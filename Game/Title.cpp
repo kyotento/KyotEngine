@@ -9,7 +9,7 @@ Title::Title()
 Title::~Title()
 {
 	DeleteGO(m_spriteRender);
-	DeleteGO(m_player);
+//	DeleteGO(m_player);
 }
 
 bool Title::Start()
@@ -19,8 +19,8 @@ bool Title::Start()
 	m_spriteRender->Init(L"Assets/sprite/Title.dds", 720, 1280 , false);
 	m_spriteRender->SetPosition(m_position);
 
-	m_player = NewGO<Player_1>(0, "player");
-	m_player->SetPosition({ 0.f,0.f,0.f });
+//	m_player = NewGO<Player_1>(0, "player");
+//	m_player->SetPosition({ 0.f,0.f,0.f });
 	
 	return true;
 }

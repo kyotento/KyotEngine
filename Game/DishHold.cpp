@@ -27,7 +27,7 @@ bool DishHold::Start()
 	m_physicsStaticObject.CreateMeshObject(m_skinModelRenderCollidion->GetSkinModel(), m_position, m_rotation);
 	DeleteGO(m_skinModelRenderCollidion);
 
-	m_physicsStaticObject.SetUserIndex(3);
+	m_physicsStaticObject.SetUserIndex(enDishHold);
 	m_physicsStaticObject.SetUserPointer(this);
 
 	return true;

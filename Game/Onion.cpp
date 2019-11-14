@@ -4,6 +4,8 @@
 
 Onion::Onion()
 {
+	//H‚×•¨‚Æ¯•Ê‚³‚ê‚éB
+	m_identification = enFood;
 }
 
 

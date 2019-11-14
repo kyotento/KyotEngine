@@ -249,13 +249,15 @@ float4 PSMain( PSInput In ) : SV_Target0
 	//return albedoTexture.Sample(Sampler, In.TexCoord);
 }
 
-//--------------------------------------------------------------------------------------
-// シルエット描画用のピクセルシェーダーのエントリ関数。
-//--------------------------------------------------------------------------------------
+
+/// <summary>
+/// シルエット描画用のピクセルシェーダーのエントリ関数。
+/// </summary>
 float4 PSMain_Silhouette(PSInput In) : SV_Target0
 {
 	return float4(0.5f, 0.5f, 0.5f, 1.0f);
 }
+
 
 /// <summary>
 /// シャドウマップ生成用の頂点シェーダー。
@@ -269,6 +271,8 @@ PSInput_ShadowMap VSMain_ShadowMap(VSInputNmTxVcTangent In)
 	psInput.Position = pos;
 	return psInput;
 }
+
+
 /// <summary>
 /// ピクセルシェーダーのエントリ関数。
 /// </summary>

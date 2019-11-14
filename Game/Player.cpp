@@ -37,32 +37,30 @@ void Player::Update()
 void Player::Movement(int a)
 {
 	
-	stickPower.x = g_pad[a].GetLStickXF();
-	stickPower.y = 0.f;
-	stickPower.z = g_pad[a].GetLStickYF();
+	m_stickPower.x = g_pad[a].GetLStickXF();		//左スティックのX軸の傾き。
+	m_stickPower.y = 0.f;							//左スティックのY軸。
+	m_stickPower.z = g_pad[a].GetLStickYF();		//左スティックのZ軸の傾き。
 
-	if (stickPower.Length() > m_noLongerZero)
+	if (m_stickPower.Length() > m_noLongerZero)		//スティックを傾けているとき。
 	{
-		m_oldPosition = m_position;
+		m_oldPosition = m_position;			//プレイヤーの座標をバックアップ。
 
-		m_move = stickPower * m_moveSpeed;
-		m_move.y -= m_fallSpeed;
-		m_position = m_characon.Execute(1.0, m_move);
+		m_move = m_stickPower * m_moveSpeed;			//移動速度の計算。
+		m_move.y -= m_fallSpeed;					//落下速度の計算。
+		m_position = m_characon.Execute(1.0, m_move);		//キャラコンに移動速度を代入。
 
 		if (m_toHave == false) {		//何も持っていないとき。
-			m_state = enRun;	//移動状態。
+			m_playerState = enRun;	//移動状態。
 		}
 	}
 
 	else {
-		if (m_toHave == false) {		//何か持っているとき。
-			m_state = enIdle;	//待機状態。
+		if (m_toHave == false) {		//何も持っていないとき。
+			m_playerState = enIdle;	//待機状態。
 		}
 	}
 
-
-		
-	m_skinModelRender->SetPosition(m_position);
+	m_skinModelRender->SetPosition(m_position);			//モデルの座標を更新。
 
 }
 
@@ -75,15 +73,14 @@ void Player::Rotation()
 	//	m_skinModelRender->SetRotation(m_rotation);
 	//}
 
-
-	YisDie = m_move;
-	YisDie.y = 0.0f;
+	m_YisDie = m_move;
+	m_YisDie.y = 0.0f;
 
 	//移動しているなら。
-	if (YisDie.Length() > m_noLongerZero){
+	if (m_YisDie.Length() > m_noLongerZero){
 		
-		YisDie.Normalize();
-		m_rotation.SetRotation({ 0.0f,  1.0f,  0.0f }, atan2f(YisDie.x, YisDie.z));
+		m_YisDie.Normalize();
+		m_rotation.SetRotation({ 0.0f,  1.0f,  0.0f }, atan2f(m_YisDie.x, m_YisDie.z));
 		m_skinModelRender->SetRotation(m_rotation);
 
 	}
@@ -112,86 +109,85 @@ void Player::ForwardDirectionRay(int a)
 				int n = rayRC.m_collisionObject->getUserIndex();	//nに当たっているオブジェクトのIndexを代入。
 				if (rayRC.m_collisionObject->getUserIndex() == i) {	//衝突したオブジェクトがi番目だった時。
 					rayRC.m_collisionObject->getUserPointer();		//衝突しているもののポインタを返す。
-					m_objNum = i;									//オブジェクトナンバー格納庫にiを代入。
 					m_objectAbove = (ObjectAbove*)rayRC.m_collisionObject->getUserPointer();
-
-					if (i == 1) {		//机のとき。
+					
+					if (rayRC.m_collisionObject->getUserIndex() == StageObject::enDesk) {		//机のとき。
 
 						m_desk = (Desk*)rayRC.m_collisionObject->getUserPointer();	//(Desk*)に当たったオブジェクトのポインタを入れる。
 
 					}
 
-					if (i == 2) {		//カウンターのとき。
+					if (rayRC.m_collisionObject->getUserIndex() == StageObject::enDelivery) {		//カウンターのとき。
 
 						m_delivery = (Delivery*)rayRC.m_collisionObject->getUserPointer();	
 
 					}
 
-					if (i == 3) {		//お皿置きのとき。
+					if (rayRC.m_collisionObject->getUserIndex() == StageObject::enDishHold) {		//お皿置きのとき。
 
 						m_dishHold = (DishHold*)rayRC.m_collisionObject->getUserPointer();
 
 					}
 
-					if (i == 4) {		//ゴミ箱のとき。
+					if (rayRC.m_collisionObject->getUserIndex() == StageObject::enDustBox) {		//ゴミ箱のとき。
 
 						m_dustbox = (DustBox*)rayRC.m_collisionObject->getUserPointer();
 
 					}
 
-					if (i == 5) {		//ガスコンロのとき。
+					if (rayRC.m_collisionObject->getUserIndex() == StageObject::enGasStove) {		//ガスコンロのとき。
 
 						m_gasStove = (GasStove*)rayRC.m_collisionObject->getUserPointer();	//(GasStove*)に当たったオブジェクトのポインタを入れる。
 
 					}
 
-					if (i == 6) {		//キッチンのとき。
+					if (rayRC.m_collisionObject->getUserIndex() == StageObject::enKitchen) {		//キッチンのとき。
 
 						m_kitchen = (Kitchen*)rayRC.m_collisionObject->getUserPointer();
 
 						//todo 絶　仮 実際は汚れたお皿があるとき。
 						if (g_pad[0].IsPress(enButtonB))
 						{
-							m_state = enWashing;
+							m_playerState = enWashing;
 						}
 					}
 
-					if (i == 7) {		//玉ねぎボックスのとき。
+					if (rayRC.m_collisionObject->getUserIndex() == StageObject::enOnionBox) {		//玉ねぎボックスのとき。
 
 						m_onionBox = (OnionBox*)rayRC.m_collisionObject->getUserPointer();
 
 						if (m_toHave == false) {
-							if (g_pad[a].IsTrigger(enButtonA) && m_objectAbove->GetState() == 0)
+							if (g_pad[a].IsTrigger(enButtonA) && m_objectAbove->GetState() == ObjectAbove::en_default)
 							{
 								m_belongings = m_onionBox->NewFood(a);		//玉ねぎを生成する。生成したものの情報をm_belongingsに代入。
 
-								m_state = enIdleHave;
+								m_playerState = enIdleHave;
 							}
 						}
 					}
 
-					if (i == 8) {		//トマトボックスのとき。
+					if (rayRC.m_collisionObject->getUserIndex() == StageObject::enTomatoBox) {		//トマトボックスのとき。
 
 						m_tomatoBox = (TomatoBox*)rayRC.m_collisionObject->getUserPointer();
 
 						if (m_toHave == false) {		//何も持っていないとき。
-							if (g_pad[a].IsTrigger(enButtonA) && m_objectAbove->GetState() == 0)
+							if (g_pad[a].IsTrigger(enButtonA) && m_objectAbove->GetState() == ObjectAbove::en_default)
 							{
 								m_belongings = m_tomatoBox->NewFood(a);	//トマトを生成する。生成したものの情報をm_belongingsに代入。
 
-								m_state = enIdleHave;
+								m_playerState = enIdleHave;
 							}
 						}
 					}
 
-					if (i == 9) {		//まな板のとき。
+					if (rayRC.m_collisionObject->getUserIndex() == StageObject::enCuttingDesk) {		//まな板のとき。
 
 						m_cuttingDesk = (CuttingDesk*)rayRC.m_collisionObject->getUserPointer();
 
 						if (m_toHave == false) {		//何も持っていないとき。
-							if (g_pad[a].IsPress(enButtonX) && m_objectAbove->GetState() == 1)		//Xを押したとき、何か乗っているとき。
+							if (g_pad[a].IsPress(enButtonX) && m_objectAbove->GetState() == ObjectAbove::en_onObject)		//Xを押したとき、何か乗っているとき。
 							{
-								m_state = enCutting;
+								m_playerState = enCutting;
 							}
 						}
 					}
@@ -204,7 +200,7 @@ void Player::ForwardDirectionRay(int a)
 void Player::ActionProcessing(int a)
 {
 
-	switch (m_state)
+	switch (m_playerState)
 	{
 	case enIdle:		//待機状態のとき。
 
@@ -257,8 +253,8 @@ void Player::ActionProcessing(int a)
 
 		m_toHave = true;
 
-		if (stickPower.Length() > m_noLongerZero){			//移動した時。
-			m_state = enRunHave;
+		if (m_stickPower.Length() > m_noLongerZero){			//移動した時。
+			m_playerState = enRunHave;
 		}
 
 		SetFoodPosition();
@@ -273,8 +269,8 @@ void Player::ActionProcessing(int a)
 
 		m_toHave = true;
 
-		if (stickPower.Length() > m_noLongerZero == false) {		//移動してなかったとき。
-			m_state = enIdleHave;
+		if (m_stickPower.Length() > m_noLongerZero == false) {		//移動してなかったとき。
+			m_playerState = enIdleHave;
 		}
 
 		SetFoodPosition();
@@ -304,41 +300,59 @@ void Player::PutObjects(int a)
 		if (m_objectAbove != nullptr) {					//物を置けるオブジェクトが目の前にあるとき。
 
 			//オブジェクトに何も乗っていないとき。
-			if (m_objectAbove->GetState() == 0) {		
+			if (m_objectAbove->GetState() == ObjectAbove::en_default) {		
 
 				//持っているものが食べ物のとき。
-				if (m_belongings->GetIndentValue() == 0) {		
-					if (m_objNum == 1 || m_objNum == 4 || m_objNum == 7 || m_objNum == 8 || m_objNum == 9) {		//食べ物が置けるオブジェクトかどうか。
+				if (m_belongings->GetIndentValue() == Belongings::enFood) {		
+					if (StageObject::enDesk || StageObject::enOnionBox || StageObject::enTomatoBox || StageObject::enCuttingDesk) {		//食べ物が置けるオブジェクトかどうか。
 						m_objectAbove->PutThings(m_belongings);		//設置物の座標にオブジェクトの座標を代入。
-						m_objectAbove->SetState(1);					//物を置いたオブジェクトのステートを変更する。
-						m_state = enIdle;							//プレイヤーのステートを待機状態に。
+						m_objectAbove->SetState(ObjectAbove::en_onObject);					//物を置いたオブジェクトのステートを変更する。
+						m_playerState = enIdle;							//プレイヤーのステートを待機状態に。
 					}
 				}
 
 				//持っているものが調理器具の場合。
-				if (m_belongings->GetIndentValue() == 1) {		
-					if (m_objNum == 1 || m_objNum == 5 || m_objNum == 7 || m_objNum == 8) {		//調理器具が置けるオブジェクトかどうか。
+				if (m_belongings->GetIndentValue() == Belongings::enKitchenWare) {		
+					if (StageObject::enDesk || StageObject::enGasStove || StageObject::enOnionBox || StageObject::enTomatoBox) {		//調理器具が置けるオブジェクトかどうか。
 						m_objectAbove->PutThings(m_belongings);		//設置物の座標にオブジェクトの座標を代入。
-						m_objectAbove->SetState(1);					//物を置いたオブジェクトのステートを変更する。
-						m_state = enIdle;							//プレイヤーのステートを待機状態に。
+						m_objectAbove->SetState(ObjectAbove::en_onObject);					//物を置いたオブジェクトのステートを変更する。
+						m_playerState = enIdle;							//プレイヤーのステートを待機状態に。
+					}
+				}
+
+				//持っているものがお皿の場合。
+				if (m_belongings->GetIndentValue() == Belongings::enDish) {
+					if (StageObject::enDesk || StageObject::enOnionBox || StageObject::enTomatoBox) {		//お皿が置けるオブジェクトかどうか。
+						m_objectAbove->PutThings(m_belongings);		//設置物の座標にオブジェクトの座標を代入。
+						m_objectAbove->SetState(ObjectAbove::en_onObject);					//物を置いたオブジェクトのステートを変更する。
+						m_playerState = enIdle;							//プレイヤーのステートを待機状態に。
 					}
 				}
 			}
 
 			//オブジェクトに何か乗っているとき。
-			if (m_objectAbove->GetState() == 1){
+			if (m_objectAbove->GetState() == ObjectAbove::en_onObject){
 
-				if (m_belongings->GetIndentValue() == 0) {			//持っているものが食べ物のとき。
-					if (m_belongings->GetState() == 2) {			//持っているオブジェクトが切られているとき。
+				if (m_belongings->GetIndentValue() == Belongings::enFood) {			//持っているものが食べ物のとき。
+					if (m_belongings->GetFoodState() == Belongings::enCutting) {			//持っているオブジェクトが切られているとき。
 						m_objectAbove->TakeThings(m_cacth);			//乗っているオブジェクトを検索する。
-						if (m_cacth->GetIndentValue() == 1) {			//乗っているものが調理器具だった場合。
-							//todo 絶　持っているものを消す(条件付き)。
+						if (m_cacth->GetIndentValue() == Belongings::enKitchenWare) {			//乗っているものが調理器具だった場合。
+							//todo 絶　持っているものを <条件付き> で消す。
 							m_cacth->SetSoupBase(m_cacth);				//鍋にスープを入れる(それっぽいオブジェクトの生成)処理。
 							DeleteGO(m_belongings);						//持っているものを消す。
-							m_state = enIdle;							//状態を待機状態に変更。
+							m_playerState = enIdle;							//状態を待機状態に変更。
 						}
 					}
 				}
+
+				if (m_belongings->GetIndentValue() == Belongings::enDish) {			//持っているものがお皿のとき。
+					m_objectAbove->TakeThings(m_cacth);				//乗っているオブジェクトを検索する。
+					if (m_cacth->GetIndentValue() == Belongings::enKitchenWare) {			//乗っているものが調理器具だった場合。
+						//todo 鍋の状態を見る。　Xを押したときに鍋がパーフェクト状態だったらお皿に料理を入れて鍋の中身を
+
+					}
+				}
+
 			}
 		}
 		//todo メモ　ここのコメントを外すとどこにでも食べ物を置くことができる。
@@ -354,12 +368,12 @@ void Player::PickUpObjects(int a)
 	{
 		if(m_toHave == false){			//何も持っていないとき
 			if (m_objectAbove != nullptr) {						//目の前にオブジェクトがあるとき。
-				if (m_objectAbove->GetState() == 1) {			//オブジェクトに何か乗っているとき。
+				if (m_objectAbove->GetState() == ObjectAbove::en_onObject) {			//オブジェクトに何か乗っているとき。
 					m_objectAbove->TakeThings(m_belongings);	//乗っているオブジェクトを検索。
 					SetFoodPosition();							//持っているものの座標を指定。
-					m_objectAbove->SetState(0);					//物をとったオブジェクトのステートを変更する。
+					m_objectAbove->SetState(ObjectAbove::en_default);					//物をとったオブジェクトのステートを変更する。
 					m_toHave = true;							//物を持つフラグ。
-					m_state = enIdleHave;						//ステート変更。
+					m_playerState = enIdleHave;						//ステート変更。
 				}
 			}
 		}
@@ -379,7 +393,7 @@ void Player::CuttingObject()
 //	m_objectAbove->TakeThings(m_belongings);
 //	m_gauge->Expansion();
 //	if (m_gauge->GetScale()) {		//2D拡大率１なら。
-		m_belongings->SetState(2);	//持てるものを切られている状態にする。
+		m_belongings->SetState(Belongings::enCutting);	//持てるものを切られている状態にする。
 //	}
 	
 }
@@ -387,25 +401,25 @@ void Player::CuttingObject()
 //包丁をプレイヤーに持たせる処理。
 void Player::HoldingKnife()
 {
-	int a;			//骨の配列の番号を保持するためのもの。
+	int boneNum;			//骨の配列の番号を保持するためのもの。
 	m_skelton = &m_skinModelRender->GetSkinModel().GetSkeleton();		//ほねのインスタンスを取得。
-	a = m_skelton->FindBoneID(L"Bone008");		//包丁を持つBoneの名前。
+	boneNum = m_skelton->FindBoneID(L"Bone008");		//包丁を持つBoneの名前。
 	Bone* m_bone;			//骨っこジャーキー。
 
 	//座標を引き抜く。
-	CVector3 pos;		//骨の座標。
+	CVector3 Bonepos;		//骨の座標。
 
-	m_bone = m_skelton->GetBone(a);			//骨の情報を渡す。
+	m_bone = m_skelton->GetBone(boneNum);			//骨の情報を渡す。
 
-	CMatrix pp;						//ボーンの行列を保持するやつ。
-	pp = m_bone->GetMatrix();		//ボーンの行列を代入。
-	pos.x = pp.m[3][0];				//X軸。
-	pos.y = pp.m[3][1];				//Y軸。
-	pos.z = pp.m[3][2];				//Z軸。
+	CMatrix boneRot;						//ボーンの行列を保持するやつ。
+	boneRot = m_bone->GetMatrix();		//ボーンの行列を代入。
+	Bonepos.x = boneRot.m[3][0];				//X軸。
+	Bonepos.y = boneRot.m[3][1];				//Y軸。
+	Bonepos.z = boneRot.m[3][2];				//Z軸。
 
-	CQuaternion rote;			//骨の回転を引き抜くよ。
-	rote.SetRotation(pp);		//ボーンの行列から回転行列を抽出。
+	CQuaternion Bonerote;			//骨の回転を引き抜くよ。
+	Bonerote.SetRotation(boneRot);		//ボーンの行列から回転行列を抽出。
 
-	m_knife->SetPosition(pos);			//包丁に骨の座標を代入。
-	m_knife->SetRotation(rote);			//包丁に骨の回転を代入。
+	m_knife->SetPosition(Bonepos);			//包丁に骨の座標を代入。
+	m_knife->SetRotation(Bonerote);			//包丁に骨の回転を代入。
 }

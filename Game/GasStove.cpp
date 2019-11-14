@@ -26,7 +26,7 @@ bool GasStove::Start()
 	m_physicsStaticObject.CreateMeshObject(m_skinModelRenderCollidion->GetSkinModel(), m_position, m_rotation);
 	DeleteGO(m_skinModelRenderCollidion);
 
-	m_physicsStaticObject.SetUserIndex(5);
+	m_physicsStaticObject.SetUserIndex(enGasStove);
 	m_physicsStaticObject.SetUserPointer(this);
 
 	return true;

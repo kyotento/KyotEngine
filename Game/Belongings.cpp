@@ -19,9 +19,9 @@ bool Belongings::Start()
 }
 
 //todo そのうち持っている物ごとに生成するものを変える。(SoupBaseクラス側でやったほうがいいかもしれない。)
-void Belongings::SetSoupBase(Belongings* bel)
+void Belongings::SetSoupBase(Belongings* belongings)
 {
-	Pot* pot = (Pot*)bel;		//どのPotか検索をかける。	
+	Pot* pot = (Pot*)belongings;		//どのPotか検索をかける。	
 	pot->Soup();				//スープの素を生成する。	
 }
 

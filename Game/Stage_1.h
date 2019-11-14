@@ -13,7 +13,8 @@ public:
 
 private:
 
-	
+	int m_dishNum = 0;						//¶¬‚³‚ê‚½‚¨M‚Ì”B
+	int m_dishNumUpperLimit = 4;			//¶¬‚³‚ê‚é‚¨M‚Ì”ãŒÀB
 
 };
 

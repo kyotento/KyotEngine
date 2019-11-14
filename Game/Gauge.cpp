@@ -33,13 +33,13 @@ bool Gauge::Start()
 	return true;
 }
 
-void Gauge::Expansion()
+void Gauge::Expansion(float a)
 {
 	//todo 絶　切った時に拡大する。Xが１になると切られた状態にする。0.2秒に一回切る。
 	if (m_spriteRenderGauge != nullptr) {
 		if (m_x <= 1.f)		//拡大率が１以下のとき。
 		{
-			m_x += 0.2f;	//拡大する。
+			m_x += a;	//拡大する。
 			m_spriteRenderGauge->SetScale({ m_x,1.f,1.f });		//拡大を更新。
 		}
 	}

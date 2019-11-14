@@ -7,6 +7,7 @@
 class Belongings : public StageObject
 {
 public:
+
 	Belongings();
 	~Belongings();
 
@@ -14,29 +15,14 @@ public:
 	void Update();
 
 
-	void SetState(int a)
-	{
-		if (a == 0)		//持たれている状態。
-		{
-			m_state = enHave;		
-		}
-		if (a == 1)		//置かれている状態。
-		{
-			m_state = enPutting;
-		}
-		if (a == 2)		//切られている状態。
-		{
-			m_state = enCutting;
-		}
-	}
 
 	/// <summary>
 	/// 状態を入手する。
 	/// </summary>
 	/// <returns>状態</returns>
-	int GetState()
+	int GetFoodState()
 	{
-		return m_state;
+		return m_foodState;
 	}
 
 	/// <summary>
@@ -45,23 +31,14 @@ public:
 	/// <returns>持てるオブジェクトが食べ物か調理器具か判断するための値</returns>
 	int GetIndentValue()
 	{
-		return m_IdentificationValue;
+		return m_identification;
 	}
 
 	/// <summary>
 	/// スープっぽいオブジェクトを生成する。
 	/// </summary>
-	/// <param name="bel">置いてあるもの</param>
-	void SetSoupBase(Belongings* bel);
-
-protected:
-
-	/// <summary>
-	/// 持てるオブジェクトが食べ物か調理器具か判断するための値。
-	/// </summary>
-	/// <value>0=食べ物、1=調理器具</value>
-	int m_IdentificationValue = 0;			
-
+	/// <param name="belongings">置いてあるもの</param>
+	void SetSoupBase(Belongings* belongings);
 
 	/// <summary>	
 	/// 食べ物の状態。
@@ -73,7 +50,32 @@ protected:
 		enCutting,			//切られている状態。
 	};
 
-	state m_state = enPutting;			//食べ物の状態。
+	/// <summary>
+	/// 食べ物の状態をセットする。
+	/// </summary>
+	/// <param name="foodsState">食べ物の状態</param>
+	void SetState(state foodsState)
+	{
+		m_foodState = static_cast<state>(foodsState);
+	}
+
+	/// <summary>
+	/// オブジェクトがどの系統に属するか。
+	/// </summary>
+	enum IdentificationValue
+	{
+		enFood,				//食べ物。
+		enKitchenWare,		//調理器具。
+		enDish				//お皿。
+	};
+
+protected:		
+
+	bool m_CuttingModel = false;			//切られたモデルになっているか。
+														//todo コンストラクタ設定めんどい。
+	IdentificationValue m_identification = enFood;		//オブジェクト系統の設定。(各クラスのコンストラクタで設定してあげる必要がある)。
+
+	state m_foodState = enPutting;			//食べ物の状態。
 
 private:
 

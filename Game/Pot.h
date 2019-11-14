@@ -2,11 +2,11 @@
 /// Ç®ìÁÅB
 /// </summary>
 #pragma once
-#include "KitchenWare.h"
+#include "Belongings.h"
 #include "SoupBase.h"
 #include "Gauge.h"
 
-class Pot : public KitchenWare
+class Pot : public Belongings
 {
 public:
 	Pot();

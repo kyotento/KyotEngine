@@ -4,12 +4,14 @@
 
 Tomato::Tomato()
 {
+	//食べ物と識別される。
+	m_identification = enFood;
 }
 
 
 Tomato::~Tomato()
 {
-	DeleteGO(m_skinModelRender);
+//	DeleteGO(m_skinModelRender);
 }
 
 bool Tomato::Start()
@@ -29,7 +31,7 @@ void Tomato::Update()
 	m_skinModelRender->SetRotation(m_rotation);
 
 	//todo 技　切られているモーションを付ける。
-	if (m_state == enCutting)		//もし切られたら。
+	if (m_foodState == enCutting)		//もし切られたら。
 	{
 		if (m_CuttingModel == false) {
 

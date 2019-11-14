@@ -16,6 +16,7 @@
 #include "Knife.h"
 #include "Pot.h"
 #include "Belongings.h"
+#include "Dish.h"
 
 class Desk;
 class DishHold;
@@ -60,6 +61,7 @@ protected:
 	Knife* m_knife = nullptr;				//ナイフ。
 	Pot* m_pot = nullptr;					//鍋。
 	Belongings* m_belongings = nullptr;		//持つことのできるもの。
+	Dish* m_dish = nullptr;					//お皿。
 
 private:
 

@@ -104,12 +104,12 @@
     <ClCompile Include="CuttingDesk.cpp" />
     <ClCompile Include="Delivery.cpp" />
     <ClCompile Include="Desk.cpp" />
+    <ClCompile Include="Dish.cpp" />
     <ClCompile Include="DishHold.cpp" />
     <ClCompile Include="DustBox.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Belongings.cpp" />
     <ClCompile Include="FoodBox.cpp" />
-    <ClCompile Include="Foods.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
@@ -130,7 +130,6 @@
     <ClCompile Include="graphics\SkinModelEffect.cpp" />
     <ClCompile Include="HID\Pad.cpp" />
     <ClCompile Include="Kitchen.cpp" />
-    <ClCompile Include="KitchenWare.cpp" />
     <ClCompile Include="Knife.cpp" />
     <ClCompile Include="level\Level.cpp" />
     <ClCompile Include="level\MapChip.cpp" />
@@ -183,12 +182,12 @@
     <ClInclude Include="CVertexBuffer.h" />
     <ClInclude Include="Delivery.h" />
     <ClInclude Include="Desk.h" />
+    <ClInclude Include="Dish.h" />
     <ClInclude Include="DishHold.h" />
     <ClInclude Include="DustBox.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Belongings.h" />
     <ClInclude Include="FoodBox.h" />
-    <ClInclude Include="Foods.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectManager.h" />
@@ -211,7 +210,6 @@
     <ClInclude Include="graphics\SkinModelShaderConst.h" />
     <ClInclude Include="HID\Pad.h" />
     <ClInclude Include="Kitchen.h" />
-    <ClInclude Include="KitchenWare.h" />
     <ClInclude Include="Knife.h" />
     <ClInclude Include="level\Level.h" />
     <ClInclude Include="level\MapChip.h" />
@@ -266,6 +264,7 @@
     <MeshContentTask Include="Assets\modelData\Delivery\derivery.FBX" />
     <MeshContentTask Include="Assets\modelData\Desk\Desk.FBX" />
     <MeshContentTask Include="Assets\modelData\DishHold\DishHold.FBX" />
+    <MeshContentTask Include="Assets\modelData\Dish\Dish.FBX" />
     <MeshContentTask Include="Assets\modelData\DustBox\DustBox.FBX" />
     <MeshContentTask Include="Assets\modelData\FoodBox\Onion\OnionBox.FBX" />
     <MeshContentTask Include="Assets\modelData\FoodBox\Tomato\TomatoBox.FBX" />

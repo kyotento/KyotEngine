@@ -12,7 +12,8 @@ public:
 	/// <summary>
 	/// ゲージを拡大する。
 	/// </summary>
-	void Expansion();
+	/// <param name="a">拡大率</param>
+	void Expansion(float a);
 
 	/// <summary>
 	/// ゲージのX軸拡大率。

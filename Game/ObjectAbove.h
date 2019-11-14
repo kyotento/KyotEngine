@@ -13,7 +13,7 @@ public:
 	~ObjectAbove();
 
 	/// <summary>
-	/// 食べ物をオブジェクトの座標に置く処理。
+	/// 持っているものをオブジェクトの座標に置く処理。
 	/// </summary>
 	/// <param name="">持てるもの</param>
 	void PutThings(Belongings*);
@@ -31,20 +31,6 @@ public:
 	void SetGaugePosition(Gauge*);
 
 	/// <summary>
-	/// オブジェクトの状態を変更する。
-	/// </summary>
-	/// <param name="a">状態</param>
-	void SetState(int a)
-	{
-		if (a == 0) {
-			m_state = en_default;
-		}
-		if (a == 1) {
-			m_state = en_onObject;
-		}
-	}
-
-	/// <summary>
 	/// オブジェクトの状態を検索する。
 	/// </summary>
 	/// <returns></returns>
@@ -52,11 +38,6 @@ public:
 	{
 		return m_state;
 	}
-
-protected:
-
-	Belongings* m_belongings = nullptr;
-	Gauge* m_gauge = nullptr;
 
 	/// <summary>
 	/// オブジェクトの状態。
@@ -68,7 +49,22 @@ protected:
 
 	};
 
-	enState m_state = en_default;
+	/// <summary>
+	/// オブジェクトの状態を変更する。
+	/// </summary>
+	/// <param name="objectAboveState">状態</param>
+	void SetState(enState objectAboveState)
+	{
+		m_state = static_cast<enState>(objectAboveState);
+	}
+
+
+protected:
+
+	Belongings* m_belongings = nullptr;			//持つことのできるオブジェクト。
+	Gauge* m_gauge = nullptr;					//ゲージ。
+
+	enState m_state = en_default;		//オブジェクトの状態。
 
 };
 

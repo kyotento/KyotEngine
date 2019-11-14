@@ -68,6 +68,22 @@ public:
 		return m_rotation;
 	}
 
+	/// <summary>
+	/// 置けるものの名前格納。
+	/// </summary>
+	enum ObjectNames
+	{
+		enDesk,				//お皿。
+		enDelivery,			//料理受け渡し口。			
+		enDishHold,			//お皿置き場。
+		enDustBox,			//ゴミ箱。
+		enGasStove,			//コンロ。
+		enKitchen,			//皿洗い場。
+		enOnionBox,			//玉ねぎボックス。			
+		enTomatoBox,		//トマトボックス。
+		enCuttingDesk		//まな板。
+	};
+
 protected:
 
 	SkinModelRender* m_skinModelRender = nullptr;				//すきんもでる。
@@ -79,19 +95,8 @@ protected:
 	CQuaternion m_rotation = CQuaternion::Identity();			//回転。
 
 	PhysicsStaticObject m_physicsStaticObject;					//静的物理オブジェクト。
-																			/*
-																				1.Desk
-																				2.Delivery
-																				3.DishHold
-																				4.DustBox
-																				5.GasStove
-																				6.Kitchen
-																				7.OnionBox
-																				8.TomatoBox
-																				9.CuttingDesk
-
-																			*/
-
+											
+	ObjectNames m_objName = enDesk;								//オブジェクトの名前。
 
 private:
 

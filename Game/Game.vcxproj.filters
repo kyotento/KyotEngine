@@ -246,9 +246,6 @@
     <ClCompile Include="Belongings.cpp">
       <Filter>Game\Field\Objects\Belongings</Filter>
     </ClCompile>
-    <ClCompile Include="Foods.cpp">
-      <Filter>Game\Field\Objects\Belongings\Foods</Filter>
-    </ClCompile>
     <ClCompile Include="Onion.cpp">
       <Filter>Game\Field\Objects\Belongings\Foods</Filter>
     </ClCompile>
@@ -264,9 +261,6 @@
     <ClCompile Include="Title.cpp">
       <Filter>Game\2D</Filter>
     </ClCompile>
-    <ClCompile Include="KitchenWare.cpp">
-      <Filter>Game\Field\Objects\Belongings\KitchenWare</Filter>
-    </ClCompile>
     <ClCompile Include="Pot.cpp">
       <Filter>Game\Field\Objects\Belongings\KitchenWare</Filter>
     </ClCompile>
@@ -278,6 +272,9 @@
     </ClCompile>
     <ClCompile Include="RenderTarget.cpp">
       <Filter>Engine\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Dish.cpp">
+      <Filter>Game\Field\Objects\Belongings</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -478,9 +475,6 @@
     <ClInclude Include="Belongings.h">
       <Filter>Game\Field\Objects\Belongings</Filter>
     </ClInclude>
-    <ClInclude Include="Foods.h">
-      <Filter>Game\Field\Objects\Belongings\Foods</Filter>
-    </ClInclude>
     <ClInclude Include="Onion.h">
       <Filter>Game\Field\Objects\Belongings\Foods</Filter>
     </ClInclude>
@@ -496,9 +490,6 @@
     <ClInclude Include="Title.h">
       <Filter>Game\2D</Filter>
     </ClInclude>
-    <ClInclude Include="KitchenWare.h">
-      <Filter>Game\Field\Objects\Belongings\KitchenWare</Filter>
-    </ClInclude>
     <ClInclude Include="Pot.h">
       <Filter>Game\Field\Objects\Belongings\KitchenWare</Filter>
     </ClInclude>
@@ -510,6 +501,9 @@
     </ClInclude>
     <ClInclude Include="RenderTarget.h">
       <Filter>Engine\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Dish.h">
+      <Filter>Game\Field\Objects\Belongings</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -580,6 +574,9 @@
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Pot\SoupBase\onion\soupBase_onion.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Dish\Dish.FBX">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
   </ItemGroup>

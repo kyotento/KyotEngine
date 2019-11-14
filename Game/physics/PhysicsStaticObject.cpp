@@ -12,6 +12,7 @@ PhysicsStaticObject::PhysicsStaticObject()
 }
 PhysicsStaticObject::~PhysicsStaticObject()
 {
+	//todo âûã}èàíuÅB
 	if (m_rigidBody.GetBody() != nullptr) {
 		g_physics.RemoveRigidBody(m_rigidBody);
 	}

@@ -31,7 +31,7 @@ void Player_1::Update()
 	ForwardDirectionRay(m_controllerNumber);
 	ActionProcessing(m_controllerNumber);
 
-	if (m_state != enanimationClip_Cut) {		//もし切っている状態じゃないとき。
+	if (m_playerState != enanimationClip_Cut) {		//もし切っている状態じゃないとき。
 		m_knife->SetPosition(m_position);		//ナイフの座標を指定。
 	}
 }

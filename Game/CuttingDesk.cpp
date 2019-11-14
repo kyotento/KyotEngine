@@ -28,7 +28,7 @@ bool CuttingDesk::Start()
 	m_physicsStaticObject.CreateMeshObject(m_skinModelRenderCollidion->GetSkinModel(), m_position, m_rotation);
 	DeleteGO(m_skinModelRenderCollidion);
 
-	m_physicsStaticObject.SetUserIndex(9);
+	m_physicsStaticObject.SetUserIndex(enCuttingDesk);
 	m_physicsStaticObject.SetUserPointer(this);
 
 	return true;

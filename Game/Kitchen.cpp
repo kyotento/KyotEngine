@@ -28,7 +28,7 @@ bool Kitchen::Start()
 	m_physicsStaticObject.CreateMeshObject(m_skinModelRenderCollidion->GetSkinModel(), m_position, m_rotation);
 	DeleteGO(m_skinModelRenderCollidion);
 
-	m_physicsStaticObject.SetUserIndex(6);
+	m_physicsStaticObject.SetUserIndex(enKitchen);
 	m_physicsStaticObject.SetUserPointer(this);
 
 	return true;

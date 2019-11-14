@@ -31,6 +31,20 @@ bool Stage_1::Start()
 				m_desk->SetPosition(objData.position);
 				m_desk->SetRotation(objData.rotation);
 				m_desk->SetScale(objData.scale);
+
+				m_dishNum += 1;			//生成したお皿の数を増やす。
+
+				//お皿。
+				if (m_dishNum <= m_dishNumUpperLimit) {
+					m_dish = NewGO<Dish>(0, "dish");		//お皿を生成する、
+					CVector3 pos;							//お皿の座標。
+					pos = objData.position;					//机の座標をお皿の座標に代入。
+					pos.y += 80.f;							//Y座標を上げてやる。
+					m_dish->SetPosition(pos);				//お皿の座標を設定。	
+					m_desk->PutThings(m_dish);				//机の上にお皿を置く処理。
+					m_desk->SetState(ObjectAbove::en_onObject);					//お皿を置いた机のステートを変更。
+				}
+
 			}
 
 			//お皿置き。
@@ -52,14 +66,14 @@ bool Stage_1::Start()
 
 				//お鍋。
 				m_pot = NewGO<Pot>(0, "pot");		//鍋をNew。
-				CVector3 m_position;				//鍋の仮値。
-				m_position = objData.position;		//ガスコンロの座標を代入。
-				m_position.y += 80.f;				//ｙ座標のみ上げてやる。
-				m_pot->SetPosition(m_position);		//鍋の座標指定。
+				CVector3 position;				//鍋の仮値。
+				position = objData.position;		//ガスコンロの座標を代入。
+				position.y += 80.f;				//ｙ座標のみ上げてやる。
+				m_pot->SetPosition(position);		//鍋の座標指定。
 
 				m_gasStove->PutThings(m_pot);		//ガスコンロの上に鍋を置く処理。
 
-				m_gasStove->SetState(1);			//ガスコンロのステート変更。
+				m_gasStove->SetState(ObjectAbove::en_onObject);			//ガスコンロのステート変更。
 
 			}
 

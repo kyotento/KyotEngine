@@ -24,7 +24,7 @@ bool TomatoBox::Start()
 	m_physicsStaticObject.CreateMeshObject(m_skinModelRenderCollidion->GetSkinModel(), m_position, m_rotation);
 	DeleteGO(m_skinModelRenderCollidion);
 
-	m_physicsStaticObject.SetUserIndex(8);
+	m_physicsStaticObject.SetUserIndex(enTomatoBox);
 	m_physicsStaticObject.SetUserPointer(this);
 
 	return true;
