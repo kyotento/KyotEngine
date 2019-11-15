@@ -10,15 +10,6 @@ public:
 	void Update();
 
 	/// <summary>
-	/// ‚¨M‚Ìó‘Ô‚ğæ“¾‚·‚éB
-	/// </summary>
-	/// <returns>‚¨M‚Ìó‘Ô</returns>
-	int GetState()
-	{
-		return m_dishState;
-	}
-
-	/// <summary>
 	/// ‚¨M‚Ìó‘ÔB
 	/// </summary>
 	enum DishState
