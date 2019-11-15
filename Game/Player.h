@@ -153,7 +153,7 @@ public:
 
 protected:
 
-	int m_objectNum = 9;									//オブジェクトの数。
+	int userIndexNum = 0;									//当たっているインデックスを代入。
 
 	bool m_toHave = false;									//何かを持っているかどうか。
 	bool m_knifeflag = false;								//ナイフがNewされたかどうか。
@@ -181,25 +181,25 @@ protected:
 
 	SkinModelRender* m_skinModelRender = nullptr;			//スキンモデル。
 
-	enPlayerState m_playerState = enIdle;								//プレイヤーの状態。
+	enPlayerState m_playerState = enIdle;					//プレイヤーの状態。
 
-	Desk* m_desk = nullptr;					//机。
-	DishHold* m_dishHold = nullptr;			//お皿置き。
-	GasStove* m_gasStove = nullptr;			//ガスコンロ。
-	DustBox* m_dustbox = nullptr;			//ゴミ箱。
-	CuttingDesk* m_cuttingDesk = nullptr;	//まな板。
-	Kitchen* m_kitchen = nullptr;			//水洗い場。
-	Delivery* m_delivery = nullptr;			//受け渡し所。
-	TomatoBox* m_tomatoBox = nullptr;		//トマトの箱。
-	OnionBox* m_onionBox = nullptr;			//玉ねぎの箱。
-	Knife* m_knife = nullptr;				//ナイフ。
-	Skeleton* m_skelton = nullptr;			//サンズ(スケルトン)。
-	Belongings* m_belongings = nullptr;		//持つことができるもの。
-	Belongings* m_cacth = nullptr;			//物を置くことのできるオブジェクトに乗ってある、持つことのできるオブジェクトを検索したものを格納するためのもの。
-	Tomato* m_tomato = nullptr;				//トマト。
-	ObjectAbove* m_objectAbove = nullptr;	//物を置くことができるオブジェクト。
-	Gauge* m_gauge = nullptr;				//ゲージ。
-	SoupBase* m_soupBase = nullptr;			//スープ。
+	Desk* m_desk = nullptr;						//机。
+	DishHold* m_dishHold = nullptr;				//お皿置き。
+	GasStove* m_gasStove = nullptr;				//ガスコンロ。
+	DustBox* m_dustbox = nullptr;				//ゴミ箱。
+	CuttingDesk* m_cuttingDesk = nullptr;		//まな板。
+	Kitchen* m_kitchen = nullptr;				//水洗い場。
+	Delivery* m_delivery = nullptr;				//受け渡し所。
+	TomatoBox* m_tomatoBox = nullptr;			//トマトの箱。
+	OnionBox* m_onionBox = nullptr;				//玉ねぎの箱。
+	Knife* m_knife = nullptr;					//ナイフ。
+	Skeleton* m_skelton = nullptr;				//サンズ(スケルトン)。
+	Belongings* m_belongings = nullptr;			//持つことができるもの。
+	Belongings* m_cacth = nullptr;				//物を置くことのできるオブジェクトに乗ってある、持つことのできるオブジェクトを検索したものを格納するためのもの。
+	Tomato* m_tomato = nullptr;					//トマト。
+	ObjectAbove* m_objectAbove = nullptr;		//物を置くことができるオブジェクト。
+	Gauge* m_gauge = nullptr;					//ゲージ。
+	SoupBase* m_soupBase = nullptr;				//スープ。
 
 private:
 

@@ -37,7 +37,6 @@ public:
 	{
 		en_default,					//何も乗っていない状態。
 		en_onObject,				//何かオブジェクトが乗ってある状態。
-
 	};
 
 	/// <summary>
@@ -58,12 +57,39 @@ public:
 		return m_state;
 	}
 
+	/// <summary>
+	/// 置けるものの名前格納。
+	/// </summary>
+	enum ObjectNames
+	{
+		enDesk,						//お皿。
+		enDelivery,					//料理受け渡し口。			
+		enDishHold,					//お皿置き場。
+		enDustBox,					//ゴミ箱。
+		enGasStove,					//コンロ。
+		enKitchen,					//皿洗い場。
+		enOnionBox,					//玉ねぎボックス。			
+		enTomatoBox,				//トマトボックス。
+		enCuttingDesk,				//まな板。
+		enNumberOfObjectAbove		//持てる物の種類の数。
+	};
+
+	///// <summary>
+	///// 食べ物の名前を取得する。
+	///// </summary>
+	///// <returns>食べ物の名前</returns>
+	//int GetObjName()
+	//{
+	//	return m_objName;
+	//}
+
 protected:
 
 	Belongings* m_belongings = nullptr;			//持つことのできるオブジェクト。
 	Gauge* m_gauge = nullptr;					//ゲージ。
 
-	enState m_state = en_default;		//オブジェクトの状態。
+	enState m_state = en_default;				//オブジェクトの状態。
 
+	ObjectNames m_objName = enDesk;				//オブジェクトの名前。
 };
 

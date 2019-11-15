@@ -101,56 +101,56 @@ void Player::ForwardDirectionRay(int controllerNum)
 
 		if (rayRC.hasHit())			//衝突しているなら。
 		{
-
-			for (int i = 1; i <= m_objectNum; i++)
+			//オブジェクトの数分ループする。
+			for (int i = 0; i <= ObjectAbove::enNumberOfObjectAbove; i++)
 			{
-				int n = rayRC.m_collisionObject->getUserIndex();	//nに当たっているオブジェクトのIndexを代入。
+				userIndexNum = rayRC.m_collisionObject->getUserIndex();	//nに当たっているオブジェクトのIndexを代入。
 				if (rayRC.m_collisionObject->getUserIndex() == i) {	//衝突したオブジェクトがi番目だった時。
 					rayRC.m_collisionObject->getUserPointer();		//衝突しているもののポインタを返す。
 					m_objectAbove = (ObjectAbove*)rayRC.m_collisionObject->getUserPointer();
 					
-					if (rayRC.m_collisionObject->getUserIndex() == StageObject::enDesk) {		//机のとき。
+					if (rayRC.m_collisionObject->getUserIndex() == ObjectAbove::enDesk) {		//机のとき。
 
 						m_desk = (Desk*)rayRC.m_collisionObject->getUserPointer();	//(Desk*)に当たったオブジェクトのポインタを入れる。
 
 					}
 
-					if (rayRC.m_collisionObject->getUserIndex() == StageObject::enDelivery) {		//カウンターのとき。
+					if (rayRC.m_collisionObject->getUserIndex() == ObjectAbove::enDelivery) {		//カウンターのとき。
 
 						m_delivery = (Delivery*)rayRC.m_collisionObject->getUserPointer();	
 
 					}
 
-					if (rayRC.m_collisionObject->getUserIndex() == StageObject::enDishHold) {		//お皿置きのとき。
+					if (rayRC.m_collisionObject->getUserIndex() == ObjectAbove::enDishHold) {		//お皿置きのとき。
 
 						m_dishHold = (DishHold*)rayRC.m_collisionObject->getUserPointer();
 
 					}
 
-					if (rayRC.m_collisionObject->getUserIndex() == StageObject::enDustBox) {		//ゴミ箱のとき。
+					if (rayRC.m_collisionObject->getUserIndex() == ObjectAbove::enDustBox) {		//ゴミ箱のとき。
 
 						m_dustbox = (DustBox*)rayRC.m_collisionObject->getUserPointer();
 
 					}
 
-					if (rayRC.m_collisionObject->getUserIndex() == StageObject::enGasStove) {		//ガスコンロのとき。
+					if (rayRC.m_collisionObject->getUserIndex() == ObjectAbove::enGasStove) {		//ガスコンロのとき。
 
 						m_gasStove = (GasStove*)rayRC.m_collisionObject->getUserPointer();	//(GasStove*)に当たったオブジェクトのポインタを入れる。
 
 					}
 
-					if (rayRC.m_collisionObject->getUserIndex() == StageObject::enKitchen) {		//キッチンのとき。
+					if (rayRC.m_collisionObject->getUserIndex() == ObjectAbove::enKitchen) {		//キッチンのとき。
 
 						m_kitchen = (Kitchen*)rayRC.m_collisionObject->getUserPointer();
 
 						//todo 絶　仮 実際は汚れたお皿があるとき。
-						if (g_pad[0].IsPress(enButtonB))
+						if (g_pad[0].IsPress(enButtonX))
 						{
 							m_playerState = enWashing;
 						}
 					}
 
-					if (rayRC.m_collisionObject->getUserIndex() == StageObject::enOnionBox) {		//玉ねぎボックスのとき。
+					if (rayRC.m_collisionObject->getUserIndex() == ObjectAbove::enOnionBox) {		//玉ねぎボックスのとき。
 
 						m_onionBox = (OnionBox*)rayRC.m_collisionObject->getUserPointer();
 
@@ -164,7 +164,7 @@ void Player::ForwardDirectionRay(int controllerNum)
 						}
 					}
 
-					if (rayRC.m_collisionObject->getUserIndex() == StageObject::enTomatoBox) {		//トマトボックスのとき。
+					if (rayRC.m_collisionObject->getUserIndex() == ObjectAbove::enTomatoBox) {		//トマトボックスのとき。
 
 						m_tomatoBox = (TomatoBox*)rayRC.m_collisionObject->getUserPointer();
 
@@ -178,7 +178,7 @@ void Player::ForwardDirectionRay(int controllerNum)
 						}
 					}
 
-					if (rayRC.m_collisionObject->getUserIndex() == StageObject::enCuttingDesk) {		//まな板のとき。
+					if (rayRC.m_collisionObject->getUserIndex() == ObjectAbove::enCuttingDesk) {		//まな板のとき。
 
 						m_cuttingDesk = (CuttingDesk*)rayRC.m_collisionObject->getUserPointer();
 
@@ -302,7 +302,8 @@ void Player::PutObjects(int controllerNum)
 
 				//持っているものが食べ物のとき。
 				if (m_belongings->GetIndentValue() == Belongings::enFood) {		
-					if (StageObject::enDesk || StageObject::enOnionBox || StageObject::enTomatoBox || StageObject::enCuttingDesk) {		//食べ物が置けるオブジェクトかどうか。
+					if (userIndexNum == ObjectAbove::enDesk || userIndexNum == ObjectAbove::enOnionBox ||
+						userIndexNum == ObjectAbove::enTomatoBox || userIndexNum == ObjectAbove::enCuttingDesk) {		//食べ物が置けるオブジェクトかどうか。
 						m_objectAbove->PutThings(m_belongings);		//設置物の座標にオブジェクトの座標を代入。
 						m_objectAbove->SetState(ObjectAbove::en_onObject);					//物を置いたオブジェクトのステートを変更する。
 						m_playerState = enIdle;							//プレイヤーのステートを待機状態に。
@@ -311,7 +312,8 @@ void Player::PutObjects(int controllerNum)
 
 				//持っているものが調理器具の場合。
 				if (m_belongings->GetIndentValue() == Belongings::enKitchenWare) {		
-					if (StageObject::enDesk || StageObject::enGasStove || StageObject::enOnionBox || StageObject::enTomatoBox) {		//調理器具が置けるオブジェクトかどうか。
+					if (userIndexNum == ObjectAbove::enDesk || userIndexNum ==ObjectAbove::enGasStove ||
+						userIndexNum == ObjectAbove::enOnionBox || userIndexNum == ObjectAbove::enTomatoBox) {		//調理器具が置けるオブジェクトかどうか。
 						m_objectAbove->PutThings(m_belongings);		//設置物の座標にオブジェクトの座標を代入。
 						m_objectAbove->SetState(ObjectAbove::en_onObject);					//物を置いたオブジェクトのステートを変更する。
 						m_playerState = enIdle;							//プレイヤーのステートを待機状態に。
@@ -320,7 +322,8 @@ void Player::PutObjects(int controllerNum)
 
 				//持っているものがお皿の場合。
 				if (m_belongings->GetIndentValue() == Belongings::enDish) {
-					if (StageObject::enDesk || StageObject::enOnionBox || StageObject::enTomatoBox) {		//お皿が置けるオブジェクトかどうか。
+					if (userIndexNum == ObjectAbove::enDesk || userIndexNum == ObjectAbove::enOnionBox || 
+						userIndexNum == ObjectAbove::enTomatoBox) {		//お皿が置けるオブジェクトかどうか。
 						m_objectAbove->PutThings(m_belongings);		//設置物の座標にオブジェクトの座標を代入。
 						m_objectAbove->SetState(ObjectAbove::en_onObject);					//物を置いたオブジェクトのステートを変更する。
 						m_playerState = enIdle;							//プレイヤーのステートを待機状態に。

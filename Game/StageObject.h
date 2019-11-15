@@ -68,21 +68,6 @@ public:
 		return m_rotation;
 	}
 
-	/// <summary>
-	/// 置けるものの名前格納。
-	/// </summary>
-	enum ObjectNames
-	{
-		enDesk,				//お皿。
-		enDelivery,			//料理受け渡し口。			
-		enDishHold,			//お皿置き場。
-		enDustBox,			//ゴミ箱。
-		enGasStove,			//コンロ。
-		enKitchen,			//皿洗い場。
-		enOnionBox,			//玉ねぎボックス。			
-		enTomatoBox,		//トマトボックス。
-		enCuttingDesk		//まな板。
-	};
 
 protected:
 
@@ -96,7 +81,6 @@ protected:
 
 	PhysicsStaticObject m_physicsStaticObject;					//静的物理オブジェクト。
 											
-	ObjectNames m_objName = enDesk;								//オブジェクトの名前。
 
 private:
 
