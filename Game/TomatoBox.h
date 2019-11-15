@@ -16,8 +16,8 @@ public:
 	/// <summary>
 	/// 食べ物を生成するクラス。
 	/// </summary>
-	/// <param name="a">コントローラー番号</param>
-	Tomato* NewFood(int a);
+	/// <param name="controllerNum">コントローラー番号</param>
+	Tomato* NewFood(int controllerNum);
 
 protected:
 

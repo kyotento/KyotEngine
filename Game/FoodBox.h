@@ -26,10 +26,10 @@ public:
 	/// <summary>
 	/// 座標を指定。
 	/// </summary>
-	/// <param name="a">座標</param>
-	void SetPositon(CVector3 a)
+	/// <param name="position">座標</param>
+	void SetPositon(CVector3 position)
 	{
-		m_position = a;
+		m_position = position;
 	}
 
 

@@ -15,8 +15,8 @@ public:
 /// <summary>
 /// 食べ物を生成するクラス。
 /// </summary>
-/// <param name="a">コントローラー番号</param>
-	Onion* NewFood(int a);
+/// <param name="controllerNum">コントローラー番号</param>
+	Onion* NewFood(int controllerNum);
 
 private:
 

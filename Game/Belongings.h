@@ -14,8 +14,6 @@ public:
 	bool Start();
 	void Update();
 
-
-
 	/// <summary>
 	/// ó‘Ô‚ğ“üè‚·‚éB
 	/// </summary>

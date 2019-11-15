@@ -87,7 +87,7 @@ void Player::Rotation()
 
 }
 
-void Player::ForwardDirectionRay(int a)
+void Player::ForwardDirectionRay(int controllerNum)
 {
 	m_objectAbove = nullptr;		//物を置くとNullになる。
 
@@ -157,9 +157,9 @@ void Player::ForwardDirectionRay(int a)
 						m_onionBox = (OnionBox*)rayRC.m_collisionObject->getUserPointer();
 
 						if (m_toHave == false) {
-							if (g_pad[a].IsTrigger(enButtonA) && m_objectAbove->GetState() == ObjectAbove::en_default)
+							if (g_pad[controllerNum].IsTrigger(enButtonA) && m_objectAbove->GetState() == ObjectAbove::en_default)
 							{
-								m_belongings = m_onionBox->NewFood(a);		//玉ねぎを生成する。生成したものの情報をm_belongingsに代入。
+								m_belongings = m_onionBox->NewFood(controllerNum);		//玉ねぎを生成する。生成したものの情報をm_belongingsに代入。
 
 								m_playerState = enIdleHave;
 							}
@@ -171,9 +171,9 @@ void Player::ForwardDirectionRay(int a)
 						m_tomatoBox = (TomatoBox*)rayRC.m_collisionObject->getUserPointer();
 
 						if (m_toHave == false) {		//何も持っていないとき。
-							if (g_pad[a].IsTrigger(enButtonA) && m_objectAbove->GetState() == ObjectAbove::en_default)
+							if (g_pad[controllerNum].IsTrigger(enButtonA) && m_objectAbove->GetState() == ObjectAbove::en_default)
 							{
-								m_belongings = m_tomatoBox->NewFood(a);	//トマトを生成する。生成したものの情報をm_belongingsに代入。
+								m_belongings = m_tomatoBox->NewFood(controllerNum);	//トマトを生成する。生成したものの情報をm_belongingsに代入。
 
 								m_playerState = enIdleHave;
 							}
@@ -185,7 +185,7 @@ void Player::ForwardDirectionRay(int a)
 						m_cuttingDesk = (CuttingDesk*)rayRC.m_collisionObject->getUserPointer();
 
 						if (m_toHave == false) {		//何も持っていないとき。
-							if (g_pad[a].IsPress(enButtonX) && m_objectAbove->GetState() == ObjectAbove::en_onObject)		//Xを押したとき、何か乗っているとき。
+							if (g_pad[controllerNum].IsPress(enButtonX) && m_objectAbove->GetState() == ObjectAbove::en_onObject)		//Xを押したとき、何か乗っているとき。
 							{
 								m_playerState = enCutting;
 							}
@@ -197,7 +197,7 @@ void Player::ForwardDirectionRay(int a)
 	}
 }
 
-void Player::ActionProcessing(int a)
+void Player::ActionProcessing(int controllerNum)
 {
 
 	switch (m_playerState)
@@ -209,7 +209,7 @@ void Player::ActionProcessing(int a)
 
 		m_toHave = false;
 
-		PickUpObjects(a);		//オブジェクトを持つ処理。
+		PickUpObjects(controllerNum);		//オブジェクトを持つ処理。
 
 		break;
 
@@ -220,7 +220,7 @@ void Player::ActionProcessing(int a)
 
 		m_toHave = false;
 
-		PickUpObjects(a);		//オブジェクトを持つ処理。
+		PickUpObjects(controllerNum);		//オブジェクトを持つ処理。
 
 		break;
 
@@ -258,7 +258,7 @@ void Player::ActionProcessing(int a)
 		}
 
 		SetFoodPosition();
-		PutObjects(a);
+		PutObjects(controllerNum);
 
 		break;
 
@@ -274,7 +274,7 @@ void Player::ActionProcessing(int a)
 		}
 
 		SetFoodPosition();
-		PutObjects(a);
+		PutObjects(controllerNum);
 
 		break;
 
@@ -290,12 +290,12 @@ void Player::SetFoodPosition()
 
 }
 
-void Player::PutObjects(int a)
+void Player::PutObjects(int controllerNum)
 {
 	//todo 仮？。持ったものをおけるようになるまでのタイマー。
 	m_putTimer -= 0.1f;
 
-	if (g_pad[a].IsTrigger(enButtonA) && m_putTimer <= 0.f)		//Aボタンを押したときかつ、物を持ってから一定時間が経過した時。
+	if (g_pad[controllerNum].IsTrigger(enButtonA) && m_putTimer <= 0.f)		//Aボタンを押したときかつ、物を持ってから一定時間が経過した時。
 	{
 		if (m_objectAbove != nullptr) {					//物を置けるオブジェクトが目の前にあるとき。
 
@@ -362,9 +362,9 @@ void Player::PutObjects(int a)
 	}
 }
 
-void Player::PickUpObjects(int a)
+void Player::PickUpObjects(int controllerNum)
 {
-	if (g_pad[a].IsTrigger(enButtonA))						//Aボタンを押したとき。
+	if (g_pad[controllerNum].IsTrigger(enButtonA))						//Aボタンを押したとき。
 	{
 		if(m_toHave == false){			//何も持っていないとき
 			if (m_objectAbove != nullptr) {						//目の前にオブジェクトがあるとき。

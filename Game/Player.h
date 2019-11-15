@@ -54,17 +54,18 @@ public:
 	/// <summary>
 	/// プレイヤーの動作処理。
 	/// </summary>
-	void ActionProcessing(int a);
+	/// <param name="controllerNum">コントローラー番号</param>
+	void ActionProcessing(int controllerNum);
 
 	/// <summary>
 	/// プレイヤーの前方方向に線を飛ばす処理。
 	/// rayとオブジェクトの当たり判定を調べる処理。
 	/// </summary>
-	/// <param name="a">コントローラー番号</param>
+	/// <param name="controllerNum">コントローラー番号</param>
 	/// <remarks>
 	/// 前方方向にオブジェクトがあるかを調べるためのもの。
 	/// </remarks>
-	void ForwardDirectionRay(int a);
+	void ForwardDirectionRay(int controllerNum);
 
 	/// <summary>
 	/// 包丁をもたせる。
@@ -79,14 +80,14 @@ public:
 	/// <summary>
 	/// 物を置く処理。
 	/// </summary>
-	/// <param name="a">コントローラー番号</param>
-	void PutObjects(int a);
+	/// <param name="controllerNum">コントローラー番号</param>
+	void PutObjects(int controllerNum);
 
 	/// <summary>
 	/// オブジェクトを拾う。
 	/// </summary>
-	/// <param name="a">コントローラー番号</param>
-	void PickUpObjects(int a);
+	/// <param name="controllerNum">コントローラー番号</param>
+	void PickUpObjects(int controllerNum);
 
 	/// <summary>
 	/// オブジェクトを切る処理。
@@ -148,6 +149,7 @@ public:
 	{
 		return m_knife;
 	}
+
 
 protected:
 

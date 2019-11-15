@@ -18,9 +18,9 @@ public:
 /// 座標指定。
 /// </summary>
 /// <param name="a">座標</param>
-	void SetPosition(CVector3 a)
+	void SetPosition(CVector3 position)
 	{
-		m_position = a;
+		m_position = position;
 	}
 
 	/// <summary>
@@ -36,9 +36,9 @@ public:
 	/// スケール指定。
 	/// </summary>
 	/// <param name="a">スケール</param>
-	void SetScale(CVector3 a)
+	void SetScale(CVector3 scale)
 	{
-		m_scale = a;
+		m_scale = scale;
 	}
 
 	/// <summary>
@@ -54,9 +54,9 @@ public:
 	/// 回転を指定する。
 	/// </summary>
 	/// <param name="a">回転</param>
-	void SetRotation(CQuaternion a)
+	void SetRotation(CQuaternion rotation)
 	{
-		m_rotation = a;
+		m_rotation = rotation;
 	}
 
 	/// <summary>
