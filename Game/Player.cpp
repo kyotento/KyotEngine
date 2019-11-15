@@ -15,8 +15,6 @@ Player::Player()
 	m_characon.Init(45.f, 50.f, m_characonPos);
 }
 
-//todo マジックナンバーをenumに。
-
 Player::~Player()
 {
 	DeleteGO(m_skinModelRender);
@@ -412,7 +410,7 @@ void Player::HoldingKnife()
 	m_bone = m_skelton->GetBone(boneNum);			//骨の情報を渡す。
 
 	CMatrix boneRot;						//ボーンの行列を保持するやつ。
-	boneRot = m_bone->GetMatrix();		//ボーンの行列を代入。
+	boneRot = m_bone->GetMatrix();			//ボーンの行列を代入。
 	Bonepos.x = boneRot.m[3][0];				//X軸。
 	Bonepos.y = boneRot.m[3][1];				//Y軸。
 	Bonepos.z = boneRot.m[3][2];				//Z軸。

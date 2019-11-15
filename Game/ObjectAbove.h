@@ -31,15 +31,6 @@ public:
 	void SetGaugePosition(Gauge*);
 
 	/// <summary>
-	/// オブジェクトの状態を検索する。
-	/// </summary>
-	/// <returns></returns>
-	int GetState()
-	{
-		return m_state;
-	}
-
-	/// <summary>
 	/// オブジェクトの状態。
 	/// </summary>
 	enum enState
@@ -58,6 +49,14 @@ public:
 		m_state = static_cast<enState>(objectAboveState);
 	}
 
+	/// <summary>
+	/// オブジェクトの状態を検索する。
+	/// </summary>
+	/// <returns>オブジェクトの状態</returns>
+	int GetState()
+	{
+		return m_state;
+	}
 
 protected:
 
