@@ -7,7 +7,6 @@
 
 class Title;
 class Player;
-class Player_2;
 class Stage_1;
 class Game : public GameObject
 {
