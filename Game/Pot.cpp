@@ -28,13 +28,18 @@ bool Pot::Start()
 //スープが投入されたときの処理。
 void Pot::Soup()
 {
-	if (m_potState == enThree) {						//食べ物が二つ入っている状態。
+	if (m_potState == enTwo) {						//食べ物が二つ入っている状態。
 		m_soupPos.y += 25.f;							//食べ物が入ったように見せるためにY座標を上げる。
-		m_potState = enComplete;						//食べ物が三つ入った状態にする。
+		m_potState = enThree;						//食べ物が三つ入った状態にする。
+	}
+	//todo 仮　三つ入った時完成形にする。
+	if (m_potState == enThree)
+	{
+		m_potState = enComplete;
 	}
 	if (m_potState == enOne) {							//食べ物が一つ入っている状態のとき。
 		m_soupPos.y += 25.f;							//食べ物が入ったように見せるためにY座標を上げる。
-		m_potState = enThree;							//ポットに食べ物が二つ入っている状態。
+		m_potState = enTwo;								//ポットに食べ物が二つ入っている状態。
 	}
 
 	if (m_potState == enZero) {							//ポットに何も入っていないとき。
@@ -43,6 +48,13 @@ void Pot::Soup()
 		m_gauge = NewGO<Gauge>(0, "gauge");				//ゲージを生成する。
 		m_gauge->SetPosition(m_position);				//ゲージの座標を指定。
 	}
+}
+
+void Pot::DeleteLikeSoup()
+{
+	m_potState = enZero;			//状態を何も入っていない状態に。
+	m_soupPos = m_position;			//座標を元に戻す。
+	DeleteGO(m_soupBase);			//スープのモデルを消す。
 }
 
 void Pot::Update()

@@ -300,6 +300,7 @@ void Player::SetFoodPosition()
 
 }
 
+//物を置く処理。
 void Player::PutObjects(int controllerNum)
 {
 	//todo 仮？。持ったものをおけるようになるまでのタイマー。
@@ -361,8 +362,12 @@ void Player::PutObjects(int controllerNum)
 				if (m_belongings->GetIndentValue() == Belongings::enDish) {			//持っているものがお皿のとき。
 					m_objectAbove->TakeThings(m_cacth);				//乗っているオブジェクトを検索する。
 					if (m_cacth->GetIndentValue() == Belongings::enKitchenWare) {			//乗っているものが調理器具だった場合。
-						//todo 鍋の状態を見る。　Xを押したときに鍋がパーフェクト状態だったらお皿に料理を入れて鍋の中身を
-
+						if (m_cacth->GetPotState() == Belongings::enComplete) {				//乗っているものの状態が完成状態だった時。
+							//todo お皿に料理を入れる。
+							//todo 鍋の中身を消す。
+							m_cacth->DeleteSoup(m_cacth);
+							m_belongings->PutDishs(m_belongings);
+						}
 					}
 				}
 

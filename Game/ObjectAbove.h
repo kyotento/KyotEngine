@@ -74,14 +74,6 @@ public:
 		enNumberOfObjectAbove		//持てる物の種類の数。
 	};
 
-	///// <summary>
-	///// 食べ物の名前を取得する。
-	///// </summary>
-	///// <returns>食べ物の名前</returns>
-	//int GetObjName()
-	//{
-	//	return m_objName;
-	//}
 
 protected:
 
@@ -90,6 +82,6 @@ protected:
 
 	enState m_state = en_default;				//オブジェクトの状態。
 
-	ObjectNames m_objName = enDesk;				//オブジェクトの名前。
+	ObjectNames m_objName = enDesk;				//オブジェクトの名前。多分使わない。
 };
 

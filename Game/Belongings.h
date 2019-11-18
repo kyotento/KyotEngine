@@ -35,8 +35,20 @@ public:
 	/// <summary>
 	/// スープっぽいオブジェクトを生成する。
 	/// </summary>
-	/// <param name="belongings">置いてあるもの</param>
+	/// <param name="belongings">置いてある持てるもの</param>
 	void SetSoupBase(Belongings* belongings);
+
+	/// <summary>
+	/// スープを消す処理。
+	/// </summary>
+	/// <param name="belongings">置いてある持てるもの</param>
+	void DeleteSoup(Belongings* belongings);
+
+	/// <summary>
+	///	お皿に食べ物を置く処理。
+	/// </summary>
+	/// <param name="belongings">持てるもの</param>
+	void PutDishs(Belongings* belongings);
 
 	/// <summary>	
 	/// 食べ物の状態。
@@ -67,6 +79,27 @@ public:
 		enDish				//お皿。
 	};
 
+	/// <summary>
+	/// お鍋の状態。
+	/// </summary>
+	enum PotState
+	{
+		enZero,			//何も入っていない。
+		enOne,			//一つ何かが入っている。
+		enTwo,			//ふたつなにかがはいっている。
+		enThree,		//三つ何かが入っている状態。
+		enComplete		//料理完成。湯で終わっている。
+	};
+
+	/// <summary>
+	/// お鍋の状態を取得する。
+	/// </summary>
+	/// <returns>お鍋の状態</returns>
+	int GetPotState()
+	{
+		return m_potState;
+	}
+
 protected:		
 
 	bool m_CuttingModel = false;			//切られたモデルになっているか。
@@ -74,6 +107,8 @@ protected:
 	IdentificationValue m_identification = enFood;		//オブジェクト系統の設定。(各クラスのコンストラクタで設定してあげる必要がある)。
 
 	state m_foodState = enPutting;			//食べ物の状態。
+
+	PotState m_potState = enZero;			//鍋の状態を格納したもの。
 
 private:
 

@@ -1,5 +1,6 @@
 #pragma once
 #include "Belongings.h"
+#include "Cuisine.h"
 class Dish : public Belongings
 {
 public:
@@ -8,6 +9,11 @@ public:
 
 	bool Start();
 	void Update();
+
+	/// <summary>
+	/// お皿の状態管理。
+	/// </summary>
+	void PutDish();
 
 	/// <summary>
 	/// お皿の状態。
@@ -23,7 +29,7 @@ public:
 	/// お皿の状態をセットする処理。
 	/// </summary>
 	/// <param name="dishState">お皿の状態</param>
-	void SetState(DishState dishState)
+	void SetDishState(DishState dishState)
 	{
 		m_dishState = static_cast<DishState>(dishState);
 	}
@@ -39,9 +45,9 @@ public:
 
 private:
 
-
 	DishState m_dishState = endefault;			//お皿の状態。
 
+	Cuisine* m_cuisine = nullptr;				//お料理。
 
 };
 

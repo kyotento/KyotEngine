@@ -100,6 +100,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="character\CharacterController.cpp" />
+    <ClCompile Include="Cuisine.cpp" />
     <ClCompile Include="CuttingBoard.cpp" />
     <ClCompile Include="CuttingDesk.cpp" />
     <ClCompile Include="Delivery.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="character\CharacterController.h" />
     <ClInclude Include="CIndexBuffer.h" />
     <ClInclude Include="ConstantBuffer.h" />
+    <ClInclude Include="Cuisine.h" />
     <ClInclude Include="CuttingBoard.h" />
     <ClInclude Include="CuttingDesk.h" />
     <ClInclude Include="CVertexBuffer.h" />
@@ -251,6 +253,8 @@
     <MeshContentTask Include="Assets\modelData\Chef\chef_2.FBX" />
     <MeshContentTask Include="Assets\modelData\ColidionBox\collidionBox.FBX" />
     <MeshContentTask Include="Assets\modelData\ColidionBox\collidionBoxLong.FBX" />
+    <MeshContentTask Include="Assets\modelData\Cuisine\onion_soup.FBX" />
+    <MeshContentTask Include="Assets\modelData\Cuisine\tomato_soup.FBX" />
     <MeshContentTask Include="Assets\modelData\cutting_board\cutting_board.FBX" />
     <MeshContentTask Include="Assets\modelData\cutting_board\cutting_desk.FBX" />
     <MeshContentTask Include="Assets\modelData\Delivery\derivery.FBX" />
