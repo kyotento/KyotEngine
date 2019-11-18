@@ -403,7 +403,8 @@ void Player::CuttingObject()
 //	hoge.y -= 150.f;
 //	m_gauge->SetPosition(hoge);
 //
-//	m_objectAbove->TakeThings(m_belongings);
+	m_objectAbove->TakeThings(m_belongings);		//置いてあるオブジェクトを検索。
+
 //	m_gauge->Expansion();
 //	if (m_gauge->GetScale()) {		//2D拡大率１なら。
 		m_belongings->SetState(Belongings::enCutting);	//持てるものを切られている状態にする。
