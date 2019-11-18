@@ -147,10 +147,6 @@
     <ClCompile Include="physics\RigidBody.cpp" />
     <ClCompile Include="physics\CapsuleCollider.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Player_1.cpp" />
-    <ClCompile Include="Player_2.cpp" />
-    <ClCompile Include="Player_3.cpp" />
-    <ClCompile Include="Player_4.cpp" />
     <ClCompile Include="Pot.cpp" />
     <ClCompile Include="RenderTarget.cpp" />
     <ClCompile Include="SceneItemManager.cpp" />
@@ -229,10 +225,6 @@
     <ClInclude Include="physics\CollisionAttr.h" />
     <ClInclude Include="physics\PhysicsStaticObject.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Player_1.h" />
-    <ClInclude Include="Player_2.h" />
-    <ClInclude Include="Player_3.h" />
-    <ClInclude Include="Player_4.h" />
     <ClInclude Include="Pot.h" />
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="RenderTarget.h" />

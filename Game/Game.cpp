@@ -25,8 +25,7 @@ void Game::Update()
 	//’†‚Å‚â‚Á‚Ä‚é‚±‚Æ‚Í‰¼B
 	if (m_titleDeleteFlag)
 	{
-		m_player_1 = NewGO<Player_1>(0, "player");
-	//	m_player_2 = NewGO<Player_2>(0, "player");
+		m_player = NewGO<Player>(0, "player");
 		m_stage_1 = NewGO<Stage_1>(0, "stage_1");
 		m_titleDeleteFlag = false;
 	}

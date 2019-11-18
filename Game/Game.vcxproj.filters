@@ -197,18 +197,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>Game\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Player_1.cpp">
-      <Filter>Game\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Player_2.cpp">
-      <Filter>Game\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Player_3.cpp">
-      <Filter>Game\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Player_4.cpp">
-      <Filter>Game\Player</Filter>
-    </ClCompile>
     <ClCompile Include="CuttingBoard.cpp">
       <Filter>Game\Field\Objects</Filter>
     </ClCompile>
@@ -424,18 +412,6 @@
       <Filter>Game\Field\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Game\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Player_1.h">
-      <Filter>Game\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Player_2.h">
-      <Filter>Game\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Player_3.h">
-      <Filter>Game\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Player_4.h">
       <Filter>Game\Player</Filter>
     </ClInclude>
     <ClInclude Include="CuttingBoard.h">

@@ -154,6 +154,7 @@ public:
 protected:
 
 	int userIndexNum = 0;									//当たっているインデックスを代入。
+	int m_controllerNumber = 0;								//todo 仮　プレイヤー１のコントローラー番号。
 
 	bool m_toHave = false;									//何かを持っているかどうか。
 	bool m_knifeflag = false;								//ナイフがNewされたかどうか。
