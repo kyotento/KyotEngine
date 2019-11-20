@@ -37,17 +37,19 @@ void Dish::DishModelChange()
 		{
 		case endefault:
 
-			m_skinModelRender->Init(L"Assets/modelData/Dish/Dish.cmo");
+			m_skinModelRender->Init(L"Assets/modelData/Dish/Dish.cmo");			//‚«‚ê‚¢‚È‚¨MB
 
 			break;
 
 		case endirty:
 
-			m_skinModelRender->Init(L"Assets/modelData/Dish/DirtyDish.cmo");
+			m_skinModelRender->Init(L"Assets/modelData/Dish/DirtyDish.cmo");			//‰˜‚ê‚½‚¨MB
 
 			break;
 
 		case enSomethingOnBoard:
+
+			m_skinModelRender->Init(L"Assets/modelData/Dish/Dish.cmo");			//‚«‚ê‚¢‚È‚¨MB
 
 			break;
 

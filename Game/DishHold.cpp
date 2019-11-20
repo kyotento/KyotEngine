@@ -47,10 +47,12 @@ void DishHold::NumberOfDished()
 		}
 
 		m_dish = NewGO<Dish>(0, "dish");		//お皿の生成。
-		m_dish->SetPosition(m_dishPosition);
-		m_dish->SetDishState(Dish::endirty);
+		PutThings(m_dish);						//お皿置きにお皿を置く処理。
+		m_dish->SetPosition(m_dishPosition);			//座標がずれているので上書きしてやる。
+		m_dish->SetDishState(Dish::endirty);			//お座らの状態を汚れている状態に。
 
 	}
+
 	m_oldDishNum = m_dishNum;			//お皿の数が変更されたかを確認するために代入。
 }
 
