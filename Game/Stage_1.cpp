@@ -145,6 +145,8 @@ bool Stage_1::Start()
 
 		});
 
+		m_delivery->SetDishHold(m_dishHold);		//お皿置きのインスタンスを料理受け渡し口で送る。
+
 	return true;
 }
 

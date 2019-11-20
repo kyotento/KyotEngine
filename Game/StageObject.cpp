@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "StageObject.h"
 #include "Desk.h"
-#include "DishHold.h"
 
 StageObject::StageObject()
 {

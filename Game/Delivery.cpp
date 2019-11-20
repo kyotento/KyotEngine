@@ -36,4 +36,24 @@ bool Delivery::Start()
 void Delivery::Update()
 {
 
+	if (m_state == ObjectAbove::en_onObject)			//何か乗っているとき。
+	{
+		m_TimeAdvanced = true;
+		m_state = en_default;
+
+	}
+
+	if (m_TimeAdvanced)
+	{
+		m_StateChangeTime += 1.f;
+
+		if (m_StateChangeTime >= 300.f) {
+			//ここでDishHoldに皿を置く処理。
+			m_DishNum3 += 1;
+			m_dishHold->SetDishNum(m_DishNum3);			//お皿の数を設定。
+			m_TimeAdvanced = false;
+			m_StateChangeTime = 0.f;
+		}
+	}
+
 }

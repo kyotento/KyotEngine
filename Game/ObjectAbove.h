@@ -30,6 +30,24 @@ public:
 	/// <param name=""></param>
 	void SetGaugePosition(Gauge*);
 
+	///// <summary>
+	///// お皿の数を指定する。
+	///// </summary>
+	///// <param name="dishNum">お皿の数</param>
+	//void SetDishNum(int dishNum)
+	//{
+	//	m_DishNum = dishNum;
+	//}
+
+	///// <summary>
+	///// お皿の数を取得する。
+	///// </summary>
+	///// <returns>お皿の数</returns>
+	//int GetDishNum()
+	//{
+	//	return m_DishNum;
+	//}
+
 	/// <summary>
 	/// オブジェクトの状態。
 	/// </summary>
@@ -77,11 +95,17 @@ public:
 
 protected:
 
+
 	Belongings* m_belongings = nullptr;			//持つことのできるオブジェクト。
 	Gauge* m_gauge = nullptr;					//ゲージ。
 
 	enState m_state = en_default;				//オブジェクトの状態。
 
 	ObjectNames m_objName = enDesk;				//オブジェクトの名前。多分使わない。
+
+private:
+
+//	int m_DishNum = 0;			//お皿の数。
+
 };
 

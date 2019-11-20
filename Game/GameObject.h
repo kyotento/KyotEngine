@@ -31,7 +31,7 @@ public:
 	/// <summary>
 	/// スタート関数。
 	/// </summary>
-	/// <returns></returns>
+	/// <returns>正</returns>
 	virtual bool Start()
 	{
 		return true;
@@ -46,7 +46,7 @@ public:
 	}
 
 	/// <summary>
-	/// 
+	/// 描画処理。
 	/// </summary>
 	virtual void Render()
 	{

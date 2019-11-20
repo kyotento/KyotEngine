@@ -336,10 +336,17 @@ void Player::PutObjects(int controllerNum)
 				//持っているものがお皿の場合。
 				if (m_belongings->GetIndentValue() == Belongings::enDish) {
 					if (userIndexNum == ObjectAbove::enDesk || userIndexNum == ObjectAbove::enOnionBox || 
-						userIndexNum == ObjectAbove::enTomatoBox) {		//お皿が置けるオブジェクトかどうか。
-						m_objectAbove->PutThings(m_belongings);		//設置物の座標にオブジェクトの座標を代入。
+						userIndexNum == ObjectAbove::enTomatoBox) {			//お皿が置けるオブジェクトかどうか。
+						m_objectAbove->PutThings(m_belongings);			//設置物の座標にオブジェクトの座標を代入。
 						m_objectAbove->SetState(ObjectAbove::en_onObject);					//物を置いたオブジェクトのステートを変更する。
 						m_playerState = enIdle;							//プレイヤーのステートを待機状態に。
+					}
+
+					if (userIndexNum == ObjectAbove::enDelivery) {			//受け渡し口のとき。
+						m_objectAbove->PutThings(m_belongings);			//設置物の座標にオブジェクトの座標を代入。
+						DeleteGO(m_belongings);				//お皿を消す。
+						m_objectAbove->SetState(ObjectAbove::en_onObject);			//受け渡し口の状態を変更する。
+						m_playerState = enIdle;				//プレイヤーの状態を変更する。
 					}
 				}
 			}
