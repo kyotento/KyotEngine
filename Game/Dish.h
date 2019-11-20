@@ -16,6 +16,11 @@ public:
 	void PutDish();
 
 	/// <summary>
+	/// 状態変化によるモデルの変更。
+	/// </summary>
+	void DishModelChange();
+
+	/// <summary>
 	/// お皿の状態。
 	/// </summary>
 	enum DishState
@@ -46,6 +51,7 @@ public:
 private:
 
 	DishState m_dishState = endefault;			//お皿の状態。
+	DishState m_oldDishState = endefault;		//お皿の状態(1フレーム前)。
 
 	Cuisine* m_cuisine = nullptr;				//お料理。
 

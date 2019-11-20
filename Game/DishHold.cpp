@@ -48,6 +48,7 @@ void DishHold::NumberOfDished()
 
 		m_dish = NewGO<Dish>(0, "dish");		//お皿の生成。
 		m_dish->SetPosition(m_dishPosition);
+		m_dish->SetDishState(Dish::endirty);
 
 	}
 	m_oldDishNum = m_dishNum;			//お皿の数が変更されたかを確認するために代入。

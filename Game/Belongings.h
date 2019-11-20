@@ -100,6 +100,7 @@ public:
 		return m_potState;
 	}
 
+
 protected:		
 
 	bool m_CuttingModel = false;			//Ø‚ç‚ê‚½ƒ‚ƒfƒ‹‚É‚È‚Á‚Ä‚¢‚é‚©B

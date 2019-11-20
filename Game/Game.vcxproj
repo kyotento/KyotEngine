@@ -260,6 +260,7 @@
     <MeshContentTask Include="Assets\modelData\Delivery\derivery.FBX" />
     <MeshContentTask Include="Assets\modelData\Desk\Desk.FBX" />
     <MeshContentTask Include="Assets\modelData\DishHold\DishHold.FBX" />
+    <MeshContentTask Include="Assets\modelData\Dish\DirtyDish.FBX" />
     <MeshContentTask Include="Assets\modelData\Dish\Dish.FBX" />
     <MeshContentTask Include="Assets\modelData\DustBox\DustBox.FBX" />
     <MeshContentTask Include="Assets\modelData\FoodBox\Onion\OnionBox.FBX" />
