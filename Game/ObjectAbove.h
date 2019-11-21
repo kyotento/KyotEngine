@@ -19,6 +19,12 @@ public:
 	void PutThings(Belongings*);
 
 	/// <summary>
+	/// 持っている汚れたお皿を指定の座標に置く処理。
+	/// </summary>
+	/// <param name=""></param>
+	void SetDishPos(Belongings*);
+
+	/// <summary>
 	/// 乗っているオブジェクトを検索する。
 	/// </summary>
 	/// <param name="">オブジェクトのポインタの参照</param>
@@ -102,9 +108,9 @@ protected:
 
 	ObjectNames m_objName = enDesk;				//オブジェクトの名前。多分使わない。
 
+	Belongings* m_belongings = nullptr;			//持つことのできるオブジェクト。
 private:
 
-	Belongings* m_belongings = nullptr;			//持つことのできるオブジェクト。
 
 //	int m_DishNum = 0;			//お皿の数。
 

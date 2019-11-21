@@ -34,7 +34,6 @@ bool Kitchen::Start()
 	return true;
 }
 
-
 void Kitchen::Update()
 {
 

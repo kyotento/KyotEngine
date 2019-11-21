@@ -76,7 +76,8 @@ public:
 	{
 		enFood,				//食べ物。
 		enKitchenWare,		//調理器具。
-		enDish				//お皿。
+		enDish,				//お皿。
+		enDirtyDish			//汚れたお皿。
 	};
 
 	/// <summary>

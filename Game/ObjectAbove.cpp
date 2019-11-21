@@ -16,9 +16,19 @@ void ObjectAbove::PutThings(Belongings* belong)
 	CVector3 PutObjPos = m_position;
 	PutObjPos.y += 70.f;
 	belong->SetPosition(PutObjPos);
-	m_belongings = belong;		
+	m_belongings = belong;
 
 }
+
+void ObjectAbove::SetDishPos(Belongings* belongings)
+{
+	CVector3 PutDishPos = m_position;
+	PutDishPos.z -= 80.f;
+	PutDishPos.y += 30.f;
+	belongings->SetPosition(PutDishPos);
+	m_belongings = belongings;
+}
+
 
 void ObjectAbove::TakeThings(Belongings* &belong)	//ポインタのポインタを参照。
 {

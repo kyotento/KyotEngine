@@ -5,7 +5,7 @@
 DishDirty::DishDirty()
 {
 	//‚¨ŽM‚Å‚ ‚é‚Æ‚¢‚¤Ý’èB
-	m_identification = enDish;
+	m_identification = enDirtyDish;
 }
 
 
@@ -29,6 +29,13 @@ void DishDirty::AddDish()
 	m_dishDirtyList.back()->SetPosition(m_position);
 }
 
+void DishDirty::DeleteDishs()
+{
+	m_dirtyDishNum -= 1;					//‚¨ŽM‚Ì”‚ðŒ¸‚ç‚·B
+	DeleteGO(m_dishDirtyList.back());		//ˆê”ÔÅŒã‚É¶¬‚µ‚½‚¨ŽM‚ðÁ‚·B
+	m_dishDirtyList.pop_back();				//ˆê”ÔÅŒã‚ÌƒŠƒXƒg‚Ì—v‘f‚ªÁ‚¦‚éB
+}
+
 void DishDirty::Update()
 {
 	m_skinModelRender->SetPosition(m_position);
@@ -37,4 +44,5 @@ void DishDirty::Update()
 		model->SetPosition(m_position + CVector3::Up()*y*5.0f);
 		y++;
 	}
+
 }

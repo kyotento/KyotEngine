@@ -336,14 +336,27 @@ void Player::NoRidePutDishs()
 		userIndexNum == ObjectAbove::enTomatoBox) {			//お皿が置けるオブジェクトかどうか。
 		m_objectAbove->PutThings(m_belongings);				//設置物の座標にオブジェクトの座標を代入。
 		m_objectAbove->SetState(ObjectAbove::en_onObject);			//物を置いたオブジェクトのステートを変更する。
-		m_playerState = enIdle;							//プレイヤーのステートを待機状態に。
+		m_playerState = enIdle;								//プレイヤーの状態を待機状態に。
 	}
 
 	if (userIndexNum == ObjectAbove::enDelivery) {			//受け渡し口のとき。
 		m_objectAbove->PutThings(m_belongings);				//設置物の座標にオブジェクトの座標を代入。
 		DeleteGO(m_belongings);								//お皿を消す。
 		m_objectAbove->SetState(ObjectAbove::en_onObject);			//受け渡し口の状態を変更する。
-		m_playerState = enIdle;							//プレイヤーの状態を変更する。
+		m_playerState = enIdle;								//プレイヤーの状態を待機状態に。
+	}
+
+
+}
+
+//何も乗っていないときに汚れたお皿を置く処理。
+void Player::NoRidePutDirtyDishs()
+{
+	if (userIndexNum == ObjectAbove::enKitchen) {			//お皿洗い場の置き。
+		m_objectAbove->SetDishPos(m_belongings);				//設置物の座標にオブジェクトの座標を代入。
+		m_objectAbove->SetState(ObjectAbove::en_onObject);			//お皿洗い場の状態を変更する。
+		m_playerState = enIdle;								//プレイヤー状態を待機状態に。
+
 	}
 }
 
@@ -378,6 +391,13 @@ void Player::PutObjects(int controllerNum)
 				if (m_belongings->GetIndentValue() == Belongings::enDish) {
 
 					NoRidePutDishs();
+
+				}
+
+				//持っているものが汚れたお皿のとき。
+				if (m_belongings->GetIndentValue() == Belongings::enDirtyDish) {
+
+					NoRidePutDirtyDishs();
 
 				}
 			}

@@ -99,6 +99,11 @@ public:
 	void NoRidePutDishs();
 
 	/// <summary>
+	///	何も乗っていないときに汚れたお皿を置く処理。
+	/// </summary>
+	void NoRidePutDirtyDishs();
+
+	/// <summary>
 	/// オブジェクトを拾う。
 	/// </summary>
 	/// <param name="controllerNum">コントローラー番号</param>
