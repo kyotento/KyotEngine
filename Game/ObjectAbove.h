@@ -96,7 +96,6 @@ public:
 protected:
 
 
-	Belongings* m_belongings = nullptr;			//持つことのできるオブジェクト。
 	Gauge* m_gauge = nullptr;					//ゲージ。
 
 	enState m_state = en_default;				//オブジェクトの状態。
@@ -104,6 +103,8 @@ protected:
 	ObjectNames m_objName = enDesk;				//オブジェクトの名前。多分使わない。
 
 private:
+
+	Belongings* m_belongings = nullptr;			//持つことのできるオブジェクト。
 
 //	int m_DishNum = 0;			//お皿の数。
 

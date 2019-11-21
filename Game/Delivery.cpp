@@ -47,7 +47,7 @@ void Delivery::Update()
 	{
 		m_StateChangeTime += 1.f;
 
-		if (m_StateChangeTime >= 300.f) {
+		if (m_StateChangeTime >= 60.f) {
 			//‚±‚±‚ÅDishHold‚ÉM‚ğ’u‚­ˆ—B
 			m_DishNum3 += 1;
 			m_dishHold->SetDishNum(m_DishNum3);			//‚¨M‚Ì”‚ğİ’èB

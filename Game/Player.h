@@ -150,6 +150,12 @@ public:
 		return m_knife;
 	}
 
+	/// <summary>
+	/// プレイヤーのrayがオブジェクトに衝突した時の処理。
+	/// </summary>
+	/// <param name="rayRC"></param>
+	/// <param name="controllerNum">コントローラー番号</param>
+	void CollideToObject(btCollisionWorld::ClosestRayResultCallback rayRC, int controllerNum);
 
 protected:
 

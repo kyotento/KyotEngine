@@ -97,6 +97,101 @@ void Player::Rotation()
 
 }
 
+void Player::CollideToObject(btCollisionWorld::ClosestRayResultCallback rayRC, int controllerNum)
+{
+	//オブジェクトの数分ループする。
+	for (int i = 0; i <= ObjectAbove::enNumberOfObjectAbove; i++)
+	{
+		userIndexNum = rayRC.m_collisionObject->getUserIndex();	//nに当たっているオブジェクトのIndexを代入。
+		if (rayRC.m_collisionObject->getUserIndex() == i) {	//衝突したオブジェクトがi番目だった時。
+			rayRC.m_collisionObject->getUserPointer();		//衝突しているもののポインタを返す。
+			m_objectAbove = (ObjectAbove*)rayRC.m_collisionObject->getUserPointer();			//m_objectAboveに物が置けるオブジェクトを代入。
+
+			if (rayRC.m_collisionObject->getUserIndex() == ObjectAbove::enDesk) {		//机のとき。
+
+				m_desk = (Desk*)rayRC.m_collisionObject->getUserPointer();	//(Desk*)に当たったオブジェクトのポインタを入れる。
+
+			}
+
+			if (rayRC.m_collisionObject->getUserIndex() == ObjectAbove::enDelivery) {		//カウンターのとき。
+
+				m_delivery = (Delivery*)rayRC.m_collisionObject->getUserPointer();
+
+			}
+
+			if (rayRC.m_collisionObject->getUserIndex() == ObjectAbove::enDishHold) {		//お皿置きのとき。
+
+				m_dishHold = (DishHold*)rayRC.m_collisionObject->getUserPointer();
+
+			}
+
+			if (rayRC.m_collisionObject->getUserIndex() == ObjectAbove::enDustBox) {		//ゴミ箱のとき。
+
+				m_dustbox = (DustBox*)rayRC.m_collisionObject->getUserPointer();
+
+			}
+
+			if (rayRC.m_collisionObject->getUserIndex() == ObjectAbove::enGasStove) {		//ガスコンロのとき。
+
+				m_gasStove = (GasStove*)rayRC.m_collisionObject->getUserPointer();	//(GasStove*)に当たったオブジェクトのポインタを入れる。
+
+			}
+
+			if (rayRC.m_collisionObject->getUserIndex() == ObjectAbove::enKitchen) {		//キッチンのとき。
+
+				m_kitchen = (Kitchen*)rayRC.m_collisionObject->getUserPointer();
+
+				//todo 絶　仮 実際は汚れたお皿があるとき。
+				if (g_pad[0].IsPress(enButtonX))
+				{
+					m_playerState = enWashing;
+				}
+			}
+
+			if (rayRC.m_collisionObject->getUserIndex() == ObjectAbove::enOnionBox) {		//玉ねぎボックスのとき。
+
+				m_onionBox = (OnionBox*)rayRC.m_collisionObject->getUserPointer();
+
+				if (m_toHave == false) {
+					if (g_pad[controllerNum].IsTrigger(enButtonA) && m_objectAbove->GetState() == ObjectAbove::en_default)
+					{
+						m_belongings = m_onionBox->NewFood(controllerNum);		//玉ねぎを生成する。生成したものの情報をm_belongingsに代入。
+
+						m_playerState = enIdleHave;
+					}
+				}
+			}
+
+			if (rayRC.m_collisionObject->getUserIndex() == ObjectAbove::enTomatoBox) {		//トマトボックスのとき。
+
+				m_tomatoBox = (TomatoBox*)rayRC.m_collisionObject->getUserPointer();
+
+				if (m_toHave == false) {		//何も持っていないとき。
+					if (g_pad[controllerNum].IsTrigger(enButtonA) && m_objectAbove->GetState() == ObjectAbove::en_default)
+					{
+						m_belongings = m_tomatoBox->NewFood(controllerNum);	//トマトを生成する。生成したものの情報をm_belongingsに代入。
+
+						m_playerState = enIdleHave;
+					}
+				}
+			}
+
+			if (rayRC.m_collisionObject->getUserIndex() == ObjectAbove::enCuttingDesk) {		//まな板のとき。
+
+				m_cuttingDesk = (CuttingDesk*)rayRC.m_collisionObject->getUserPointer();
+
+				if (m_toHave == false) {		//何も持っていないとき。
+					if (g_pad[controllerNum].IsPress(enButtonX) && m_objectAbove->GetState() == ObjectAbove::en_onObject)		//Xを押したとき、何か乗っているとき。
+					{
+						m_playerState = enCutting;
+					}
+				}
+			}
+		}
+	}
+}
+
+//プレイヤーの前方方向に線を飛ばす処理。rayとオブジェクトの当たり判定を調べる処理。
 void Player::ForwardDirectionRay(int controllerNum)
 {
 	m_objectAbove = nullptr;		//物を置くとNullになる。
@@ -113,100 +208,12 @@ void Player::ForwardDirectionRay(int controllerNum)
 
 		if (rayRC.hasHit())			//衝突しているなら。
 		{
-			//オブジェクトの数分ループする。
-			for (int i = 0; i <= ObjectAbove::enNumberOfObjectAbove; i++)
-			{
-				userIndexNum = rayRC.m_collisionObject->getUserIndex();	//nに当たっているオブジェクトのIndexを代入。
-				if (rayRC.m_collisionObject->getUserIndex() == i) {	//衝突したオブジェクトがi番目だった時。
-					rayRC.m_collisionObject->getUserPointer();		//衝突しているもののポインタを返す。
-					m_objectAbove = (ObjectAbove*)rayRC.m_collisionObject->getUserPointer();
-					
-					if (rayRC.m_collisionObject->getUserIndex() == ObjectAbove::enDesk) {		//机のとき。
-
-						m_desk = (Desk*)rayRC.m_collisionObject->getUserPointer();	//(Desk*)に当たったオブジェクトのポインタを入れる。
-
-					}
-
-					if (rayRC.m_collisionObject->getUserIndex() == ObjectAbove::enDelivery) {		//カウンターのとき。
-
-						m_delivery = (Delivery*)rayRC.m_collisionObject->getUserPointer();	
-
-					}
-
-					if (rayRC.m_collisionObject->getUserIndex() == ObjectAbove::enDishHold) {		//お皿置きのとき。
-
-						m_dishHold = (DishHold*)rayRC.m_collisionObject->getUserPointer();
-
-					}
-
-					if (rayRC.m_collisionObject->getUserIndex() == ObjectAbove::enDustBox) {		//ゴミ箱のとき。
-
-						m_dustbox = (DustBox*)rayRC.m_collisionObject->getUserPointer();
-
-					}
-
-					if (rayRC.m_collisionObject->getUserIndex() == ObjectAbove::enGasStove) {		//ガスコンロのとき。
-
-						m_gasStove = (GasStove*)rayRC.m_collisionObject->getUserPointer();	//(GasStove*)に当たったオブジェクトのポインタを入れる。
-
-					}
-
-					if (rayRC.m_collisionObject->getUserIndex() == ObjectAbove::enKitchen) {		//キッチンのとき。
-
-						m_kitchen = (Kitchen*)rayRC.m_collisionObject->getUserPointer();
-
-						//todo 絶　仮 実際は汚れたお皿があるとき。
-						if (g_pad[0].IsPress(enButtonX))
-						{
-							m_playerState = enWashing;
-						}
-					}
-
-					if (rayRC.m_collisionObject->getUserIndex() == ObjectAbove::enOnionBox) {		//玉ねぎボックスのとき。
-
-						m_onionBox = (OnionBox*)rayRC.m_collisionObject->getUserPointer();
-
-						if (m_toHave == false) {
-							if (g_pad[controllerNum].IsTrigger(enButtonA) && m_objectAbove->GetState() == ObjectAbove::en_default)
-							{
-								m_belongings = m_onionBox->NewFood(controllerNum);		//玉ねぎを生成する。生成したものの情報をm_belongingsに代入。
-
-								m_playerState = enIdleHave;
-							}
-						}
-					}
-
-					if (rayRC.m_collisionObject->getUserIndex() == ObjectAbove::enTomatoBox) {		//トマトボックスのとき。
-
-						m_tomatoBox = (TomatoBox*)rayRC.m_collisionObject->getUserPointer();
-
-						if (m_toHave == false) {		//何も持っていないとき。
-							if (g_pad[controllerNum].IsTrigger(enButtonA) && m_objectAbove->GetState() == ObjectAbove::en_default)
-							{
-								m_belongings = m_tomatoBox->NewFood(controllerNum);	//トマトを生成する。生成したものの情報をm_belongingsに代入。
-
-								m_playerState = enIdleHave;
-							}
-						}
-					}
-
-					if (rayRC.m_collisionObject->getUserIndex() == ObjectAbove::enCuttingDesk) {		//まな板のとき。
-
-						m_cuttingDesk = (CuttingDesk*)rayRC.m_collisionObject->getUserPointer();
-
-						if (m_toHave == false) {		//何も持っていないとき。
-							if (g_pad[controllerNum].IsPress(enButtonX) && m_objectAbove->GetState() == ObjectAbove::en_onObject)		//Xを押したとき、何か乗っているとき。
-							{
-								m_playerState = enCutting;
-							}
-						}
-					}
-				}
-			}
+			CollideToObject(rayRC,controllerNum);		//プレイヤーの前方方向にオブジェクトがあった時の処理。
 		}
 	}
 }
 
+//プレイヤーの状態による動作処理。
 void Player::ActionProcessing(int controllerNum)
 {
 
@@ -361,7 +368,7 @@ void Player::PutObjects(int controllerNum)
 							//todo 絶　持っているものを <条件付き> で消す。
 							m_cacth->SetSoupBase(m_cacth);				//鍋にスープを入れる(それっぽいオブジェクトの生成)処理。
 							DeleteGO(m_belongings);						//持っているものを消す。
-							m_playerState = enIdle;							//状態を待機状態に変更。
+							m_playerState = enIdle;						//状態を待機状態に変更。
 						}
 					}
 				}
@@ -370,8 +377,7 @@ void Player::PutObjects(int controllerNum)
 					m_objectAbove->TakeThings(m_cacth);				//乗っているオブジェクトを検索する。
 					if (m_cacth->GetIndentValue() == Belongings::enKitchenWare) {			//乗っているものが調理器具だった場合。
 						if (m_cacth->GetPotState() == Belongings::enComplete) {				//乗っているものの状態が完成状態だった時。
-							//todo お皿に料理を入れる。
-							//todo 鍋の中身を消す。
+							//todo 絶　一瞬スープの中身が初期座標に行くのを直す。
 							m_cacth->DeleteSoup(m_cacth);
 							m_belongings->PutDishs(m_belongings);
 						}
@@ -387,6 +393,7 @@ void Player::PutObjects(int controllerNum)
 	}
 }
 
+//オブジェクトを拾う処理。
 void Player::PickUpObjects(int controllerNum)
 {
 	if (g_pad[controllerNum].IsTrigger(enButtonA))						//Aボタンを押したとき。
@@ -398,7 +405,7 @@ void Player::PickUpObjects(int controllerNum)
 					SetFoodPosition();							//持っているものの座標を指定。
 					m_objectAbove->SetState(ObjectAbove::en_default);					//物をとったオブジェクトのステートを変更する。
 					m_toHave = true;							//物を持つフラグ。
-					m_playerState = enIdleHave;						//ステート変更。
+					m_playerState = enIdleHave;					//ステート変更。
 				}
 			}
 		}

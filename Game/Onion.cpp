@@ -31,4 +31,14 @@ void Onion::Update()
 	m_skinModelRender->SetPosition(m_position);
 	m_skinModelRender->SetRotation(m_rotation);
 
+	//todo 技　切られているモーションを付ける。
+	if (m_foodState == enCutting)		//もし切られたら。
+	{
+		if (m_CuttingModel == false) {
+
+			m_skinModelRender->Init(L"Assets/modelData/Food/Onion/CuttingOnion.cmo");	//切られたモデルに変更。
+			m_CuttingModel = true;
+		}
+	}
+
 }

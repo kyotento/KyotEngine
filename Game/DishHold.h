@@ -1,6 +1,7 @@
 #pragma once
 #include "ObjectAbove.h"
 #include "Dish.h"
+#include "DishDirty.h"
 
 class DishHold : public ObjectAbove
 {
@@ -18,12 +19,21 @@ public:
 	void NumberOfDished();
 
 	/// <summary>
-	/// ‚¨M‚Ì”‚ğæ“¾‚·‚éB
+	/// ‚¨M‚Ì”‚ğİ’è‚·‚éB
 	/// </summary>
 	/// <param name="dishNum">‚¨M‚Ì”</param>
 	void SetDishNum(int dishNum)
 	{
 		m_dishNum = dishNum;
+	}
+
+	/// <summary>
+	/// ‚¨M‚Ì”‚ğæ“¾‚·‚éB
+	/// </summary>
+	/// <returns>‚¨M‚Ì”</returns>
+	int GetDishNum()
+	{
+		return m_dishNum;
 	}
 
 private:
@@ -33,7 +43,8 @@ private:
 
 	CVector3 m_dishPosition = CVector3::Zero();		//‚¨M‚ÌÀ•WB
 
-	Dish* m_dish = nullptr;			//‚¨MB
+	Dish* m_dish = nullptr;							//‚¨MB
+	DishDirty* m_dishDirty = nullptr;				//‰˜‚ê‚½‚¨MB
 
 };
 

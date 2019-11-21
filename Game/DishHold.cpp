@@ -46,11 +46,18 @@ void DishHold::NumberOfDished()
 			m_dishPosition.y += 3.f;
 		}
 
-		m_dish = NewGO<Dish>(0, "dish");		//お皿の生成。
-		PutThings(m_dish);						//お皿置きにお皿を置く処理。
-		m_dish->SetPosition(m_dishPosition);			//座標がずれているので上書きしてやる。
-		m_dish->SetDishState(Dish::endirty);			//お座らの状態を汚れている状態に。
+		if (m_dishDirty != nullptr)
+		{
+			m_dishDirty->AddDish();
+		}
 
+		//お皿が一つも生成されてないときの処理。
+		if (m_dishDirty == nullptr) {
+			m_dishDirty = NewGO<DishDirty>(0, "dishdirty");		//お皿の生成。
+			PutThings(m_dishDirty);								//お皿置きにお皿を置く処理。
+			m_dishDirty->SetPosition(m_dishPosition);			//座標がずれているので上書きしてやる。
+			m_state = en_onObject;								//お皿置きの状態を変更。
+		}
 	}
 
 	m_oldDishNum = m_dishNum;			//お皿の数が変更されたかを確認するために代入。
@@ -58,6 +65,6 @@ void DishHold::NumberOfDished()
 
 void DishHold::Update()
 {
-	NumberOfDished();			//お皿の数を管理するクラス。
+	NumberOfDished();			//お皿の数を管理する関数。
 
 }

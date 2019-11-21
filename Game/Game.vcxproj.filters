@@ -267,6 +267,9 @@
     <ClCompile Include="Cuisine.cpp">
       <Filter>Game\Field\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="DishDirty.cpp">
+      <Filter>Game\Field\Objects\Belongings</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -487,6 +490,9 @@
     <ClInclude Include="Cuisine.h">
       <Filter>Game\Field\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="DishDirty.h">
+      <Filter>Game\Field\Objects\Belongings</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">
@@ -568,6 +574,9 @@
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Dish\DirtyDish.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Food\Onion\CuttingOnion.FBX">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
   </ItemGroup>
