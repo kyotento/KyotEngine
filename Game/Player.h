@@ -78,10 +78,25 @@ public:
 	void SetFoodPosition();
 
 	/// <summary>
-	/// 物を置く処理。
+	/// 食べ物を置く処理。
 	/// </summary>
 	/// <param name="controllerNum">コントローラー番号</param>
 	void PutObjects(int controllerNum);
+
+	/// <summary>
+	/// 何も乗っていないときに食べ物を置く処理。
+	/// </summary>
+	void NoRidePutFoods();
+
+	/// <summary>
+	/// 何も乗っていないときに調理器具を置く処理。
+	/// </summary>
+	void NoRidePutKichenWares();
+
+	/// <summary>
+	/// 何も乗っていないときにお皿を置く処理。
+	/// </summary>
+	void NoRidePutDishs();
 
 	/// <summary>
 	/// オブジェクトを拾う。
