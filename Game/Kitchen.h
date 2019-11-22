@@ -1,5 +1,7 @@
 #pragma once
 #include "ObjectAbove.h"
+#include "DishDirty.h"
+#include "Dish.h"
 
 class Kitchen : public ObjectAbove
 {
@@ -10,9 +12,27 @@ public:
 	bool Start();
 	void Update();
 
+	/// <summary>
+	/// お皿を洗う関数。
+	/// </summary>
+	void DishWashing();
+
+	/// <summary>
+	/// 外部から汚れたお皿のインスタンスを設定する関数。
+	/// </summary>
+	/// <param name="dishDirty">お皿のインスタンス</param>
+	void SetDishDirtyInstance(DishDirty* dishDirty)
+	{
+		m_dishDirty = dishDirty;
+	}
+
 
 private:
 
+	int m_timerK = 0;				//カリカリの仮。
+
+	Dish* m_dish = nullptr;						//お皿。
+	DishDirty* m_dishDirty = nullptr;			//汚れたお皿。
 
 };
 

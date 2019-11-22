@@ -17,6 +17,7 @@ bool DishDirty::Start()
 {
 	m_skinModelRender->Init(L"Assets/modelData/Dish/DirtyDish.cmo");			//汚れたお皿。
 	m_skinModelRender->SetPosition(m_position);
+	m_dirtyDishNum += 1;
 
 	return true;
 }
@@ -34,6 +35,7 @@ void DishDirty::DeleteDishs()
 	m_dirtyDishNum -= 1;					//お皿の数を減らす。
 	DeleteGO(m_dishDirtyList.back());		//一番最後に生成したお皿を消す。
 	m_dishDirtyList.pop_back();				//一番最後のリストの要素が消える。
+
 }
 
 void DishDirty::Update()

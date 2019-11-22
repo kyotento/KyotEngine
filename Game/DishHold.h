@@ -36,6 +36,15 @@ public:
 		return m_dishNum;
 	}
 
+	/// <summary>
+	/// 汚れたお皿のインスタンスを取得する。
+	/// </summary>
+	/// <returns>汚れたお皿のインスタンス</returns>
+	DishDirty *GetDirtyDishInstance()
+	{
+		return m_dishDirty;
+	}
+
 private:
 
 	int m_dishNum = 0;			//乗っているお皿の数。

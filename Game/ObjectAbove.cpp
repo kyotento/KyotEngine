@@ -20,11 +20,20 @@ void ObjectAbove::PutThings(Belongings* belong)
 
 }
 
+void ObjectAbove::SetDirtyDishPos(Belongings* belongings)
+{
+	CVector3 PutDirtyDishPos = m_position;
+	PutDirtyDishPos.z -= 80.f;
+	PutDirtyDishPos.y += 30.f;
+	belongings->SetPosition(PutDirtyDishPos);
+	m_belongings = belongings;
+}
+
 void ObjectAbove::SetDishPos(Belongings* belongings)
 {
 	CVector3 PutDishPos = m_position;
-	PutDishPos.z -= 80.f;
-	PutDishPos.y += 30.f;
+	PutDishPos.y += 70.f;
+	PutDishPos.z += 30.f;
 	belongings->SetPosition(PutDishPos);
 	m_belongings = belongings;
 }

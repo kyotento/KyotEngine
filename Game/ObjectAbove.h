@@ -22,6 +22,12 @@ public:
 	/// 持っている汚れたお皿を指定の座標に置く処理。
 	/// </summary>
 	/// <param name=""></param>
+	void SetDirtyDishPos(Belongings*);
+
+	/// <summary>
+	/// お皿を指定の座標に置く処理。(洗われたお皿)。
+	/// </summary>
+	/// <param name="">持てるもの(お皿)</param>
 	void SetDishPos(Belongings*);
 
 	/// <summary>

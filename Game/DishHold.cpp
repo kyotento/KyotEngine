@@ -57,7 +57,6 @@ void DishHold::NumberOfDished()
 			m_dishDirty = NewGO<DishDirty>(0, "dishdirty");		//お皿の生成。
 			PutThings(m_dishDirty);								//お皿置きにお皿を置く処理。
 			m_dishDirty->SetPosition(m_dishPosition);			//座標がずれているので上書きしてやる。
-			m_dishDirty->SetDirtyDishNum(1);					//汚れたお皿の数を指定してやる。
 			m_state = en_onObject;								//お皿置きの状態を変更。
 		}
 	}

@@ -145,6 +145,10 @@ void Player::CollideToObject(btCollisionWorld::ClosestRayResultCallback rayRC, i
 				if (g_pad[0].IsPress(enButtonX))
 				{
 					m_playerState = enWashing;
+					m_objectAbove->TakeThings(m_cacth);
+					m_kitchen->SetDishDirtyInstance((DishDirty*)m_cacth);
+					m_kitchen->DishWashing();
+
 				}
 			}
 
@@ -352,8 +356,8 @@ void Player::NoRidePutDishs()
 //何も乗っていないときに汚れたお皿を置く処理。
 void Player::NoRidePutDirtyDishs()
 {
-	if (userIndexNum == ObjectAbove::enKitchen) {			//お皿洗い場の置き。
-		m_objectAbove->SetDishPos(m_belongings);				//設置物の座標にオブジェクトの座標を代入。
+	if (userIndexNum == ObjectAbove::enKitchen) {			//お皿洗い場のとき。
+		m_objectAbove->SetDirtyDishPos(m_belongings);				//設置物の座標にオブジェクトの座標を代入。
 		m_objectAbove->SetState(ObjectAbove::en_onObject);			//お皿洗い場の状態を変更する。
 		m_playerState = enIdle;								//プレイヤー状態を待機状態に。
 
@@ -446,13 +450,34 @@ void Player::PickUpObjects(int controllerNum)
 	{
 		if(m_toHave == false){			//何も持っていないとき
 			if (m_objectAbove != nullptr) {						//目の前にオブジェクトがあるとき。
-				if (m_objectAbove->GetState() == ObjectAbove::en_onObject) {			//オブジェクトに何か乗っているとき。
-					m_objectAbove->TakeThings(m_belongings);	//乗っているオブジェクトを検索。
-					SetFoodPosition();							//持っているものの座標を指定。
-					m_objectAbove->SetState(ObjectAbove::en_default);					//物をとったオブジェクトのステートを変更する。
-					m_toHave = true;							//物を持つフラグ。
-					m_playerState = enIdleHave;					//ステート変更。
+
+				//お皿洗い場以外のとき。
+				if (userIndexNum != ObjectAbove::enKitchen) {
+					if (m_objectAbove->GetState() == ObjectAbove::en_onObject) {			//オブジェクトに何か乗っているとき。
+						m_objectAbove->TakeThings(m_belongings);	//乗っているオブジェクトを検索。
+						SetFoodPosition();							//持っているものの座標を指定。
+						m_objectAbove->SetState(ObjectAbove::en_default);					//物をとったオブジェクトのステートを変更する。
+						m_toHave = true;							//物を持つフラグ。
+						m_playerState = enIdleHave;					//ステート変更。
+					}
 				}
+
+				//お皿洗い場のとき。
+				if (userIndexNum == ObjectAbove::enKitchen) {
+					m_objectAbove->TakeThings(m_belongings);
+
+					//乗っているものがお皿のとき。
+					if (m_belongings->GetIndentValue() == Belongings::enDish) {			
+
+					}
+
+					//乗っているものが汚れたお皿のとき。
+					if (m_belongings->GetIndentValue() == Belongings::enDirtyDish) {
+
+					}
+
+				}
+
 			}
 		}
 	}
