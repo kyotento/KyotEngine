@@ -37,6 +37,12 @@ public:
 	void TakeThings(Belongings*&);
 
 	/// <summary>
+	/// 乗っている汚れたお皿を検索する。
+	/// </summary>
+	/// <param name="">オブジェクトのポインタを参照</param>
+	void TakeThingsDirtyDish(Belongings*&);
+
+	/// <summary>
 	/// ゲージの座標を指定する。
 	/// </summary>
 	/// <param name=""></param>
@@ -115,6 +121,7 @@ protected:
 	ObjectNames m_objName = enDesk;				//オブジェクトの名前。多分使わない。
 
 	Belongings* m_belongings = nullptr;			//持つことのできるオブジェクト。
+	Belongings* m_belongingsDirtyDIsh = nullptr;			//お皿洗い場に置かれた汚れたお皿。
 private:
 
 

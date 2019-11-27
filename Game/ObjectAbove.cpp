@@ -11,37 +11,45 @@ ObjectAbove::~ObjectAbove()
 {
 }
 
+//置けるものの座標を指定。
 void ObjectAbove::PutThings(Belongings* belong)
 {
-	CVector3 PutObjPos = m_position;
-	PutObjPos.y += 70.f;
-	belong->SetPosition(PutObjPos);
-	m_belongings = belong;
+	CVector3 PutObjPos = m_position;				//物が受けるオブジェクトの座標を代入。
+	PutObjPos.y += 70.f;							//座標調整。
+	belong->SetPosition(PutObjPos);					//持てる物の座標を指定。
+	m_belongings = belong;							//m_belongingsに持てる物のインスタンスを代入。
 
 }
 
+//汚れたお皿の座標を指定。
 void ObjectAbove::SetDirtyDishPos(Belongings* belongings)
 {
-	CVector3 PutDirtyDishPos = m_position;
-	PutDirtyDishPos.z -= 80.f;
-	PutDirtyDishPos.y += 30.f;
-	belongings->SetPosition(PutDirtyDishPos);
-	m_belongings = belongings;
+	CVector3 PutDirtyDishPos = m_position;			//物が置けるオブジェクトの座標を代入。(お皿洗い場)。
+	PutDirtyDishPos.z -= 80.f;						//位置調整。
+	PutDirtyDishPos.y += 30.f;						//位置調整。
+	belongings->SetPosition(PutDirtyDishPos);		//汚れたお皿の座標を指定。
+	m_belongingsDirtyDIsh = belongings;				//m_belongingsDirtyDIshに汚れたお皿のインスタンスを代入。
 }
 
+//お皿の座標を指定。
 void ObjectAbove::SetDishPos(Belongings* belongings)
 {
-	CVector3 PutDishPos = m_position;
-	PutDishPos.y += 70.f;
-	PutDishPos.z += 50.f;
-	belongings->SetPosition(PutDishPos);
-	m_belongings = belongings;
+	CVector3 PutDishPos = m_position;				//物が置けるオブジェクトの座標を代入。(お皿洗い場)。
+	PutDishPos.y += 70.f;							//位置調整。
+	PutDishPos.z += 50.f;							//位置調整。
+	belongings->SetPosition(PutDishPos);			//お皿の座標を指定。
+	m_belongings = belongings;						//m_belongingsにお皿のインスタンスを代入。
 }
 
 
-void ObjectAbove::TakeThings(Belongings* &belong)	//ポインタのポインタを参照。
+void ObjectAbove::TakeThings(Belongings* &belong)
 {
 	belong = m_belongings;
+}
+
+void ObjectAbove::TakeThingsDirtyDish(Belongings* &belong)
+{
+	belong = m_belongingsDirtyDIsh;
 }
 
 //todo 使わんかも。

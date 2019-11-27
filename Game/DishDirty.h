@@ -45,8 +45,8 @@ private:
 
 	int m_dirtyDishNum = 0;			//汚れたお皿の数。
 
-	typedef std::list<SkinModelRender*>DishDirtyList;
-	DishDirtyList m_dishDirtyList;
+	typedef std::list<SkinModelRender*>DishDirtyList;			//お皿を重ねるためのリスト。
+	DishDirtyList m_dishDirtyList;								//リスト。
 
 };
 

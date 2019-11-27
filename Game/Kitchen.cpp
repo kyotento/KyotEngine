@@ -9,6 +9,7 @@ Kitchen::Kitchen()
 
 Kitchen::~Kitchen()
 {
+	DeleteGO(this);
 }
 
 
@@ -46,20 +47,21 @@ void Kitchen::DishWashing()
 
 	if (m_timerK >= 120) {		//２秒以上たったとき。
 
-		//乗っている汚れたお皿の数が2個以上のとき。
-		if (m_dishDirty->GetDirtyDishNum() > 1) {		
-			m_dishDirty->DeleteDishs();					//汚れたお皿を消す。
-			m_dish = NewGO<Dish>(0, "dish");			//お皿を生成する。
-			SetDishPos(m_dish);
-			m_timerK = 0;
-		}
-
 		//乗っているお皿が1個の時。
 		if (m_dishDirty->GetDirtyDishNum() <= 1 && m_dishDirty->GetDirtyDishNum() > 0) {
 			DeleteGO(m_dishDirty);						//汚れたお皿クラスを消す。
 			m_dish = NewGO<Dish>(0, "dish");			//お皿を生成する。
 			SetDishPos(m_dish);
 		}
+
+		//乗っている汚れたお皿の数が2個以上のとき。
+		if (m_dishDirty->GetDirtyDishNum() > 1) {
+			m_dishDirty->DeleteDishs();					//汚れたお皿を消す。
+			m_dish = NewGO<Dish>(0, "dish");			//お皿を生成する。
+			SetDishPos(m_dish);
+			m_timerK = 0;
+		}
+
 	}
 }
 

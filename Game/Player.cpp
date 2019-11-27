@@ -97,6 +97,7 @@ void Player::Rotation()
 
 }
 
+//プレイヤーのrayがオブジェクトに衝突した時の処理。
 void Player::CollideToObject(btCollisionWorld::ClosestRayResultCallback rayRC, int controllerNum)
 {
 	//オブジェクトの数分ループする。
@@ -145,7 +146,7 @@ void Player::CollideToObject(btCollisionWorld::ClosestRayResultCallback rayRC, i
 				if (g_pad[0].IsPress(enButtonX))
 				{
 					m_playerState = enWashing;
-					m_objectAbove->TakeThings(m_cacth);
+					m_objectAbove->TakeThingsDirtyDish(m_cacth);
 					m_kitchen->SetDishDirtyInstance((DishDirty*)m_cacth);
 					m_kitchen->DishWashing();
 
