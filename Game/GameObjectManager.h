@@ -3,6 +3,7 @@
 #include "GameObject.h"
 #include "util/Util.h"
 #include "ShadowMap.h"
+#include "Sprite.h"
 class GameObjectManager /*: public Noncopy*/
 {
 public:
@@ -219,6 +220,22 @@ public:
 
 
 	/// <summary>
+	/// フォワードレンダリング描画処理。(通常描画)。
+	/// </summary>
+	virtual void ForwardRender();
+
+
+	/// <summary>
+	/// レンダリングターゲット切り替え。
+	/// </summary>
+	/// <param name="d3dDeviceContext">D3Dデバイスコンテキスト</param>
+	/// <param name="renderTarget">レンダリングターゲット</param>
+	/// <param name="viewport">ビューポート</param>
+	void ChangeRenderTarget(ID3D11DeviceContext* d3dDeviceContext, RenderTarget* renderTarget, D3D11_VIEWPORT* viewport);
+	void ChangeRenderTarget(ID3D11DeviceContext* d3dDeviceContext, ID3D11RenderTargetView* renderTarget, ID3D11DepthStencilView* depthStensil, D3D11_VIEWPORT* viewport);
+
+
+	/// <summary>
 	/// 更新関数。
 	/// </summary>
 	void Execute();
@@ -266,6 +283,8 @@ private:
 	ID3D11RenderTargetView* m_frameBufferRenderTargetView = nullptr;	//フレームバッファのレンダリングターゲットビュー。
 	ID3D11DepthStencilView* m_frameBufferDepthStencilView = nullptr;	//フレームバッファのデプスステンシルビュー。
 
+	RenderTarget m_mainRenderTarget;		//メインレンダリングターゲット。
+	Sprite m_copyMainRtToFrameBufferSprite;			//メインレンダリングターゲットに描かれた絵をフレームバッファにコピーするためのスプライト。
 
 
 };

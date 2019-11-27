@@ -299,7 +299,7 @@ void Sprite::Init(ID3D11ShaderResourceView* srv, float w, float h)
 
 	m_texture = srv;
 	if (m_texture != nullptr) {
-		//m_texture->AddRef();
+		m_texture->AddRef();
 	}
 
 }

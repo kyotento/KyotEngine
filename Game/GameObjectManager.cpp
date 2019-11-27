@@ -1,11 +1,35 @@
 #include "stdafx.h"
 #include "GameObjectManager.h"
 
+//#define USE_MAIN_RT		//定義するとメインレンダリングターゲットが使われる。
+
 GameObjectManager::GameObjectManager()
 {
 	for (int i = 0; i < priorityMax; i++) { //優先度。
 		m_gameObjectListArray.push_back(GameObjectList()); //リストにリストを入れていく。Vector.
 	}
+
+	//レンダリングターゲットを作成。
+	m_mainRenderTarget.Create(
+		FRAME_BUFFER_W,
+		FRAME_BUFFER_H,
+		DXGI_FORMAT_R8G8B8A8_UNORM
+	);
+	m_frameBufferViewports.TopLeftX = 0;
+	m_frameBufferViewports.TopLeftY = 0;
+	m_frameBufferViewports.Width = FRAME_BUFFER_W;
+	m_frameBufferViewports.Height = FRAME_BUFFER_H;
+	m_frameBufferViewports.MinDepth = 0.0f;
+	m_frameBufferViewports.MaxDepth = 1.0f;
+
+	//メインレンダリングターゲットに描かれた絵を
+	//フレームバッファにコピーするためのスプライトを初期化する。
+	m_copyMainRtToFrameBufferSprite.Init(
+		m_mainRenderTarget.GetRenderTargetSRV(),
+		FRAME_BUFFER_W,
+		FRAME_BUFFER_H
+	);
+
 }
 
 GameObjectManager::~GameObjectManager()
@@ -59,6 +83,12 @@ void GameObjectManager::Execute()
 	d3dDeviceContext->RSGetViewports(&numViewport, &oldViewports);
 	//シャドウマップにレンダリング
 	m_shadowMap.RenderToShadowMap();
+	
+#ifdef USE_MAIN_RT
+	//レンダリングターゲットをメインに変更する。
+	ChangeRenderTarget(d3dDeviceContext, &m_mainRenderTarget, &m_frameBufferViewports);
+#else
+	//レンダリングターゲットを戻す。
 	//レンダリングターゲットをメインに変更する。
 	d3dDeviceContext->OMSetRenderTargets(
 		1,
@@ -69,7 +99,11 @@ void GameObjectManager::Execute()
 	//レンダリングターゲットとデプスステンシルの参照カウンタを下す。
 	oldRenderTargetView->Release();
 	oldDepthStencilView->Release();
-
+#endif
+	//メインレンダリングターゲットをクリアする。
+	float clearColor[] = { 0.2f, 0.2f, 0.2f, 1.0f };
+	m_mainRenderTarget.ClearRenderTarget(clearColor);
+	//３Dレンダリング。
 	//通常レンダリング。
 	for (GameObjectList objList : m_gameObjectListArray)
 	{
@@ -79,8 +113,62 @@ void GameObjectManager::Execute()
 		}
 	}
 
+#ifdef USE_MAIN_RT
+	//レンダリングターゲットを戻す。
+	//レンダリングターゲットを画面に変更する。
+	d3dDeviceContext->OMSetRenderTargets(
+		1,
+		&oldRenderTargetView,
+		oldDepthStencilView
+	);
+	d3dDeviceContext->RSSetViewports(numViewport, &oldViewports);
+	//レンダリングターゲットとデプスステンシルの参照カウンタを下す。
+	oldRenderTargetView->Release();
+	oldDepthStencilView->Release();
+#endif
+
+	//m_mainRenderTargetをレンダリングターゲット。
+	
+	m_copyMainRtToFrameBufferSprite.Draw(&camera2d);
+	//２Dのレンダリング。
+
+
 	g_graphicsEngine->EndRender();
 
+}
+
+void GameObjectManager::ChangeRenderTarget(ID3D11DeviceContext* d3dDeviceContext, ID3D11RenderTargetView* renderTarget, ID3D11DepthStencilView* depthStensil, D3D11_VIEWPORT* viewport)
+{
+	ID3D11RenderTargetView* rtTbl[] = {
+		renderTarget
+	};
+	//レンダリングターゲットの切り替え。
+	d3dDeviceContext->OMSetRenderTargets(1, rtTbl, depthStensil);
+	if (viewport != nullptr) {
+		//ビューポートが指定されていたら、ビューポートも変更する。
+		d3dDeviceContext->RSSetViewports(1, viewport);
+	}
+}
+
+void GameObjectManager::ChangeRenderTarget(ID3D11DeviceContext* d3dDeviceContext, RenderTarget* renderTarget, D3D11_VIEWPORT* viewport)
+{
+	ChangeRenderTarget(
+		d3dDeviceContext,
+		renderTarget->GetRenderTargetView(),
+		renderTarget->GetDepthStensilView(),
+		viewport
+	);
+}
+
+//フォワードレンダリング。
+void GameObjectManager::ForwardRender()
+{
+	//レンダリングターゲットをメインに変更する。
+	auto d3dDeviceContext = g_graphicsEngine->GetD3DDeviceContext();
+	ChangeRenderTarget(d3dDeviceContext, &m_mainRenderTarget, &m_frameBufferViewports);
+	//メインレンダリングターゲットをクリアする。
+	float clearColor[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+	m_mainRenderTarget.ClearRenderTarget(clearColor);
 }
 
 void GameObjectManager::ExecuteDeleteGameObjects()

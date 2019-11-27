@@ -60,10 +60,7 @@ void Kitchen::DishWashing()
 			m_dish = NewGO<Dish>(0, "dish");			//‚¨M‚ğ¶¬‚·‚éB
 			SetDishPos(m_dish);
 		}
-
 	}
-
-
 }
 
 void Kitchen::Update()

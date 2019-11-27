@@ -468,7 +468,11 @@ void Player::PickUpObjects(int controllerNum)
 
 					//乗っているものがお皿のとき。
 					if (m_belongings->GetIndentValue() == Belongings::enDish) {			
-
+						m_objectAbove->TakeThings(m_belongings);	//乗っているオブジェクトを検索。
+						SetFoodPosition();							//持っているものの座標を指定。
+						m_objectAbove->SetState(ObjectAbove::en_default);					//物をとったオブジェクトのステートを変更する。
+						m_toHave = true;							//物を持つフラグ。
+						m_playerState = enIdleHave;					//ステート変更。
 					}
 
 					//乗っているものが汚れたお皿のとき。

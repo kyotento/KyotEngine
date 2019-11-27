@@ -33,7 +33,7 @@ void ObjectAbove::SetDishPos(Belongings* belongings)
 {
 	CVector3 PutDishPos = m_position;
 	PutDishPos.y += 70.f;
-	PutDishPos.z += 30.f;
+	PutDishPos.z += 50.f;
 	belongings->SetPosition(PutDishPos);
 	m_belongings = belongings;
 }
