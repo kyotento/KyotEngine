@@ -41,11 +41,6 @@ void DishHold::NumberOfDished()
 {
 	if (m_oldDishNum < m_dishNum) {		//お皿の数が増えた時。
 
-		for (int i = 0; i < m_dishNum; i++)		//お皿の数だけ強くなれるよ。（曲::TOMORROW）。
-		{
-			m_dishPosition.y += 3.f;
-		}
-
 		//お皿が一つ以上生成されているときの処理。
 		if (m_dishDirty != nullptr)
 		{
@@ -59,6 +54,7 @@ void DishHold::NumberOfDished()
 			m_dishDirty->SetPosition(m_dishPosition);			//座標がずれているので上書きしてやる。
 			m_state = en_onObject;								//お皿置きの状態を変更。
 		}
+
 	}
 
 	m_oldDishNum = m_dishNum;			//お皿の数が変更されたかを確認するために代入。
@@ -66,6 +62,12 @@ void DishHold::NumberOfDished()
 
 void DishHold::Update()
 {
+
 	NumberOfDished();			//お皿の数を管理する関数。
+
+	if (m_state == en_default)
+	{
+		m_dishDirty = nullptr;
+	}
 
 }

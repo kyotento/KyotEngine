@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "ObjectAbove.h"
-
+#include "Kitchen.h"
 
 ObjectAbove::ObjectAbove()
 {
@@ -36,7 +36,7 @@ void ObjectAbove::SetDishPos(Belongings* belongings)
 {
 	CVector3 PutDishPos = m_position;				//物が置けるオブジェクトの座標を代入。(お皿洗い場)。
 	PutDishPos.y += 70.f;							//位置調整。
-	PutDishPos.z += 50.f;							//位置調整。
+	PutDishPos.z += 70.f;							//位置調整。
 	belongings->SetPosition(PutDishPos);			//お皿の座標を指定。
 	m_belongings = belongings;						//m_belongingsにお皿のインスタンスを代入。
 }

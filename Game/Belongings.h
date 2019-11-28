@@ -50,6 +50,12 @@ public:
 	/// <param name="belongings">持てるもの</param>
 	void PutDishs(Belongings* belongings);
 
+	/// <summary>
+	/// お皿洗い場の重ねてあるお皿からお皿を一つとる処理。
+	/// </summary>
+	/// <param name="belongings">持てるもの(お皿)</param>
+	void PutDishFromKitchen(Belongings* belongings);
+
 	/// <summary>	
 	/// 食べ物の状態。
 	/// </summary>

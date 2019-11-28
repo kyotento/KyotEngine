@@ -145,11 +145,12 @@ void Player::CollideToObject(btCollisionWorld::ClosestRayResultCallback rayRC, i
 				//todo 絶　仮 実際は汚れたお皿があるとき。
 				if (g_pad[0].IsPress(enButtonX))
 				{
-					m_playerState = enWashing;
-					m_objectAbove->TakeThingsDirtyDish(m_cacth);
-					m_kitchen->SetDishDirtyInstance((DishDirty*)m_cacth);
-					m_kitchen->DishWashing();
-
+					if (m_playerState != enIdleHave && m_playerState != enRunHave) {
+						m_playerState = enWashing;
+						m_objectAbove->TakeThingsDirtyDish(m_cacth);
+						m_kitchen->SetDishDirtyInstance((DishDirty*)m_cacth);
+						m_kitchen->DishWashing();
+					}
 				}
 			}
 
@@ -456,7 +457,6 @@ void Player::PickUpObjects(int controllerNum)
 				if (userIndexNum != ObjectAbove::enKitchen) {
 					if (m_objectAbove->GetState() == ObjectAbove::en_onObject) {			//オブジェクトに何か乗っているとき。
 						m_objectAbove->TakeThings(m_belongings);	//乗っているオブジェクトを検索。
-						SetFoodPosition();							//持っているものの座標を指定。
 						m_objectAbove->SetState(ObjectAbove::en_default);					//物をとったオブジェクトのステートを変更する。
 						m_toHave = true;							//物を持つフラグ。
 						m_playerState = enIdleHave;					//ステート変更。
@@ -471,8 +471,10 @@ void Player::PickUpObjects(int controllerNum)
 						//乗っているものがお皿のとき。
 						if (m_belongings->GetIndentValue() == Belongings::enDish) {
 							m_objectAbove->TakeThings(m_belongings);	//乗っているオブジェクトを検索。
-							SetFoodPosition();							//持っているものの座標を指定。
-							m_objectAbove->SetState(ObjectAbove::en_default);					//物をとったオブジェクトのステートを変更する。
+							m_cacth = m_belongings;
+							m_belongings->PutDishFromKitchen(m_cacth);
+							m_belongings = NewGO<Dish>(0, "dish");
+						//	m_objectAbove->SetState(ObjectAbove::en_default);					//物をとったオブジェクトのステートを変更する。
 							m_toHave = true;							//物を持つフラグ。
 							m_playerState = enIdleHave;					//ステート変更。
 						}

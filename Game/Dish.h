@@ -11,7 +11,7 @@ public:
 	void Update();
 
 	/// <summary>
-	/// お皿の状態管理。
+	/// 料理の管理。
 	/// </summary>
 	void PutDish();
 
@@ -24,6 +24,11 @@ public:
 	///	お皿リストにお皿を追加する処理。
 	/// </summary>
 	void AddDishList();
+
+	/// <summary>
+	/// お皿リストのお皿を消す処理。
+	/// </summary>
+	void DeleteDishList();
 
 	/// <summary>
 	/// お皿の状態。
@@ -53,9 +58,27 @@ public:
 		return m_dishState;
 	}
 
+	/// <summary>
+	/// リストのお皿の数を指定する。
+	/// </summary>
+	/// <param name="dishListNum"></param>
+	void SetDishListNum(int dishListNum)
+	{
+		m_dishListNum = dishListNum;
+	}
+
+	/// <summary>
+	/// リストのお皿の数を取得する。
+	/// </summary>
+	/// <returns>リストのお皿の数</returns>
+	int GetDisListNum()
+	{
+		return m_dishListNum;
+	}
+
 private:
 
-	int m_dishListNum = 0;						//お皿の数。
+	int m_dishListNum = 0;						//リストのお皿の数。
 
 	DishState m_dishState = endefault;			//お皿の状態。
 	DishState m_oldDishState = endefault;		//お皿の状態(1フレーム前)。

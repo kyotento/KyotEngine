@@ -43,7 +43,7 @@ void DishDirty::Update()
 	m_skinModelRender->SetPosition(m_position);
 	int y = 1;
 	for (auto& model : m_dishDirtyList) {
-		model->SetPosition(m_position + CVector3::Up()*y*5.0f);
+		model->SetPosition(m_position + CVector3::Up()*y*7.0f);
 		y++;
 	}
 
