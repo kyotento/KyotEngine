@@ -118,14 +118,13 @@ protected:
 
 	enState m_state = en_default;				//オブジェクトの状態。
 
-	ObjectNames m_objName = enDesk;				//オブジェクトの名前。多分使わない。
+//	ObjectNames m_objName = enDesk;				//オブジェクトの名前。多分使わない。
 
 	Belongings* m_belongings = nullptr;			//持つことのできるオブジェクト。
 	Belongings* m_belongingsDirtyDIsh = nullptr;			//お皿洗い場に置かれた汚れたお皿。
+
 private:
 
-
-//	int m_DishNum = 0;			//お皿の数。
 
 };
 

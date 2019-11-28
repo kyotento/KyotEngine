@@ -21,6 +21,11 @@ public:
 	void DishModelChange();
 
 	/// <summary>
+	///	お皿リストにお皿を追加する処理。
+	/// </summary>
+	void AddDishList();
+
+	/// <summary>
 	/// お皿の状態。
 	/// </summary>
 	enum DishState
@@ -50,10 +55,16 @@ public:
 
 private:
 
+	int m_dishListNum = 0;						//お皿の数。
+
 	DishState m_dishState = endefault;			//お皿の状態。
 	DishState m_oldDishState = endefault;		//お皿の状態(1フレーム前)。
 
 	Cuisine* m_cuisine = nullptr;				//お料理。
+
+
+	typedef std::list<SkinModelRender*>DishList;			//お皿を重ねるためのリスト。
+	DishList m_dishList;									//お皿リスト。
 
 };
 

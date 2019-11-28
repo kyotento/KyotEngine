@@ -53,6 +53,17 @@ void Dish::DishModelChange()
 	m_oldDishState = m_dishState;			//代入。
 }
 
+/// <summary>
+/// お皿リストにお皿を追加する。
+/// </summary>
+void Dish::AddDishList()
+{
+	m_dishListNum += 1;
+	m_dishList.emplace_back(NewGO<SkinModelRender>(0, "skinmodel"));
+	m_dishList.back()->Init(L"Assets/modelData/Dish/Dish.cmo");			//汚れたお皿。
+	m_dishList.back()->SetPosition(m_position);
+}
+
 void Dish::Update()
 {
 	m_skinModelRender->SetPosition(m_position);			//座標の更新。
@@ -61,6 +72,12 @@ void Dish::Update()
 
 	if (m_cuisine != nullptr) {					//スープが生成しているとき。
 		m_cuisine->SetPosition(m_position);		//スープの座標を更新する。
+	}
+
+	int y = 1;
+	for (auto& model : m_dishList) {
+		model->SetPosition(m_position + CVector3::Up()*y*5.0f);
+		y++;
 	}
 
 }
