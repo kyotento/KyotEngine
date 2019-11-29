@@ -4,6 +4,8 @@
 #pragma once
 #include "StageObject.h"
 
+class Kitchen;
+
 class Belongings : public StageObject
 {
 public:
@@ -54,7 +56,8 @@ public:
 	/// ‚¨Mô‚¢ê‚Ìd‚Ë‚Ä‚ ‚é‚¨M‚©‚ç‚¨M‚ğˆê‚Â‚Æ‚éˆ—B
 	/// </summary>
 	/// <param name="belongings">‚Ä‚é‚à‚Ì(‚¨M)</param>
-	void PutDishFromKitchen(Belongings* belongings);
+	/// <param name="Kitchen">‚¨Mô‚¢ê</param>
+	void PutDishFromKitchen(Belongings* belongings, Kitchen* kitchen);
 
 	/// <summary>	
 	/// H‚×•¨‚Ìó‘ÔB

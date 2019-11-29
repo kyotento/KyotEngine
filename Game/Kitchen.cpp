@@ -9,7 +9,7 @@ Kitchen::Kitchen()
 
 Kitchen::~Kitchen()
 {
-	DeleteGO(this);
+
 }
 
 
@@ -51,17 +51,17 @@ void Kitchen::DishWashing()
 		if (m_dishDirty->GetDirtyDishNum() <= 1 && m_dishDirty->GetDirtyDishNum() > 0) {
 			DeleteGO(m_dishDirty);						//汚れたお皿クラスを消す。
 
-			if (m_dish != nullptr) {
+			if (m_dish != nullptr) {			//お皿があるとき。
 
 				m_dish->AddDishList();			//お皿を生成する。
 			}
 
-			if (m_dish == nullptr) {
+			if (m_dish == nullptr) {			//お皿がないとき。
 
 				m_dish = NewGO<Dish>(0, "dish");			//お皿を生成する。
 			}
 
-			SetDishPos(m_dish);
+			SetDishPos(m_dish);					//お皿の座標を指定。
 			m_timerK = 0;
 		}
 
@@ -86,8 +86,22 @@ void Kitchen::DishWashing()
 	}
 }
 
+void Kitchen::DeleteDishInstance()
+{
+	if (m_dish != nullptr) {
+		if (m_dish->GetDisListNum() <= 0)
+		{
+			m_dish = nullptr;
+		}
+	}
+
+}
+
 void Kitchen::Update()
 {
-
+	if (m_dish == nullptr)			//お皿のインスタンスがNullのとき。
+	{
+		m_state = en_default;			//状態を何も乗っていない状態に。
+	}
 
 }

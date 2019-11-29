@@ -41,10 +41,10 @@ void Belongings::PutDishs(Belongings* belongings)
 }
 
 // ‚¨ŽMô‚¢ê‚Ìd‚Ë‚Ä‚ ‚é‚¨ŽM‚©‚ç‚¨ŽM‚ðˆê‚Â‚Æ‚éˆ—B
-void Belongings::PutDishFromKitchen(Belongings* belongings)
+void Belongings::PutDishFromKitchen(Belongings* belongings, Kitchen* kitchen)
 {
 	Dish* dish = (Dish*)belongings;
-	dish->DeleteDishList();
+	dish->DeleteDishList(kitchen);
 }
 
 void Belongings::Update()

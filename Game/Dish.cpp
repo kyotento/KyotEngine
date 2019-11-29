@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Dish.h"
-
+#include "Kitchen.h"
 
 Dish::Dish()
 {
@@ -11,6 +11,7 @@ Dish::Dish()
 
 Dish::~Dish()
 {
+//	DeleteGO(m_skinModelRender);
 }
 
 bool Dish::Start()
@@ -52,7 +53,7 @@ void Dish::DishModelChange()
 		}
 	}
 
-	m_oldDishState = m_dishState;			//代入。
+	m_oldDishState = m_dishState;			//お皿の状態を代入。
 }
 
 //お皿リストにお皿を追加する。
@@ -64,11 +65,17 @@ void Dish::AddDishList()
 	m_dishList.back()->SetPosition(m_position);								//座標を指定。
 }
 
-void Dish::DeleteDishList()
+void Dish::DeleteDishList(Kitchen* kitchen)
 {
-	m_dishListNum -= 1;					//お皿の数を減らす。
-	DeleteGO(m_dishList.back());		//一番最後に生成したお皿を消す。
-	m_dishList.pop_back();				//一番最後のリストの要素が消える。
+	if (m_dishListNum > 0) {				//お皿リストの数が２個以上のとき。
+		m_dishListNum -= 1;					//お皿の数を減らす。
+		DeleteGO(m_dishList.back());		//一番最後に生成したお皿を消す。
+		m_dishList.pop_back();				//一番最後のリストの要素が消える。
+	}
+	else{
+		kitchen->DeleteDishInstance();		//お皿のインスタンスを消す。
+		DeleteGO(this);						//お皿をクラスごと消す。
+	}
 }
 
 void Dish::Update()

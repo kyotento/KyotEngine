@@ -1,6 +1,11 @@
 #include "stdafx.h"
 #include "Player.h"
 
+namespace {
+	const float playerCollidedRadius = 45.f;			//カプセルコライダーの半径。
+	const float playerCollidedHeight = 50.f;			//カプセルコライダーの高さ。
+}
+
 Player::Player()
 {
 	m_skinModelRender = NewGO<SkinModelRender>(0, "skinmodel");
@@ -12,7 +17,7 @@ Player::Player()
 	m_animationClips[enanimationClip_RunHave].Load(L"Assets/animData/chef_runHave.tka");		//物を持った状態で移動。
 
 	//キャラコンの初期化。
-	m_characon.Init(45.f, 50.f, m_characonPos);
+	m_characon.Init(playerCollidedRadius, playerCollidedHeight, m_characonPos);
 }
 
 Player::~Player()
@@ -145,11 +150,11 @@ void Player::CollideToObject(btCollisionWorld::ClosestRayResultCallback rayRC, i
 				//todo 絶　仮 実際は汚れたお皿があるとき。
 				if (g_pad[0].IsPress(enButtonX))
 				{
-					if (m_playerState != enIdleHave && m_playerState != enRunHave) {
-						m_playerState = enWashing;
-						m_objectAbove->TakeThingsDirtyDish(m_cacth);
-						m_kitchen->SetDishDirtyInstance((DishDirty*)m_cacth);
-						m_kitchen->DishWashing();
+					if (m_toHave == false) {			//プレイヤーが何も持っていないとき。
+						m_playerState = enWashing;			//プレイヤーの状態を洗っている状態に。
+						m_objectAbove->TakeThingsDirtyDish(m_cacth);			//乗っている汚れたオブジェクトを検索してm_cactcに。
+						m_kitchen->SetDishDirtyInstance((DishDirty*)m_cacth);			//汚れたお皿のインスタンスを設定。
+						m_kitchen->DishWashing();			//お皿を洗う関数を呼び出し。
 					}
 				}
 			}
@@ -329,9 +334,9 @@ void Player::NoRidePutKichenWares()
 {
 	if (userIndexNum == ObjectAbove::enDesk || userIndexNum == ObjectAbove::enGasStove ||
 		userIndexNum == ObjectAbove::enOnionBox || userIndexNum == ObjectAbove::enTomatoBox) {		//調理器具が置けるオブジェクトかどうか。
-		m_objectAbove->PutThings(m_belongings);		//設置物の座標にオブジェクトの座標を代入。
-		m_objectAbove->SetState(ObjectAbove::en_onObject);					//物を置いたオブジェクトのステートを変更する。
-		m_playerState = enIdle;							//プレイヤーのステートを待機状態に。
+		m_objectAbove->PutThings(m_belongings);							//設置物の座標にオブジェクトの座標を代入。
+		m_objectAbove->SetState(ObjectAbove::en_onObject);				//物を置いたオブジェクトのステートを変更する。
+		m_playerState = enIdle;											//プレイヤーのステートを待機状態に。
 	}
 }
 
@@ -339,29 +344,27 @@ void Player::NoRidePutKichenWares()
 void Player::NoRidePutDishs()
 {
 	if (userIndexNum == ObjectAbove::enDesk || userIndexNum == ObjectAbove::enOnionBox ||
-		userIndexNum == ObjectAbove::enTomatoBox) {			//お皿が置けるオブジェクトかどうか。
-		m_objectAbove->PutThings(m_belongings);				//設置物の座標にオブジェクトの座標を代入。
+		userIndexNum == ObjectAbove::enTomatoBox) {					//お皿が置けるオブジェクトかどうか。
+		m_objectAbove->PutThings(m_belongings);						//設置物の座標にオブジェクトの座標を代入。
 		m_objectAbove->SetState(ObjectAbove::en_onObject);			//物を置いたオブジェクトのステートを変更する。
-		m_playerState = enIdle;								//プレイヤーの状態を待機状態に。
+		m_playerState = enIdle;										//プレイヤーの状態を待機状態に。
 	}
 
-	if (userIndexNum == ObjectAbove::enDelivery) {			//受け渡し口のとき。
-		m_objectAbove->PutThings(m_belongings);				//設置物の座標にオブジェクトの座標を代入。
-		DeleteGO(m_belongings);								//お皿を消す。
+	if (userIndexNum == ObjectAbove::enDelivery) {					//受け渡し口のとき。
+		m_objectAbove->PutThings(m_belongings);						//設置物の座標にオブジェクトの座標を代入。
+		DeleteGO(m_belongings);										//お皿を消す。
 		m_objectAbove->SetState(ObjectAbove::en_onObject);			//受け渡し口の状態を変更する。
-		m_playerState = enIdle;								//プレイヤーの状態を待機状態に。
+		m_playerState = enIdle;										//プレイヤーの状態を待機状態に。
 	}
-
-
 }
 
 //何も乗っていないときに汚れたお皿を置く処理。
 void Player::NoRidePutDirtyDishs()
 {
-	if (userIndexNum == ObjectAbove::enKitchen) {			//お皿洗い場のとき。
+	if (userIndexNum == ObjectAbove::enKitchen) {					//お皿洗い場のとき。
 		m_objectAbove->SetDirtyDishPos(m_belongings);				//設置物の座標にオブジェクトの座標を代入。
 		m_objectAbove->SetState(ObjectAbove::en_onObject);			//お皿洗い場の状態を変更する。
-		m_playerState = enIdle;								//プレイヤー状態を待機状態に。
+		m_playerState = enIdle;										//プレイヤー状態を待機状態に。
 
 	}
 }
@@ -468,15 +471,15 @@ void Player::PickUpObjects(int controllerNum)
 					m_objectAbove->TakeThings(m_belongings);
 
 					if (m_belongings != nullptr) {				//持つことのできるオブジェクトがあるとき。(汚れたお皿以外)。
+
 						//乗っているものがお皿のとき。
 						if (m_belongings->GetIndentValue() == Belongings::enDish) {
-							m_objectAbove->TakeThings(m_belongings);	//乗っているオブジェクトを検索。
-							m_cacth = m_belongings;
-							m_belongings->PutDishFromKitchen(m_cacth);
-							m_belongings = NewGO<Dish>(0, "dish");
-						//	m_objectAbove->SetState(ObjectAbove::en_default);					//物をとったオブジェクトのステートを変更する。
-							m_toHave = true;							//物を持つフラグ。
-							m_playerState = enIdleHave;					//ステート変更。
+							m_objectAbove->TakeThings(m_belongings);		//乗っているオブジェクトを検索。
+							m_cacth = m_belongings;							//一度m_cacthに避難。
+							m_belongings->PutDishFromKitchen(m_cacth, (Kitchen*)m_objectAbove);		//お皿を一つとる。
+							m_belongings = NewGO<Dish>(0, "dish");			//新しくお皿を生成する。
+							m_toHave = true;								//物を持つフラグ。
+							m_playerState = enIdleHave;						//ステート変更。
 						}
 					}
 				}

@@ -98,7 +98,7 @@ public:
 	/// 平行投影か射法投影にするかを決める。
 	/// </summary>
 	/// <param name="a">a = 0 = 射法投影。 a = true = 平行投影</param>
-	void SetUpdateCameraMatrix(float a)
+	void SetUpdateCameraMatrix(bool a)
 	{
 		if (a) {
 			m_UpdateCameraMatrix = enUpdateProjMatrixFunc_Ortho;

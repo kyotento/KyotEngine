@@ -61,8 +61,8 @@ void Sprite::InitVertexBuffer(float w, float h)
 
 	//座標の設定。
 
-	float halfH = w * 0.5f;
-	float halfW = h * 0.5f;
+	float halfW = w * 0.5f;
+	float halfH = h * 0.5f;
 	SVertex vertex[4] = {
 		//頂点１
 		{
@@ -227,7 +227,7 @@ void Sprite::BlendState()
 		{
 			D3D11_RASTERIZER_DESC desc = {};
 			ID3D11Device* pd3d = g_graphicsEngine->GetD3DDevice();
-			desc.CullMode = D3D11_CULL_FRONT;
+			desc.CullMode = D3D11_CULL_NONE;
 			desc.FillMode = D3D11_FILL_SOLID;
 			desc.DepthClipEnable = true;
 			desc.MultisampleEnable = true;
@@ -301,7 +301,14 @@ void Sprite::Init(ID3D11ShaderResourceView* srv, float w, float h)
 	if (m_texture != nullptr) {
 		m_texture->AddRef();
 	}
+	//定数バッファを初期化。
+	InitConstantBuffer();
 
+	//ブレンドステート。
+	BlendState();
+
+	//ラスタライザステート。
+	RasterizerState();
 }
 
 //Init関数。テクスチャロード。

@@ -17,6 +17,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	g_camera3D.SetTarget({ 0.0f, 0.0f, 0.0f });
 	g_camera3D.SetFar(10000.0f);
 	
+	camera2d.SetPosition({0.0f, 0.0f, -100.0f});
+	camera2d.SetTarget({ 0.0f, 0.0f, 0.0f });
 	//ÉvÉåÉCÉÑÅ[
 	/*Player player;*/
 	NewGO<Game>(0, "game");

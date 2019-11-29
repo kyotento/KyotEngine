@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "GameObjectManager.h"
 
-//#define USE_MAIN_RT		//定義するとメインレンダリングターゲットが使われる。
+#define USE_MAIN_RT		//定義するとメインレンダリングターゲットが使われる。
 
 GameObjectManager::GameObjectManager()
 {
@@ -128,7 +128,8 @@ void GameObjectManager::Execute()
 #endif
 
 	//m_mainRenderTargetをレンダリングターゲット。
-	
+	m_copyMainRtToFrameBufferSprite.Update(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
+	camera2d.Update();
 	m_copyMainRtToFrameBufferSprite.Draw(&camera2d);
 	//２Dのレンダリング。
 

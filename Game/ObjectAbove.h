@@ -107,7 +107,7 @@ public:
 		enOnionBox,					//玉ねぎボックス。			
 		enTomatoBox,				//トマトボックス。
 		enCuttingDesk,				//まな板。
-		enNumberOfObjectAbove		//持てる物の種類の数。
+		enNumberOfObjectAbove		//持てる物の種類の数。追加するときはこの上に足す。
 	};
 
 

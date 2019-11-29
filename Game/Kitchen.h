@@ -18,6 +18,11 @@ public:
 	void DishWashing();
 
 	/// <summary>
+	/// お皿のインスタンスを消去する。
+	/// </summary>
+	void DeleteDishInstance();
+
+	/// <summary>
 	/// 外部から汚れたお皿のインスタンスを設定する関数。
 	/// </summary>
 	/// <param name="dishDirty">お皿のインスタンス</param>

@@ -1,6 +1,7 @@
 #pragma once
 #include "Belongings.h"
 #include "Cuisine.h"
+
 class Dish : public Belongings
 {
 public:
@@ -21,14 +22,14 @@ public:
 	void DishModelChange();
 
 	/// <summary>
-	///	お皿リストにお皿を追加する処理。
+	///	お皿リストに二つ目以降のお皿を追加する処理。
 	/// </summary>
 	void AddDishList();
 
 	/// <summary>
 	/// お皿リストのお皿を消す処理。
 	/// </summary>
-	void DeleteDishList();
+	void DeleteDishList(Kitchen* kitchen);
 
 	/// <summary>
 	/// お皿の状態。
@@ -84,6 +85,7 @@ private:
 	DishState m_oldDishState = endefault;		//お皿の状態(1フレーム前)。
 
 	Cuisine* m_cuisine = nullptr;				//お料理。
+	Kitchen* m_kitchen = nullptr;				//お皿洗い場。
 
 
 	typedef std::list<SkinModelRender*>DishList;			//お皿を重ねるためのリスト。
