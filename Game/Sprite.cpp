@@ -208,7 +208,7 @@ void Sprite::BlendState()
 				ZeroMemory(&desc, sizeof(desc));
 				ID3D11Device* pd3d = g_graphicsEngine->GetD3DDevice();
 				desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-				desc.DepthFunc = D3D11_COMPARISON_LESS;
+				desc.DepthFunc = D3D11_COMPARISON_LESS_EQUAL;			//[“x‚ª“¯’l‚©‚»‚êˆÈ‰º‚È‚ç•`‰æ‚·‚éB
 				desc.DepthEnable = true;
 				desc.StencilEnable = false;
 				pd3d->CreateDepthStencilState(&desc, &zspriteRender);

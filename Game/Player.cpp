@@ -147,7 +147,6 @@ void Player::CollideToObject(btCollisionWorld::ClosestRayResultCallback rayRC, i
 
 				m_kitchen = (Kitchen*)rayRC.m_collisionObject->getUserPointer();
 
-				//todo 絶　仮 実際は汚れたお皿があるとき。
 				if (g_pad[0].IsPress(enButtonX))
 				{
 					if (m_toHave == false) {			//プレイヤーが何も持っていないとき。
@@ -386,28 +385,24 @@ void Player::PutObjects(int controllerNum)
 				if (m_belongings->GetIndentValue() == Belongings::enFood) {	
 
 					NoRidePutFoods();
-
 				}
 
 				//持っているものが調理器具の場合。
 				if (m_belongings->GetIndentValue() == Belongings::enKitchenWare) {		
 
 					NoRidePutKichenWares();
-
 				}
 
 				//持っているものがお皿の場合。
 				if (m_belongings->GetIndentValue() == Belongings::enDish) {
 
 					NoRidePutDishs();
-
 				}
 
 				//持っているものが汚れたお皿のとき。
 				if (m_belongings->GetIndentValue() == Belongings::enDirtyDish) {
 
 					NoRidePutDirtyDishs();
-
 				}
 			}
 
@@ -419,12 +414,22 @@ void Player::PutObjects(int controllerNum)
 					if (m_belongings->GetFoodState() == Belongings::enCutting) {			//持っているオブジェクトが切られているとき。
 						m_objectAbove->TakeThings(m_cacth);			//乗っているオブジェクトを検索する。
 						if (m_cacth->GetIndentValue() == Belongings::enKitchenWare) {			//乗っているものが調理器具だった場合。
-							//todo 絶　持っているものを <条件付き> で消す。
-						//	if (m_cacth == m_tomato) {
+							if ( m_cacth->GetPotState() == Belongings::enZero) {			//お鍋に何も入ってないとき。
+								m_cacth->SetPotFoodType(m_cacth, m_belongings->GetFoodTypeState());			//お鍋に入れる食べ物を設定する。
 								m_cacth->SetSoupBase(m_cacth);				//鍋にスープを入れる(それっぽいオブジェクトの生成)処理。
 								DeleteGO(m_belongings);						//持っているものを消す。
 								m_playerState = enIdle;						//状態を待機状態に変更。
-						//	}
+							}
+
+							else {
+								if (m_cacth->GetPotFoosType(m_cacth) == m_belongings->GetFoodTypeState()) {			//お鍋の中身と持っている食べ物の種類が同じとき。
+									if (m_cacth->GetPotState() == Belongings::enOne || m_cacth->GetPotState() == Belongings::enTwo) {		//お鍋にまだ食べ物が入る状態のとき。
+										m_cacth->SetSoupBase(m_cacth);				//鍋にスープを入れる(それっぽいオブジェクトの生成)処理。
+										DeleteGO(m_belongings);						//持っているものを消す。
+										m_playerState = enIdle;						//状態を待機状態に変更。
+									}
+								}
+							}
 						}
 					}
 				}
@@ -436,11 +441,11 @@ void Player::PutObjects(int controllerNum)
 						if (m_cacth->GetPotState() == Belongings::enComplete) {				//乗っているものの状態が完成状態だった時。
 							//todo 絶　一瞬スープの中身が初期座標に行くのを直す。
 							m_cacth->DeleteSoup(m_cacth);
+							m_cacth->GetFoodTypeState();
 							m_belongings->PutDishs(m_belongings);
 						}
 					}
 				}
-
 			}
 		}
 		//todo メモ　ここのコメントを外すとどこにでも食べ物を置くことができる。

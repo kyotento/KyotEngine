@@ -14,6 +14,12 @@ public:
 	bool Start();
 	void Update();
 
+	/// <summary>
+	/// 生成するスープを決定する。
+	/// </summary>
+	/// <param name="FoodType">食べ物の種類</param>
+	void DecideTheSoupType(int FoodType);
+
 	//座標を指定。
 	CVector3 SetPositon(CVector3 pos)
 	{

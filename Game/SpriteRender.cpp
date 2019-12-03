@@ -50,4 +50,5 @@ void SpriteRender::PostRender()
 	{
 		m_sprite.Draw(&camera2d);
 	}
+
 }

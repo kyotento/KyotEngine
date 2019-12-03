@@ -101,7 +101,7 @@ void GameObjectManager::Execute()
 	oldDepthStencilView->Release();
 #endif
 	//メインレンダリングターゲットをクリアする。
-	float clearColor[] = { 0.2f, 0.2f, 0.2f, 1.0f };
+	float clearColor[] = { 0.8f, 0.8f, 0.8f, 1.0f };
 	m_mainRenderTarget.ClearRenderTarget(clearColor);
 
 	//３Dレンダリング。
@@ -131,6 +131,7 @@ void GameObjectManager::Execute()
 	//m_mainRenderTargetをレンダリングターゲット。
 	m_copyMainRtToFrameBufferSprite.Update(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
 	camera2d.Update();
+
 	m_copyMainRtToFrameBufferSprite.Draw(&camera2d);
 
 	//２Dのレンダリング。
@@ -141,6 +142,7 @@ void GameObjectManager::Execute()
 			object->PostRenderWrapper();
 		}
 	}
+
 
 	g_graphicsEngine->EndRender();
 

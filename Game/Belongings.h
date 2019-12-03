@@ -38,7 +38,11 @@ public:
 	/// スープっぽいオブジェクトを生成する。
 	/// </summary>
 	/// <param name="belongings">置いてある持てるもの</param>
-	void SetSoupBase(Belongings* belongings);
+	void SetSoupBase(Belongings* puttingBelongings);
+
+	int GetPotFoosType(Belongings* pot);
+
+	void SetPotFoodType(Belongings* pot,int foodType);
 
 	/// <summary>
 	/// スープを消す処理。

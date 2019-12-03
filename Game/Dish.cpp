@@ -27,8 +27,8 @@ bool Dish::Start()
 void Dish::PutDish()
 {
 	m_cuisine = NewGO<Cuisine>(0, "cuisine");			//料理クラスをNewする。
-	m_cuisine->NewSoup();								//スープを生成する。
 	m_cuisine->SetPosition(m_position);					//スープの座標を更新する。
+	m_cuisine->NewSoup();								//スープを生成する。
 }
 
 //状態変化によるモデルの変更。

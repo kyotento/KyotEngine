@@ -223,10 +223,12 @@ protected:
 	Skeleton* m_skelton = nullptr;				//サンズ(スケルトン)。
 	Belongings* m_belongings = nullptr;			//持つことができるもの。
 	Belongings* m_cacth = nullptr;				//物を置くことのできるオブジェクトに乗ってある、持つことのできるオブジェクトを検索したものを格納するためのもの。
+	Belongings* m_putSoup = nullptr;
 	Tomato* m_tomato = nullptr;					//トマト。
 	ObjectAbove* m_objectAbove = nullptr;		//物を置くことができるオブジェクト。
 	Gauge* m_gauge = nullptr;					//ゲージ。
 	SoupBase* m_soupBase = nullptr;				//スープ。
+
 
 private:
 
