@@ -79,6 +79,34 @@ public:
 	}
 
 	/// <summary>
+	/// 食べ物の種類。
+	/// </summary>
+	enum FoodTypeState
+	{
+		enTomato,			//トマト。
+		enOnion,			//玉ねぎ。
+		enFoodTypeNum		//食べ物の種類の数。
+	};
+
+	/// <summary>
+	/// 食べ物の種類を設定する。
+	/// </summary>
+	/// <param name="foodTypeState">食べ物の種類</param>
+	void SetFoodTypeState(FoodTypeState foodTypeState)
+	{
+		m_foodTypeState = static_cast<FoodTypeState>(foodTypeState);
+	}
+
+	/// <summary>
+	/// 食べ物の種類を取得する。
+	/// </summary>
+	/// <returns>食べ物の種類</returns>
+	int GetFoodTypeState()
+	{
+		return m_foodTypeState;
+	}
+
+	/// <summary>
 	/// オブジェクトがどの系統に属するか。
 	/// </summary>
 	enum IdentificationValue
@@ -118,6 +146,8 @@ protected:
 	IdentificationValue m_identification = enFood;		//オブジェクト系統の設定。(各クラスのコンストラクタで設定してあげる必要がある)。
 
 	state m_foodState = enPutting;			//食べ物の状態。
+
+	FoodTypeState m_foodTypeState = enTomato;			//食べ物の種類。
 
 	PotState m_potState = enZero;			//鍋の状態を格納したもの。
 

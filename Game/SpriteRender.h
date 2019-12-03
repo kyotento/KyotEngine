@@ -82,7 +82,7 @@ public:
 	/// <summary>
 	/// XVˆ—B
 	/// </summary>
-	void Render()override;
+	void PostRender()override;
 
 private:
 	Camera::EnUpdateProjMatrixFunc m_projMatrixFunc = Camera::enUpdateProjMatrixFunc_Ortho;

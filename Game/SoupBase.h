@@ -3,6 +3,7 @@
 /// </summary>
 #pragma once
 #include "StageObject.h"
+#include "Belongings.h"
 
 class SoupBase : public StageObject
 {

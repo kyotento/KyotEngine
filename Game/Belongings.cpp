@@ -23,7 +23,7 @@ bool Belongings::Start()
 void Belongings::SetSoupBase(Belongings* belongings)
 {
 	Pot* pot = (Pot*)belongings;		//どのPotか検索をかける。	
-	pot->Soup();				//スープの素を生成する。	
+	pot->Soup(belongings);				//スープの素を生成する。	
 }
 
 //スープを消す処理。

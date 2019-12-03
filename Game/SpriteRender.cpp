@@ -20,21 +20,21 @@ void SpriteRender::Init(const wchar_t* textureFilePath, float w, float h, bool i
 	
 }
 
-void SpriteRender::Render()
+void SpriteRender::PostRender()
 {
+	//画像の更新処理。	
 	m_sprite.Update(m_position, m_rotation, m_scale, m_pivot);
 
-
-	if (m_Draw3D == true)
+	if (m_Draw3D == true)			//3D空間上に描画するとき。
 	{
-		Camera::EnUpdateProjMatrixFunc m_projMatrixFunc = Camera::enUpdateProjMatrixFunc_Perspective;
+		/*Camera::EnUpdateProjMatrixFunc*/ m_projMatrixFunc = Camera::enUpdateProjMatrixFunc_Perspective;
 		/*m_camera.SetUpdateCameraMatrix(false);*/
 
 	}
 
-	if (m_Draw3D == false)
+	if (m_Draw3D == false)			//2D空間上に描画するとき。
 	{
-		Camera::EnUpdateProjMatrixFunc m_projMatrixFunc = Camera::enUpdateProjMatrixFunc_Ortho;
+		/*Camera::EnUpdateProjMatrixFunc*/ m_projMatrixFunc = Camera::enUpdateProjMatrixFunc_Ortho;
 /*
 		camera2d.m_UpdateCameraMatrix*/
 		camera2d.SetUpdateCameraMatrix(true);

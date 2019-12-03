@@ -6,6 +6,8 @@ Onion::Onion()
 {
 	//H‚×•¨‚Æ¯•Ê‚³‚ê‚éB
 	m_identification = enFood;
+	//‹Ê‚Ë‚¬‚¾‚æB
+	m_foodTypeState = enOnion;
 }
 
 

@@ -17,14 +17,14 @@ bool Gauge::Start()
 {
 	//ゲージ基盤。
 	m_spriteRender = NewGO<SpriteRender>(3, "sprite");
-	m_spriteRender->Init(L"Assets/sprite/gauge_sheet.dds", 18, 72, true);
+	m_spriteRender->Init(L"Assets/sprite/gauge_sheet.dds", 72, 18, true);
 	m_spriteRender->SetPosition(m_position);
 	m_spriteRender->SetScale({1.f,1.f,1.f});
 	m_spriteRender->SetPivot(m_pivot);
 
 	//ゲージ。
 	m_spriteRenderGauge = NewGO<SpriteRender>(2, "sprite");
-	m_spriteRenderGauge->Init(L"Assets/sprite/gauge.dds", 16, 66, true);
+	m_spriteRenderGauge->Init(L"Assets/sprite/gauge.dds", 66, 16, true);
 	m_spriteRenderGauge->SetPosition(m_position);
 	m_spriteRenderGauge->SetScale({ m_x,1.f,1.f });
 	m_spriteRenderGauge->SetPivot(m_pivot);

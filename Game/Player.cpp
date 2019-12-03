@@ -420,9 +420,11 @@ void Player::PutObjects(int controllerNum)
 						m_objectAbove->TakeThings(m_cacth);			//乗っているオブジェクトを検索する。
 						if (m_cacth->GetIndentValue() == Belongings::enKitchenWare) {			//乗っているものが調理器具だった場合。
 							//todo 絶　持っているものを <条件付き> で消す。
-							m_cacth->SetSoupBase(m_cacth);				//鍋にスープを入れる(それっぽいオブジェクトの生成)処理。
-							DeleteGO(m_belongings);						//持っているものを消す。
-							m_playerState = enIdle;						//状態を待機状態に変更。
+						//	if (m_cacth == m_tomato) {
+								m_cacth->SetSoupBase(m_cacth);				//鍋にスープを入れる(それっぽいオブジェクトの生成)処理。
+								DeleteGO(m_belongings);						//持っているものを消す。
+								m_playerState = enIdle;						//状態を待機状態に変更。
+						//	}
 						}
 					}
 				}

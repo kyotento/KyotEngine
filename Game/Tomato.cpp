@@ -6,6 +6,8 @@ Tomato::Tomato()
 {
 	//食べ物と識別される。
 	m_identification = enFood;
+	//トマトだよ。
+	m_foodTypeState = enTomato;
 }
 
 

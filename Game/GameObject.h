@@ -53,6 +53,14 @@ public:
 
 	}
 
+	/// <summary>
+	/// 2Dの描画処理。
+	/// </summary>
+	virtual void PostRender()
+	{
+
+	}
+
 
 	/// <summary>
 	/// 死亡フラグを立てる。※エンジン外での実行禁止。
@@ -205,6 +213,14 @@ public:
 		if (m_activeflag && m_startflag && !m_deadflag && !m_isRegistDeadList)
 		{
 			Render();
+		}
+	}
+
+	void PostRenderWrapper()
+	{
+		if (m_activeflag && m_startflag && !m_deadflag && !m_isRegistDeadList)
+		{
+			PostRender();
 		}
 	}
 

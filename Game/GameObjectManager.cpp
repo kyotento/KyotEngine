@@ -103,6 +103,7 @@ void GameObjectManager::Execute()
 	//メインレンダリングターゲットをクリアする。
 	float clearColor[] = { 0.2f, 0.2f, 0.2f, 1.0f };
 	m_mainRenderTarget.ClearRenderTarget(clearColor);
+
 	//３Dレンダリング。
 	//通常レンダリング。
 	for (GameObjectList objList : m_gameObjectListArray)
@@ -131,8 +132,15 @@ void GameObjectManager::Execute()
 	m_copyMainRtToFrameBufferSprite.Update(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
 	camera2d.Update();
 	m_copyMainRtToFrameBufferSprite.Draw(&camera2d);
-	//２Dのレンダリング。
 
+	//２Dのレンダリング。
+	for (GameObjectList objList : m_gameObjectListArray)
+	{
+		for (GameObject* object : objList)
+		{
+			object->PostRenderWrapper();
+		}
+	}
 
 	g_graphicsEngine->EndRender();
 

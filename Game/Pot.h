@@ -18,7 +18,7 @@ public:
 	/// <summary>
 	/// スープが投入されたときの処理。
 	/// </summary>
-	void Soup();
+	void Soup(Belongings* belongings);
 
 	/// <summary>
 	/// スープを消す処理。
@@ -33,5 +33,6 @@ private:
 
 	SoupBase* m_soupBase = nullptr;			//スープ部分。
 	Gauge* m_gauge = nullptr;				//ゲージ。
+	Belongings* m_food = nullptr;			//食べ物。
 
 };
