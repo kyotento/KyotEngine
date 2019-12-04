@@ -207,10 +207,11 @@ void Player::ForwardDirectionRay(int controllerNum)
 	m_objectAbove = nullptr;		//物を置くとNullになる。
 
 	CVector3 m_movesecond;							//rayの長さ。
+	m_move.Normalize();								//正規化し、方向だけを取得する。
 	m_movesecond = m_move * m_distance;				//rayの長さを設定。
-	btVector3 start(m_position.x, m_position.y + 10, m_position.z);		//btVector3型に変換。
+	btVector3 start(m_position.x, m_position.y + 10, m_position.z);		//rayの始点をbtVector3型に変換。
 	m_ray = { m_position.x + m_movesecond.x , m_position.y + m_movesecond.y, m_position.z + m_movesecond.z };		//rayの終点を指定。
-	btVector3 end(m_ray.x, m_ray.y + 10, m_ray.z);						//btVector3型に変換。
+	btVector3 end(m_ray.x, m_ray.y + 10, m_ray.z);						//rayの終点をbtVector3型に変換。
 
 	if (m_movesecond.Length() > m_noLongerZero) {			//rayの長さが０以上のとき。
 		btCollisionWorld::ClosestRayResultCallback rayRC(start, end);	//rayRCに情報が入っている。
@@ -226,7 +227,6 @@ void Player::ForwardDirectionRay(int controllerNum)
 //プレイヤーの状態による動作処理。
 void Player::ActionProcessing(int controllerNum)
 {
-
 	switch (m_playerState)
 	{
 	case enIdle:		//待機状態のとき。
