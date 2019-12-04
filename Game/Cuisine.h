@@ -14,7 +14,7 @@ public:
 	void Update();
 
 	//スープを生成する処理。
-	void NewSoup();
+	void NewSoup(int FoodType);
 
 private:
 

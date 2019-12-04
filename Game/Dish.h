@@ -14,7 +14,7 @@ public:
 	/// <summary>
 	/// 料理の管理。
 	/// </summary>
-	void PutDish();
+	void PutDish(int FoodType);
 
 	/// <summary>
 	/// 状態変化によるモデルの変更。

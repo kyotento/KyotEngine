@@ -182,7 +182,7 @@ void Sprite::InitConstantBuffer()
 
 }
 
-//ブレンドステート。
+//ブレンドステート。レンダリングの際にそれがどのように描画されるかを定義する。
 void Sprite::BlendState()
 {
 	//ブレンドステートオブジェクトの作成。
@@ -358,7 +358,7 @@ void Sprite::Draw(Camera* camera)
 
 	unsigned int vertexSize = sizeof(SVertex);
 	unsigned int offset = 0;
-	GraphicsEngine* ge = g_graphicsEngine;
+	GraphicsEngine* ge = g_graphicsEngine;				//グラフィックエンジン。
 	ge->GetD3DDeviceContext()->IASetVertexBuffers(
 		0,
 		1,
@@ -366,6 +366,7 @@ void Sprite::Draw(Camera* camera)
 		&vertexSize,
 		&offset
 	);
+
 	ge->GetD3DDeviceContext()->IASetIndexBuffer(
 		m_indexBuffer,
 		DXGI_FORMAT_R32_UINT,

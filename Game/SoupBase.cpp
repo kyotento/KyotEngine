@@ -18,6 +18,7 @@ bool SoupBase::Start()
 	return true;
 }
 
+//生成するスープを決める処理。
 void SoupBase::DecideTheSoupType(int FoodType)
 {
 	if (FoodType == Belongings::enTomato){

@@ -46,10 +46,10 @@ void Belongings::SetPotFoodType(Belongings* powt, int fooType)
 }
 
 //お皿に食べ物を置く処理。
-void Belongings::PutDishs(Belongings* belongings)
+void Belongings::PutDishs(Belongings* belongings ,int FoodType)
 {
 	Dish* dish = (Dish*)belongings;
-	dish->PutDish();
+	dish->PutDish(FoodType);
 }
 
 // お皿洗い場の重ねてあるお皿からお皿を一つとる処理。

@@ -101,8 +101,9 @@ void GameObjectManager::Execute()
 	oldDepthStencilView->Release();
 #endif
 	//メインレンダリングターゲットをクリアする。
-	float clearColor[] = { 0.8f, 0.8f, 0.8f, 1.0f };
-	m_mainRenderTarget.ClearRenderTarget(clearColor);
+
+	float clearColor[] = { 0.6f, 0.8f, 1.0f, 1.0f };			//背景色。(今はパステルブルー)。
+	m_mainRenderTarget.ClearRenderTarget(clearColor);			//背景を決めた色に。
 
 	//３Dレンダリング。
 	//通常レンダリング。

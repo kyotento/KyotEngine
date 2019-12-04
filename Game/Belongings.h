@@ -54,7 +54,7 @@ public:
 	///	お皿に食べ物を置く処理。
 	/// </summary>
 	/// <param name="belongings">持てるもの</param>
-	void PutDishs(Belongings* belongings);
+	void PutDishs(Belongings* belongings,int FoodType);
 
 	/// <summary>
 	/// お皿洗い場の重ねてあるお皿からお皿を一つとる処理。
@@ -96,7 +96,7 @@ public:
 	/// 食べ物の種類を設定する。
 	/// </summary>
 	/// <param name="foodTypeState">食べ物の種類</param>
-	void SetFoodTypeState(FoodTypeState foodTypeState)
+	void SetFoodTypeState(int foodTypeState)
 	{
 		m_foodTypeState = static_cast<FoodTypeState>(foodTypeState);
 	}

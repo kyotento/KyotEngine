@@ -44,7 +44,7 @@ void Pot::Soup()
 
 	if (m_potState == enZero) {							//ポットに何も入っていないとき。
 		m_soupBase = NewGO<SoupBase>(0, "soup");		//スープの部分を生成する。
-		m_soupBase->DecideTheSoupType(m_putSoupFoods);
+		m_soupBase->DecideTheSoupType(m_putSoupFoods);	//生成するスープを決める。
 		m_potState = enOne;								//ポットに食べ物が一つ入っている状態に。
 		m_gauge = NewGO<Gauge>(0, "gauge");				//ゲージを生成する。
 		m_gauge->SetPosition(m_position);				//ゲージの座標を指定。

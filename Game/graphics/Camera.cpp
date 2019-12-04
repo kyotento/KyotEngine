@@ -3,7 +3,7 @@
 
 Camera g_camera3D;		//3Dカメラ。
 
-Camera camera2d;
+Camera camera2d;		//2Dカメラ。
 
 void Camera::Update()
 {
