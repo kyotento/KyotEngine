@@ -120,7 +120,7 @@ public:
 	}
 
 private:
-	CMatrix	m_viewMatrix = CMatrix::Identity();		//ビュー行列。
+	CMatrix	m_viewMatrix = CMatrix::Identity();		//ビュー行列。実は逆。
 	CMatrix m_projMatrix = CMatrix::Identity();		//プロジェクション行列。
 	CVector3 m_target = { 0.f,0.f,10.f };			//注視点。
 	CVector3 m_position = CVector3::Zero();			//視点。

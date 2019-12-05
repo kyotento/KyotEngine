@@ -272,6 +272,7 @@
     <MeshContentTask Include="Assets\modelData\Food\Tomato\Tomato.FBX" />
     <MeshContentTask Include="Assets\modelData\Food\Tomato\TomatoCutting.FBX" />
     <MeshContentTask Include="Assets\modelData\Gas_stove\gas_stove.FBX" />
+    <MeshContentTask Include="Assets\modelData\karikkari.FBX" />
     <MeshContentTask Include="Assets\modelData\kari_floor.FBX" />
     <MeshContentTask Include="Assets\modelData\kitchen\kitchen.FBX" />
     <MeshContentTask Include="Assets\modelData\Knife\Knife.FBX" />

@@ -11,7 +11,7 @@ Pot::Pot()
 
 Pot::~Pot()
 {
-	DeleteGO(m_skinModelRender);
+//	DeleteGO(m_skinModelRender);
 }
 
 
@@ -20,7 +20,7 @@ bool Pot::Start()
 	m_skinModelRender->Init(L"Assets/modelData/Pot/Pot.cmo");		//初期化、
 	m_skinModelRender->SetPosition(m_position);						//座標指定。
 
-	m_soupPos = m_position;
+	m_soupPos = m_position;			//スープの座標をお鍋の座標に代入。
 
 	return true;
 }
@@ -72,7 +72,7 @@ void Pot::Update()
 
 	if (m_gauge != nullptr) {							//ゲージが生成されていたら。
 		m_gauge->SetPosition(m_gaugePos);				//ゲージの座標を指定。	
-	//	m_gauge->Expansion();							//ゲージの拡大処理。
+		m_gauge->Expansion(0.1);						//ゲージの拡大処理。
 	}
 
 }

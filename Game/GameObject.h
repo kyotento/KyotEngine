@@ -61,6 +61,14 @@ public:
 
 	}
 
+	/// <summary>
+	/// 3D空間上に描画する2D。
+	/// </summary>
+	virtual void RenderAfterPostEffect()
+	{
+
+	}
+
 
 	/// <summary>
 	/// 死亡フラグを立てる。※エンジン外での実行禁止。
@@ -216,11 +224,25 @@ public:
 		}
 	}
 
+	/// <summary>
+	/// PostRenderを使うときのフィルター。
+	/// </summary>
 	void PostRenderWrapper()
 	{
 		if (m_activeflag && m_startflag && !m_deadflag && !m_isRegistDeadList)
 		{
 			PostRender();
+		}
+	}
+
+	/// <summary>
+	/// RenderAfterPostEffectを使うときのフィルター。
+	/// </summary>
+	void RenderAfterPostEffectWrapper()
+	{
+		if (m_activeflag && m_startflag && !m_deadflag && !m_isRegistDeadList)
+		{
+			RenderAfterPostEffect();
 		}
 	}
 

@@ -396,6 +396,7 @@ void Sprite::Draw(Camera* camera)
 	g_graphicsEngine->GetD3DDeviceContext()->PSSetShaderResources(0, 1, &m_texture);
 	g_graphicsEngine->GetD3DDeviceContext()->PSSetSamplers(0, 1, &m_samplerState);
 	g_graphicsEngine->GetD3DDeviceContext()->RSSetState(rspriteRender);
+	//g_graphicsEngine->GetD3DDeviceContext()->OMSetDepthStencilState(spriteRender, 0);
 	//deviceContext->RSSetState(rasterizerState);
 
 	/*a = m_camera.GetSetUpdateCameraMatrix();*/

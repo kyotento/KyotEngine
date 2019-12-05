@@ -24,13 +24,18 @@ Player::~Player()
 {
 	DeleteGO(m_skinModelRender);
 }
-
+SkinModelRender* m_skinModelRender2;
 bool Player::Start()
 {
 	m_skinModelRender->Init(L"Assets/modelData/Chef/chef_1.cmo", m_animationClips, enanimationClip_Num);
 	m_skinModelRender->SetPosition(m_position);
 	m_skinModelRender->SetRotation(m_rotation);
 	m_skinModelRender->PlayAnimation(enanimationClip_Idle);
+
+	//todo　仮　2Dのテスト。
+	
+	m_skinModelRender2 = NewGO<SkinModelRender>(0, "karikkari");
+	m_skinModelRender2->Init(L"Assets/modelData/karikkari.cmo", nullptr, 0, "PSMain", "VSMain", true);
 
 	m_knife = NewGO<Knife>(0, "knife");
 
@@ -39,16 +44,18 @@ bool Player::Start()
 
 void Player::Update()
 {
-	Movement(m_controllerNumber);
-	Rotation();
-	ForwardDirectionRay(m_controllerNumber);
-	ActionProcessing(m_controllerNumber);
+	Movement(m_controllerNumber);					//プレイヤーの移動処理。
+	Rotation();										//プレイヤーの回転処理。
+	ForwardDirectionRay(m_controllerNumber);		//プレイヤーの前方方向にrayを飛ばす処理。
+	ActionProcessing(m_controllerNumber);			//プレ親―の状態による動作処理。
 
 	if (m_playerState != enanimationClip_Cut) {		//もし切っている状態じゃないとき。
-		m_knife->SetPosition(m_position);		//ナイフの座標を指定。
+		m_knife->SetPosition(m_position);			//ナイフの座標を指定。
 	}
+	//m_skinModelRender2->SetPosition(m_position);
 }
 
+//プレイヤーの移動処理。
 void Player::Movement(int a)
 {
 	
@@ -79,6 +86,7 @@ void Player::Movement(int a)
 
 }
 
+//プレイヤーの回転処理。
 void Player::Rotation()
 {
 	//移動していないなら。
@@ -162,12 +170,12 @@ void Player::CollideToObject(btCollisionWorld::ClosestRayResultCallback rayRC, i
 
 				m_onionBox = (OnionBox*)rayRC.m_collisionObject->getUserPointer();
 
-				if (m_toHave == false) {
+				if (m_toHave == false) {		//何も持っていないとき。
 					if (g_pad[controllerNum].IsTrigger(enButtonA) && m_objectAbove->GetState() == ObjectAbove::en_default)
 					{
 						m_belongings = m_onionBox->NewFood(controllerNum);		//玉ねぎを生成する。生成したものの情報をm_belongingsに代入。
 
-						m_playerState = enIdleHave;
+						m_playerState = enIdleHave;			//プレイヤーの状態を物をもって待機している状態に。
 					}
 				}
 			}
@@ -181,7 +189,7 @@ void Player::CollideToObject(btCollisionWorld::ClosestRayResultCallback rayRC, i
 					{
 						m_belongings = m_tomatoBox->NewFood(controllerNum);	//トマトを生成する。生成したものの情報をm_belongingsに代入。
 
-						m_playerState = enIdleHave;
+						m_playerState = enIdleHave;			//プレイヤーの状態を物をもって待機している状態に。
 					}
 				}
 			}
@@ -193,7 +201,7 @@ void Player::CollideToObject(btCollisionWorld::ClosestRayResultCallback rayRC, i
 				if (m_toHave == false) {		//何も持っていないとき。
 					if (g_pad[controllerNum].IsPress(enButtonX) && m_objectAbove->GetState() == ObjectAbove::en_onObject)		//Xを押したとき、何か乗っているとき。
 					{
-						m_playerState = enCutting;
+						m_playerState = enCutting;			//プレイヤーの状態を物を切っている状態に。
 					}
 				}
 			}
@@ -213,9 +221,9 @@ void Player::ForwardDirectionRay(int controllerNum)
 	m_ray = { m_position.x + m_movesecond.x , m_position.y + m_movesecond.y, m_position.z + m_movesecond.z };		//rayの終点を指定。
 	btVector3 end(m_ray.x, m_ray.y + 10, m_ray.z);						//rayの終点をbtVector3型に変換。
 
-	if (m_movesecond.Length() > m_noLongerZero) {			//rayの長さが０以上のとき。
+	if (m_movesecond.Length() > m_noLongerZero) {						//rayの長さが０以上のとき。
 		btCollisionWorld::ClosestRayResultCallback rayRC(start, end);	//rayRCに情報が入っている。
-		g_physics.GetDynamicWorld()->rayTest(start, end, rayRC);			//衝突判定。
+		g_physics.GetDynamicWorld()->rayTest(start, end, rayRC);		//衝突判定。
 
 		if (rayRC.hasHit())			//衝突しているなら。
 		{

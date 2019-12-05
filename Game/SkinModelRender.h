@@ -10,10 +10,11 @@ public:
 	bool Start();
 	void Update();
 	void Render();
+	void RenderAfterPostEffect();
 
 	void Init(const wchar_t* filePath,
 		AnimationClip* animationClips = nullptr,
-		int numAnimationClips = 0, const char* psmain = "PSMain", const char* vsmain = "VSMain");
+		int numAnimationClips = 0, const char* psmain = "PSMain", const char* vsmain = "VSMain", bool drawAfterPostEffect = false);
 
 	void InitAnimation(AnimationClip* animationClips, int numAnimationClips);
 
@@ -21,6 +22,12 @@ public:
 	{
 		m_animation.Play(animNo, interpolateTime);
 	}
+
+	/// <summary>
+	/// m_drawAfterPostEffectを設定する。
+	/// </summary>
+	/// <param name="drawAfterPostEffect">ポストエフェクトの後に書くか</param>
+	void ChangeDrawAfterPostEffect(bool drawAfterPostEffect);
 
 	/// <summary>
 	/// 座標の設定。
@@ -72,6 +79,7 @@ private:
 
 	int m_numAnimationClips = 0;
 	bool m_isShadowCaster = true;		//シャドーキャスターフラグ。
+	bool m_drawAfterPostEffect = false;		//ポストエフェクトの後に書くか。
 
 	const char* m_psmain;
 	const char* m_vsmain;

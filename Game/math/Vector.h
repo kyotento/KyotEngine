@@ -548,6 +548,14 @@ public:
 	*@brief	行列からクォータニオンを作成。
 	*/
 	void SetRotation(const CMatrix& m);
+
+	//todooooooooooooooo
+	/// <summary>
+	/// fromベクトルからtoベクトルに回転させるクォータニオンを作成。
+	/// </summary>
+	/// <param name="from">元の回転</param>
+	/// <param name="to">回転後の回転</param>
+	void SetRotation(CVector3 from, CVector3 to);
 	/*!
 	 *@brief	球面線形補完。
 	 */

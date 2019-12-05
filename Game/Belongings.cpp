@@ -19,7 +19,6 @@ bool Belongings::Start()
 	return true;
 }
 
-//todo そのうち持っている物ごとに生成するものを変える。(SoupBaseクラス側でやったほうがいいかもしれない。)
 void Belongings::SetSoupBase(Belongings* puttingBelongings)
 {
 	Pot* pot = (Pot*)puttingBelongings;		//どのPotか検索をかける。	

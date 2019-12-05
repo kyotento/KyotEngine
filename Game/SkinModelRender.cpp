@@ -31,20 +31,34 @@ void SkinModelRender::Update()
 
 void SkinModelRender::Render()
 {
-	//todo シャドウマップをレジスタに渡す。
-	m_skinModel.SetShadowMap(IGameObjectManager().GetShadowMap()->GetShadowMapSRV());
-	//todo InitされなかったらDrawを呼ばないようにする。 
-	m_skinModel.Draw(enRenderMode_Normal,g_camera3D.GetViewMatrix(),g_camera3D.GetProjectionMatrix());
-	
+	if (m_drawAfterPostEffect == false) {			//ポストエフェクト前に書くなら。	
+		//todo シャドウマップをレジスタに渡す。
+		m_skinModel.SetShadowMap(IGameObjectManager().GetShadowMap()->GetShadowMapSRV());
+		//todo InitされなかったらDrawを呼ばないようにする。 
+		m_skinModel.Draw(enRenderMode_Normal, g_camera3D.GetViewMatrix(), g_camera3D.GetProjectionMatrix());
+	}
+}
+
+void SkinModelRender::RenderAfterPostEffect()
+{
+	if (m_drawAfterPostEffect) {				//ポストエフェクト後に書くなら。
+		m_skinModel.Draw(enRenderMode_Normal, g_camera3D.GetViewMatrix(), g_camera3D.GetProjectionMatrix());
+	}
 }
 
 void SkinModelRender::Init(const wchar_t* filePath,
 	AnimationClip* animationClips,
 	int numAnimationClips, const char* psmain,
-	const char* vsmain)
+	const char* vsmain, bool drawAfterPostEffect)
 {
 	m_skinModel.Init(filePath, m_psmain, m_vsmain);
 	InitAnimation(animationClips, numAnimationClips);
+	ChangeDrawAfterPostEffect(drawAfterPostEffect);
+}
+
+void SkinModelRender::ChangeDrawAfterPostEffect(bool drawAfterPostEffect) 
+{
+	m_drawAfterPostEffect = drawAfterPostEffect;
 }
 
 void SkinModelRender::InitAnimation(AnimationClip* animationClips, int numAnimationClips) {

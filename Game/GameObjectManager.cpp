@@ -114,6 +114,17 @@ void GameObjectManager::Execute()
 			object->RenderWrapper();
 		}
 	}
+	//やるとしたらここでポストエフェクト。
+
+
+	//２Dのレンダリング。
+	for (GameObjectList objList : m_gameObjectListArray)
+	{
+		for (GameObject* object : objList)
+		{
+			object->RenderAfterPostEffect();
+		}
+	}
 
 #ifdef USE_MAIN_RT
 	//レンダリングターゲットを戻す。
