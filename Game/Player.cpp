@@ -225,8 +225,7 @@ void Player::ForwardDirectionRay(int controllerNum)
 		btCollisionWorld::ClosestRayResultCallback rayRC(start, end);	//rayRCに情報が入っている。
 		g_physics.GetDynamicWorld()->rayTest(start, end, rayRC);		//衝突判定。
 
-		if (rayRC.hasHit())			//衝突しているなら。
-		{
+		if (rayRC.hasHit()){			//衝突しているなら。
 			CollideToObject(rayRC,controllerNum);		//プレイヤーの前方方向にオブジェクトがあった時の処理。
 		}
 	}

@@ -11,7 +11,11 @@ Dish::Dish()
 
 Dish::~Dish()
 {
-//	DeleteGO(m_skinModelRender);
+	DeleteGO(m_skinModelRender);
+	if (m_cuisine != nullptr) {
+		DeleteGO(m_cuisine);
+		m_cuisine = nullptr;
+	}
 }
 
 bool Dish::Start()
