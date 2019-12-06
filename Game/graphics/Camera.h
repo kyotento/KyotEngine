@@ -119,17 +119,31 @@ public:
 		return m_UpdateCameraMatrix;
 	}
 
+	/// <summary>
+	/// カメラの回転を取得する。
+	/// </summary>
+	/// <returns>カメラの回転</returns>
+	CQuaternion GetCameraQuauternion()
+	{
+		CVector3 rot = m_target - m_position;		//注視点から視点を減算。
+		rot.Normalize();							//正規化し、向きを計算。
+		CQuaternion camerarot;						//カメラの回転。
+		camerarot.SetRotation(m_front, rot);		//カメラの回転を計算。
+		return camerarot;							//カメラの回転。
+	}
+
 private:
 	CMatrix	m_viewMatrix = CMatrix::Identity();		//ビュー行列。実は逆。
 	CMatrix m_projMatrix = CMatrix::Identity();		//プロジェクション行列。
 	CVector3 m_target = { 0.f,0.f,10.f };			//注視点。
 	CVector3 m_position = CVector3::Zero();			//視点。
 	CVector3 m_up = CVector3::Up();					//上方向。
+	CVector3 m_front = CVector3::Front();			//前方方向。
 	float m_viewAngle = CMath::DegToRad(60.0f);		//画角。
 	float m_far = 10000.0f;							//遠い平面までの距離。
 	float m_near = 1.0f;							//近平面までの距離。
 
-	EnUpdateProjMatrixFunc m_UpdateCameraMatrix = enUpdateProjMatrixFunc_Perspective;
+	EnUpdateProjMatrixFunc m_UpdateCameraMatrix = enUpdateProjMatrixFunc_Perspective;			//平行東映か射法投影か。
 };
 
 extern Camera g_camera3D;		//!<3Dカメラ。

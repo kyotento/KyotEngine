@@ -30,7 +30,7 @@ cbuffer VSPSCb : register(b0){
 	float4x4 mProj;
 	float4x4 mLightView;	//ライトビュー行列。
 	float4x4 mLightProj;	//ライトプロジェクション行列。
-//	int isShadowReciever;	//シャドウレシーバーフラグ。
+	int isShadowReciever;	//シャドウレシーバーフラグ。
 };
 
 static const int directionLightNum = 1;		//ディレクションライトの数。
@@ -41,7 +41,7 @@ struct DirectionLight {
 };
 
 //ライト用定数バッファ。
-cbuffer LightConstantBuffer : register(b0)
+cbuffer LightConstantBuffer : register(b1)
 {
 	DirectionLight		directionLight;		//ディレクションライト。
 	float3				eyePos;				//カメラの視点。
@@ -128,11 +128,11 @@ PSInput VSMain( VSInputNmTxVcTangent In )
 	//psInput.Normal = normalize(mul(mWorld, In.Normal));
 	//psInput.Tangent = normalize(mul(mWorld, In.Tangent));
 
-//	if (isShadowReciever == 1) {
+	if (isShadowReciever == 1) {
 		//ライトビュープロジェクション空間に変換。
 		psInput.posInLVP = mul(mLightView, worldPos);
 		psInput.posInLVP = mul(mLightProj,psInput.posInLVP);
-//	}
+	}
 
 	//UV座標はそのままピクセルシェーダーに渡す。
 	psInput.Normal = normalize(mul(mWorld, In.Normal));
@@ -215,7 +215,7 @@ float4 PSMain( PSInput In ) : SV_Target0
 		}
 	}
 
-//	if (isShadowReciever == 1) {	//シャドウレシーバー。
+	if (isShadowReciever == 1) {	//シャドウレシーバー。
 	//LVP空間から見た時の最も手前の深度値をシャドウマップから取得する。
 		float2 shadowMapUV = In.posInLVP.xy / In.posInLVP.w;
 		shadowMapUV *= float2(0.5f, -0.5f);
@@ -232,12 +232,12 @@ float4 PSMain( PSInput In ) : SV_Target0
 			//シャドウマップに書き込まれている深度値を取得。
 			float zInShadowMap = g_shadowMap.Sample(g_sampler, shadowMapUV);
 
-			if (zInLVP > zInShadowMap + 0.001f) {// + 0.01fしているのは、シャドウアクネを回避するため。
+			if (zInLVP > zInShadowMap + 0.001f) {// + 0.001fしているのは、シャドウアクネを回避するため。
 				//影が落ちているので、光を弱くする
 				lig *= 0.4f;
 			}
 		}
-//	}
+	}
 
 	//　環境光を当てる。
 //	lig += 1.f/*float3(environmentpow)*/;

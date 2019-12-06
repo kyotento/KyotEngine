@@ -477,6 +477,24 @@ public:
 		DirectX::XMVECTOR xmv0 = DirectX::XMLoadFloat4(&vec);
 		DirectX::XMVECTOR xmv1 = DirectX::XMLoadFloat4(&_v.vec);
 		return DirectX::XMVector4Dot(xmv0, xmv1).m128_f32[0];
+	}	
+	/*!
+	*@brief	ベクトル同士の外積。
+	*/
+	template< class TVector>
+	static inline TVector Cross(const TVector& v0, const TVector& v1)
+	{
+		TVector result;
+		result.Cross(v0, v1);
+		return result;
+	}
+	/*!
+	*@brief	ベクトル同士の内積。
+	*/
+	template< class TVector>
+	static inline float Dot(const TVector& v0, const TVector& v1)
+	{
+		return v0.Dot(v1);
 	}
 	/*!
 	 * @brief	長さを取得
@@ -549,7 +567,7 @@ public:
 	*/
 	void SetRotation(const CMatrix& m);
 
-	//todooooooooooooooo
+	//todo oooooooooooooo
 	/// <summary>
 	/// fromベクトルからtoベクトルに回転させるクォータニオンを作成。
 	/// </summary>

@@ -131,6 +131,15 @@ public:
 		enSkinModelSRVReg_DiffuseTexture = 0,		//!<ディフューズテクスチャ。
 		enSkinModelSRVReg_BoneMatrix,				//!<ボーン行列。
 	};
+
+	/// <summary>
+	/// シャドウフラグを設定する。
+	/// </summary>
+	/// <param name="flag">シャドウレシーバーフラグ</param>
+	void SetShadowReciever(bool flag) {
+		m_isShadowReciever = flag;
+	}
+
 private:
 	/*!
 	*@brief	サンプラステートの初期化。
@@ -154,7 +163,11 @@ private:
 		CMatrix mProj;			//プロジェクション行列。
 		CMatrix mLightView;		//todo ライトビュー行列。
 		CMatrix mLightProj;		//todo ライトプロジェクション行列。
+		int isShadowReciever;
 	};
+
+	bool m_isShadowReciever = true;			//シャドウレシーバーフラグ。
+
 	EnFbxUpAxis			m_enFbxUpAxis = enFbxUpAxisZ;	//!<FBXの上方向。
 	ID3D11Buffer*		m_cb = nullptr;					//!<定数バッファ。
 	Skeleton			m_skeleton;						//!<スケルトン。

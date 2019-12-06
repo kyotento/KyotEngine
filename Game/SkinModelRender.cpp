@@ -43,6 +43,8 @@ void SkinModelRender::RenderAfterPostEffect()
 {
 	if (m_drawAfterPostEffect) {				//ポストエフェクト後に書くなら。
 		m_skinModel.Draw(enRenderMode_Normal, g_camera3D.GetViewMatrix(), g_camera3D.GetProjectionMatrix());
+		m_rotation = g_camera3D.GetCameraQuauternion();
+		m_skinModel.SetShadowReciever(false);
 	}
 }
 
