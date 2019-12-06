@@ -43,60 +43,63 @@ void Kitchen::DishWashing()
 	//拡大処理をして拡大値が１になったら汚れたお皿を消して新しいお皿を生成する。
 	//todo 仮　今はゲージを描画できないので条件をタイマーにする。
 
-	m_timerK += 1;
+	if (m_dishDirty->GetDirtyDishNum() > 0) {
+		m_timerK += 1;
 
-	if (m_timerK >= 120) {		//２秒以上たったとき。
+		if (m_timerK >= 120) {		//２秒以上たったとき。
 
-		//乗っているお皿が1個の時。
-		if (m_dishDirty->GetDirtyDishNum() <= 1 && m_dishDirty->GetDirtyDishNum() > 0) {
-			DeleteGO(m_dishDirty);						//汚れたお皿クラスを消す。
+			//乗っているお皿が1個の時。
+			if (m_dishDirty->GetDirtyDishNum() <= 1 && m_dishDirty->GetDirtyDishNum() > 0) {
+				DeleteGO(m_dishDirty);						//汚れたお皿クラスを消す。
 
-			if (m_dish != nullptr) {			//お皿があるとき。
+				if (m_dish != nullptr) {			//お皿があるとき。
 
-				m_dish->AddDishList();			//お皿を生成する。
+					m_dish->AddDishList();			//お皿を生成する。
+				}
+
+				if (m_dish == nullptr) {			//お皿がないとき。
+
+					m_dish = NewGO<Dish>(0, "dish");			//お皿を生成する。
+				}
+
+				SetDishPos(m_dish);					//お皿の座標を指定。
+				m_timerK = 0;
 			}
 
-			if (m_dish == nullptr) {			//お皿がないとき。
+			//乗っている汚れたお皿の数が2個以上のとき。
+			if (m_dishDirty->GetDirtyDishNum() > 1) {
+				m_dishDirty->DeleteDishs();					//汚れたお皿を消す。
 
-				m_dish = NewGO<Dish>(0, "dish");			//お皿を生成する。
+				if (m_dish != nullptr) {
+
+					m_dish->AddDishList();			//お皿を生成する。
+				}
+
+				if (m_dish == nullptr) {
+
+					m_dish = NewGO<Dish>(0, "dish");			//お皿を生成する。
+				}
+
+				SetDishPos(m_dish);
+				m_timerK = 0;
 			}
-
-			SetDishPos(m_dish);					//お皿の座標を指定。
-			m_timerK = 0;
 		}
-
-		//乗っている汚れたお皿の数が2個以上のとき。
-		if (m_dishDirty->GetDirtyDishNum() > 1) {
-			m_dishDirty->DeleteDishs();					//汚れたお皿を消す。
-
-			if (m_dish != nullptr) {
-
-				m_dish->AddDishList();			//お皿を生成する。
-			}
-
-			if (m_dish == nullptr){
-
-				m_dish = NewGO<Dish>(0, "dish");			//お皿を生成する。
-			}
-
-			SetDishPos(m_dish);
-			m_timerK = 0;
-		}
-
 	}
 }
 
+//お皿のインスタンスを消す処理。
 void Kitchen::DeleteDishInstance()
 {
-	if (m_dish != nullptr) {
-		if (m_dish->GetDisListNum() <= 0)
+	if (m_dish != nullptr) {					//お皿のインスタンスがあるとき。
+		if (m_dish->GetDisListNum() <= 0)		//リストの中身がないとき。
 		{
-			m_dish = nullptr;
+			m_dish = nullptr;					//お皿のインスタンスをnullに。
 		}
 	}
 
 }
 
+//更新処理。
 void Kitchen::Update()
 {
 	if (m_dish == nullptr)			//お皿のインスタンスがNullのとき。
