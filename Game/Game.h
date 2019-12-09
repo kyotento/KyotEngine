@@ -4,6 +4,9 @@
 #include "StageBase.h"
 #include "Stage_1.h"
 #include "Gauge.h"
+#include "Timer.h"
+#include "Score.h"
+
 
 class Title;
 class Player;
@@ -36,6 +39,8 @@ private:
 	Player* m_player = nullptr;					//プレイヤーの基底クラス。
 	Stage_1* m_stage_1 = nullptr;				//ステージ１。
 	Gauge* m_gauge = nullptr;
+	Timer* m_timer = nullptr;					//タイマー。
+	Score* m_score = nullptr;					//スコア。
 
 };
 

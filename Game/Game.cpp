@@ -27,6 +27,8 @@ void Game::Update()
 	{
 		m_player = NewGO<Player>(0, "player");
 		m_stage_1 = NewGO<Stage_1>(0, "stage_1");
+		m_timer = NewGO<Timer>(0, "timer");
+		m_score = NewGO<Score>(0, "score");
 		m_titleDeleteFlag = false;
 	}
 

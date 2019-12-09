@@ -152,6 +152,7 @@
     <ClCompile Include="Pot.cpp" />
     <ClCompile Include="RenderTarget.cpp" />
     <ClCompile Include="SceneItemManager.cpp" />
+    <ClCompile Include="Score.cpp" />
     <ClCompile Include="ShadowMap.cpp" />
     <ClCompile Include="SkinModelRender.cpp" />
     <ClCompile Include="SoupBase.cpp" />
@@ -167,6 +168,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="system\system.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="Tomato.cpp" />
     <ClCompile Include="TomatoBox.cpp" />
@@ -233,6 +235,7 @@
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="RenderTarget.h" />
     <ClInclude Include="SceneItemManager.h" />
+    <ClInclude Include="Score.h" />
     <ClInclude Include="ShadowMap.h" />
     <ClInclude Include="SkinModelRender.h" />
     <ClInclude Include="SoupBase.h" />
@@ -245,6 +248,7 @@
     <ClInclude Include="Stage_1.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="system\system.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="Tomato.h" />
     <ClInclude Include="TomatoBox.h" />
@@ -293,6 +297,12 @@
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\gauge\gauge.png" />
     <ImageContentTask Include="Assets\sprite\gauge\gauge_sheet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\Timer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\coin.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
