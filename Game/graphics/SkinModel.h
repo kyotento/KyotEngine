@@ -54,19 +54,21 @@ public:
 	*@param[in]	filePath		ロードするcmoファイルのファイルパス。
 	*@param[in] enFbxUpAxis		fbxの上軸。デフォルトはenFbxUpAxisZ。
 	*/
-	void Init(const wchar_t* filePath, /*EnFbxUpAxis enFbxUpAxis,*/ const char* entryPS, const char* entryVS);
-		/*!
-	*@brief	モデルをワールド座標系に変換するためのワールド行列を更新する。
-	*@param[in]	position	モデルの座標。
-	*@param[in]	rotation	モデルの回転。
-	*@param[in]	scale		モデルの拡大率。
-	*/
+	void Init(const wchar_t* filePath, /*EnFbxUpAxis enFbxUpAxis,*/ const char* entryPS, const char* entryVS/*, bool ShadowReciever*/);
+
+	/// <summary>
+	/// モデルをワールド座標系に変換するためのワールド行列を更新。
+	/// </summary>
+	/// <param name="position">モデルの座標</param>
+	/// <param name="rotation">モデルの回転</param>
+	/// <param name="scale">モデルの拡大率</param>
 	void UpdateWorldMatrix(CVector3 position, CQuaternion rotation, CVector3 scale);
-	/*!
-	*@brief	ボーンを検索。
-	*@param[in]		boneName	ボーンの名前。
-	*@return	見つかったボーン。見つからなかった場合はnullptrを返します。
-	*/
+
+	/// <summary>
+	/// ボーンを検索。
+	/// </summary>
+	/// <param name="boneName">ボーンの名前</param>
+	/// <returns>見つかったボーン。else見つからなかった場合はnullを返す</returns>
 	Bone* FindBone(const wchar_t* boneName)
 	{
 		int boneId = m_skeleton.FindBoneID(boneName);
@@ -79,18 +81,27 @@ public:
 	*@param[in]	projMatrix		プロジェクション行列。
 	*  カメラ座標系の3Dモデルをスクリーン座標系に変換する行列です。
 	*/
+	/// <summary>
+	/// モデルを描画。
+	/// </summary>
+	/// <param name="renderMode">レンダリングモード</param>
+	/// <param name="viewMatrix">カメラ行列(ワールド座標系の3Dモデルをカメラ座標系に変換する行列)</param>
+	/// <param name="projMatrix">プロジェクション行列(カメラ座標系の3Dモデルをスクリーン座標系に変換する行列)</param>
 	void Draw(EnRenderMode renderMode, CMatrix viewMatrix, CMatrix projMatrix );
-	/*!
-	*@brief	スケルトンの取得。
-	*/
+
+	/// <summary>
+	/// スケルトンの取得。
+	/// </summary>
+	/// <returns>スケルトン</returns>
 	Skeleton& GetSkeleton()
 	{
 		return m_skeleton;
 	}
-	/*!
-	*@brief	メッシュを検索する。
-	*@param[in] onFindMesh		メッシュが見つかったときのコールバック関数
-	*/
+
+	/// <summary>
+	/// メッシュの検索。
+	/// </summary>
+	/// <param name="onFindMesh">メッシュが見つかった時のコールバック関数</param>
 	void FindMesh(OnFindMesh onFindMesh) const
 	{
 		for (auto& modelMeshs : m_modelDx->meshes) {

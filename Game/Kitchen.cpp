@@ -12,7 +12,6 @@ Kitchen::~Kitchen()
 
 }
 
-
 bool Kitchen::Start()
 {
 	m_skinModelRender->Init(L"Assets/modelData/kitchen/kitchen.cmo");
@@ -41,28 +40,28 @@ void Kitchen::DishWashing()
 	//お皿洗いの上に汚れたお皿があるとき。
 	//todo 絶　2Dのバグな直ったらGaugeを生成する。
 	//拡大処理をして拡大値が１になったら汚れたお皿を消して新しいお皿を生成する。
-	//todo 仮　今はゲージを描画できないので条件をタイマーにする。
+	//todo 仮　今はゲージを描画できないので条件をタイマーにする。マジックナンバーは基本的にすべて仮。
 
-	if (m_dishDirty->GetDirtyDishNum() > 0) {
-		m_timerK += 1;
+	if (m_dishDirty->GetDirtyDishNum() > 0) {		//汚れたお皿が乗っているとき。
+		m_timerK += 1;			//タイマーを進める。
 
 		if (m_timerK >= 120) {		//２秒以上たったとき。
 
 			//乗っているお皿が1個の時。
-			if (m_dishDirty->GetDirtyDishNum() <= 1 && m_dishDirty->GetDirtyDishNum() > 0) {
+			if (m_dishDirty->GetDirtyDishNum() <= 1 /*&& m_dishDirty->GetDirtyDishNum() > 0*/) {
 				DeleteGO(m_dishDirty);						//汚れたお皿クラスを消す。
 
-				if (m_dish != nullptr) {			//お皿があるとき。
+				if (m_dish != nullptr) {					//お皿があるとき。
 
-					m_dish->AddDishList();			//お皿を生成する。
+					m_dish->AddDishList();					//お皿を生成する。
 				}
 
-				if (m_dish == nullptr) {			//お皿がないとき。
+				if (m_dish == nullptr) {					//お皿がないとき。
 
-					m_dish = NewGO<Dish>(0, "dish");			//お皿を生成する。
+					m_dish = NewGO<Dish>(0, "dish");		//お皿を生成する。
 				}
 
-				SetDishPos(m_dish);					//お皿の座標を指定。
+				SetDishPos(m_dish);							//お皿の座標を指定。
 				m_timerK = 0;
 			}
 
@@ -72,7 +71,7 @@ void Kitchen::DishWashing()
 
 				if (m_dish != nullptr) {
 
-					m_dish->AddDishList();			//お皿を生成する。
+					m_dish->AddDishList();					//お皿を生成する。
 				}
 
 				if (m_dish == nullptr) {

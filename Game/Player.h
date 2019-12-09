@@ -232,5 +232,10 @@ protected:
 
 private:
 
+	float m_x = 1.f;
+
+	CVector3 m_testScale = CVector3::One();
+
+
 };
 

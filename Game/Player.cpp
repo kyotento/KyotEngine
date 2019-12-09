@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Player.h"
 
+//#define SPRITE_TEST		//3DのSpriteのテストをするときに定義する。
+
 namespace {
 	const float playerCollidedRadius = 45.f;			//カプセルコライダーの半径。
 	const float playerCollidedHeight = 50.f;			//カプセルコライダーの高さ。
@@ -34,8 +36,10 @@ bool Player::Start()
 
 	//todo　仮　2Dのテスト。
 	
+#ifdef SPRITE_TEST
 	m_skinModelRender2 = NewGO<SkinModelRender>(0, "karikkari");
-	m_skinModelRender2->Init(L"Assets/modelData/karikkari.cmo", nullptr, 0, "PSMain", "VSMain", true);
+	m_skinModelRender2->Init(L"Assets/modelData/karikkari.cmo", nullptr, 0, "PSMain", "VSMain", true, false);
+#endif
 
 	m_knife = NewGO<Knife>(0, "knife");
 
@@ -52,6 +56,17 @@ void Player::Update()
 	if (m_playerState != enanimationClip_Cut) {		//もし切っている状態じゃないとき。
 		m_knife->SetPosition(m_position);			//ナイフの座標を指定。
 	}
+
+#ifdef SPRITE_TEST
+
+	m_x += 0.1f;
+	m_testScale.x = m_x;
+
+	m_skinModelRender2->SetScale(m_testScale);
+
+#endif
+
+
 	//m_skinModelRender2->SetPosition(m_position);
 }
 
@@ -371,7 +386,6 @@ void Player::NoRidePutDirtyDishs()
 		m_objectAbove->SetDirtyDishPos(m_belongings);				//設置物の座標にオブジェクトの座標を代入。
 		m_objectAbove->SetState(ObjectAbove::en_onObject);			//お皿洗い場の状態を変更する。
 		m_playerState = enIdle;										//プレイヤー状態を待機状態に。
-
 	}
 }
 

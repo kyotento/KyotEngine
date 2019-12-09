@@ -21,7 +21,7 @@ SkinModel::~SkinModel()
 	}
 
 }
-void SkinModel::Init(const wchar_t* filePath,/* EnFbxUpAxis enFbxUpAxis,*/ const char* entryPS, const char* entryVS )
+void SkinModel::Init(const wchar_t* filePath,/* EnFbxUpAxis enFbxUpAxis,*/ const char* entryPS, const char* entryVS/*, bool ShadowReciever = true*/)
 {
 	m_psmain = entryPS;
 	m_vsmain = entryVS;
@@ -40,6 +40,9 @@ void SkinModel::Init(const wchar_t* filePath,/* EnFbxUpAxis enFbxUpAxis,*/ const
 
 	//SkinModelDataManagerを使用してCMOファイルのロード。
 	m_modelDx = g_skinModelDataManager.Load(filePath, m_skeleton);
+
+	//影を生成するか否か。
+	/*SetShadowReciever(ShadowReciever);*/
 
 	//m_enFbxUpAxis = enFbxUpAxis;
 }

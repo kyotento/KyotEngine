@@ -12,12 +12,32 @@ public:
 	void Render();
 	void RenderAfterPostEffect();
 
+	/// <summary>
+	/// 初期化。
+	/// </summary>
+	/// <param name="filePath">3Dモデルのファイルパス</param>
+	/// <param name="animationClips">アニメーション</param>
+	/// <param name="numAnimationClips">アニメーションの数</param>
+	/// <param name="psmain"></param>
+	/// <param name="vsmain">頂点シェーダー</param>
+	/// <param name="drawAfterPostEffect">2Dとして描画するかどうか</param>
+	/// <param name="SetShadowReciever">影をかけるかどうか</param>
 	void Init(const wchar_t* filePath,
 		AnimationClip* animationClips = nullptr,
-		int numAnimationClips = 0, const char* psmain = "PSMain", const char* vsmain = "VSMain", bool drawAfterPostEffect = false);
+		int numAnimationClips = 0, const char* psmain = "PSMain", const char* vsmain = "VSMain", bool drawAfterPostEffect = false, bool SetShadowReciever = true);
 
+	/// <summary>
+	/// アニメーションの初期化。
+	/// </summary>
+	/// <param name="animationClips">アニメーション</param>
+	/// <param name="numAnimationClips">アニメーションの数</param>
 	void InitAnimation(AnimationClip* animationClips, int numAnimationClips);
 
+	/// <summary>
+	/// アニメーション。
+	/// </summary>
+	/// <param name="animNo">アニメーションの数</param>
+	/// <param name="interpolateTime">切り替え時間</param>
 	void PlayAnimation(int animNo, float interpolateTime = 0.0f)
 	{
 		m_animation.Play(animNo, interpolateTime);
@@ -77,20 +97,20 @@ public:
 
 private:
 
-	int m_numAnimationClips = 0;
-	bool m_isShadowCaster = true;		//シャドーキャスターフラグ。
+	int m_numAnimationClips = 0;			//アニメーションの数。
+	bool m_isShadowCaster = true;			//シャドーキャスターフラグ。
 	bool m_drawAfterPostEffect = false;		//ポストエフェクトの後に書くか。
 
 	const char* m_psmain;
 	const char* m_vsmain;
 
-	CVector3 m_position = CVector3::Zero();
-	CVector3 m_scale = CVector3::One();
+	CVector3 m_position = CVector3::Zero();					//座標。
+	CVector3 m_scale = CVector3::One();						//拡大率。	
 
-	CQuaternion m_rotation = CQuaternion::Identity();
+	CQuaternion m_rotation = CQuaternion::Identity();		//回転
 
-	Animation m_animation;
-	AnimationClip* m_animationClips = nullptr;
+	Animation m_animation;									//アニメーション。
+	AnimationClip* m_animationClips = nullptr;				//アニメーションクリップ。
 
 	SkinModel m_skinModel;
 };
