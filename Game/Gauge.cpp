@@ -64,4 +64,9 @@ void Gauge::Update()
 //	m_skinModelRender->SetPosition(m_position);			//座標を更新。
 	m_skinModelRenderGauge->SetPosition(m_position);	//ゲージの座標を更新。
 
+	if (m_gaugeMax == false && m_x >= 1.f)
+	{
+		m_gaugeMax = true;
+	}
+
 }

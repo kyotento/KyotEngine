@@ -28,17 +28,25 @@ bool Pot::Start()
 //スープが投入されたときの処理。
 void Pot::Soup()
 {
+
+	//if (m_potState == enComplete)
+	//{
+	//	DeleteGO(m_gauge);							//ゲージを消す。
+	//	m_gauge = nullptr;
+	//}
+
+	////todo 仮　三つ入った時完成形。
+	//if (m_potState == enThree)
+	//{
+	//	if (m_gauge->GetGaugeMax()) {
+	//		m_potState = enComplete;
+	//	}
+	//}
 	if (m_potState == enTwo) {						//食べ物が二つ入っている状態。
 		m_soupPos.y += 25.f;						//食べ物が入ったように見せるためにY座標を上げる。
 		m_potState = enThree;						//食べ物が三つ入った状態にする。
-		DeleteGO(m_gauge);							//ゲージを消す。
-		m_gauge = nullptr;
 	}
-	//todo 仮　三つ入った時完成形。
-	if (m_potState == enThree)
-	{
-		m_potState = enComplete;
-	}
+
 	if (m_potState == enOne) {							//食べ物が一つ入っている状態のとき。
 		m_soupPos.y += 25.f;							//食べ物が入ったように見せるためにY座標を上げる。
 		m_potState = enTwo;								//ポットに食べ物が二つ入っている状態。
@@ -75,6 +83,19 @@ void Pot::Update()
 	if (m_gauge != nullptr) {							//ゲージが生成されていたら。
 		m_gauge->SetPosition(m_gaugePos);				//ゲージの座標を指定。	
 		m_gauge->Expansion(5.f);						//ゲージの拡大処理。
+	}
+
+	if (m_potState == enComplete)					//鍋の中身が完成しているとき。
+	{
+		DeleteGO(m_gauge);							//ゲージを消す。
+		m_gauge = nullptr;							//ゲージのインスタンスをnullに。
+	}
+
+	if (m_potState == enThree)						//食べ物が３個入っているとき。
+	{
+		if (m_gauge->GetGaugeMax()) {				//ゲージが最大値のとき。
+			m_potState = enComplete;				//食べ物の状態を完成状態に。
+		}
 	}
 
 }

@@ -42,8 +42,14 @@ public:
 		m_position = pos;
 	}
 
+	bool GetGaugeMax()
+	{
+		return m_gaugeMax;
+	}
+
 private:
 
+	bool m_gaugeMax = false;
 	float m_x = 0.0f;									//ゲージのX軸拡大率。
 
 	CVector2 m_pivot = { 0.f,0.5f };					//基点。
