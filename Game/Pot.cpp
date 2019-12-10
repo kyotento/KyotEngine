@@ -29,8 +29,10 @@ bool Pot::Start()
 void Pot::Soup()
 {
 	if (m_potState == enTwo) {						//食べ物が二つ入っている状態。
-		m_soupPos.y += 25.f;							//食べ物が入ったように見せるためにY座標を上げる。
+		m_soupPos.y += 25.f;						//食べ物が入ったように見せるためにY座標を上げる。
 		m_potState = enThree;						//食べ物が三つ入った状態にする。
+		DeleteGO(m_gauge);							//ゲージを消す。
+		m_gauge = nullptr;
 	}
 	//todo 仮　三つ入った時完成形。
 	if (m_potState == enThree)

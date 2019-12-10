@@ -41,10 +41,16 @@ public:
 /// <returns>インスタンス</returns>
 	static GameObjectManager& Instance()
 	{
-		static GameObjectManager instance;
-		return instance;
+		static GameObjectManager* instance = nullptr;
+		if (instance == nullptr) {
+			instance = new GameObjectManager;
+		}
+		return *instance;
 	}
-
+	static void DeleteInstance()
+	{
+		delete &Instance();
+	}
 
 	void AddShadowCaster(SkinModel* model) {
 		m_shadowMap.RegistShadowCaster(model);
