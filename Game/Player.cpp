@@ -26,7 +26,11 @@ Player::~Player()
 {
 	DeleteGO(m_skinModelRender);
 }
+
+#ifdef SPRITE_TEST
 SkinModelRender* m_skinModelRender2;
+#endif
+
 bool Player::Start()
 {
 	m_skinModelRender->Init(L"Assets/modelData/Chef/chef_1.cmo", m_animationClips, enanimationClip_Num);
@@ -59,7 +63,7 @@ void Player::Update()
 
 #ifdef SPRITE_TEST
 
-	m_x += 0.1f;
+//	m_x += 0.1f;
 	m_testScale.x = m_x;
 
 	m_skinModelRender2->SetScale(m_testScale);

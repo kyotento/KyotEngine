@@ -72,7 +72,7 @@ void Pot::Update()
 
 	if (m_gauge != nullptr) {							//ゲージが生成されていたら。
 		m_gauge->SetPosition(m_gaugePos);				//ゲージの座標を指定。	
-		m_gauge->Expansion(0.1);						//ゲージの拡大処理。
+		m_gauge->Expansion(5.f);						//ゲージの拡大処理。
 	}
 
 }

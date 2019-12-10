@@ -49,11 +49,13 @@ private:
 	CVector2 m_pivot = { 0.f,0.5f };					//基点。
 
 	CVector3 m_position = {0,0,0}/* CVector3::Zero()*/;				//ゲージと基盤の座標。
-	CVector3 m_scaleGauge = CVector3::Zero();			//ゲージの拡大率。
+	CVector3 m_scaleGauge = CVector3::One();			//ゲージの拡大率。
 
-	SpriteRender* m_spriteRender = nullptr;				//ゲージ基盤用スプライト。
-	SpriteRender* m_spriteRenderGauge = nullptr;		//ゲージ用スプライト。
+	//SpriteRender* m_spriteRender = nullptr;				//ゲージ基盤用スプライト。
+	//SpriteRender* m_spriteRenderGauge = nullptr;		//ゲージ用スプライト。
 
+	SkinModelRender* m_skinModelRender = nullptr;				//ゲージ基盤用スキンモデル。
+	SkinModelRender* m_skinModelRenderGauge = nullptr;			//ゲージ用スキンモデル。
 
 };
 

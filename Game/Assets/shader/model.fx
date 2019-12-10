@@ -1,7 +1,6 @@
-/*!
- * @brief	モデルシェーダー。
- */
-
+/// <summary>
+/// モデルシェーダー。
+/// </summary>
 
 /////////////////////////////////////////////////////////////
 // Shader Resource View
@@ -201,13 +200,13 @@ float4 PSMain( PSInput In ) : SV_Target0
 	//ディレクションライトの鏡面反射光を計算する。
 	{
 		for(int i = 0; i < directionLightNum; i++) {
-			//①反射ベクトルRを求める。
+			//反射ベクトルRを求める。
 			float3 R = directionLight.direction[i] + 2 * dot(In.Normal, -directionLight.direction[i]) * In.Normal;
 
-			//②始点からライトを当てる物体に伸びるベクトルEを求める。
+			//始点からライトを当てる物体に伸びるベクトルEを求める。
 			float3 E = normalize(In.worldPos - eyePos);
 
-			//①と②で求まったベクトルの内積を計算する。
+			//求まったベクトルの内積を計算する。
 			float specPower = max(0, dot(R, -E));
 
 			//スペキュラ反射をライトに加算する。

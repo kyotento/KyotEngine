@@ -1,6 +1,6 @@
-/*!
- * @brief	スプライト用のシェーダー。
- */
+/// <summary>
+/// スプライト用のシェーダー。
+/// </summary>
 
 cbuffer cb : register(b0){
 	float4x4 mvp;		//ワールドビュープロジェクション行列。
