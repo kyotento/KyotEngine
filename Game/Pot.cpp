@@ -84,8 +84,6 @@ void Pot::StateChange()
 void Pot::PotGaugeExpansion()
 {
 	if (m_gauge != nullptr) {							//ゲージが生成されていたら。
-		m_gauge->SetPosition(m_gaugePos);				//ゲージの座標を指定。	
-		//todo 絶 コンロに載っているとき。
 		m_gauge->Expansion(10.f);						//ゲージの拡大処理。
 	}
 }
@@ -102,6 +100,9 @@ void Pot::Update()
 
 	if (m_soupBase != nullptr) {						//スープが生成されていたら。
 		m_soupBase->SetPosition(m_soupPos);				//スープの座標を指定。
+	}
+	if (m_gauge != nullptr) {							//ゲージが生成されていたら。
+		m_gauge->SetPosition(m_gaugePos);				//ゲージの座標を指定。
 	}
 
 	StateChange();										//状態変化。

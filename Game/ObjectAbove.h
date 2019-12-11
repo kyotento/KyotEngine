@@ -48,6 +48,11 @@ public:
 	/// <param name=""></param>
 	void SetGaugePosition(Gauge*);
 
+	void SetBelongings(Belongings* belongngs)
+	{
+		m_belongings = belongngs;
+	}
+
 	///// <summary>
 	///// ‚¨M‚Ì”‚ğw’è‚·‚éB
 	///// </summary>

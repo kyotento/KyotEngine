@@ -34,8 +34,10 @@ bool GasStove::Start()
 
 void GasStove::Update()
 {
-	if (m_belongings->GetIndentValue() == Belongings::enKitchenWare)
-	{
-		m_belongings->PotGaugeExpansion(m_belongings);
+	if (m_belongings != nullptr) {
+		if (m_belongings->GetIndentValue() == Belongings::enKitchenWare)
+		{
+			m_belongings->PotGaugeExpansion(m_belongings);
+		}
 	}
 }

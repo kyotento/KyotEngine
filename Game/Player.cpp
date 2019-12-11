@@ -1,10 +1,11 @@
 #include "stdafx.h"
 #include "Player.h"
 
-#define SPRITE_TEST		//3DのSpriteのテストをするときに定義する。
+//#define SPRITE_TEST		//3DのSpriteのテストをするときに定義する。
 //todo 持っているものの回転をプレイヤー依存にする。
 //todo プレイヤーを不k数出す仕組みを作る。
 //todo　包丁を描画しないように。
+//todo　物をとった時、ObjectAboveのm_belongingsをnullにする。
 namespace {
 	const float playerCollidedRadius = 45.f;			//カプセルコライダーの半径。
 	const float playerCollidedHeight = 50.f;			//カプセルコライダーの高さ。
@@ -495,6 +496,7 @@ void Player::PickUpObjects(int controllerNum)
 					if (m_objectAbove->GetState() == ObjectAbove::en_onObject) {			//オブジェクトに何か乗っているとき。
 						m_objectAbove->TakeThings(m_belongings);	//乗っているオブジェクトを検索。
 						m_objectAbove->SetState(ObjectAbove::en_default);					//物をとったオブジェクトのステートを変更する。
+						m_objectAbove->SetBelongings(nullptr);				//乗っているものをnullに。
 						m_toHave = true;							//物を持つフラグ。
 						m_playerState = enIdleHave;					//ステート変更。
 					}
