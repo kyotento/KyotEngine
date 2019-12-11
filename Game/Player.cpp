@@ -1,8 +1,10 @@
 #include "stdafx.h"
 #include "Player.h"
 
-//#define SPRITE_TEST		//3DのSpriteのテストをするときに定義する。
-
+#define SPRITE_TEST		//3DのSpriteのテストをするときに定義する。
+//todo 持っているものの回転をプレイヤー依存にする。
+//todo プレイヤーを不k数出す仕組みを作る。
+//todo　包丁を描画しないように。
 namespace {
 	const float playerCollidedRadius = 45.f;			//カプセルコライダーの半径。
 	const float playerCollidedHeight = 50.f;			//カプセルコライダーの高さ。

@@ -41,6 +41,11 @@ public:
 	}
 
 	/// <summary>
+	/// ゲージの拡大処理。
+	/// </summary>
+	void PotGaugeExpansion();
+
+	/// <summary>
 	/// お鍋に入っている食べ物の種類を検索する。
 	/// </summary>
 	/// <returns>お鍋に入っている食べ物の種類</returns>

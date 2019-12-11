@@ -47,6 +47,11 @@ public:
 		return m_gaugeMax;
 	}
 
+	void GaugeHalf()
+	{
+		m_x = m_x / 2;
+	}
+
 private:
 
 	bool m_gaugeMax = false;

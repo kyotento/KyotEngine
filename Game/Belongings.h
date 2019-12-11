@@ -51,6 +51,12 @@ public:
 	void DeleteSoup(Belongings* belongings);
 
 	/// <summary>
+	/// ポットのゲージ拡大処理。
+	/// </summary>
+	/// <param name="belongings">持てるもの(鍋)</param>
+	void PotGaugeExpansion(Belongings* belongings);
+
+	/// <summary>
 	///	お皿に食べ物を置く処理。
 	/// </summary>
 	/// <param name="belongings">持てるもの</param>

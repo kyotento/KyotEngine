@@ -30,12 +30,14 @@ void Pot::Soup()
 {
 	if (m_potState == enTwo) {						//食べ物が二つ入っている状態。
 		m_soupPos.y += 25.f;						//食べ物が入ったように見せるためにY座標を上げる。
+		m_gauge->GaugeHalf();						//ゲージのスケールを半分にする。
 		m_potState = enThree;						//食べ物が三つ入った状態にする。
 	}
 
 	if (m_potState == enOne) {							//食べ物が一つ入っている状態のとき。
 		m_soupPos.y += 25.f;							//食べ物が入ったように見せるためにY座標を上げる。
 		m_potState = enTwo;								//ポットに食べ物が二つ入っている状態。
+		m_gauge->GaugeHalf();							//ゲージのスケールを半分にする。
 	}
 
 	if (m_potState == enZero) {							//ポットに何も入っていないとき。
@@ -43,7 +45,7 @@ void Pot::Soup()
 		m_soupBase->DecideTheSoupType(m_putSoupFoods);	//生成するスープを決める。
 		m_potState = enOne;								//ポットに食べ物が一つ入っている状態に。
 		m_gauge = NewGO<Gauge>(0, "gauge");				//ゲージを生成する。
-		m_gauge->SetPosition(m_position);				//ゲージの座標を指定。
+		m_gauge->SetPosition(m_gaugePos);				//ゲージの座標を指定。
 	}
 }
 
@@ -52,9 +54,9 @@ void Pot::DeleteLikeSoup()
 	m_potState = enZero;			//状態を何も入っていない状態に。
 	m_soupPos = m_position;			//座標を元に戻す。
 	DeleteGO(m_soupBase);			//スープのモデルを消す。
-	DeleteGO(m_check);
-	m_check = nullptr;
-	m_checkFlag = false;
+	DeleteGO(m_check);				//チェックマークを消す。
+	m_check = nullptr;		
+	m_checkFlag = false;			//チェックマークフラグをfalseに。
 }
 
 //状態変化。
@@ -79,23 +81,28 @@ void Pot::StateChange()
 	}
 }
 
+void Pot::PotGaugeExpansion()
+{
+	if (m_gauge != nullptr) {							//ゲージが生成されていたら。
+		m_gauge->SetPosition(m_gaugePos);				//ゲージの座標を指定。	
+		//todo 絶 コンロに載っているとき。
+		m_gauge->Expansion(10.f);						//ゲージの拡大処理。
+	}
+}
+
 void Pot::Update()
 {
 	m_skinModelRender->SetPosition(m_position);		//座標を更新。
 	m_soupPos.x = m_position.x;		//鍋のX座標をスープのX座標に代入。
 	m_soupPos.z = m_position.z;		//鍋のZ座標をスープのZ座標に代入。
 	m_gaugePos = m_position;		//ゲージの座標にお鍋の座標に代入。
+	m_gaugePos.x -= 50.f;
 	m_gaugePos.y += 100.f;			//Y軸を少し上げてやる。
+	m_gaugePos.z -= 70.f;
 
 	if (m_soupBase != nullptr) {						//スープが生成されていたら。
 		m_soupBase->SetPosition(m_soupPos);				//スープの座標を指定。
 	}
 
-	if (m_gauge != nullptr) {							//ゲージが生成されていたら。
-		m_gauge->SetPosition(m_gaugePos);				//ゲージの座標を指定。	
-		m_gauge->Expansion(5.f);						//ゲージの拡大処理。
-	}
-
 	StateChange();										//状態変化。
-
 }

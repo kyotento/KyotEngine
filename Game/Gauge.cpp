@@ -29,14 +29,14 @@ bool Gauge::Start()
 	//m_spriteRenderGauge->SetScale({ m_x,1.f,1.f });
 	//m_spriteRenderGauge->SetPivot(m_pivot);
 
-	//ゲージの基盤。
-	m_skinModelRender = NewGO<SkinModelRender>(2, "skinmodel");
-	m_skinModelRender->Init(L"Assets/modelData/2D/Gauge/GaugeSheet.cmo", nullptr, 0, "PSMain", "VSMain", true, false);
-	m_skinModelRender->SetPosition(m_position);
-	m_skinModelRender->SetScale({ 1.f,1.f,1.f });
+	////ゲージの基盤。
+	//m_skinModelRender = NewGO<SkinModelRender>(1, "skinmodel");
+	//m_skinModelRender->Init(L"Assets/modelData/2D/Gauge/GaugeSheet.cmo", nullptr, 0, "PSMain", "VSMain", true, false);
+	//m_skinModelRender->SetPosition(m_position);
+	//m_skinModelRender->SetScale({ 1.f,1.f,1.f });
 
 	//ゲージ。
-	m_skinModelRenderGauge = NewGO<SkinModelRender>(1, "skinModel");
+	m_skinModelRenderGauge = NewGO<SkinModelRender>(2, "skinModel");
 	m_skinModelRenderGauge->Init(L"Assets/modelData/2D/Gauge/Gauge.cmo", nullptr, 0, "PSMain", "VSMain", true, false);
 	m_skinModelRenderGauge->SetPosition(m_position);
 	m_skinModelRenderGauge->SetScale({ m_x, 1.f, 1.f });
@@ -61,12 +61,19 @@ void Gauge::Expansion(float a)
 
 void Gauge::Update()
 {
+	CVector3 oldPosition = m_position;
+
 //	m_skinModelRender->SetPosition(m_position);			//座標を更新。
 	m_skinModelRenderGauge->SetPosition(m_position);	//ゲージの座標を更新。
 
-	if (m_gaugeMax == false && m_x >= 1.f)
+	if (m_gaugeMax == false && m_x >= 1.f)		
 	{
 		m_gaugeMax = true;
+	}
+
+	if (m_gaugeMax == true && m_x < 1.f)
+	{
+		m_gaugeMax = false;
 	}
 
 }

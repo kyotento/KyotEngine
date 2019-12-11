@@ -44,6 +44,12 @@ void Belongings::SetPotFoodType(Belongings* powt, int fooType)
 	pot->SetPutSoupFoods(fooType);
 }
 
+void Belongings::PotGaugeExpansion(Belongings* belongings)
+{
+	Pot* pot = (Pot*)belongings;
+	pot->PotGaugeExpansion();
+}
+
 //‚¨M‚ÉH‚×•¨‚ğ’u‚­ˆ—B
 void Belongings::PutDishs(Belongings* belongings ,int FoodType)
 {
