@@ -294,6 +294,9 @@
     <ClCompile Include="sound\SoundSource.cpp">
       <Filter>Engine\sound</Filter>
     </ClCompile>
+    <ClCompile Include="Check.cpp">
+      <Filter>Game\2D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -535,6 +538,9 @@
     <ClInclude Include="sound\SoundSource.h">
       <Filter>Engine\sound</Filter>
     </ClInclude>
+    <ClInclude Include="Check.h">
+      <Filter>Game\2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">
@@ -628,6 +634,9 @@
       <Filter>Assets\modelData\2D</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\2D\Gauge\Gauge.FBX">
+      <Filter>Assets\modelData\2D</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\2D\Check\check.FBX">
       <Filter>Assets\modelData\2D</Filter>
     </MeshContentTask>
   </ItemGroup>

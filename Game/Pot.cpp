@@ -28,20 +28,6 @@ bool Pot::Start()
 //スープが投入されたときの処理。
 void Pot::Soup()
 {
-
-	//if (m_potState == enComplete)
-	//{
-	//	DeleteGO(m_gauge);							//ゲージを消す。
-	//	m_gauge = nullptr;
-	//}
-
-	////todo 仮　三つ入った時完成形。
-	//if (m_potState == enThree)
-	//{
-	//	if (m_gauge->GetGaugeMax()) {
-	//		m_potState = enComplete;
-	//	}
-	//}
 	if (m_potState == enTwo) {						//食べ物が二つ入っている状態。
 		m_soupPos.y += 25.f;						//食べ物が入ったように見せるためにY座標を上げる。
 		m_potState = enThree;						//食べ物が三つ入った状態にする。
@@ -66,6 +52,31 @@ void Pot::DeleteLikeSoup()
 	m_potState = enZero;			//状態を何も入っていない状態に。
 	m_soupPos = m_position;			//座標を元に戻す。
 	DeleteGO(m_soupBase);			//スープのモデルを消す。
+	DeleteGO(m_check);
+	m_check = nullptr;
+	m_checkFlag = false;
+}
+
+//状態変化。
+void Pot::StateChange()
+{
+	if (m_potState == enComplete)					//鍋の中身が完成しているとき。
+	{
+		DeleteGO(m_gauge);							//ゲージを消す。
+		m_gauge = nullptr;							//ゲージのインスタンスをnullに。
+		if (m_checkFlag == false) {
+			m_check = NewGO<Check>(0, "check");		//チェックマークを生成。
+			m_check->SetPosition(m_position);		//座標を更新。
+			m_checkFlag = true;						//チェック生成フラグをtrueに。
+		}
+	}
+
+	if (m_potState == enThree)						//食べ物が３個入っているとき。
+	{
+		if (m_gauge->GetGaugeMax()) {				//ゲージが最大値のとき。
+			m_potState = enComplete;				//食べ物の状態を完成状態に。
+		}
+	}
 }
 
 void Pot::Update()
@@ -85,17 +96,6 @@ void Pot::Update()
 		m_gauge->Expansion(5.f);						//ゲージの拡大処理。
 	}
 
-	if (m_potState == enComplete)					//鍋の中身が完成しているとき。
-	{
-		DeleteGO(m_gauge);							//ゲージを消す。
-		m_gauge = nullptr;							//ゲージのインスタンスをnullに。
-	}
-
-	if (m_potState == enThree)						//食べ物が３個入っているとき。
-	{
-		if (m_gauge->GetGaugeMax()) {				//ゲージが最大値のとき。
-			m_potState = enComplete;				//食べ物の状態を完成状態に。
-		}
-	}
+	StateChange();										//状態変化。
 
 }

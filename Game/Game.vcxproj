@@ -100,6 +100,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="character\CharacterController.cpp" />
+    <ClCompile Include="Check.cpp" />
     <ClCompile Include="Cuisine.cpp" />
     <ClCompile Include="CuttingBoard.cpp" />
     <ClCompile Include="CuttingDesk.cpp" />
@@ -179,6 +180,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character\CharacterController.h" />
+    <ClInclude Include="Check.h" />
     <ClInclude Include="CIndexBuffer.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="Cuisine.h" />
@@ -263,6 +265,7 @@
     <ClInclude Include="VertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
+    <MeshContentTask Include="Assets\modelData\2D\Check\check.FBX" />
     <MeshContentTask Include="Assets\modelData\2D\Gauge\Gauge.FBX" />
     <MeshContentTask Include="Assets\modelData\2D\Gauge\GaugeSheet.FBX" />
     <MeshContentTask Include="Assets\modelData\Chef\chef_1.FBX" />

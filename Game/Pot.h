@@ -5,6 +5,7 @@
 #include "Belongings.h"
 #include "SoupBase.h"
 #include "Gauge.h"
+#include "Check.h"
 
 class Pot : public Belongings
 {
@@ -14,6 +15,11 @@ public:
 
 	bool Start();
 	void Update();
+
+	/// <summary>
+	/// 状態を変化させる。
+	/// </summary>
+	void StateChange();
 
 	/// <summary>
 	/// スープが投入された時の処理
@@ -47,6 +53,8 @@ private:
 
 	int m_putSoupFoods = 0;			//お鍋に入っている食べ物の種類。
 
+	bool m_checkFlag = false;		//チェックマークが生成されているかどうか。
+
 	CVector3 m_soupPos = CVector3::Zero();			//スープの座標。
 	CVector3 m_gaugePos = CVector3::Zero();			//ゲージの座標。
 
@@ -54,5 +62,6 @@ private:
 	SoupBase* m_soupBase = nullptr;			//スープ部分。
 	Gauge* m_gauge = nullptr;				//ゲージ。
 	Belongings* m_food = nullptr;			//食べ物。
+	Check* m_check = nullptr;				//チェックマーク。
 
 };
