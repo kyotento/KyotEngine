@@ -26,7 +26,7 @@ public:
 	}
 
 
-	virtual ~GameObject();
+	virtual ~GameObject();		//仮想にしておかないとデストラクタが呼ばれないくなる。(そういう仕様ですC++)。
 
 	/// <summary>
 	/// スタート関数。

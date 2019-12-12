@@ -44,10 +44,10 @@ void SkinModelRender::Render()
 void SkinModelRender::RenderAfterPostEffect()
 {
 	if (m_drawAfterPostEffect) {				//ポストエフェクト後に書くなら。
-		m_skinModel.Draw(enRenderMode_Normal, g_camera3D.GetViewMatrix(), g_camera3D.GetProjectionMatrix());		//更新処理。
 		m_rotation = g_camera3D.GetCameraQuauternion();			//カメラの回転をモデルの回転軸に代入。(モデルが正面に向くため2Dに見える)。
 		m_skinModel.SetShadowReciever(false);					//影がかからない。
 		SetShadowCasterFlag(false);								//影を出さない。
+		m_skinModel.Draw(enRenderMode_Normal, g_camera3D.GetViewMatrix(), g_camera3D.GetProjectionMatrix());		//更新処理。
 	}
 }
 

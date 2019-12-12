@@ -3,7 +3,7 @@
 
 //#define SPRITE_TEST		//3DのSpriteのテストをするときに定義する。
 //todo 持っているものの回転をプレイヤー依存にする。
-//todo プレイヤーを不k数出す仕組みを作る。
+//todo プレイヤーを複数出す仕組みを作る。
 //todo　包丁を描画しないように。
 //todo　物をとった時、ObjectAboveのm_belongingsをnullにする。
 namespace {
@@ -70,11 +70,11 @@ void Player::Update()
 	m_testScale.x = m_x;
 
 	m_skinModelRender2->SetScale(m_testScale);
+	//m_skinModelRender2->SetPosition(m_position);
 
 #endif
 
 
-	//m_skinModelRender2->SetPosition(m_position);
 }
 
 //プレイヤーの移動処理。

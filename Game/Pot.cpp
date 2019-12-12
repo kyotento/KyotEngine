@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "Pot.h"
 
+namespace {
+	CVector3 checkPos;		//チェックマークの座標。
+}
 
 Pot::Pot()
 {
@@ -8,12 +11,9 @@ Pot::Pot()
 	m_identification = enKitchenWare;
 }
 
-
 Pot::~Pot()
 {
-//	DeleteGO(m_skinModelRender);
 }
-
 
 bool Pot::Start()
 {
@@ -49,27 +49,53 @@ void Pot::Soup()
 	}
 }
 
+//todo 画像の切り替えをpotでやるのではなく、クラスを作ってやったほうがいいかも。
+
+//スープを消す処理。
 void Pot::DeleteLikeSoup()
 {
 	m_potState = enZero;			//状態を何も入っていない状態に。
 	m_soupPos = m_position;			//座標を元に戻す。
 	DeleteGO(m_soupBase);			//スープのモデルを消す。
-	DeleteGO(m_check);				//チェックマークを消す。
-	m_check = nullptr;		
+
+	if (m_check != nullptr) {		//生成されていたら。
+		DeleteGO(m_check);			//チェックマークを消す。
+		m_check = nullptr;			//nullに。
+	}
+	if (m_danger != nullptr) {		//生成されていたら。
+		DeleteGO(m_danger);			//危険マークを消す。
+		m_danger = nullptr;			//nullに。
+		m_dangerFlag = false;		//生成されていないのでfalseに変更する。
+	}
+	if (m_fire != nullptr) {		//生成されていたら。
+		DeleteGO(m_fire);			//火事マークを消す。
+		m_fire = nullptr;			//nullに。
+		m_fireFlag = false;			//生成されていないのでfalseに変更する。
+	}
+
 	m_checkFlag = false;			//チェックマークフラグをfalseに。
+	m_dangerStartTimer = 0.f;		//タイマーをリセット。
+
 }
 
 //状態変化。
 void Pot::StateChange()
 {
+	//チェックマークの座標更新。
+	checkPos = m_position;			//チェックマークの座標にお鍋の座標を代入。
+	checkPos.y += 100.f;			//Y軸を少し上げてやる。
+	checkPos.z -= 70.f;				//少し手前に。
+
 	if (m_potState == enComplete)					//鍋の中身が完成しているとき。
 	{
 		DeleteGO(m_gauge);							//ゲージを消す。
 		m_gauge = nullptr;							//ゲージのインスタンスをnullに。
 		if (m_checkFlag == false) {
 			m_check = NewGO<Check>(0, "check");		//チェックマークを生成。
-			m_check->SetPosition(m_position);		//座標を更新。
 			m_checkFlag = true;						//チェック生成フラグをtrueに。
+		}
+		if (m_check != nullptr) {
+			m_check->SetPosition(checkPos);			//座標を更新。
 		}
 	}
 
@@ -81,10 +107,54 @@ void Pot::StateChange()
 	}
 }
 
+//ゲージの拡大処理。(お鍋がコンロの上にある時のみ呼ばれる)。
 void Pot::PotGaugeExpansion()
 {
 	if (m_gauge != nullptr) {							//ゲージが生成されていたら。
 		m_gauge->Expansion(10.f);						//ゲージの拡大処理。
+	}
+	if (m_check != nullptr || m_danger != nullptr) {
+		m_dangerStartTimer += 1.f / 60.f;		//todo　実際はgetFrameDeltaTime。
+	}
+}
+
+//2Dの座標更新関数。
+void Pot::Vector2DUpdate()
+{
+	//ゲージの座標更新。
+	m_gaugePos = m_position;		//ゲージの座標にお鍋の座標に代入。
+	m_gaugePos.x -= 50.f;			//左に寄せる。
+	m_gaugePos.y += 100.f;			//Y軸を少し上げてやる。
+	m_gaugePos.z -= 70.f;			
+
+}
+
+//危険マーク描画処理。
+void Pot::Danger2D()
+{
+	if (m_dangerFlag == false && m_dangerStartTimer >= 5.f && m_dangerStartTimer <= 10.f) {		//危険マークが生成されていない、且つタイマーが経過していた時。
+		m_danger = NewGO<Danger>(0, "danger");			//画像を生成。
+		DeleteGO(m_check);								//チェックマークを消す。
+		m_check = nullptr;								//チェックマークのインスタンスを消す。
+		m_dangerFlag = true;							//生成フラグを返す。
+	}
+	if (m_danger != nullptr) {							//危険マークが生成されているとき。
+		m_danger->SetPosition(checkPos);				//座標更新。
+	}
+}
+
+//火事マーク描画処理。
+void Pot::Fire2D()
+{
+	if (m_fireFlag == false && m_dangerStartTimer > 10.f) {		//火事マークが生成されていない、且つタイマーが経過していた時。	
+		m_fire = NewGO<Fire>(0, "fire");				//画像を生成。
+		DeleteGO(m_danger);								//危険マークを消す。
+		m_danger = nullptr;								//危険マークのインスタンスを消す。
+		m_dangerFlag = false;							//生成されてないのでフラグを返す。
+		m_fireFlag = true;								//生成フラグを返す。
+	}
+	if (m_fire != nullptr) {							//火事マークが生成されているとき。
+		m_fire->SetPosition(checkPos);				//座標を更新。
 	}
 }
 
@@ -93,10 +163,6 @@ void Pot::Update()
 	m_skinModelRender->SetPosition(m_position);		//座標を更新。
 	m_soupPos.x = m_position.x;		//鍋のX座標をスープのX座標に代入。
 	m_soupPos.z = m_position.z;		//鍋のZ座標をスープのZ座標に代入。
-	m_gaugePos = m_position;		//ゲージの座標にお鍋の座標に代入。
-	m_gaugePos.x -= 50.f;
-	m_gaugePos.y += 100.f;			//Y軸を少し上げてやる。
-	m_gaugePos.z -= 70.f;
 
 	if (m_soupBase != nullptr) {						//スープが生成されていたら。
 		m_soupBase->SetPosition(m_soupPos);				//スープの座標を指定。
@@ -106,4 +172,7 @@ void Pot::Update()
 	}
 
 	StateChange();										//状態変化。
+	Vector2DUpdate();									//2Dの座標更新。
+	Danger2D();											//危険マーク描画処理。
+	Fire2D();											//火事マーク描画処理。
 }

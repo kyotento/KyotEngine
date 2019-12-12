@@ -297,6 +297,12 @@
     <ClCompile Include="Check.cpp">
       <Filter>Game\2D</Filter>
     </ClCompile>
+    <ClCompile Include="Danger.cpp">
+      <Filter>Game\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Fire.cpp">
+      <Filter>Game\2D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -541,6 +547,12 @@
     <ClInclude Include="Check.h">
       <Filter>Game\2D</Filter>
     </ClInclude>
+    <ClInclude Include="Danger.h">
+      <Filter>Game\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Fire.h">
+      <Filter>Game\2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">
@@ -637,6 +649,12 @@
       <Filter>Assets\modelData\2D</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\2D\Check\check.FBX">
+      <Filter>Assets\modelData\2D</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\2D\Fire\fire.FBX">
+      <Filter>Assets\modelData\2D</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\2D\Danger\danger.FBX">
       <Filter>Assets\modelData\2D</Filter>
     </MeshContentTask>
   </ItemGroup>

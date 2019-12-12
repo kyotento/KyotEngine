@@ -104,6 +104,7 @@
     <ClCompile Include="Cuisine.cpp" />
     <ClCompile Include="CuttingBoard.cpp" />
     <ClCompile Include="CuttingDesk.cpp" />
+    <ClCompile Include="Danger.cpp" />
     <ClCompile Include="Delivery.cpp" />
     <ClCompile Include="Desk.cpp" />
     <ClCompile Include="Dish.cpp" />
@@ -112,6 +113,7 @@
     <ClCompile Include="DustBox.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Belongings.cpp" />
+    <ClCompile Include="Fire.cpp" />
     <ClCompile Include="FoodBox.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -187,6 +189,7 @@
     <ClInclude Include="CuttingBoard.h" />
     <ClInclude Include="CuttingDesk.h" />
     <ClInclude Include="CVertexBuffer.h" />
+    <ClInclude Include="Danger.h" />
     <ClInclude Include="Delivery.h" />
     <ClInclude Include="Desk.h" />
     <ClInclude Include="Dish.h" />
@@ -195,6 +198,7 @@
     <ClInclude Include="DustBox.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Belongings.h" />
+    <ClInclude Include="Fire.h" />
     <ClInclude Include="FoodBox.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
@@ -266,6 +270,8 @@
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\2D\Check\check.FBX" />
+    <MeshContentTask Include="Assets\modelData\2D\Danger\danger.FBX" />
+    <MeshContentTask Include="Assets\modelData\2D\Fire\fire.FBX" />
     <MeshContentTask Include="Assets\modelData\2D\Gauge\Gauge.FBX" />
     <MeshContentTask Include="Assets\modelData\2D\Gauge\GaugeSheet.FBX" />
     <MeshContentTask Include="Assets\modelData\Chef\chef_1.FBX" />
