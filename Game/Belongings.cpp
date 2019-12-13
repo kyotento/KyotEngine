@@ -64,6 +64,61 @@ void Belongings::PutDishFromKitchen(Belongings* belongings, Kitchen* kitchen)
 	dish->DeleteDishList(kitchen);
 }
 
+// ゲージ生成、拡大、画像差し替えを担う関数。
+void Belongings::GaugeGeneration()
+{
+	if (m_GaugeGenerationFlag == false) {			//ゲージが生成されていなければ。
+		m_gauge = NewGO<Gauge>(0, "gauge");			//ゲージを生成する。
+		m_gaugePos = m_position;					//ゲージの座標にモデルの座標を代入。
+		m_gaugePos.x -= 50.f;						//左に寄せる。
+		m_gaugePos.y += 100.f;						//Y軸を少し上げてやる。
+		m_gaugePos.z -= 70.f;						//少し手前に寄せる。	
+		m_gauge->SetPosition(m_gaugePos);			//ゲージの座標を更新。
+		m_GaugeGenerationFlag = true;				//ゲージが生成されたのでフラグを返す。
+	}
+
+	if (m_gauge != nullptr){						//ゲージが生成されていたならば。
+		m_gauge->Magnification(1.f, 5.f);			//ゲージを拡大する。
+	}
+
+	if (m_gauge != nullptr && m_gauge->GetGaugeMax())			//ゲージが最大になったら。
+	{
+		m_foodState = enCutting;		//食べ物の状態を切られた状態に。
+		DeleteGO(m_gauge);				//ゲージを消す。
+		m_gauge = nullptr;				//ゲージのインスタンスを消す。
+		m_check = NewGO<Check>(0, "check");
+	}
+
+}
+
+//ゲージの座標更新。
+void Belongings::GaugePosUpdate()
+{
+	if (m_gauge != nullptr)
+	{
+		m_gaugePos = m_position;
+		m_gaugePos.x -= 50.f;			//左に寄せる。
+		m_gaugePos.y += 100.f;			//Y軸を少し上げてやる。
+		m_gaugePos.z -= 70.f;
+		m_gauge->SetPosition(m_gaugePos);
+	}
+
+	if (m_check != nullptr) {
+		m_gaugePos = m_position;
+		m_gaugePos.y += 100.f;			//Y軸を少し上げてやる。
+		m_gaugePos.z -= 70.f;
+		m_check->SetPosition(m_gaugePos);
+		m_checkDeleteTimer += 1.f / 60.f;
+
+		if (m_checkDeleteTimer >= 1.f) {
+			DeleteGO(m_check);
+			m_check = nullptr;
+		}
+
+	}
+
+}
+
 void Belongings::Update()
 {
 

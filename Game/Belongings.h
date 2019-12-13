@@ -3,6 +3,8 @@
 /// </summary>
 #pragma once
 #include "StageObject.h"
+#include "Gauge.h"
+#include "Check.h"
 
 class Kitchen;
 
@@ -68,6 +70,16 @@ public:
 	/// <param name="belongings">持てるもの(お皿)</param>
 	/// <param name="Kitchen">お皿洗い場</param>
 	void PutDishFromKitchen(Belongings* belongings, Kitchen* kitchen);
+
+	/// <summary>
+	/// ゲージ生成、拡大、画像差し替えを担う関数。
+	/// </summary>
+	void GaugeGeneration();
+
+	/// <summary>
+	/// ゲージの座標更新関数。
+	/// </summary>
+	void GaugePosUpdate();
 
 	/// <summary>	
 	/// 食べ物の状態。
@@ -151,7 +163,12 @@ public:
 
 protected:		
 
+	float m_checkDeleteTimer = 0.f;			//チェックマークを消すタイマー。
+
 	bool m_CuttingModel = false;			//切られたモデルになっているか。
+	bool m_GaugeGenerationFlag = false;		//ゲージが生成されたか。
+
+	CVector3 m_gaugePos = CVector3::Zero(); 			//生成されたゲージの座標。
 														//todo コンストラクタ設定めんどい。
 	IdentificationValue m_identification = enFood;		//オブジェクト系統の設定。(各クラスのコンストラクタで設定してあげる必要がある)。
 
@@ -160,6 +177,9 @@ protected:
 	FoodTypeState m_foodTypeState = enTomato;			//食べ物の種類。
 
 	PotState m_potState = enZero;			//鍋の状態を格納したもの。
+
+	Gauge* m_gauge = nullptr;
+	Check* m_check = nullptr;
 
 private:
 

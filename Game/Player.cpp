@@ -528,17 +528,22 @@ void Player::CuttingObject()
 {
 	//todo ゲージを描画して拡大率を操作する。　
 //	m_gauge = NewGO<Gauge>(0, "gauge");
-////	m_objectAbove->SetGaugePosition(m_gauge);
-//	//todo 絶　圧倒的仮。
-//	CVector3 hoge = m_position;
-//	hoge.y -= 150.f;
-//	m_gauge->SetPosition(hoge);
+//	m_objectAbove->SetGaugePosition(m_gauge);
+	//todo 絶　圧倒的仮。
+//	CVector3 hoge = m_belongings->GetPosition();
+////	hoge.y -= 150.f;
+//	hoge.x -= 50.f;			//左に寄せる。
+//	hoge.y += 100.f;			//Y軸を少し上げてやる。
+//	hoge.z -= 70.f;
 //
+//	m_gauge->SetPosition(hoge);
+
 	m_objectAbove->TakeThings(m_belongings);		//置いてあるオブジェクトを検索。
 
-//	m_gauge->Expansion();
+	m_belongings->GaugeGeneration();				//ゲージを生成する。
+
 //	if (m_gauge->GetScale()) {		//2D拡大率１なら。
-		m_belongings->SetState(Belongings::enCutting);	//持てるものを切られている状態にする。
+	//	m_belongings->SetState(Belongings::enCutting);	//持てるものを切られている状態にする。
 //	}
 	
 }

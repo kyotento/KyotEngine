@@ -41,4 +41,6 @@ void Tomato::Update()
 			m_CuttingModel = true;
 		}
 	}
+
+	GaugePosUpdate();			//生成されたゲージの座標を更新。
 }

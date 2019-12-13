@@ -10,6 +10,9 @@ public:
 	bool Start();
 	void Update();
 
+//	void GaugeGeneration();
+
+
 private:
 
 };

@@ -24,7 +24,6 @@ bool Onion::Start()
 	m_skinModelRender->SetScale(m_scale);
 	m_skinModelRender->SetRotation(m_rotation);
 
-
 	return true;
 }
 
@@ -42,5 +41,5 @@ void Onion::Update()
 			m_CuttingModel = true;
 		}
 	}
-
+	GaugePosUpdate();			//生成されたゲージの座標を更新。
 }
