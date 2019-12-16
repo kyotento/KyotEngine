@@ -51,7 +51,6 @@ bool Gauge::Start()
 //ゲージを拡大する処理。
 void Gauge::Expansion(float time)
 {
-	//todo 絶　切った時に拡大する。Xが１になると切られた状態にする。0.2秒に一回切る。
 	float ExpensionSpeed;
 	ExpensionSpeed = 1 / (time * 60.f);		//引数秒で拡大率を１にするための計算。
 

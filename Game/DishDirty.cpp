@@ -32,7 +32,7 @@ void DishDirty::AddDish()
 
 void DishDirty::DeleteDishs()
 {
-
+	DeleteGauge();
 	DeleteGO(m_dishDirtyList.back());		//一番最後に生成したお皿を消す。
 	m_dishDirtyList.pop_back();				//一番最後のリストの要素が消える。
 	m_dirtyDishNum -= 1;					//お皿の数を減らす。

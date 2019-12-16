@@ -65,7 +65,7 @@ void Belongings::PutDishFromKitchen(Belongings* belongings, Kitchen* kitchen)
 }
 
 // ゲージ生成、拡大、画像差し替えを担う関数。
-void Belongings::GaugeGeneration()
+void Belongings::GaugeGeneration(bool enlargedDivision, float time, float numberOfTimer, bool checkGeneration)
 {
 	if (m_GaugeGenerationFlag == false) {			//ゲージが生成されていなければ。
 		m_gauge = NewGO<Gauge>(0, "gauge");			//ゲージを生成する。
@@ -77,8 +77,14 @@ void Belongings::GaugeGeneration()
 		m_GaugeGenerationFlag = true;				//ゲージが生成されたのでフラグを返す。
 	}
 
-	if (m_gauge != nullptr){						//ゲージが生成されていたならば。
-		m_gauge->Magnification(1.f, 5.f);			//ゲージを拡大する。
+	if (m_gauge != nullptr) {						//ゲージが生成されていたならば。
+		if (enlargedDivision) {						//拡大分割をする場合。
+			m_gauge->Magnification(time, numberOfTimer);			//ゲージを拡大する。
+		}
+
+		if (enlargedDivision == false) {			//拡大分割をしない場合。
+			m_gauge->Expansion(time);				//ゲージを拡大する。
+		}
 	}
 
 	if (m_gauge != nullptr && m_gauge->GetGaugeMax())			//ゲージが最大になったら。
@@ -86,7 +92,9 @@ void Belongings::GaugeGeneration()
 		m_foodState = enCutting;		//食べ物の状態を切られた状態に。
 		DeleteGO(m_gauge);				//ゲージを消す。
 		m_gauge = nullptr;				//ゲージのインスタンスを消す。
-		m_check = NewGO<Check>(0, "check");
+		if (checkGeneration) {			//ちぇっくまーくを生成する処理のとき。
+			m_check = NewGO<Check>(0, "check");					//チェックマークを生成する。
+		}
 	}
 
 }
@@ -114,9 +122,13 @@ void Belongings::GaugePosUpdate()
 			DeleteGO(m_check);
 			m_check = nullptr;
 		}
-
 	}
+}
 
+void Belongings::DeleteGauge()
+{
+	DeleteGO(m_gauge);
+	DeleteGO(m_check);
 }
 
 void Belongings::Update()

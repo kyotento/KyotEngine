@@ -74,12 +74,21 @@ public:
 	/// <summary>
 	/// ゲージ生成、拡大、画像差し替えを担う関数。
 	/// </summary>
-	void GaugeGeneration();
+	/// <param name="enlargedDivision">拡大を分割するか</param>
+	/// <param name="time">拡大時間</param>
+	/// <param name="numberOfTimer">分割回数</param>
+	/// <param name="checkGeneration">チェックマークを生成するか</param>
+	void GaugeGeneration(bool enlargedDivision, float time, float numberOfTimer = 0.f, bool checkGeneration = true);
 
 	/// <summary>
 	/// ゲージの座標更新関数。
 	/// </summary>
 	void GaugePosUpdate();
+
+	/// <summary>
+	/// ゲージを消す処理。
+	/// </summary>
+	void DeleteGauge();
 
 	/// <summary>	
 	/// 食べ物の状態。

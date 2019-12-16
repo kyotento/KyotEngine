@@ -386,8 +386,8 @@ void Player::NoRidePutDishs()
 	}
 }
 
-//何も乗っていないときに汚れたお皿を置く処理。
-void Player::NoRidePutDirtyDishs()
+//汚れたお皿を置く処理。
+void Player::PutDirtyDishs()
 {
 	if (userIndexNum == ObjectAbove::enKitchen) {					//お皿洗い場のとき。
 		m_objectAbove->SetDirtyDishPos(m_belongings);				//設置物の座標にオブジェクトの座標を代入。
@@ -426,12 +426,12 @@ void Player::PutObjects(int controllerNum)
 
 					NoRidePutDishs();
 				}
+			}
 
-				//持っているものが汚れたお皿のとき。
-				if (m_belongings->GetIndentValue() == Belongings::enDirtyDish) {
+			//持っているものが汚れたお皿のとき。
+			if (m_belongings->GetIndentValue() == Belongings::enDirtyDish) {
 
-					NoRidePutDirtyDishs();
-				}
+				PutDirtyDishs();
 			}
 
 			//オブジェクトに何か乗っているとき。
@@ -442,7 +442,8 @@ void Player::PutObjects(int controllerNum)
 					if (m_belongings->GetFoodState() == Belongings::enCutting) {			//持っているオブジェクトが切られているとき。
 						m_objectAbove->TakeThings(m_cacth);			//乗っているオブジェクトを検索する。
 						if (m_cacth->GetIndentValue() == Belongings::enKitchenWare) {			//乗っているものが調理器具だった場合。
-							if ( m_cacth->GetPotState() == Belongings::enZero) {			//お鍋に何も入ってないとき。
+							//お鍋に何も入ってないとき。
+							if ( m_cacth->GetPotState() == Belongings::enZero) {			
 								m_cacth->SetPotFoodType(m_cacth, m_belongings->GetFoodTypeState());			//お鍋に入れる食べ物を設定する。
 								m_cacth->SetSoupBase(m_cacth);				//鍋にスープを入れる(それっぽいオブジェクトの生成)処理。
 								m_cacth->SetFoodTypeState(m_belongings->GetFoodTypeState());
@@ -526,26 +527,9 @@ void Player::PickUpObjects(int controllerNum)
 
 void Player::CuttingObject()
 {
-	//todo ゲージを描画して拡大率を操作する。　
-//	m_gauge = NewGO<Gauge>(0, "gauge");
-//	m_objectAbove->SetGaugePosition(m_gauge);
-	//todo 絶　圧倒的仮。
-//	CVector3 hoge = m_belongings->GetPosition();
-////	hoge.y -= 150.f;
-//	hoge.x -= 50.f;			//左に寄せる。
-//	hoge.y += 100.f;			//Y軸を少し上げてやる。
-//	hoge.z -= 70.f;
-//
-//	m_gauge->SetPosition(hoge);
-
 	m_objectAbove->TakeThings(m_belongings);		//置いてあるオブジェクトを検索。
 
-	m_belongings->GaugeGeneration();				//ゲージを生成する。
-
-//	if (m_gauge->GetScale()) {		//2D拡大率１なら。
-	//	m_belongings->SetState(Belongings::enCutting);	//持てるものを切られている状態にする。
-//	}
-	
+	m_belongings->GaugeGeneration(true, 1.f, 5.f);				//ゲージを生成する。
 }
 
 //包丁をプレイヤーに持たせる処理。

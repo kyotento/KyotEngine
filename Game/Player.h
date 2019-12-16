@@ -99,9 +99,9 @@ public:
 	void NoRidePutDishs();
 
 	/// <summary>
-	///	何も乗っていないときに汚れたお皿を置く処理。
+	///	汚れたお皿を置く処理。
 	/// </summary>
-	void NoRidePutDirtyDishs();
+	void PutDirtyDishs();
 
 	/// <summary>
 	/// オブジェクトを拾う。
@@ -188,7 +188,7 @@ protected:
 	float m_transitionTime = 0.1f;							//アニメーションが切り替わるときの遷移時間。
 	float m_moveSpeed = 7.5f;								//移動速度。
 	float m_fallSpeed = 9.8f;								//落下速度。
-	float m_distance = 90.0f;								//Rayの飛ばせる距離。
+	float m_distance = 85.0f;								//Rayの飛ばせる距離。
 	float m_noLongerZero = 0.00001f;						//限りなく０に近い値。
 	float m_putTimer = 0.5f;								//持ったオブジェクトを置けるようになるまでの時間。
 

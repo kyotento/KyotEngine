@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "Kitchen.h"
 
+namespace {
+	int kari = 0;
+}
 
 Kitchen::Kitchen()
 {
@@ -44,6 +47,7 @@ void Kitchen::DishWashing()
 
 	if (m_dishDirty->GetDirtyDishNum() > 0) {		//汚れたお皿が乗っているとき。
 		m_timerK += 1;			//タイマーを進める。
+		m_dishDirty->GaugeGeneration(false, 1.9f, 0.f, false);
 
 		if (m_timerK >= 120) {		//２秒以上たったとき。
 
@@ -84,6 +88,7 @@ void Kitchen::DishWashing()
 			}
 		}
 	}
+	kari = m_dishDirty->GetDirtyDishNum();
 }
 
 //お皿のインスタンスを消す処理。
@@ -95,7 +100,6 @@ void Kitchen::DeleteDishInstance()
 			m_dish = nullptr;					//お皿のインスタンスをnullに。
 		}
 	}
-
 }
 
 //更新処理。
@@ -105,5 +109,4 @@ void Kitchen::Update()
 	{
 		m_state = en_default;			//状態を何も乗っていない状態に。
 	}
-
 }
