@@ -62,7 +62,6 @@ void Player::Update()
 	if (m_playerState != enanimationClip_Cut) {		//もし切っている状態じゃないとき。
 		m_knife->SetPosition(m_position);			//ナイフの座標を指定。
 	}
-
 #ifdef SPRITE_TEST
 
 //	m_x += 0.1f;
@@ -117,16 +116,19 @@ void Player::Rotation()
 	//	m_skinModelRender->SetRotation(m_rotation);
 	//}
 
-	m_YisDie = m_move;
-	m_YisDie.y = 0.0f;
+	m_YisDie = m_move;		//移動速度(方向持ち)を代入。
+	m_YisDie.y = 0.0f;		//Y軸は必要ないので0を代入。
 
 	//移動しているなら。
-	if (m_YisDie.Length() > m_noLongerZero){
+	if (m_YisDie.Length() > m_noLongerZero){		
 		
-		m_YisDie.Normalize();
-		m_rotation.SetRotation({ 0.0f,  1.0f,  0.0f }, atan2f(m_YisDie.x, m_YisDie.z));
-		m_skinModelRender->SetRotation(m_rotation);
+		m_YisDie.Normalize();				//正規化して向きを求める。
+		m_rotation.SetRotation({ 0.0f,  1.0f,  0.0f }, atan2f(m_YisDie.x, m_YisDie.z));			//回転を計算。
+		m_skinModelRender->SetRotation(m_rotation);				//モデルの回転を更新する。
+	}
 
+	if (m_belongings != nullptr && m_toHave == true) {			//何か持っちるとき。
+		m_belongings->SetRotation(m_rotation);					//持っているものの回転を更新する。
 	}
 
 }
@@ -255,7 +257,7 @@ void Player::ForwardDirectionRay(int controllerNum)
 //プレイヤーの状態による動作処理。
 void Player::ActionProcessing(int controllerNum)
 {
-	switch (m_playerState)
+	switch (m_playerState)		//プレイヤーの状態。
 	{
 	case enIdle:		//待機状態のとき。
 
@@ -516,6 +518,7 @@ void Player::PickUpObjects(int controllerNum)
 							m_belongings = NewGO<Dish>(0, "dish");			//新しくお皿を生成する。
 							m_toHave = true;								//物を持つフラグ。
 							m_playerState = enIdleHave;						//ステート変更。
+							//todo 絶　一瞬お皿が初期座標に生成されるバグを治す。　
 						}
 					}
 				}

@@ -88,6 +88,12 @@
     <Filter Include="Game\2D\Icon">
       <UniqueIdentifier>{85799918-81eb-40e0-a2f9-4819b993536f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\2D\Stage\Order">
+      <UniqueIdentifier>{4099d64c-18d3-4a9f-906d-ac5afab8df75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\sprite\orderSheet">
+      <UniqueIdentifier>{c8cab3d2-5dd7-4162-bab8-36c54b1334b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -308,6 +314,9 @@
     </ClCompile>
     <ClCompile Include="Fire.cpp">
       <Filter>Game\2D\Icon</Filter>
+    </ClCompile>
+    <ClCompile Include="OrderSheet.cpp">
+      <Filter>Game\2D\Stage\Order</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -559,6 +568,9 @@
     <ClInclude Include="Fire.h">
       <Filter>Game\2D\Icon</Filter>
     </ClInclude>
+    <ClInclude Include="OrderSheet.h">
+      <Filter>Game\2D\Stage\Order</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">
@@ -679,6 +691,15 @@
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\coin.png">
       <Filter>Assets\sprite</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\orderSheet\Food_Sheet.png">
+      <Filter>Assets\sprite\orderSheet</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\orderSheet\Food_Sheet2.png">
+      <Filter>Assets\sprite\orderSheet</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\orderSheet\Food_Sheet3.png">
+      <Filter>Assets\sprite\orderSheet</Filter>
     </ImageContentTask>
   </ItemGroup>
   <ItemGroup>

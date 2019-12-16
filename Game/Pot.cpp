@@ -19,6 +19,7 @@ bool Pot::Start()
 {
 	m_skinModelRender->Init(L"Assets/modelData/Pot/Pot.cmo");		//初期化、
 	m_skinModelRender->SetPosition(m_position);						//座標指定。
+	m_skinModelRender->SetRotation(m_rotation);
 
 	m_soupPos = m_position;			//スープの座標をお鍋の座標に代入。
 
@@ -44,7 +45,7 @@ void Pot::Soup()
 		m_soupBase = NewGO<SoupBase>(0, "soup");		//スープの部分を生成する。	
 		m_soupPos.x = m_position.x;		//鍋のX座標をスープのX座標に代入。
 		m_soupPos.z = m_position.z;		//鍋のZ座標をスープのZ座標に代入。
-		m_soupBase->SetPosition(m_soupPos);
+		m_soupBase->SetPosition(m_soupPos);				//スープの座標を設定する。
 		m_soupBase->DecideTheSoupType(m_putSoupFoods);	//生成するスープを決める。
 		m_potState = enOne;								//ポットに食べ物が一つ入っている状態に。
 		m_gauge = NewGO<Gauge>(0, "gauge");				//ゲージを生成する。
@@ -164,6 +165,7 @@ void Pot::Fire2D()
 void Pot::Update()
 {
 	m_skinModelRender->SetPosition(m_position);		//座標を更新。
+	m_skinModelRender->SetRotation(m_rotation);		//回転を更新。
 	m_soupPos.x = m_position.x;		//鍋のX座標をスープのX座標に代入。
 	m_soupPos.z = m_position.z;		//鍋のZ座標をスープのZ座標に代入。
 

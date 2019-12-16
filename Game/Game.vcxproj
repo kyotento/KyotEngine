@@ -146,6 +146,7 @@
     <ClCompile Include="ObjectAbove.cpp" />
     <ClCompile Include="Onion.cpp" />
     <ClCompile Include="OnionBox.cpp" />
+    <ClCompile Include="OrderSheet.cpp" />
     <ClCompile Include="physics\MeshCollider.cpp" />
     <ClCompile Include="physics\Physics.cpp" />
     <ClCompile Include="physics\PhysicsStaticObject.cpp" />
@@ -232,6 +233,7 @@
     <ClInclude Include="ObjectAbove.h" />
     <ClInclude Include="Onion.h" />
     <ClInclude Include="OnionBox.h" />
+    <ClInclude Include="OrderSheet.h" />
     <ClInclude Include="PhysicsDebugDraw.h" />
     <ClInclude Include="physics\ICollider.h" />
     <ClInclude Include="physics\MeshCollider.h" />
@@ -322,6 +324,11 @@
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\coin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\orderSheet\Food_Sheet.png" />
+    <ImageContentTask Include="Assets\sprite\orderSheet\Food_Sheet2.png" />
+    <ImageContentTask Include="Assets\sprite\orderSheet\Food_Sheet3.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

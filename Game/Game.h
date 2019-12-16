@@ -6,7 +6,7 @@
 #include "Gauge.h"
 #include "Timer.h"
 #include "Score.h"
-
+#include "OrderSheet.h"
 
 class Title;
 class Player;
@@ -41,6 +41,7 @@ private:
 	Gauge* m_gauge = nullptr;
 	Timer* m_timer = nullptr;					//タイマー。
 	Score* m_score = nullptr;					//スコア。
+	OrderSheet* m_orderSheet = nullptr;
 
 };
 
