@@ -478,7 +478,7 @@ void Player::PutObjects(int controllerNum)
 				}
 			}
 		}
-		//todo メモ　ここのコメントを外すとどこにでも食べ物を置くことができる。
+	// ここのコメントを外すとどこにでも食べ物を置くことができる。
 	//	else(m_state = enIdle);							//前方方向にオブジェクトがないとき。
 
 		m_putTimer = 0.5f;		//タイマーを初期化。

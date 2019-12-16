@@ -341,6 +341,17 @@ void Sprite::Init(const wchar_t* TextureFilePath, float w, float h)
 		&m_texture					        //SRV
 	);
 
+#ifdef _DEBUG
+	if (hr != S_OK) {
+		//ファイルが開けなかったときの処理。
+		char message[256];
+		sprintf(message, "Sprite::Init, ファイルのオープンに失敗しました。%ls\n", TextureFilePath);
+		MessageBox(NULL, message, "Error", MB_OK);
+		//止める。
+		std::abort();
+	}
+#endif	
+
 	//定数バッファを初期化。
 	InitConstantBuffer();
 
