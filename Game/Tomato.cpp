@@ -32,7 +32,7 @@ void Tomato::Update()
 	m_skinModelRender->SetPosition(m_position);
 	m_skinModelRender->SetRotation(m_rotation);
 
-	//todo 技　切られているモーションを付ける。
+	//todo 技　食べ物に切られているモーションを付ける。
 	if (m_foodState == enCutting)		//もし切られたら。
 	{
 		if (m_CuttingModel == false) {

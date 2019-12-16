@@ -41,7 +41,10 @@ void Pot::Soup()
 	}
 
 	if (m_potState == enZero) {							//ポットに何も入っていないとき。
-		m_soupBase = NewGO<SoupBase>(0, "soup");		//スープの部分を生成する。
+		m_soupBase = NewGO<SoupBase>(0, "soup");		//スープの部分を生成する。	
+		m_soupPos.x = m_position.x;		//鍋のX座標をスープのX座標に代入。
+		m_soupPos.z = m_position.z;		//鍋のZ座標をスープのZ座標に代入。
+		m_soupBase->SetPosition(m_soupPos);
 		m_soupBase->DecideTheSoupType(m_putSoupFoods);	//生成するスープを決める。
 		m_potState = enOne;								//ポットに食べ物が一つ入っている状態に。
 		m_gauge = NewGO<Gauge>(0, "gauge");				//ゲージを生成する。
@@ -132,7 +135,7 @@ void Pot::Vector2DUpdate()
 //危険マーク描画処理。
 void Pot::Danger2D()
 {
-	if (m_dangerFlag == false && m_dangerStartTimer >= 5.f && m_dangerStartTimer <= 10.f) {		//危険マークが生成されていない、且つタイマーが経過していた時。
+	if (m_dangerFlag == false && m_dangerStartTimer >= 5.f && m_dangerStartTimer <= 15.f) {		//危険マークが生成されていない、且つタイマーが経過していた時。
 		m_danger = NewGO<Danger>(0, "danger");			//画像を生成。
 		DeleteGO(m_check);								//チェックマークを消す。
 		m_check = nullptr;								//チェックマークのインスタンスを消す。
@@ -146,7 +149,7 @@ void Pot::Danger2D()
 //火事マーク描画処理。
 void Pot::Fire2D()
 {
-	if (m_fireFlag == false && m_dangerStartTimer > 10.f) {		//火事マークが生成されていない、且つタイマーが経過していた時。	
+	if (m_fireFlag == false && m_dangerStartTimer > 15.f) {		//火事マークが生成されていない、且つタイマーが経過していた時。	
 		m_fire = NewGO<Fire>(0, "fire");				//画像を生成。
 		DeleteGO(m_danger);								//危険マークを消す。
 		m_danger = nullptr;								//危険マークのインスタンスを消す。

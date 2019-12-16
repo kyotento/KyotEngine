@@ -445,8 +445,8 @@ void Player::PutObjects(int controllerNum)
 							//お鍋に何も入ってないとき。
 							if ( m_cacth->GetPotState() == Belongings::enZero) {			
 								m_cacth->SetPotFoodType(m_cacth, m_belongings->GetFoodTypeState());			//お鍋に入れる食べ物を設定する。
+								m_cacth->SetFoodTypeState(m_belongings->GetFoodTypeState());		//鍋に入れるスープを指定する。
 								m_cacth->SetSoupBase(m_cacth);				//鍋にスープを入れる(それっぽいオブジェクトの生成)処理。
-								m_cacth->SetFoodTypeState(m_belongings->GetFoodTypeState());
 								DeleteGO(m_belongings);						//持っているものを消す。
 								m_playerState = enIdle;						//状態を待機状態に変更。
 							}
@@ -469,9 +469,8 @@ void Player::PutObjects(int controllerNum)
 					m_objectAbove->TakeThings(m_cacth);				//乗っているオブジェクトを検索する。
 					if (m_cacth->GetIndentValue() == Belongings::enKitchenWare) {			//乗っているものが調理器具だった場合。
 						if (m_cacth->GetPotState() == Belongings::enComplete) {				//乗っているものの状態が完成状態だった時。
-							//todo 絶　一瞬スープの中身が初期座標に行くのを直す。
-							m_cacth->DeleteSoup(m_cacth);
-							m_belongings->PutDishs(m_belongings, m_cacth->GetFoodTypeState());
+							m_cacth->DeleteSoup(m_cacth);			//鍋の中のスープを消す。
+							m_belongings->PutDishs(m_belongings, m_cacth->GetFoodTypeState());	//お皿にスープを置く。
 						}
 					}
 				}
