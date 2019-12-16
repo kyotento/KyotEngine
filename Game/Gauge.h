@@ -66,6 +66,11 @@ public:
 		m_x = m_x / 2;
 	}
 
+	void SetGaugeScale(float scale_x)
+	{
+		m_x = scale_x;
+	}
+
 private:
 
 	bool m_gaugeMax = false;							//ƒQ[ƒW‚ÌŠg‘å—¦‚ªÅ‘å‚Ì‚Æ‚«true‚É‚È‚éB

@@ -89,14 +89,18 @@ void Belongings::GaugeGeneration(bool enlargedDivision, float time, float number
 
 	if (m_gauge != nullptr && m_gauge->GetGaugeMax())			//ゲージが最大になったら。
 	{
-		m_foodState = enCutting;		//食べ物の状態を切られた状態に。
-		DeleteGO(m_gauge);				//ゲージを消す。
-		m_gauge = nullptr;				//ゲージのインスタンスを消す。
-		if (checkGeneration) {			//ちぇっくまーくを生成する処理のとき。
-			m_check = NewGO<Check>(0, "check");					//チェックマークを生成する。
+		if (m_identification == enFood) {			//食べ物のとき。
+			m_foodState = enCutting;				//食べ物の状態を切られた状態に。
+		}
+		DeleteGO(m_gauge);							//ゲージを消す。
+		m_gauge = nullptr;							//ゲージのインスタンスを消す。
+		if (checkGeneration == false) {
+			m_GaugeGenerationFlag = false;
+		}
+		if (checkGeneration) {						//ちぇっくまーくを生成する処理のとき。
+			m_check = NewGO<Check>(0, "check");		//チェックマークを生成する。			
 		}
 	}
-
 }
 
 //ゲージの座標更新。

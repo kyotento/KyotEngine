@@ -32,6 +32,8 @@ public:
 		m_dirtyDishNum = dirtyDishNum;
 	}
 
+	void GaugeUpdate();
+
 	/// <summary>
 	/// 汚れたお皿の数を取得する。
 	/// </summary>
@@ -39,6 +41,15 @@ public:
 	int GetDirtyDishNum()
 	{
 		return m_dirtyDishNum;
+	}
+
+	/// <summary>
+	/// 汚れたお皿クラスで生成されたゲージのインスタンスを取得する。
+	/// </summary>
+	/// <returns>ゲージのインスタンス</returns>
+	Gauge* GetGauge()
+	{
+		return m_gauge;
 	}
 
 private:

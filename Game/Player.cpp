@@ -5,7 +5,6 @@
 //todo 持っているものの回転をプレイヤー依存にする。
 //todo プレイヤーを複数出す仕組みを作る。
 //todo　包丁を描画しないように。
-//todo　物をとった時、ObjectAboveのm_belongingsをnullにする。
 namespace {
 	const float playerCollidedRadius = 45.f;			//カプセルコライダーの半径。
 	const float playerCollidedHeight = 50.f;			//カプセルコライダーの高さ。
@@ -337,6 +336,7 @@ void Player::ActionProcessing(int controllerNum)
 	}
 }
 
+//持っている食べ物の座標を更新する。
 void Player::SetFoodPosition()
 {
 	//todo 低　余裕があれば右手と左手のBoneの座標の中間地点にオブジェクトを置く処理にする。(アニメーションにオブジェクトがついてくるから)。

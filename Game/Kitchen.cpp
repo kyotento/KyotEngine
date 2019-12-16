@@ -1,10 +1,6 @@
 #include "stdafx.h"
 #include "Kitchen.h"
 
-namespace {
-	int kari = 0;
-}
-
 Kitchen::Kitchen()
 {
 }
@@ -41,15 +37,12 @@ bool Kitchen::Start()
 void Kitchen::DishWashing()
 {
 	//お皿洗いの上に汚れたお皿があるとき。
-	//todo 絶　2Dのバグな直ったらGaugeを生成する。
 	//拡大処理をして拡大値が１になったら汚れたお皿を消して新しいお皿を生成する。
-	//todo 仮　今はゲージを描画できないので条件をタイマーにする。マジックナンバーは基本的にすべて仮。
 
 	if (m_dishDirty->GetDirtyDishNum() > 0) {		//汚れたお皿が乗っているとき。
-		m_timerK += 1;			//タイマーを進める。
-		m_dishDirty->GaugeGeneration(false, 1.9f, 0.f, false);
+		m_dishDirty->GaugeUpdate();					//ゲージの拡大処理。
 
-		if (m_timerK >= 120) {		//２秒以上たったとき。
+		if (m_dishDirty->GetGauge() == nullptr) {		//ゲージの拡大が完了し、インスタンスが破棄されたとき。
 
 			//乗っているお皿が1個の時。
 			if (m_dishDirty->GetDirtyDishNum() <= 1 /*&& m_dishDirty->GetDirtyDishNum() > 0*/) {
@@ -66,7 +59,6 @@ void Kitchen::DishWashing()
 				}
 
 				SetDishPos(m_dish);							//お皿の座標を指定。
-				m_timerK = 0;
 			}
 
 			//乗っている汚れたお皿の数が2個以上のとき。
@@ -84,11 +76,9 @@ void Kitchen::DishWashing()
 				}
 
 				SetDishPos(m_dish);
-				m_timerK = 0;
 			}
 		}
 	}
-	kari = m_dishDirty->GetDirtyDishNum();
 }
 
 //お皿のインスタンスを消す処理。

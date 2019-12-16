@@ -82,6 +82,12 @@
     <Filter Include="Engine\sound">
       <UniqueIdentifier>{8a1ed48f-bbd8-462f-9f88-2c9dffc498d8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\2D\Stage">
+      <UniqueIdentifier>{c85f2f90-21b1-4502-a8e0-e28cf26f0f8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\2D\Icon">
+      <UniqueIdentifier>{85799918-81eb-40e0-a2f9-4819b993536f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -246,9 +252,6 @@
     <ClCompile Include="CuttingDesk.cpp">
       <Filter>Game\Field\Objects\ObjectAbove</Filter>
     </ClCompile>
-    <ClCompile Include="Gauge.cpp">
-      <Filter>Game\2D</Filter>
-    </ClCompile>
     <ClCompile Include="Title.cpp">
       <Filter>Game\2D</Filter>
     </ClCompile>
@@ -273,12 +276,6 @@
     <ClCompile Include="DishDirty.cpp">
       <Filter>Game\Field\Objects\Belongings</Filter>
     </ClCompile>
-    <ClCompile Include="Timer.cpp">
-      <Filter>Game\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="Score.cpp">
-      <Filter>Game\2D</Filter>
-    </ClCompile>
     <ClCompile Include="Effect.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -294,14 +291,23 @@
     <ClCompile Include="sound\SoundSource.cpp">
       <Filter>Engine\sound</Filter>
     </ClCompile>
+    <ClCompile Include="Score.cpp">
+      <Filter>Game\2D\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Game\2D\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Gauge.cpp">
+      <Filter>Game\2D\Icon</Filter>
+    </ClCompile>
     <ClCompile Include="Check.cpp">
-      <Filter>Game\2D</Filter>
+      <Filter>Game\2D\Icon</Filter>
     </ClCompile>
     <ClCompile Include="Danger.cpp">
-      <Filter>Game\2D</Filter>
+      <Filter>Game\2D\Icon</Filter>
     </ClCompile>
     <ClCompile Include="Fire.cpp">
-      <Filter>Game\2D</Filter>
+      <Filter>Game\2D\Icon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -499,9 +505,6 @@
     <ClInclude Include="CuttingDesk.h">
       <Filter>Game\Field\Objects\ObjectAbove</Filter>
     </ClInclude>
-    <ClInclude Include="Gauge.h">
-      <Filter>Game\2D</Filter>
-    </ClInclude>
     <ClInclude Include="Title.h">
       <Filter>Game\2D</Filter>
     </ClInclude>
@@ -526,12 +529,6 @@
     <ClInclude Include="DishDirty.h">
       <Filter>Game\Field\Objects\Belongings</Filter>
     </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>Game\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="Score.h">
-      <Filter>Game\2D</Filter>
-    </ClInclude>
     <ClInclude Include="sound\WaveFile.h">
       <Filter>Engine\sound</Filter>
     </ClInclude>
@@ -544,14 +541,23 @@
     <ClInclude Include="sound\SoundSource.h">
       <Filter>Engine\sound</Filter>
     </ClInclude>
+    <ClInclude Include="Score.h">
+      <Filter>Game\2D\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Game\2D\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Gauge.h">
+      <Filter>Game\2D\Icon</Filter>
+    </ClInclude>
     <ClInclude Include="Check.h">
-      <Filter>Game\2D</Filter>
+      <Filter>Game\2D\Icon</Filter>
     </ClInclude>
     <ClInclude Include="Danger.h">
-      <Filter>Game\2D</Filter>
+      <Filter>Game\2D\Icon</Filter>
     </ClInclude>
     <ClInclude Include="Fire.h">
-      <Filter>Game\2D</Filter>
+      <Filter>Game\2D\Icon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -31,7 +31,6 @@ public:
 		m_dishDirty = dishDirty;
 	}
 
-
 private:
 
 	int m_timerK = 0;				//ƒJƒŠƒJƒŠ‚Ì‰¼B

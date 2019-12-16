@@ -90,11 +90,11 @@ void Pot::StateChange()
 	{
 		DeleteGO(m_gauge);							//ゲージを消す。
 		m_gauge = nullptr;							//ゲージのインスタンスをnullに。
-		if (m_checkFlag == false) {
+		if (m_checkFlag == false) {					//チェックマークが生成されていないなら。
 			m_check = NewGO<Check>(0, "check");		//チェックマークを生成。
 			m_checkFlag = true;						//チェック生成フラグをtrueに。
 		}
-		if (m_check != nullptr) {
+		if (m_check != nullptr) {					//チェックマークのインスタンスが生成されているなr。
 			m_check->SetPosition(checkPos);			//座標を更新。
 		}
 	}
@@ -125,7 +125,7 @@ void Pot::Vector2DUpdate()
 	m_gaugePos = m_position;		//ゲージの座標にお鍋の座標に代入。
 	m_gaugePos.x -= 50.f;			//左に寄せる。
 	m_gaugePos.y += 100.f;			//Y軸を少し上げてやる。
-	m_gaugePos.z -= 70.f;			
+	m_gaugePos.z -= 70.f;			//少し手前に。
 
 }
 
