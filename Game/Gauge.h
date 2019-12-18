@@ -69,6 +69,7 @@ public:
 	void SetGaugeScale(float scale_x)
 	{
 		m_x = scale_x;
+		m_gaugeMax = false;
 	}
 
 private:

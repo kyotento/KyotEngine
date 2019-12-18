@@ -24,15 +24,21 @@ public:
 	/// </summary>
 	void Move();
 
+	/// <summary>
+	/// 料理に使用する食べ物を書くシート。
+	/// </summary>
+	/// <param name="FoodTypeNum">料理に使用する食べ物の種類</param>
+	void FoodSheetGenerations(int FoodTypeNum);
+
 private://todo 絶　初期化する。
 
 	static const int m_orderNumLimit = 5;				//注文の上限値。
 	int m_orderNumber = 0;								//生成された注文の番号。
 	int m_generationNum = 0;							//生成された注文の数。
-	float m_sheet_x = 540.f;							//シートのX座標。
-	float m_sheet_y = 310.f;							//シートのY座標。
+	float m_sheet_x = 700.f;							//シートのX座標。
+	float m_sheet_y = 320.f;							//シートのY座標。
 	float m_sheet_z = 0.f;								//シートのZ座標。
-	float m_moveLimit[m_orderNumLimit] = { -540.f };		//移動上限値。
+	float m_moveLimit[m_orderNumLimit] = { -540.f ,-400.f  ,-260.f  ,-120.f  ,20.f };	//移動上限値。
 
 	float m_orderTimer = 0.f;							//todo 仮　注文が来るタイマー。
 

@@ -321,6 +321,9 @@
     <ClCompile Include="OrderGenerations.cpp">
       <Filter>Game\2D\Stage</Filter>
     </ClCompile>
+    <ClCompile Include="FoodSheetGenerations.cpp">
+      <Filter>Game\2D\Stage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -575,6 +578,9 @@
       <Filter>Game\2D\Stage\Order</Filter>
     </ClInclude>
     <ClInclude Include="OrderGenerations.h">
+      <Filter>Game\2D\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="FoodSheetGenerations.h">
       <Filter>Game\2D\Stage</Filter>
     </ClInclude>
   </ItemGroup>

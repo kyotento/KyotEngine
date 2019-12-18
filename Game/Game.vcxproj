@@ -115,6 +115,7 @@
     <ClCompile Include="Belongings.cpp" />
     <ClCompile Include="Fire.cpp" />
     <ClCompile Include="FoodBox.cpp" />
+    <ClCompile Include="FoodSheetGenerations.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
@@ -202,6 +203,7 @@
     <ClInclude Include="Belongings.h" />
     <ClInclude Include="Fire.h" />
     <ClInclude Include="FoodBox.h" />
+    <ClInclude Include="FoodSheetGenerations.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectManager.h" />

@@ -102,5 +102,4 @@ void Gauge::Update()
 	{
 		m_gaugeMax = false;
 	}
-
 }

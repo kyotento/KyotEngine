@@ -126,7 +126,7 @@ void Belongings::GaugePosUpdate()
 		m_check->SetPosition(m_gaugePos);
 		m_checkDeleteTimer += 1.f / 60.f;
 
-		if (m_checkDeleteTimer >= 1.f) {
+		if (m_checkDeleteTimer >= 0.5f) {
 			DeleteGO(m_check);
 			m_check = nullptr;
 		}
