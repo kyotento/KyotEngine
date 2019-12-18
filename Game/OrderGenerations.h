@@ -29,6 +29,11 @@ private://todo 絶　初期化する。
 	static const int m_orderNumLimit = 5;				//注文の上限値。
 	int m_orderNumber = 0;								//生成された注文の番号。
 	int m_generationNum = 0;							//生成された注文の数。
+	float m_sheet_x = 540.f;							//シートのX座標。
+	float m_sheet_y = 310.f;							//シートのY座標。
+	float m_sheet_z = 0.f;								//シートのZ座標。
+	float m_moveLimit[m_orderNumLimit] = { -540.f };		//移動上限値。
+
 	float m_orderTimer = 0.f;							//todo 仮　注文が来るタイマー。
 
 	bool m_order = false;								//注文を承ったか否か。
