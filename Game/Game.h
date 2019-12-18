@@ -7,6 +7,7 @@
 #include "Timer.h"
 #include "Score.h"
 #include "OrderSheet.h"
+#include "OrderGenerations.h"
 
 class Title;
 class Player;
@@ -42,6 +43,7 @@ private:
 	Timer* m_timer = nullptr;					//タイマー。
 	Score* m_score = nullptr;					//スコア。
 	OrderSheet* m_orderSheet = nullptr;
+	OrderGenerations* m_orderGenerations = nullptr;
 
 };
 

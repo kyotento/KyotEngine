@@ -25,7 +25,7 @@ void SkinModelRender::Update()
 	}
 
 	m_animation.Update(1/60.0f);			//アニメーション。
-	m_skinModel.UpdateWorldMatrix(m_position, m_rotation, m_scale);
+	m_skinModel.UpdateWorldMatrix(m_position, m_rotation, m_scale);		//モデルをワールド座標系に変換するためのワールド行列を更新。
 
 }
 

@@ -29,5 +29,7 @@ bool OrderSheet::Start()
 
 void OrderSheet::Update()
 {
+	m_spriteRenderSheetNo1->SetPosition(m_position);
+	m_spriteRenderSheetNo2->SetPosition(m_position);
 
 }

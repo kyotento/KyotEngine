@@ -22,6 +22,7 @@ public:
 private:
 
 	CVector3 m_position = CVector3::Zero();				//座標。
+	CVector3 m_scale = CVector3::One();
 
 	SkinModelRender* m_skinModelRender = nullptr;		//スキンモデル。
 

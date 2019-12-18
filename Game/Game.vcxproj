@@ -146,6 +146,7 @@
     <ClCompile Include="ObjectAbove.cpp" />
     <ClCompile Include="Onion.cpp" />
     <ClCompile Include="OnionBox.cpp" />
+    <ClCompile Include="OrderGenerations.cpp" />
     <ClCompile Include="OrderSheet.cpp" />
     <ClCompile Include="physics\MeshCollider.cpp" />
     <ClCompile Include="physics\Physics.cpp" />
@@ -233,6 +234,7 @@
     <ClInclude Include="ObjectAbove.h" />
     <ClInclude Include="Onion.h" />
     <ClInclude Include="OnionBox.h" />
+    <ClInclude Include="OrderGenerations.h" />
     <ClInclude Include="OrderSheet.h" />
     <ClInclude Include="PhysicsDebugDraw.h" />
     <ClInclude Include="physics\ICollider.h" />

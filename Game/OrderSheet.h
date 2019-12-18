@@ -10,6 +10,32 @@ public:
 	bool Start();
 	void Update();
 
+	/// <summary>
+	/// 座標を指定する関数。
+	/// </summary>
+	/// <param name="position">座標</param>
+	void SetPosition(CVector3 position)
+	{
+		m_position = position;
+	}
+
+	/// <summary>
+	/// スケールを指定する関数。
+	/// </summary>	
+	/// <param name="scale">スケール</param>
+	void SetScale(CVector3 scale)
+	{
+		m_scale = scale;
+	}
+	/// <summary>
+	/// 回転を指定する関数。
+	/// </summary>
+	/// <param name="rotation">回転</param>
+	void SetRotation(CQuaternion rotation)
+	{
+		m_rotation = rotation;
+	}
+
 private:
 
 	CVector3 m_position = CVector3::Zero();					//座標。
