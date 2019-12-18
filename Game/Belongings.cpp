@@ -98,7 +98,11 @@ void Belongings::GaugeGeneration(bool enlargedDivision, float time, float number
 			m_GaugeGenerationFlag = false;
 		}
 		if (checkGeneration) {						//ちぇっくまーくを生成する処理のとき。
-			m_check = NewGO<Check>(0, "check");		//チェックマークを生成する。			
+			m_check = NewGO<Check>(0, "check");		//チェックマークを生成する。
+			m_gaugePos = m_position;
+			m_gaugePos.y += 100.f;			//Y軸を少し上げてやる。
+			m_gaugePos.z -= 70.f;
+			m_check->SetPosition(m_gaugePos);
 		}
 	}
 }

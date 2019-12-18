@@ -22,9 +22,12 @@ public:
 	/// <param name="vsmain">頂点シェーダー</param>
 	/// <param name="drawAfterPostEffect">2Dとして描画するかどうか</param>
 	/// <param name="SetShadowReciever">影をかけるかどうか</param>
+	/// drawAfterPostEffectをtrueにした場合、そのスキンモデルの回転は初期化してはならない(してもいいけど2Dとしては表示されない。)
 	void Init(const wchar_t* filePath,
 		AnimationClip* animationClips = nullptr,
-		int numAnimationClips = 0, const char* psmain = "PSMain", const char* vsmain = "VSMain", bool drawAfterPostEffect = false, bool SetShadowReciever = true);
+		int numAnimationClips = 0,
+		const char* psmain = "PSMain", const char* vsmain = "VSMain", 
+		bool drawAfterPostEffect = false, bool SetShadowReciever = true);
 
 	/// <summary>
 	/// アニメーションの初期化。

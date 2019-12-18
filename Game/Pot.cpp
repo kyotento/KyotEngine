@@ -49,6 +49,10 @@ void Pot::Soup()
 		m_soupBase->DecideTheSoupType(m_putSoupFoods);	//生成するスープを決める。
 		m_potState = enOne;								//ポットに食べ物が一つ入っている状態に。
 		m_gauge = NewGO<Gauge>(0, "gauge");				//ゲージを生成する。
+		m_gaugePos = m_position;		//ゲージの座標にお鍋の座標に代入。
+		m_gaugePos.x -= 50.f;			//左に寄せる。
+		m_gaugePos.y += 100.f;			//Y軸を少し上げてやる。
+		m_gaugePos.z -= 70.f;			//少し手前に。
 		m_gauge->SetPosition(m_gaugePos);				//ゲージの座標を指定。
 	}
 }
@@ -95,7 +99,11 @@ void Pot::StateChange()
 		DeleteGO(m_gauge);							//ゲージを消す。
 		m_gauge = nullptr;							//ゲージのインスタンスをnullに。
 		if (m_checkFlag == false) {					//チェックマークが生成されていないなら。
-			m_check = NewGO<Check>(0, "check");		//チェックマークを生成。
+			m_check = NewGO<Check>(0, "check");		//チェックマークを生成。		
+			checkPos = m_position;		//ゲージの座標にお鍋の座標に代入。
+			checkPos.y += 100.f;		//Y軸を少し上げてやる。
+			checkPos.z -= 70.f;			//少し手前に。
+			m_check->SetPosition(checkPos);				//座標更新。
 			m_checkFlag = true;						//チェック生成フラグをtrueに。
 		}
 		if (m_check != nullptr) {					//チェックマークのインスタンスが生成されているなr。
@@ -138,11 +146,19 @@ void Pot::Danger2D()
 {
 	if (m_dangerFlag == false && m_dangerStartTimer >= 5.f && m_dangerStartTimer <= 15.f) {		//危険マークが生成されていない、且つタイマーが経過していた時。
 		m_danger = NewGO<Danger>(0, "danger");			//画像を生成。
+		checkPos = m_position;		//ゲージの座標にお鍋の座標に代入。
+		checkPos = m_position;		//ゲージの座標にお鍋の座標に代入。
+		checkPos.y += 100.f;		//Y軸を少し上げてやる。
+		checkPos.z -= 70.f;			//少し手前に。
+		m_danger->SetPosition(checkPos);				//座標更新。
 		DeleteGO(m_check);								//チェックマークを消す。
 		m_check = nullptr;								//チェックマークのインスタンスを消す。
 		m_dangerFlag = true;							//生成フラグを返す。
 	}
 	if (m_danger != nullptr) {							//危険マークが生成されているとき。
+		checkPos = m_position;		//ゲージの座標にお鍋の座標に代入。
+		checkPos.y += 100.f;		//Y軸を少し上げてやる。
+		checkPos.z -= 70.f;			//少し手前に。
 		m_danger->SetPosition(checkPos);				//座標更新。
 	}
 }
@@ -158,6 +174,9 @@ void Pot::Fire2D()
 		m_fireFlag = true;								//生成フラグを返す。
 	}
 	if (m_fire != nullptr) {							//火事マークが生成されているとき。
+		checkPos = m_position;		//ゲージの座標にお鍋の座標に代入。
+		checkPos.y += 100.f;		//Y軸を少し上げてやる。
+		checkPos.z -= 70.f;			//少し手前に。
 		m_fire->SetPosition(checkPos);				//座標を更新。
 	}
 }

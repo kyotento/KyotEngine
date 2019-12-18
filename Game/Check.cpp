@@ -25,5 +25,6 @@ bool Check::Start()
 void Check::Update()
 {
 	m_skinModelRender->SetPosition(m_position);			//座標を更新。
+	m_skinModelRender->SetScale(m_scale);				//スケールを更新。
 
 }
