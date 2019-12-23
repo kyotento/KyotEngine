@@ -2,7 +2,6 @@
 #include "OrderGenerations.h"
 
 namespace {
-	float foodPosY = 320.f;
 }
 
 OrderGenerations::OrderGenerations()
@@ -50,7 +49,7 @@ void OrderGenerations::Move()
 	for (int m_orderNumber = 0; m_orderNumber < m_orderNumLimit; m_orderNumber++) {		//配列の数分ループする。
 		if (m_orderSheet[m_orderNumber] != nullptr) {			//シートが生成されていたら。
 			if (m_position[m_orderNumber].x > m_moveLimit[m_orderNumber]) {		//座標が上限値に達していなかったら。
-				m_position[m_orderNumber].x -= 20.f;				//X座標を更新。	
+				m_position[m_orderNumber].x -= 20.f;			//X座標を更新。	
 				m_position[m_orderNumber].y = m_sheet_y;		//Y座標を更新。
 				m_position[m_orderNumber].z = m_sheet_z;		//Z座標を更新。
 			}
@@ -59,9 +58,7 @@ void OrderGenerations::Move()
 			if (m_position[m_orderNumber].x <= m_moveLimit[m_orderNumber]) {	//座標が上限値に達した時。
 
 				FoodSheetGeneration(1, m_orderNumber);		//１は仮。
-				FoodSheetPosUpdate();						//食べ物シートの座標更新処理。
-			}
-			else{
+				FoodSheetPosUpdate(m_orderNumber);						//食べ物シートの座標更新処理。
 			}
 		}
 	}
@@ -70,21 +67,23 @@ void OrderGenerations::Move()
 //料理に使用する食べ物を書くシート。
 void OrderGenerations::FoodSheetGeneration(int FoodTypeNum, int genenum)
 {
-	if (m_foodSheetGenerationFlag == false) {		//食べ物シートを生成していなかったら。
+	if (m_foodSheetGenerationFlag[genenum] == false) {		//食べ物シートを生成していなかったら。
 		m_foodSheetGenerations->FoodSheetGeneration(FoodTypeNum);		//食べ物シートを生成。
 		m_foodSheetGenerations->SetPosition(m_position[genenum]);		//生成されたシートの座標を指定してやる。
-		foodPosY = m_position[genenum].y;								//Y座標を保存しておく。
+		m_foodPosY[genenum] = m_position[genenum].y;								//Y座標を保存しておく。
 
-		m_foodSheetGenerationFlag = true;			//生成した。
+		m_foodSheetGenerationFlag[genenum] = true;			//生成したのでフラグを返す。
 	}
 }
 
 //食べ物シートの座標更新処理。
-void OrderGenerations::FoodSheetPosUpdate()
+void OrderGenerations::FoodSheetPosUpdate(int genenum)
 {
-	foodPosY += -1.f;					//Y座標を枚フレーム更新。
-	if (m_foodSheetGenerationFlag) {	//生成されていたら。
-		m_foodSheetGenerations->SetPositionY(foodPosY);		//座標を更新する。
+	if (m_foodPosY[genenum] >= m_foodPosYLimit) {		//座標が上限値に達していないなら。
+		m_foodPosY[genenum] += -1.f;					//Y座標を枚フレーム更新。
+	}
+	if (m_foodSheetGenerationFlag) {					//生成されていたら。
+		m_foodSheetGenerations->SetPositionY(m_foodPosY[genenum]);		//座標を更新する。
 	}
 }
 
@@ -95,3 +94,10 @@ void OrderGenerations::Update()
 	//移動処理。
 	Move();
 }
+
+//todo 配列ごと消すときにやること
+/*
+	生成フラグを返す。
+	配列の空いたところを詰める。
+	m_foodPosYをリセットする。
+*/

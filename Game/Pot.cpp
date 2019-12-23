@@ -100,9 +100,6 @@ void Pot::StateChange()
 		m_gauge = nullptr;							//ゲージのインスタンスをnullに。
 		if (m_checkFlag == false) {					//チェックマークが生成されていないなら。
 			m_check = NewGO<Check>(0, "check");		//チェックマークを生成。		
-			checkPos = m_position;		//ゲージの座標にお鍋の座標に代入。
-			checkPos.y += 100.f;		//Y軸を少し上げてやる。
-			checkPos.z -= 70.f;			//少し手前に。
 			m_check->SetPosition(checkPos);				//座標更新。
 			m_checkFlag = true;						//チェック生成フラグをtrueに。
 		}
@@ -146,7 +143,6 @@ void Pot::Danger2D()
 {
 	if (m_dangerFlag == false && m_dangerStartTimer >= 5.f && m_dangerStartTimer <= 15.f) {		//危険マークが生成されていない、且つタイマーが経過していた時。
 		m_danger = NewGO<Danger>(0, "danger");			//画像を生成。
-		checkPos = m_position;		//ゲージの座標にお鍋の座標に代入。
 		checkPos = m_position;		//ゲージの座標にお鍋の座標に代入。
 		checkPos.y += 100.f;		//Y軸を少し上げてやる。
 		checkPos.z -= 70.f;			//少し手前に。

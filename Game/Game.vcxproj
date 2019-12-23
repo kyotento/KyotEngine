@@ -101,6 +101,7 @@
   <ItemGroup>
     <ClCompile Include="character\CharacterController.cpp" />
     <ClCompile Include="Check.cpp" />
+    <ClCompile Include="CookingList.cpp" />
     <ClCompile Include="Cuisine.cpp" />
     <ClCompile Include="CuttingBoard.cpp" />
     <ClCompile Include="CuttingDesk.cpp" />
@@ -135,7 +136,6 @@
     <ClCompile Include="graphics\SkinModelDataManager.cpp" />
     <ClCompile Include="graphics\SkinModelEffect.cpp" />
     <ClCompile Include="HID\Pad.cpp" />
-    <ClCompile Include="kari.cpp" />
     <ClCompile Include="Kitchen.cpp" />
     <ClCompile Include="Knife.cpp" />
     <ClCompile Include="level\Level.cpp" />
@@ -189,6 +189,7 @@
     <ClInclude Include="Check.h" />
     <ClInclude Include="CIndexBuffer.h" />
     <ClInclude Include="ConstantBuffer.h" />
+    <ClInclude Include="CookingList.h" />
     <ClInclude Include="Cuisine.h" />
     <ClInclude Include="CuttingBoard.h" />
     <ClInclude Include="CuttingDesk.h" />
@@ -226,7 +227,6 @@
     <ClInclude Include="graphics\SkinModelEffect.h" />
     <ClInclude Include="graphics\SkinModelShaderConst.h" />
     <ClInclude Include="HID\Pad.h" />
-    <ClInclude Include="kari.h" />
     <ClInclude Include="Kitchen.h" />
     <ClInclude Include="Knife.h" />
     <ClInclude Include="level\Level.h" />

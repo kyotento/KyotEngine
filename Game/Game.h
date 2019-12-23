@@ -8,11 +8,8 @@
 #include "Score.h"
 #include "OrderSheet.h"
 #include "OrderGenerations.h"
-#include "kari.h"
 
 class Title;
-class Player;
-class Stage_1;
 class Game : public GameObject
 {
 public:
@@ -45,7 +42,6 @@ private:
 	Score* m_score = nullptr;					//スコア。
 	OrderSheet* m_orderSheet = nullptr;
 	OrderGenerations* m_orderGenerations = nullptr;
-	kari* m_kari = nullptr;
 
 };
 

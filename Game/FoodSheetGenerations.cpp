@@ -2,7 +2,8 @@
 #include "FoodSheetGenerations.h"
 
 namespace {
-	float XU = 140.f;
+	float XU = 120.f;		//画像のXスケール。
+	float YV = 80.f;		//画像のYスケール。
 }
 
 FoodSheetGenerations::FoodSheetGenerations()
@@ -12,6 +13,7 @@ FoodSheetGenerations::FoodSheetGenerations()
 
 FoodSheetGenerations::~FoodSheetGenerations()
 {
+	DeleteGO(m_spriteRender);
 }
 
 
@@ -26,7 +28,7 @@ void FoodSheetGenerations::FoodSheetGeneration(int FoodTypeNum)
 	for (int i = 0; i < FoodTypeNum; i++)
 	{
 		m_spriteRender = NewGO<SpriteRender>(0, "sprite");
-		m_spriteRender->Init(L"Assets/sprite/Food_Sheet3.dds", XU, 80.f);
+		m_spriteRender->Init(L"Assets/sprite/Food_Sheet3.dds", XU, YV);
 		m_spriteRender->SetPosition(m_position);
 		m_spriteRender->SetScale(m_scale);
 		m_spriteRender->SetRotation(m_rotation);
