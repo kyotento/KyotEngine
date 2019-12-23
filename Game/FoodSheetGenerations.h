@@ -22,6 +22,24 @@ public:
 	/// <param name="FoodTypeNum">料理に使う食べ物の種類</param>
 	void SheetPos(int FoodTypeNum);
 
+	/// <summary>
+	/// 座標のY軸を設定する関数。
+	/// </summary>
+	/// <param name="Y">Y座標</param>
+	void SetPositionY(float Y)
+	{
+		m_y = Y;
+	}
+
+	/// <summary>
+	/// 座標設定。
+	/// </summary>
+	/// <param name="pos">座標</param>
+	void SetPosition(CVector3 pos)
+	{
+		m_position = pos;
+	}
+
 private:
 
 	int m_foodNum = 0;
@@ -36,7 +54,7 @@ private:
 	CVector3 m_scale = CVector3::One();
 	CQuaternion m_rotation = CQuaternion::Identity();
 
-	SpriteRender* m_spriteRender[] = { nullptr };			//スプライト。
+	SpriteRender* m_spriteRender = nullptr;			//スプライト。
 
 
 };

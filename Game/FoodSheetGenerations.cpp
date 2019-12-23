@@ -23,22 +23,22 @@ bool FoodSheetGenerations::Start()
 //食べ物シートの生成処理。
 void FoodSheetGenerations::FoodSheetGeneration(int FoodTypeNum)
 {
-	for (int i = 0; i <= FoodTypeNum; i++)
+	for (int i = 0; i < FoodTypeNum; i++)
 	{
-		m_spriteRender[i] = NewGO<SpriteRender>(0, "sprite");
-		m_spriteRender[i]->Init(L"Assets/sprite/Food_Sheet3.dds", XU, 80.f);
-		m_spriteRender[i]->SetPosition(m_position);
-		m_spriteRender[i]->SetScale(m_position);
-		m_spriteRender[i]->SetRotation(m_rotation);
+		m_spriteRender = NewGO<SpriteRender>(0, "sprite");
+		m_spriteRender->Init(L"Assets/sprite/Food_Sheet3.dds", XU, 80.f);
+		m_spriteRender->SetPosition(m_position);
+		m_spriteRender->SetScale(m_scale);
+		m_spriteRender->SetRotation(m_rotation);
 	}
 }
 
 void FoodSheetGenerations::SheetPos(int FoodTypeNum)
 {
 	if (FoodTypeNum == 1) {		//食べ物が一種類のとき。
-		m_spriteRender[0]->SetPosition(m_position);
-		m_spriteRender[0]->SetScale(m_scale);
-		m_spriteRender[0]->SetRotation(m_rotation);
+		m_spriteRender->SetPosition(m_position);
+		m_spriteRender->SetScale(m_scale);
+		m_spriteRender->SetRotation(m_rotation);
 	}
 
 	else {					//食べ物が二種類以上のとき。
@@ -58,16 +58,19 @@ void FoodSheetGenerations::SheetPos(int FoodTypeNum)
 				if (i == 1) {
 					m_position.x += x * 2;
 				}
-					m_spriteRender[i]->SetPosition(m_position);
+					m_spriteRender->SetPosition(m_position);
 			}
 
-			m_spriteRender[i]->SetScale(m_scale);			//スケールを代入。
-			m_spriteRender[i]->SetRotation(m_rotation);		//回転を代入。
+			m_spriteRender->SetScale(m_scale);			//スケールを代入。
+			m_spriteRender->SetRotation(m_rotation);		//回転を代入。
 		}
 	}
 }
 
 void FoodSheetGenerations::Update()
 {
-
+	if (m_spriteRender != nullptr) {
+		m_spriteRender->SetPosition(m_position);		//座標更新。
+	}
+	m_position.y = m_y;
 }

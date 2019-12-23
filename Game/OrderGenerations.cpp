@@ -2,7 +2,7 @@
 #include "OrderGenerations.h"
 
 namespace {
-
+	float foodPosY = 320.f;
 }
 
 OrderGenerations::OrderGenerations()
@@ -15,6 +15,7 @@ OrderGenerations::~OrderGenerations()
 
 bool OrderGenerations::Start()
 {
+	m_foodSheetGenerations = NewGO<FoodSheetGenerations>(3, "foodSheet");
 
 	return true;
 }
@@ -54,14 +55,37 @@ void OrderGenerations::Move()
 				m_position[m_orderNumber].z = m_sheet_z;		//Z座標を更新。
 			}
 			m_orderSheet[m_orderNumber]->SetPosition(m_position[m_orderNumber]);		//シートの座標を更新。
+
+			if (m_position[m_orderNumber].x <= m_moveLimit[m_orderNumber]) {	//座標が上限値に達した時。
+
+				FoodSheetGeneration(1, m_orderNumber);		//１は仮。
+				FoodSheetPosUpdate();						//食べ物シートの座標更新処理。
+			}
+			else{
+			}
 		}
 	}
 }
 
 //料理に使用する食べ物を書くシート。
-void OrderGenerations::FoodSheetGenerations(int FoodTypeNum)
+void OrderGenerations::FoodSheetGeneration(int FoodTypeNum, int genenum)
 {
+	if (m_foodSheetGenerationFlag == false) {		//食べ物シートを生成していなかったら。
+		m_foodSheetGenerations->FoodSheetGeneration(FoodTypeNum);		//食べ物シートを生成。
+		m_foodSheetGenerations->SetPosition(m_position[genenum]);		//生成されたシートの座標を指定してやる。
+		foodPosY = m_position[genenum].y;								//Y座標を保存しておく。
 
+		m_foodSheetGenerationFlag = true;			//生成した。
+	}
+}
+
+//食べ物シートの座標更新処理。
+void OrderGenerations::FoodSheetPosUpdate()
+{
+	foodPosY += -1.f;					//Y座標を枚フレーム更新。
+	if (m_foodSheetGenerationFlag) {	//生成されていたら。
+		m_foodSheetGenerations->SetPositionY(foodPosY);		//座標を更新する。
+	}
 }
 
 void OrderGenerations::Update()

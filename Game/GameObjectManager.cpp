@@ -122,7 +122,7 @@ void GameObjectManager::Execute()
 	{
 		for (GameObject* object : objList)
 		{
-			object->RenderAfterPostEffect();
+			object->RenderAfterPostEffectWrapper();
 		}
 	}
 

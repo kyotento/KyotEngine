@@ -324,6 +324,7 @@
     <ClCompile Include="FoodSheetGenerations.cpp">
       <Filter>Game\2D\Stage</Filter>
     </ClCompile>
+    <ClCompile Include="kari.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -583,6 +584,7 @@
     <ClInclude Include="FoodSheetGenerations.h">
       <Filter>Game\2D\Stage</Filter>
     </ClInclude>
+    <ClInclude Include="kari.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">

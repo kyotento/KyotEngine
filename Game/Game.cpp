@@ -31,6 +31,7 @@ void Game::Update()
 		m_score = NewGO<Score>(0, "score");
 //		m_orderSheet = NewGO<OrderSheet>(0, "order");
 		m_orderGenerations = NewGO<OrderGenerations>(0, "orderGenerations");
+		m_kari = NewGO<kari>(0, "a");
 		m_titleDeleteFlag = false;
 	}
 

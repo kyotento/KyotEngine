@@ -135,6 +135,7 @@
     <ClCompile Include="graphics\SkinModelDataManager.cpp" />
     <ClCompile Include="graphics\SkinModelEffect.cpp" />
     <ClCompile Include="HID\Pad.cpp" />
+    <ClCompile Include="kari.cpp" />
     <ClCompile Include="Kitchen.cpp" />
     <ClCompile Include="Knife.cpp" />
     <ClCompile Include="level\Level.cpp" />
@@ -225,6 +226,7 @@
     <ClInclude Include="graphics\SkinModelEffect.h" />
     <ClInclude Include="graphics\SkinModelShaderConst.h" />
     <ClInclude Include="HID\Pad.h" />
+    <ClInclude Include="kari.h" />
     <ClInclude Include="Kitchen.h" />
     <ClInclude Include="Knife.h" />
     <ClInclude Include="level\Level.h" />
