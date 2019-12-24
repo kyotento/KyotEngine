@@ -35,6 +35,14 @@ public:
 	{
 		m_rotation = rotation;
 	}
+	/// <summary>
+	/// À•W‚ğæ“¾‚·‚éB
+	/// </summary>
+	/// <returns>À•W</returns>
+	CVector3 GetPosition()
+	{
+		return m_position;
+	}
 
 private:
 

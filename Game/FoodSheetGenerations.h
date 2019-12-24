@@ -46,7 +46,7 @@ private:
 	int m_foodTypeLimit = 4;
 
 	float m_y = 0.f;			//Y座標。
-	float m_scaleY = 1.f;		//スケールのY座標。
+	float m_scaleX = 1.f;		//スケールのY座標。
 
 	bool m_changeScaleFlag = false;
 

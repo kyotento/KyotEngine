@@ -62,6 +62,7 @@ public:
 	///	お皿に食べ物を置く処理。
 	/// </summary>
 	/// <param name="belongings">持てるもの</param>
+	/// <param name="FoodType">食べ物の種類</param>
 	void PutDishs(Belongings* belongings,int FoodType);
 
 	/// <summary>

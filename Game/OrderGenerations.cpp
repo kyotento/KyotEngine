@@ -2,6 +2,10 @@
 #include "OrderGenerations.h"
 
 namespace {
+	int cuisinePriority = 5;		//料理画像のプライオリティ。
+
+	float cuisineSize = 50.f;		//料理の画像のサイズ。
+	float foodSize = 30.f;			//食べ物の画像のサイズ。
 }
 
 OrderGenerations::OrderGenerations()
@@ -15,6 +19,7 @@ OrderGenerations::~OrderGenerations()
 bool OrderGenerations::Start()
 {
 	m_foodSheetGenerations = NewGO<FoodSheetGenerations>(3, "foodSheet");
+	m_cookingList = NewGO<CookingList>(0, "cookingList");
 
 	return true;
 }
@@ -57,7 +62,7 @@ void OrderGenerations::Move()
 
 			if (m_position[m_orderNumber].x <= m_moveLimit[m_orderNumber]) {	//座標が上限値に達した時。
 
-				FoodSheetGeneration(1, m_orderNumber);		//１は仮。
+				FoodSheetGeneration(m_cookingList->GetFoodType(), m_orderNumber);		//食べ物シートを生成する。
 				FoodSheetPosUpdate(m_orderNumber);						//食べ物シートの座標更新処理。
 			}
 		}
@@ -67,6 +72,10 @@ void OrderGenerations::Move()
 //料理に使用する食べ物を書くシート。
 void OrderGenerations::FoodSheetGeneration(int FoodTypeNum, int genenum)
 {
+	m_foodSheetPosition[genenum].x = m_position[genenum].x;
+	m_foodSheetPosition[genenum].y = m_foodPosY[genenum];
+	m_foodSheetPosition[genenum].z = m_position[genenum].z;
+
 	if (m_foodSheetGenerationFlag[genenum] == false) {		//食べ物シートを生成していなかったら。
 		m_foodSheetGenerations->FoodSheetGeneration(FoodTypeNum);		//食べ物シートを生成。
 		m_foodSheetGenerations->SetPosition(m_position[genenum]);		//生成されたシートの座標を指定してやる。
@@ -82,8 +91,37 @@ void OrderGenerations::FoodSheetPosUpdate(int genenum)
 	if (m_foodPosY[genenum] >= m_foodPosYLimit) {		//座標が上限値に達していないなら。
 		m_foodPosY[genenum] += -1.f;					//Y座標を枚フレーム更新。
 	}
+
+	else {		//上限値に達したら。
+		Order(genenum);		//その他画像生成処理。
+	}
 	if (m_foodSheetGenerationFlag) {					//生成されていたら。
 		m_foodSheetGenerations->SetPositionY(m_foodPosY[genenum]);		//座標を更新する。
+	}
+}
+
+void OrderGenerations::Order(int genenum)
+{
+	if (m_cuisineSheetFlag[genenum] == false) {			//料理の画像が生成されていないとき。
+		if (m_cookingList->GetCookingList() == CookingList::enTomatoSoup)		//作成するものがトマトスープの場合。
+		{
+			//トマトスープの画像を描画する。
+			m_spriteRenderCuisine[genenum] = NewGO<SpriteRender>(cuisinePriority, "sprite");						//料理の画像生成。
+			m_spriteRenderCuisine[genenum]->Init(L"Assets/sprite/TomatoSoup.dds", cuisineSize, cuisineSize);		//初期化。
+			m_spriteRenderCuisine[genenum]->SetPosition(m_position[genenum]);										//座標更新。
+
+			m_spriteRenderFoods[genenum] = NewGO<SpriteRender>(cuisinePriority, "sprite");							//食材の画像生成。
+			m_spriteRenderFoods[genenum]->Init(L"Assets/sprite/Tomato.dds", foodSize, foodSize);					//初期化。
+			m_spriteRenderFoods[genenum]->SetPosition(m_foodSheetPosition[genenum]);								//座標更新。
+
+			m_spriteRenderCuisineMethod[genenum] = NewGO<SpriteRender>(cuisinePriority, "sprite");					//調理方法の画像生成。
+			m_spriteRenderCuisineMethod[genenum]->Init(L"Assets/sprite/pot.dds", foodSize, foodSize);				//初期化。
+			m_kitchenWarePosition[genenum] = m_foodSheetPosition[genenum];
+			m_kitchenWarePosition[genenum].y -= 25.f;
+			m_spriteRenderCuisineMethod[genenum]->SetPosition(m_kitchenWarePosition[genenum]);
+
+			m_cuisineSheetFlag[genenum] = true;			//料理の画像が生成されたのでフラグを返す。
+		}
 	}
 }
 

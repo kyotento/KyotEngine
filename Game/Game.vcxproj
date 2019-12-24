@@ -322,10 +322,6 @@
     <None Include="Assets\level\stage_1.tkl" />
   </ItemGroup>
   <ItemGroup>
-    <ImageContentTask Include="Assets\sprite\gauge\gauge.png" />
-    <ImageContentTask Include="Assets\sprite\gauge\gauge_sheet.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ImageContentTask Include="Assets\sprite\Timer.png" />
   </ItemGroup>
   <ItemGroup>
@@ -335,6 +331,17 @@
     <ImageContentTask Include="Assets\sprite\orderSheet\Food_Sheet.png" />
     <ImageContentTask Include="Assets\sprite\orderSheet\Food_Sheet2.png" />
     <ImageContentTask Include="Assets\sprite\orderSheet\Food_Sheet3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\cuisine\OnionSoup.png" />
+    <ImageContentTask Include="Assets\sprite\cuisine\TomatoSoup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\foods\onion.png" />
+    <ImageContentTask Include="Assets\sprite\foods\Tomato.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\kitchenWare\pot.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

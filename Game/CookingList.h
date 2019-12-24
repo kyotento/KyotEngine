@@ -3,12 +3,21 @@
 /// </summary>
 #pragma once
 #include "GameObject.h"
+#include "Belongings.h"
 
 class CookingList : public GameObject
 {
 public:
 	CookingList();
 	~CookingList();
+
+	bool Start();
+	void Update();
+
+	/// <summary>
+	/// 料理の情報を格納してある。
+	/// </summary>
+	void CookingInformations();
 
 	/// <summary>
 	/// 料理の名前リスト。
@@ -20,9 +29,28 @@ public:
 		encookingListNum	//料理名数。
 	};
 
+	/// <summary>
+	/// 作成する料理の名前を取得する。
+	/// </summary>
+	/// <returns>料理名</returns>
+	cookingList GetCookingList()
+	{
+		return m_dishName;
+	}
+
+	/// <summary>
+	/// 料理に必要な材料の種類の数。
+	/// </summary>
+	/// <returns>料理に必要な材料の種類</returns>
+	int GetFoodType()
+	{
+		return m_foodtype;
+	}
+
 private:
 
 	int m_materialNum = 0;		//料理に必要な材料の数。
+	int m_foodtype = 0;			//料理に必要な材料の種類。
 
 	cookingList m_dishName = encookingListNum;		//料理名。
 

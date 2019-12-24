@@ -94,6 +94,15 @@
     <Filter Include="Assets\sprite\orderSheet">
       <UniqueIdentifier>{c8cab3d2-5dd7-4162-bab8-36c54b1334b0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\sprite\cuisine">
+      <UniqueIdentifier>{10e72d14-b1c9-4352-a781-26155f9f9834}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\sprite\foods">
+      <UniqueIdentifier>{dd8e1fea-19e5-4a9e-9d91-234a81f04a15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\sprite\kitchenWare">
+      <UniqueIdentifier>{76e78d03-38a6-42a8-ac09-1280327cb7a3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -694,12 +703,6 @@
     <ImageContentTask Include="Assets\sprite\Title.png">
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\gauge\gauge.png">
-      <Filter>Assets\sprite\gauge</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\gauge\gauge_sheet.png">
-      <Filter>Assets\sprite\gauge</Filter>
-    </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\Timer.png">
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
@@ -714,6 +717,21 @@
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\orderSheet\Food_Sheet3.png">
       <Filter>Assets\sprite\orderSheet</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\cuisine\OnionSoup.png">
+      <Filter>Assets\sprite\cuisine</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\cuisine\TomatoSoup.png">
+      <Filter>Assets\sprite\cuisine</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\foods\onion.png">
+      <Filter>Assets\sprite\foods</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\foods\Tomato.png">
+      <Filter>Assets\sprite\foods</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\kitchenWare\pot.png">
+      <Filter>Assets\sprite\kitchenWare</Filter>
     </ImageContentTask>
   </ItemGroup>
   <ItemGroup>

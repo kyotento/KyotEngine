@@ -46,9 +46,8 @@ public:
 	/// </remarks>
 //	bool LevelGeneration(LevelObjectData& objData);
 
-
-
 protected:
+
 
 	Level m_level;							//ƒŒƒxƒ‹B
 	Desk* m_desk = nullptr;					//Š÷B
