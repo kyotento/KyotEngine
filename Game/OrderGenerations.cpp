@@ -116,9 +116,9 @@ void OrderGenerations::Order(int genenum)
 
 			m_spriteRenderCuisineMethod[genenum] = NewGO<SpriteRender>(cuisinePriority, "sprite");					//調理方法の画像生成。
 			m_spriteRenderCuisineMethod[genenum]->Init(L"Assets/sprite/pot.dds", foodSize, foodSize);				//初期化。
-			m_kitchenWarePosition[genenum] = m_foodSheetPosition[genenum];
-			m_kitchenWarePosition[genenum].y -= 25.f;
-			m_spriteRenderCuisineMethod[genenum]->SetPosition(m_kitchenWarePosition[genenum]);
+			m_kitchenWarePosition[genenum] = m_foodSheetPosition[genenum];											//シートの座標を代入。
+			m_kitchenWarePosition[genenum].y -= 25.f;																//少し下に座標を移動。
+			m_spriteRenderCuisineMethod[genenum]->SetPosition(m_kitchenWarePosition[genenum]);						//座標更新。
 
 			m_cuisineSheetFlag[genenum] = true;			//料理の画像が生成されたのでフラグを返す。
 		}

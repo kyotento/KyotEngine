@@ -179,6 +179,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="system\system.cpp" />
+    <ClCompile Include="TimeLimitGauge.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="Tomato.cpp" />
@@ -270,6 +271,7 @@
     <ClInclude Include="Stage_1.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="system\system.h" />
+    <ClInclude Include="TimeLimitGauge.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="Tomato.h" />
@@ -342,6 +344,12 @@
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\kitchenWare\pot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\gauge\gauge_1.png" />
+    <ImageContentTask Include="Assets\sprite\gauge\gauge_2.png" />
+    <ImageContentTask Include="Assets\sprite\gauge\gauge_3.png" />
+    <ImageContentTask Include="Assets\sprite\gauge\gauge_4.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

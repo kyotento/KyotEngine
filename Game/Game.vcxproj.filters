@@ -327,13 +327,16 @@
     <ClCompile Include="OrderSheet.cpp">
       <Filter>Game\2D\Stage\Order</Filter>
     </ClCompile>
-    <ClCompile Include="OrderGenerations.cpp">
-      <Filter>Game\2D\Stage</Filter>
-    </ClCompile>
-    <ClCompile Include="FoodSheetGenerations.cpp">
-      <Filter>Game\2D\Stage</Filter>
-    </ClCompile>
     <ClCompile Include="CookingList.cpp" />
+    <ClCompile Include="FoodSheetGenerations.cpp">
+      <Filter>Game\2D\Stage\Order</Filter>
+    </ClCompile>
+    <ClCompile Include="OrderGenerations.cpp">
+      <Filter>Game\2D\Stage\Order</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeLimitGauge.cpp">
+      <Filter>Game\2D\Stage\Order</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -587,13 +590,16 @@
     <ClInclude Include="OrderSheet.h">
       <Filter>Game\2D\Stage\Order</Filter>
     </ClInclude>
+    <ClInclude Include="CookingList.h" />
     <ClInclude Include="OrderGenerations.h">
-      <Filter>Game\2D\Stage</Filter>
+      <Filter>Game\2D\Stage\Order</Filter>
     </ClInclude>
     <ClInclude Include="FoodSheetGenerations.h">
-      <Filter>Game\2D\Stage</Filter>
+      <Filter>Game\2D\Stage\Order</Filter>
     </ClInclude>
-    <ClInclude Include="CookingList.h" />
+    <ClInclude Include="TimeLimitGauge.h">
+      <Filter>Game\2D\Stage\Order</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">
@@ -732,6 +738,18 @@
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\kitchenWare\pot.png">
       <Filter>Assets\sprite\kitchenWare</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\gauge\gauge_1.png">
+      <Filter>Assets\sprite\gauge</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\gauge\gauge_2.png">
+      <Filter>Assets\sprite\gauge</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\gauge\gauge_3.png">
+      <Filter>Assets\sprite\gauge</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\gauge\gauge_4.png">
+      <Filter>Assets\sprite\gauge</Filter>
     </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
