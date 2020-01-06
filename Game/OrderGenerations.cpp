@@ -72,6 +72,7 @@ void OrderGenerations::Move()
 //料理に使用する食べ物を書くシート。
 void OrderGenerations::FoodSheetGeneration(int FoodTypeNum, int genenum)
 {
+	//座標更新処理。
 	m_foodSheetPosition[genenum].x = m_position[genenum].x;
 	m_foodSheetPosition[genenum].y = m_foodPosY[genenum];
 	m_foodSheetPosition[genenum].z = m_position[genenum].z;
@@ -81,6 +82,12 @@ void OrderGenerations::FoodSheetGeneration(int FoodTypeNum, int genenum)
 		m_foodSheetGenerations->SetPosition(m_position[genenum]);		//生成されたシートの座標を指定してやる。
 		m_foodPosY[genenum] = m_position[genenum].y;								//Y座標を保存しておく。
 
+		m_timeLimitGauge[genenum] = NewGO<TimeLimitGauge>(0, "timelimitgauge");
+		m_timeLimitGaugePosition[genenum] = m_position[genenum];
+		m_timeLimitGaugePosition[genenum].x -= 55.f;
+		m_timeLimitGaugePosition[genenum].y += 20.f;
+		m_timeLimitGauge[genenum]->SetPosition(m_timeLimitGaugePosition[genenum]);
+
 		m_foodSheetGenerationFlag[genenum] = true;			//生成したのでフラグを返す。
 	}
 }
@@ -89,17 +96,19 @@ void OrderGenerations::FoodSheetGeneration(int FoodTypeNum, int genenum)
 void OrderGenerations::FoodSheetPosUpdate(int genenum)
 {
 	if (m_foodPosY[genenum] >= m_foodPosYLimit) {		//座標が上限値に達していないなら。
-		m_foodPosY[genenum] += -1.f;					//Y座標を枚フレーム更新。
+		m_foodPosY[genenum] += -1.f;					//Y座標を毎フレーム更新。
 	}
 
 	else {		//上限値に達したら。
 		Order(genenum);		//その他画像生成処理。
 	}
+
 	if (m_foodSheetGenerationFlag) {					//生成されていたら。
 		m_foodSheetGenerations->SetPositionY(m_foodPosY[genenum]);		//座標を更新する。
 	}
 }
 
+//その他画像の生成処理。
 void OrderGenerations::Order(int genenum)
 {
 	if (m_cuisineSheetFlag[genenum] == false) {			//料理の画像が生成されていないとき。

@@ -6,6 +6,7 @@
 #include "OrderSheet.h"
 #include "FoodSheetGenerations.h"
 #include "CookingList.h"
+#include "TimeLimitGauge.h"
 
 class OrderGenerations : public GameObject
 {
@@ -66,21 +67,23 @@ private://todo 絶　初期化する。
 	bool m_foodSheetGenerationFlag[m_orderNumLimit] = { false };				//食べ物シートを生成したか否か。
 	bool m_cuisineSheetFlag[m_orderNumLimit] = { false };			//料理の画像を生成したか否か。
 	
-	CVector3 m_position[m_orderNumLimit] = { CVector3::Zero(),CVector3::Zero(),CVector3::Zero(),CVector3::Zero(),CVector3::Zero() };				//座標。
-	CVector3 m_scale[m_orderNumLimit] = { CVector3::One(),CVector3::One(),CVector3::One(),CVector3::One(),CVector3::One() };						//スケール。
-	CVector3 m_foodSheetPosition[m_orderNumLimit] = { CVector3::Zero(),CVector3::Zero(),CVector3::Zero(),CVector3::Zero(),CVector3::Zero() };		//食べ物シートの座標。
-	CVector3 m_kitchenWarePosition[m_orderNumLimit] = { CVector3::Zero(),CVector3::Zero() ,CVector3::Zero() ,CVector3::Zero() ,CVector3::Zero() };
+	CVector3 m_position[m_orderNumLimit] = { CVector3::Zero(),CVector3::Zero(),CVector3::Zero(),CVector3::Zero(),CVector3::Zero() };					//座標。
+	CVector3 m_scale[m_orderNumLimit] = { CVector3::One(),CVector3::One(),CVector3::One(),CVector3::One(),CVector3::One() };							//スケール。
+	CVector3 m_foodSheetPosition[m_orderNumLimit] = { CVector3::Zero(),CVector3::Zero(),CVector3::Zero(),CVector3::Zero(),CVector3::Zero() };			//食べ物シートの座標。
+	CVector3 m_kitchenWarePosition[m_orderNumLimit] = { CVector3::Zero(),CVector3::Zero() ,CVector3::Zero() ,CVector3::Zero() ,CVector3::Zero() };		//調理器具の画像座標。
+	CVector3 m_timeLimitGaugePosition[m_orderNumLimit] = { CVector3::Zero(),CVector3::Zero() ,CVector3::Zero() ,CVector3::Zero() ,CVector3::Zero() };	//タイムリミットゲージの座標。
 
 	CQuaternion m_rotation[m_orderNumLimit] = { CQuaternion::Identity(),CQuaternion::Identity(),CQuaternion::Identity(),CQuaternion::Identity(),CQuaternion::Identity() };	    	//回転。
-
 
 	OrderSheet* m_orderSheet[m_orderNumLimit] = {nullptr};			//オーダーシート。
 	FoodSheetGenerations* m_foodSheetGenerations = nullptr;			//食べ物のシート。
 	CookingList* m_cookingList = nullptr;							//料理リスト。
+	TimeLimitGauge* m_timeLimitGauge[m_orderNumLimit] = { nullptr };//時間制限ゲージ。
 
 	SpriteRender* m_spriteRenderCuisine[m_orderNumLimit] = { nullptr };					//料理の画像生成用スプライト。	
 	SpriteRender* m_spriteRenderFoods[m_orderNumLimit] = { nullptr };					//食べ物の画像生成用スプライト。
 	SpriteRender* m_spriteRenderCuisineMethod[m_orderNumLimit] = { nullptr };			//料理の画像生成用スプライト。
+
 
 };
 

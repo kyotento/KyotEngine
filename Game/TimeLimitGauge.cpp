@@ -2,7 +2,7 @@
 #include "TimeLimitGauge.h"
 
 namespace {
-	float size_x = 130.f;
+	float size_x = 110.f;
 	float size_y = 20.f;
 }
 
@@ -17,7 +17,7 @@ TimeLimitGauge::~TimeLimitGauge()
 
 bool TimeLimitGauge::Start()
 {
-	m_spriteRender = NewGO<SpriteRender>(0, "sprite");
+	m_spriteRender = NewGO<SpriteRender>(2, "sprite");
 	m_spriteRender->Init(L"Assets/sprite/gauge_1.dds", size_x, size_y);
 	m_spriteRender->SetPosition(m_position);
 	m_spriteRender->SetScale(m_scale);

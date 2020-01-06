@@ -19,7 +19,7 @@ bool OrderSheet::Start()
 	m_spriteRenderSheetNo1->SetPosition(m_position);
 	m_spriteRenderSheetNo1->SetRotation(m_rotation);
 
-	m_spriteRenderSheetNo2 = NewGO<SpriteRender>(2, "sprite");
+	m_spriteRenderSheetNo2 = NewGO<SpriteRender>(3, "sprite");
 	m_spriteRenderSheetNo2->Init(L"Assets/sprite/Food_Sheet2.dds", 150.f, 60.f);
 	m_spriteRenderSheetNo2->SetPosition(m_position);
 	m_spriteRenderSheetNo2->SetRotation(m_rotation);
