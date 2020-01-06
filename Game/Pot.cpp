@@ -141,7 +141,7 @@ void Pot::Vector2DUpdate()
 //危険マーク描画処理。
 void Pot::Danger2D()
 {
-	if (m_dangerFlag == false && m_dangerStartTimer >= 5.f && m_dangerStartTimer <= 15.f) {		//危険マークが生成されていない、且つタイマーが経過していた時。
+	if (m_dangerFlag == false && m_dangerStartTimer >= 3.f && m_dangerStartTimer <= 10.f) {		//危険マークが生成されていない、且つタイマーが経過していた時。
 		m_danger = NewGO<Danger>(0, "danger");			//画像を生成。
 		checkPos = m_position;		//ゲージの座標にお鍋の座標に代入。
 		checkPos.y += 100.f;		//Y軸を少し上げてやる。
@@ -162,7 +162,7 @@ void Pot::Danger2D()
 //火事マーク描画処理。
 void Pot::Fire2D()
 {
-	if (m_fireFlag == false && m_dangerStartTimer > 15.f) {		//火事マークが生成されていない、且つタイマーが経過していた時。	
+	if (m_fireFlag == false && m_dangerStartTimer > 10.f) {		//火事マークが生成されていない、且つタイマーが経過していた時。	
 		m_fire = NewGO<Fire>(0, "fire");				//画像を生成。
 		DeleteGO(m_danger);								//危険マークを消す。
 		m_danger = nullptr;								//危険マークのインスタンスを消す。

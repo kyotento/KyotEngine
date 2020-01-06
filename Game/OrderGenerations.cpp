@@ -29,7 +29,7 @@ void OrderGenerations::Generations()
 {
 	if (m_generationNum < m_orderNumLimit && m_order == false) {		//注文の数が上限値より少ないとき。且つ、注文が来ていないとき。
 		m_orderTimer += 1.f / 60.f;					//タイマーを進める。
-		if (m_orderTimer >= 5.f) {					//5秒以上経過したなら。
+		if (m_orderTimer >= 10.f) {					//5秒以上経過したなら。
 			m_order = true;							//注文フラグを返す。
 			m_orderTimer = 0.f;						//タイマーをリセットする。
 		}
