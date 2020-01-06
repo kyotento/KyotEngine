@@ -73,9 +73,33 @@ void TimeLimitGauge::ModelChange()
 	}
 }
 
+//スケールの変更。
+void TimeLimitGauge::ChangeScale()
+{
+	if (m_scale_x > 0.f)			//拡大率が０より大きいとき。
+	{
+		m_scale_x -= 1.f / 120.f / 60.f;		//todo 60.fは実際はGetFlameDeltaTime。
+	}
+
+	m_scale.x = m_scale_x;			//スケールを代入。
+}
+
+//縮小時間を指定する場合のスケールの変更。
+void TimeLimitGauge::ChangeScale(float time)
+{
+	if (m_scale_x > 0.f)			//拡大率が０より大きいとき。
+	{
+		m_scale_x -= 1.f / time / 60.f;		//todo 60.fは実際はGetFlameDeltaTime。
+	}
+
+	m_scale.x = m_scale_x;			//スケールを代入。
+}
+
 //更新処理。
 void TimeLimitGauge::Update()
 {
 	//状態を変更する。
 	StateChange();
+
+	m_spriteRender->SetScale(m_scale);			//拡大処理。
 }

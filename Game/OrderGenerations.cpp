@@ -64,6 +64,7 @@ void OrderGenerations::Move()
 
 				FoodSheetGeneration(m_cookingList->GetFoodType(), m_orderNumber);		//食べ物シートを生成する。
 				FoodSheetPosUpdate(m_orderNumber);						//食べ物シートの座標更新処理。
+				m_timeLimitGauge[m_orderNumber]->ChangeScale();			//ゲージの拡大処理。
 			}
 		}
 	}
@@ -82,11 +83,11 @@ void OrderGenerations::FoodSheetGeneration(int FoodTypeNum, int genenum)
 		m_foodSheetGenerations->SetPosition(m_position[genenum]);		//生成されたシートの座標を指定してやる。
 		m_foodPosY[genenum] = m_position[genenum].y;								//Y座標を保存しておく。
 
-		m_timeLimitGauge[genenum] = NewGO<TimeLimitGauge>(0, "timelimitgauge");
-		m_timeLimitGaugePosition[genenum] = m_position[genenum];
-		m_timeLimitGaugePosition[genenum].x -= 55.f;
-		m_timeLimitGaugePosition[genenum].y += 20.f;
-		m_timeLimitGauge[genenum]->SetPosition(m_timeLimitGaugePosition[genenum]);
+		m_timeLimitGauge[genenum] = NewGO<TimeLimitGauge>(0, "timelimitgauge");		//ゲージ生成。
+		m_timeLimitGaugePosition[genenum] = m_position[genenum];					//シートの座標を代入。
+		m_timeLimitGaugePosition[genenum].x -= 55.f;								//ゲージだけpovotが違うので少し左に移動する。
+		m_timeLimitGaugePosition[genenum].y += 20.f;								//少し上に。
+		m_timeLimitGauge[genenum]->SetPosition(m_timeLimitGaugePosition[genenum]);	//座標更新処理。
 
 		m_foodSheetGenerationFlag[genenum] = true;			//生成したのでフラグを返す。
 	}

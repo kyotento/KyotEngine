@@ -21,6 +21,19 @@ public:
 	void ModelChange();
 
 	/// <summary>
+	/// スケール変更。
+	/// </summary>
+	/// 120秒でスケールが0になる。
+	void ChangeScale();
+
+	/// <summary>
+	/// スケール変更
+	/// </summary>
+	/// <param name="time">縮小時間</param>
+	/// スケールが0になる時間を設定したい場合使用する。
+	void ChangeScale(float time);
+
+	/// <summary>
 	/// 座標を設定する関数。
 	/// </summary>
 	/// <param name="position">座標</param>
@@ -51,7 +64,9 @@ public:
 
 private:
 
-	CVector2 m_pivot = { 0.0f,0.5f };				//ピボット。
+	float m_scale_x = 1.f;							//拡大率X。
+
+	CVector2 m_pivot = { 0.0f,0.5f };				//中心地。
 
 	CVector3 m_position = CVector3::Zero();			//座標。
 	CVector3 m_scale = CVector3::One();				//スケール。
@@ -60,7 +75,6 @@ private:
 	GaugeState m_oldGaugeState = en66Then;			//1フレーム前のゲージの状態。
 
 	SpriteRender* m_spriteRender = nullptr;			//画像描画用。
-
 
 };
 
