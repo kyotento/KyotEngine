@@ -25,14 +25,12 @@ void Game::Update()
 	//íÜÇ≈Ç‚Ç¡ÇƒÇÈÇ±Ç∆ÇÕâºÅB
 	if (m_titleDeleteFlag)
 	{
-//		m_player = NewGO<Player>(0, "player");
-		m_playerGenerations = NewGO<PlayerGenerations>(0, "playergenerations");
+	//	m_player = NewGO<Player>(0, "player");
+		m_playerGenerations = NewGO<PlayerGenerations>(0, "playergnerations");
 		m_stage_1 = NewGO<Stage_1>(0, "stage_1");
 		m_timer = NewGO<Timer>(0, "timer");
 		m_score = NewGO<Score>(0, "score");
-//		m_orderSheet = NewGO<OrderSheet>(0, "order");
 		m_orderGenerations = NewGO<OrderGenerations>(0, "orderGenerations");
 		m_titleDeleteFlag = false;
 	}
-
 }

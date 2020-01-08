@@ -1,5 +1,6 @@
 #pragma once
 #include "Game.h"
+
 class Game;
 class Title : public GameObject
 {
@@ -10,13 +11,12 @@ public:
 	bool Start()override;
 	void Update();
 
-
 private:
 
-	CVector3 m_position = CVector3::Zero();
+	CVector3 m_position = CVector3::Zero();		//座標。
 
 	SpriteRender* m_spriteRender = nullptr;		//Sprite。
-	Pad* m_pad = nullptr;
-	Game* m_game = nullptr;
+	Pad* m_pad = nullptr;						//コントローラPadクラス。
+	Game* m_game = nullptr;						//Gameクラス。
 };
 
