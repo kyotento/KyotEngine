@@ -29,7 +29,8 @@ void CookingList::CookingInformations()
 
 	if (m_dishName == enOnionSoup)		//玉ねぎスープのとき。
 	{
-		m_materialNum = 1;
+		m_materialNum = 3;			//料理に必要な食べ物の数。
+		m_materialNum = 1;			//料理に必要な食べ物の種類。
 	}
 }
 

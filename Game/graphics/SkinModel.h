@@ -10,14 +10,15 @@ enum EnFbxUpAxis {
 	enFbxUpAxisZ,		//Z-up
 };
 
-const int directionLightNum = 1;		//ディレクションライトの数。(これを変えるときはシェーダー側も変更してあげる必要がある)。
+const int directionLightNum = 5;		//ディレクションライトの数。(これを変えるときはシェーダー側も変更してあげる必要がある)。
 
 
 struct DirectionLight {
 	CVector4 direction[directionLightNum];	//ディレクションライトの向き。
 	CVector4 color[directionLightNum];		//ディレクションライトの色。
 	CVector3 eyePos;
-	float specPos;
+	float specPos;			//スペキュラの強さ。
+	CVector4 ambientLig = {0.0f, 0.0f, 0.0f, 0.0f};	//アンビエントライト。
 };
 
 
@@ -115,6 +116,15 @@ public:
 	/// ディレクションライトの初期化。
 	/// </summary>
 	void InitDirectionLight();
+
+	/// <summary>
+	/// スペキュラの強さを設定する関数。
+	/// </summary>
+	/// <param name="specPow">スペキュラの強さ</param>
+	void SetSpecPower(float specPow)
+	{
+		m_directionLight.specPos = specPow;
+	}
 
 	/// <summary>
 	/// シャドウマップ

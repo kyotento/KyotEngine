@@ -23,6 +23,7 @@ bool Dish::Start()
 	m_skinModelRender->Init(L"Assets/modelData/Dish/Dish.cmo");			//初期化。
 	m_skinModelRender->SetPosition(m_position);							//座標を指定。
 	m_skinModelRender->SetRotation(m_rotation);							//回転を指定。
+	m_skinModelRender->SetSpecPower(2.f);								//スペキュラの値を設定。
 
 	return true;
 }

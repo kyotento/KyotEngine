@@ -36,7 +36,7 @@ SkinModelRender* m_skinModelRender2;
 
 bool Player::Start()
 {
-	m_skinModelRender->Init(L"Assets/modelData/Chef/chef_1.cmo", m_animationClips, enanimationClip_Num);
+	m_skinModelRender->Init(L"Assets/modelData/Chef/chef_1.cmo", m_animationClips, enanimationClip_Num, "PSMain", "VSMain", false);
 	m_skinModelRender->SetPosition(m_position);
 	m_skinModelRender->SetRotation(m_rotation);
 	m_skinModelRender->PlayAnimation(enanimationClip_Idle);

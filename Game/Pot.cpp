@@ -20,6 +20,7 @@ bool Pot::Start()
 	m_skinModelRender->Init(L"Assets/modelData/Pot/Pot.cmo");		//初期化、
 	m_skinModelRender->SetPosition(m_position);						//座標指定。
 	m_skinModelRender->SetRotation(m_rotation);
+	m_skinModelRender->SetSpecPower(2.f);							//スペキュラの値を設定。
 
 	m_soupPos = m_position;			//スープの座標をお鍋の座標に代入。
 

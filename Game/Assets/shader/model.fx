@@ -32,7 +32,7 @@ cbuffer VSPSCb : register(b0){
 	int isShadowReciever;	//シャドウレシーバーフラグ。
 };
 
-static const int directionLightNum = 1;		//ディレクションライトの数。
+static const int directionLightNum = 5;		//ディレクションライトの数。
 
 struct DirectionLight {
 	float4 direction[directionLightNum];	//ディレクションライトの向き。
@@ -44,7 +44,7 @@ cbuffer LightConstantBuffer : register(b1)
 {
 	DirectionLight		directionLight;		//ディレクションライト。
 	float3				eyePos;				//カメラの視点。
-	float				specPow;			//スペキュラライトの絞り。
+	float				specPow;			//スペキュラライトのパワー。
 	float3				environmentpow;		//環境光の強さ。
 }
 
@@ -176,6 +176,11 @@ PSInput VSMainSkin( VSInputNmTxWeights In )
 		//mulは乗算命令。
 	    pos = mul(skinning, In.Position);
 	}
+	if (isShadowReciever == 1) {
+		//ライトビュープロジェクション空間に変換。
+		psInput.posInLVP = mul(mLightView, pos);
+		psInput.posInLVP = mul(mLightProj, psInput.posInLVP);
+	}
 	psInput.Normal = normalize( mul(skinning, In.Normal) );
 	psInput.Tangent = normalize( mul(skinning, In.Tangent) );
 	//鏡面反射の計算のために、ワールド座標をピクセルシェーダーに渡す。
@@ -193,13 +198,14 @@ PSInput VSMainSkin( VSInputNmTxWeights In )
 float4 PSMain( PSInput In ) : SV_Target0
 {
 	float4 albedoColor = g_albedoTexture.Sample(g_sampler, In.TexCoord);
-	//ディレクションライトの拡散反射光を計算する。
-	float3 lig = max(0.0f, dot(In.Normal * -1.0f, directionLight.direction[0])) * directionLight.color[0];
+	float3 lig = 0.0f;
 
 		//鏡面反射光。
 	//ディレクションライトの鏡面反射光を計算する。
 	{
 		for(int i = 0; i < directionLightNum; i++) {
+			//ディレクションライトの拡散反射光を計算する。
+			lig += max(0.0f, dot(In.Normal * -1.0f, directionLight.direction[i])) * directionLight.color[i];
 			//反射ベクトルRを求める。
 			float3 R = directionLight.direction[i] + 2 * dot(In.Normal, -directionLight.direction[i]) * In.Normal;
 
@@ -210,7 +216,7 @@ float4 PSMain( PSInput In ) : SV_Target0
 			float specPower = max(0, dot(R, -E));
 
 			//スペキュラ反射をライトに加算する。
-			lig += directionLight.color[i].xyz * pow(specPower, 2);
+			lig += directionLight.color[i].xyz * pow(specPower, 2) * specPow;
 		}
 	}
 
@@ -231,7 +237,7 @@ float4 PSMain( PSInput In ) : SV_Target0
 			//シャドウマップに書き込まれている深度値を取得。
 			float zInShadowMap = g_shadowMap.Sample(g_sampler, shadowMapUV);
 
-			if (zInLVP > zInShadowMap + 0.001f) {// + 0.001fしているのは、シャドウアクネを回避するため。
+			if (zInLVP > zInShadowMap + 0.005f) {// + 0.001fしているのは、シャドウアクネを回避するため。
 				//影が落ちているので、光を弱くする
 				lig *= 0.4f;
 			}
@@ -239,7 +245,7 @@ float4 PSMain( PSInput In ) : SV_Target0
 	}
 
 	//　環境光を当てる。
-//	lig += 1.f/*float3(environmentpow)*/;
+	lig += float3(environmentpow);
 
 	float4 finalColor = float4(0.0f, 0.0f, 0.0f, 1.0f);
 	finalColor.xyz = albedoColor.xyz * lig;

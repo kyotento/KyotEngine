@@ -19,6 +19,7 @@ bool Knife::Start()
 	m_skinModelRender->SetPosition(m_position);
 	m_skinModelRender->SetScale(m_scale);
 	m_skinModelRender->SetRotation(m_rotation);
+	m_skinModelRender->SetSpecPower(2.f);
 
 	return true;
 }

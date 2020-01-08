@@ -105,19 +105,42 @@ void SkinModel::InitSamplerState()
 
 void SkinModel::InitDirectionLight()
 {
-	//ディレクションライトの数分ループする。
-	for (int i = 0; i < directionLightNum; i++)
+	//太陽光
+	m_directionLight.direction[0] = { -1.0f,-1.0f,1.0f,0.0f };
+	m_directionLight.direction[0].Normalize();
+	m_directionLight.color[0] = { 0.4f,0.4f,0.4f,1.f };
+
+	//地面の照り返し
+	m_directionLight.direction[1] = { 1.0f,-1.0f,1.0f,0.0f };
+	m_directionLight.direction[1].Normalize();
+	m_directionLight.color[1] = { 0.1f,0.1f,0.1f,1.f };
+
+
+	m_directionLight.direction[2] = { -1.0f,0.5f,0.0f,0.0f };
+	m_directionLight.direction[2].Normalize();
+	m_directionLight.color[2] = { 0.0f,0.0f,0.0f,1.f };
+
+	m_directionLight.direction[3] = { 1.0f,0.5f,1.0f,0.0f };
+	m_directionLight.direction[3].Normalize();
+	m_directionLight.color[3] = { 0.0f,0.0f,0.0f,1.f };
+
+	m_directionLight.direction[4] = { 0.f,0.f,1.0f,0.0f };
+	m_directionLight.color[4] = { 0.3f,0.3f,0.3f,1.f };
+	
+	m_directionLight.specPos = 0.0f;
+	m_directionLight.ambientLig = { 0.5f, 0.5f, 0.5f, 1.0f };
+	/*for (int i = 0; i < directionLightNum; i++)
 	{
 		if (i == 0) {
-			m_directionLight.direction[i] = { -0.707,-0.707,0.0f,0.0f };
+			m_directionLight.direction[i] = { 0.f,0.f,-1.0f,0.0f };
 			m_directionLight.color[i] = { 1.f,1.f,1.f,1.f };
 		}
 
-		//if (i == 1) {
-		//	m_directionLight.direction[i] = { -0.707,-0.707,0.0f,0.0f };
-		//	m_directionLight.color[i] = { 1.f,1.f,1.f,1.f };
-		//}
-	}
+		if (i == 1) {
+			m_directionLight.direction[i] = { 0.f,0.f,-1.0f,0.0f };
+			m_directionLight.color[i] = { 1.f,1.f,1.f,1.f };
+		}
+	}*/
 }
 
 void SkinModel::UpdateWorldMatrix(CVector3 position, CQuaternion rotation, CVector3 scale)
@@ -173,7 +196,7 @@ void SkinModel::Draw(EnRenderMode renderMode, CMatrix viewMatrix, CMatrix projMa
 	//視点を設定。
 	m_directionLight.eyePos = g_camera3D.GetPosition();
 	//鏡面反射光の絞りを設定。
-	m_directionLight.specPos = 2.f;
+	//m_directionLight.specPos = 2.f;
 	
 	//ライト用の定数バッファを更新。
 	d3dDeviceContext->UpdateSubresource(m_lightConstantBuffer, 0, nullptr, &m_directionLight, 0, 0);

@@ -89,6 +89,15 @@ public:
 	}
 
 	/// <summary>
+	/// スペキュラの強さを設定する。
+	/// </summary>
+	/// <param name="specPow">スペキュラの強さを設定</param>
+	void SetSpecPower(float specPow)
+	{
+		m_skinModel.SetSpecPower(specPow);
+	}
+
+	/// <summary>
 	/// シャドーキャスターフラグをセットする。
 	/// </summary>
 	/// <param name="flag"></param>

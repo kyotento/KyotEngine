@@ -62,7 +62,7 @@ void GameObjectManager::Execute()
 	}
 
 	//シャドウマップを更新。
-	m_shadowMap.Update({ 1000.0f,1000.0f,1000.0f }, { 0.0f,0.0f,0.0f });
+	m_shadowMap.Update({ 500.f,1000.0f,-500.0f }, { 0.0f,0.0f,0.0f });
 
 	//描画開始。
 	g_graphicsEngine->BegineRender();

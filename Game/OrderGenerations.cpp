@@ -51,22 +51,22 @@ void OrderGenerations::Generations()
 //移動処理。
 void OrderGenerations::Move()
 {
-	for (int m_orderNumber = 0; m_orderNumber < m_orderNumLimit; m_orderNumber++) {		//配列の数分ループする。
-		if (m_orderSheet[m_orderNumber] != nullptr) {			//シートが生成されていたら。
-			if (m_position[m_orderNumber].x > m_moveLimit[m_orderNumber]) {		//座標が上限値に達していなかったら。
-				m_position[m_orderNumber].x -= 20.f;			//X座標を更新。	
-				m_position[m_orderNumber].y = m_sheet_y;		//Y座標を更新。
-				m_position[m_orderNumber].z = m_sheet_z;		//Z座標を更新。
+	for (int m_orderNum = 0; m_orderNum < m_orderNumLimit; m_orderNum++) {		//配列の数分ループする。
+		if (m_orderSheet[m_orderNum] != nullptr) {			//シートが生成されていたら。
+			if (m_position[m_orderNum].x > m_moveLimit[m_orderNum]) {		//座標が上限値に達していなかったら。
+				m_position[m_orderNum].x -= 20.f;			//X座標を更新。	
+				m_position[m_orderNum].y = m_sheet_y;		//Y座標を更新。
+				m_position[m_orderNum].z = m_sheet_z;		//Z座標を更新。
 			}
-			m_orderSheet[m_orderNumber]->SetPosition(m_position[m_orderNumber]);		//シートの座標を更新。
+			m_orderSheet[m_orderNum]->SetPosition(m_position[m_orderNum]);		//シートの座標を更新。
 
-			if (m_position[m_orderNumber].x <= m_moveLimit[m_orderNumber]) {	//座標が上限値に達した時。
+			if (m_position[m_orderNum].x <= m_moveLimit[m_orderNum]) {	//座標が上限値に達した時。
 
-				FoodSheetGeneration(m_cookingList->GetFoodType(), m_orderNumber);		//食べ物シートを生成する。
-				FoodSheetPosUpdate(m_orderNumber);						//食べ物シートの座標更新処理。
-				m_timeLimitGauge[m_orderNumber]->ChangeScale();			//ゲージの拡大処理。
+				FoodSheetGeneration(m_cookingList->GetFoodType(), m_orderNum);		//食べ物シートを生成する。
+				FoodSheetPosUpdate(m_orderNum);						//食べ物シートの座標更新処理。
+				m_timeLimitGauge[m_orderNum]->ChangeScale();			//ゲージの拡大処理。
 			}
-			DeleteOrder(m_orderNumber);			//シートを消す処理。
+			DeleteOrder(m_orderNum);			//シートを消す処理。
 		}
 	}
 }
@@ -114,8 +114,8 @@ void OrderGenerations::FoodSheetPosUpdate(int genenum)
 void OrderGenerations::Order(int genenum)
 {
 	if (m_cuisineSheetFlag[genenum] == false) {			//料理の画像が生成されていないとき。
-		if (m_cookingList->GetCookingList() == CookingList::enTomatoSoup)		//作成するものがトマトスープの場合。
-		{
+		if (m_cookingList->GetCookingList() == CookingList::enTomatoSoup){		//作成するものがトマトスープの場合。
+
 			//トマトスープの画像を描画する。
 			m_spriteRenderCuisine[genenum] = NewGO<SpriteRender>(cuisinePriority, "sprite");						//料理の画像生成。
 			m_spriteRenderCuisine[genenum]->Init(L"Assets/sprite/TomatoSoup.dds", cuisineSize, cuisineSize);		//初期化。
@@ -133,6 +133,24 @@ void OrderGenerations::Order(int genenum)
 
 			m_cuisineSheetFlag[genenum] = true;			//料理の画像が生成されたのでフラグを返す。
 		}
+
+		if (m_cookingList->GetCookingList() == CookingList::enOnionSoup){		//作成するものが玉ねぎスープのとき。
+
+			//玉ねぎスープの画像を描画する。
+			m_spriteRenderCuisine[genenum] = NewGO<SpriteRender>(cuisinePriority, "sprite");						//料理の画像生成。
+			m_spriteRenderCuisine[genenum]->Init(L"Assets/sprite/OnionSoup.dds", cuisineSize, cuisineSize);			//初期化。
+			m_spriteRenderCuisine[genenum]->SetPosition(m_position[genenum]);										//座標更新。
+
+			m_spriteRenderFoods[genenum] = NewGO<SpriteRender>(cuisinePriority, "sprite");							//食材の画像生成。
+			m_spriteRenderFoods[genenum]->Init(L"Assets/sprite/Onion.dds", foodSize, foodSize);						//初期化。
+			m_spriteRenderFoods[genenum]->SetPosition(m_foodSheetPosition[genenum]);								//座標更新。
+
+			m_spriteRenderCuisineMethod[genenum] = NewGO<SpriteRender>(cuisinePriority, "sprite");					//調理方法の画像生成。
+			m_spriteRenderCuisineMethod[genenum]->Init(L"Assets/sprite/pot.dds", foodSize, foodSize);				//初期化。
+			m_kitchenWarePosition[genenum] = m_foodSheetPosition[genenum];											//シートの座標を代入。
+			m_kitchenWarePosition[genenum].y -= 25.f;																//少し下に座標を移動。
+			m_spriteRenderCuisineMethod[genenum]->SetPosition(m_kitchenWarePosition[genenum]);						//座標更新。
+		}
 	}
 }
 
@@ -142,7 +160,9 @@ void OrderGenerations::DeleteOrder(int genenum)
 	if (m_timeLimitGauge[genenum] != nullptr) {			//ゲージが生成されているとき。
 		if (m_timeLimitGauge[genenum]->GetTimeLimitFlag() == true) {			//タイムリミットを超えた時。
 			DeleteGO(m_timeLimitGauge[genenum]);			//ゲージを消す
+			m_timeLimitGauge[genenum] = nullptr;			//ゲージのインスタンスを破棄。
 			DeleteGO(m_orderSheet[genenum]);				//注文シートを消す。
+			m_orderSheet[genenum] = nullptr;				//注文シートのインスタンスを破棄。
 		}
 	}
 }
