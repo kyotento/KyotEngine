@@ -2,6 +2,7 @@
 #include "Player.h"
 
 //#define SPRITE_TEST		//3DのSpriteのテストをするときに定義する。
+//#define OVERCOOKED_ONE_SPECIFCATION			//overcooked1の仕様にしたい場合定義する。
 //todo 持っているものの回転をプレイヤー依存にする。
 //todo プレイヤーを複数出す仕組みを作る。
 //todo　包丁を描画しないように。
@@ -178,7 +179,7 @@ void Player::CollideToObject(btCollisionWorld::ClosestRayResultCallback rayRC, i
 
 				m_kitchen = (Kitchen*)rayRC.m_collisionObject->getUserPointer();
 
-				if (g_pad[0].IsPress(enButtonX))
+				if (g_pad[controllerNum].IsPress(enButtonX))
 				{
 					if (m_toHave == false) {			//プレイヤーが何も持っていないとき。
 						m_playerState = enWashing;			//プレイヤーの状態を洗っている状態に。
@@ -222,10 +223,44 @@ void Player::CollideToObject(btCollisionWorld::ClosestRayResultCallback rayRC, i
 				m_cuttingDesk = (CuttingDesk*)rayRC.m_collisionObject->getUserPointer();
 
 				if (m_toHave == false) {		//何も持っていないとき。
+
 					if (g_pad[controllerNum].IsPress(enButtonX) && m_objectAbove->GetState() == ObjectAbove::en_onObject)		//Xを押したとき、何か乗っているとき。
 					{
 						m_playerState = enCutting;			//プレイヤーの状態を物を切っている状態に。
 					}
+
+#ifdef OVERCOOKED_ONE_SPECIFCATION
+
+					//if (m_objectAbove->GetState() == ObjectAbove::en_onObject) {			//何か乗っているとき。
+					//	m_objectAbove->TakeThings(m_cacth);			//乗っているものを検索する。
+					//	if (g_pad[controllerNum].IsTrigger(enButtonX))		//Xを押したとき。
+					//	{
+					//		if (m_cacth->GetFoodState() == Belongings::enCutting) {			//乗っている食べ物が切られていた時。
+					//			m_cuttingFlag = false;					//材料を切らない状態に変更する。
+					//		}
+					//		else {				//食べ物が切られていないとき。
+					//			if (m_cuttingFlag == false) {			//材料を切っていなかった場合。
+					//				m_cuttingFlag = true;				//フラグを返す。
+					//			}
+					//			else {									//材料を切っているとき。
+					//				m_cuttingFlag = false;				//フラグを返す。
+					//			}
+					//		}
+					//	}
+
+					//	if (m_cacth->GetFoodState() == Belongings::enCutting) {			//乗っている食べ物が切られていた時。
+					//		m_cuttingFlag = false;					//材料を切らない状態に変更する。
+					//	}
+
+					//	if (m_objectAbove->GetState() == ObjectAbove::en_default) {			//何も乗っていない時。
+					//		m_cuttingFlag = false;											//材料を切っていない状態に。
+					//	}
+
+					//	if (m_cuttingFlag == true) {			//材料を切るフラグがたっているとき。
+					//		m_playerState = enCutting;			//プレイヤーの状態を物を切っている状態に。
+					//	}
+					//}
+#endif
 				}
 			}
 		}

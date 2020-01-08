@@ -66,6 +66,7 @@ void OrderGenerations::Move()
 				FoodSheetPosUpdate(m_orderNumber);						//食べ物シートの座標更新処理。
 				m_timeLimitGauge[m_orderNumber]->ChangeScale();			//ゲージの拡大処理。
 			}
+			DeleteOrder(m_orderNumber);
 		}
 	}
 }
@@ -131,6 +132,17 @@ void OrderGenerations::Order(int genenum)
 			m_spriteRenderCuisineMethod[genenum]->SetPosition(m_kitchenWarePosition[genenum]);						//座標更新。
 
 			m_cuisineSheetFlag[genenum] = true;			//料理の画像が生成されたのでフラグを返す。
+		}
+	}
+}
+
+//注文票を消す処理。
+void OrderGenerations::DeleteOrder(int genenum)
+{
+	if (m_timeLimitGauge[genenum] != nullptr) {			//ゲージが生成されているとき。
+		if (m_timeLimitGauge[genenum]->GetTimeLimitFlag() == true) {			//タイムリミットを超えた時。
+			DeleteGO(m_timeLimitGauge[genenum]);			//ゲージを消す
+			DeleteGO(m_orderSheet[genenum]);				//注文シートを消す。
 		}
 	}
 }

@@ -8,6 +8,7 @@
 #include "Score.h"
 #include "OrderSheet.h"
 #include "OrderGenerations.h"
+#include "PlayerGenerations.h"
 
 class Title;
 class Game : public GameObject
@@ -42,6 +43,7 @@ private:
 	Score* m_score = nullptr;					//スコア。
 	OrderSheet* m_orderSheet = nullptr;
 	OrderGenerations* m_orderGenerations = nullptr;
+	PlayerGenerations* m_playerGenerations = nullptr;			//プレイヤー生成処理。
 
 };
 

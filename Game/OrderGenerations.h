@@ -46,6 +46,12 @@ public:
 	/// <param name="genenum">処理している配列の番号</param>
 	void Order(int genenum);
 
+	/// <summary>
+	/// 注文票を消す処理。
+	/// </summary>
+	/// <param name="genenum">処理している配列の番号</param>
+	void DeleteOrder(int genenum);
+
 private://todo 絶　初期化する。
 
 	static const int m_orderNumLimit = 5;				//注文の上限値。

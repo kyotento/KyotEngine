@@ -31,6 +31,15 @@ public:
 		m_dishDirty = dishDirty;
 	}
 
+	/// <summary>
+	/// 汚れたお皿のインスタンスを取得する。
+	/// </summary>
+	/// <returns>汚れたお皿のインスタンス</returns>
+	DishDirty* GetDishDirtyInstance()
+	{
+		return m_dishDirty;
+	}
+
 private:
 
 	int m_timerK = 0;				//カリカリの仮。

@@ -153,6 +153,15 @@ public:
 	}
 
 	/// <summary>
+	/// コントローラー番号を指定する。
+	/// </summary>
+	/// <param name="controllerNum">コントローラー番号</param>
+	void SetControllerNumber(int controllerNum)
+	{
+		m_controllerNumber = controllerNum;
+	}
+
+	/// <summary>
 	/// 持つことのできるものを代入する。
 	/// </summary>
 	/// <param name="belon">持ち物</param>
@@ -184,6 +193,8 @@ protected:
 
 	bool m_toHave = false;									//何かを持っているかどうか。
 	bool m_knifeflag = false;								//ナイフがNewされたかどうか。
+	bool m_washingFlag = false;								//お皿を洗っているかどうか。
+	bool m_cuttingFlag = false;								//材料を切っているかどうか。
 
 	float m_transitionTime = 0.1f;							//アニメーションが切り替わるときの遷移時間。
 	float m_moveSpeed = 7.5f;								//移動速度。

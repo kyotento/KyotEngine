@@ -337,6 +337,9 @@
     <ClCompile Include="TimeLimitGauge.cpp">
       <Filter>Game\2D\Stage\Order</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerGenerations.cpp">
+      <Filter>Game\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -599,6 +602,9 @@
     </ClInclude>
     <ClInclude Include="TimeLimitGauge.h">
       <Filter>Game\2D\Stage\Order</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerGenerations.h">
+      <Filter>Game\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

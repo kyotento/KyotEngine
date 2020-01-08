@@ -126,7 +126,7 @@ protected:
 //	ObjectNames m_objName = enDesk;				//オブジェクトの名前。多分使わない。
 
 	Belongings* m_belongings = nullptr;			//持つことのできるオブジェクト。
-	Belongings* m_belongingsDirtyDIsh = nullptr;			//お皿洗い場に置かれた汚れたお皿。
+	Belongings* m_belongingsDirtyDish = nullptr;			//お皿洗い場に置かれた汚れたお皿。
 
 private:
 

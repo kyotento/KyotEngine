@@ -62,9 +62,20 @@ public:
 		en10Less		//１０％未満のとき。
 	};
 
+	/// <summary>
+	/// タイムリミットフラグを取得する。
+	/// </summary>
+	/// <returns>タイムリミットフラグ</returns>
+	bool GetTimeLimitFlag()
+	{
+		return m_timeLimitFlag;
+	}
+
 private:
 
 	float m_scale_x = 1.f;							//拡大率X。
+
+	bool m_timeLimitFlag = false;					//時間制限を超えたらtrueになる。(拡大率が0になったら)。
 
 	CVector2 m_pivot = { 0.0f,0.5f };				//中心地。
 

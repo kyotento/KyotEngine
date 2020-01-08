@@ -13,6 +13,7 @@ TimeLimitGauge::TimeLimitGauge()
 
 TimeLimitGauge::~TimeLimitGauge()
 {
+	DeleteGO(m_spriteRender);
 }
 
 bool TimeLimitGauge::Start()
@@ -102,4 +103,8 @@ void TimeLimitGauge::Update()
 	StateChange();
 
 	m_spriteRender->SetScale(m_scale);			//拡大処理。
+
+	if (m_scale.x <= 0.f && m_timeLimitFlag == false) {		//拡大率が０のとき。
+		m_timeLimitFlag = true;			//フラグを返す。
+	}
 }

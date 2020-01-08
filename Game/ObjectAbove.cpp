@@ -28,7 +28,7 @@ void ObjectAbove::SetDirtyDishPos(Belongings* belongings)
 	PutDirtyDishPos.z -= 80.f;						//位置調整。
 	PutDirtyDishPos.y += 30.f;						//位置調整。
 	belongings->SetPosition(PutDirtyDishPos);		//汚れたお皿の座標を指定。
-	m_belongingsDirtyDIsh = belongings;				//m_belongingsDirtyDIshに汚れたお皿のインスタンスを代入。
+	m_belongingsDirtyDish = belongings;				//m_belongingsDirtyDIshに汚れたお皿のインスタンスを代入。
 }
 
 //お皿の座標を指定。
@@ -47,9 +47,10 @@ void ObjectAbove::TakeThings(Belongings* &belong)
 	belong = m_belongings;
 }
 
+//乗っている汚れたお皿のインスタンスを検索する。
 void ObjectAbove::TakeThingsDirtyDish(Belongings* &belong)
 {
-	belong = m_belongingsDirtyDIsh;
+	belong = m_belongingsDirtyDish;
 }
 
 //todo 使わんかも。
