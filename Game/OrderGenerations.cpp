@@ -2,7 +2,7 @@
 #include "OrderGenerations.h"
 
 namespace {
-	int cuisinePriority = 5;		//料理画像のプライオリティ。
+	int cuisinePriority = 5;		//料理画像の実行優先度。
 
 	float cuisineSize = 50.f;		//料理の画像のサイズ。
 	float foodSize = 30.f;			//食べ物の画像のサイズ。
@@ -18,7 +18,7 @@ OrderGenerations::~OrderGenerations()
 
 bool OrderGenerations::Start()
 {
-	m_foodSheetGenerations = NewGO<FoodSheetGenerations>(3, "foodSheet");
+	m_foodSheetGenerations = NewGO<FoodSheetGenerations>(0, "foodSheet");
 	m_cookingList = NewGO<CookingList>(0, "cookingList");
 
 	return true;
@@ -29,7 +29,7 @@ void OrderGenerations::Generations()
 {
 	if (m_generationNum < m_orderNumLimit && m_order == false) {		//注文の数が上限値より少ないとき。且つ、注文が来ていないとき。
 		m_orderTimer += 1.f / 60.f;					//タイマーを進める。
-		if (m_orderTimer >= 10.f) {					//5秒以上経過したなら。
+		if (m_orderTimer >= 10.f) {					//10秒以上経過したなら。
 			m_order = true;							//注文フラグを返す。
 			m_orderTimer = 0.f;						//タイマーをリセットする。
 		}
@@ -66,7 +66,7 @@ void OrderGenerations::Move()
 				FoodSheetPosUpdate(m_orderNumber);						//食べ物シートの座標更新処理。
 				m_timeLimitGauge[m_orderNumber]->ChangeScale();			//ゲージの拡大処理。
 			}
-			DeleteOrder(m_orderNumber);
+			DeleteOrder(m_orderNumber);			//シートを消す処理。
 		}
 	}
 }

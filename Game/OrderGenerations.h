@@ -67,7 +67,7 @@ private://todo 絶　初期化する。
 	float m_foodPosY[m_orderNumLimit] = { 340.f,340.f,340.f,340.f,340.f};
 	float m_foodPosYLimit = 290.f;
 
-	float m_orderTimer = 0.f;							//todo 仮　注文が来るタイマー。
+	float m_orderTimer = 10.f;							//todo 仮　注文が来るタイマー。
 
 	bool m_order = false;								//注文を承ったか否か。
 	bool m_foodSheetGenerationFlag[m_orderNumLimit] = { false };				//食べ物シートを生成したか否か。
