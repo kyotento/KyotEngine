@@ -4,6 +4,7 @@
 #include "util/Util.h"
 #include "ShadowMap.h"
 #include "Sprite.h"
+#include "Random.h"
 class GameObjectManager /*: public Noncopy*/
 {
 public:
@@ -269,6 +270,15 @@ public:
 		});
 	}
 
+	/// <summary>
+	/// 乱数を取得する。
+	/// </summary>
+	/// <returns>乱数</returns>
+	Random& GetRandom()
+	{
+		return m_random;
+	}
+
 private:
 
 	DirectX::Model*		m_modelDx;						//!<DirectXTKが提供するモデルクラス。
@@ -291,7 +301,7 @@ private:
 
 	RenderTarget m_mainRenderTarget;		//メインレンダリングターゲット。
 	Sprite m_copyMainRtToFrameBufferSprite;			//メインレンダリングターゲットに描かれた絵をフレームバッファにコピーするためのスプライト。
-
+	Random m_random;			//ランダム関数。
 
 };
 
@@ -340,4 +350,13 @@ template<class T>
 static inline void QueryGOs(const char* objectName, std::function<bool(T*go)>func)
 {
 	return IGameObjectManager().FindGameObjects<T>(objectName, func);
+}
+
+/// <summary>
+/// 乱数を取得。
+/// </summary>
+/// <returns></returns>
+static inline Random& random()
+{
+	return IGameObjectManager().GetRandom();
 }

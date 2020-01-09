@@ -4,6 +4,7 @@
 #pragma once
 #include "GameObject.h"
 #include "Belongings.h"
+#include "Random.h"
 
 class CookingList : public GameObject
 {
@@ -18,6 +19,11 @@ public:
 	/// 料理の情報を格納してある。
 	/// </summary>
 	void CookingInformations();
+
+	/// <summary>
+	/// 料理を設定する。
+	/// </summary>
+	int OrderSetting();
 
 	/// <summary>
 	/// 料理の名前リスト。

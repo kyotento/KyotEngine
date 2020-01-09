@@ -10,7 +10,7 @@ enum EnFbxUpAxis {
 	enFbxUpAxisZ,		//Z-up
 };
 
-const int directionLightNum = 5;		//ディレクションライトの数。(これを変えるときはシェーダー側も変更してあげる必要がある)。
+const int directionLightNum = 1;		//ディレクションライトの数。(これを変えるときはシェーダー側も変更してあげる必要がある)。
 
 
 struct DirectionLight {

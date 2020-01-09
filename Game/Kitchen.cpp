@@ -17,6 +17,7 @@ bool Kitchen::Start()
 	m_skinModelRender->SetPosition(m_position);
 	m_skinModelRender->SetScale(m_scale);
 	m_skinModelRender->SetRotation(m_rotation);
+	m_skinModelRender->SetSpecPower(2.f);
 
 	m_skinModelRenderCollidion = NewGO<SkinModelRender>(0, "collidion");
 	m_skinModelRenderCollidion->Init(L"Assets/modelData/ColidionBox/collidionBoxLong.cmo");

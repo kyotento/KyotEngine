@@ -32,7 +32,7 @@ cbuffer VSPSCb : register(b0){
 	int isShadowReciever;	//シャドウレシーバーフラグ。
 };
 
-static const int directionLightNum = 5;		//ディレクションライトの数。
+static const int directionLightNum = 1;		//ディレクションライトの数。
 
 struct DirectionLight {
 	float4 direction[directionLightNum];	//ディレクションライトの向き。
@@ -237,7 +237,7 @@ float4 PSMain( PSInput In ) : SV_Target0
 			//シャドウマップに書き込まれている深度値を取得。
 			float zInShadowMap = g_shadowMap.Sample(g_sampler, shadowMapUV);
 
-			if (zInLVP > zInShadowMap + 0.005f) {// + 0.001fしているのは、シャドウアクネを回避するため。
+			if (zInLVP > zInShadowMap + 0.001f) {// + 0.001fしているのは、シャドウアクネを回避するため。
 				//影が落ちているので、光を弱くする
 				lig *= 0.4f;
 			}
@@ -265,7 +265,7 @@ float4 PSMain_Silhouette(PSInput In) : SV_Target0
 
 
 /// <summary>
-/// シャドウマップ生成用の頂点シェーダー。
+/// スキンなしモデル用の頂点シェーダー(シャドウマップ生成)
 /// </summary>
 PSInput_ShadowMap VSMain_ShadowMap(VSInputNmTxVcTangent In)
 {
@@ -276,7 +276,7 @@ PSInput_ShadowMap VSMain_ShadowMap(VSInputNmTxVcTangent In)
 	psInput.Position = pos;
 	return psInput;
 }
-
+//todo スキン有りモデル用の頂点シェーダーを作る(シャドウマップ生成)
 
 /// <summary>
 /// ピクセルシェーダーのエントリ関数。

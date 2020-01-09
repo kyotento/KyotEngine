@@ -52,6 +52,20 @@ public:
 	/// <param name="genenum">処理している配列の番号</param>
 	void DeleteOrder(int genenum);
 
+	/// <summary>
+	/// 時間制限を超えた注文の処理。
+	/// </summary>
+	/// <param name="genenum">処理している配列の番号</param>
+	void TimeLimitOrder(int genenum);
+
+	/// <summary>
+	/// 注文票を揺らす処理。
+	/// </summary>
+	/// <param name="genenum">処理している配列の番号</param>
+	void ShakeOrder(int genenum);
+
+	void PositionUpdate(int genenum);
+
 private://todo 絶　初期化する。
 
 	static const int m_orderNumLimit = 5;				//注文の上限値。
@@ -59,8 +73,9 @@ private://todo 絶　初期化する。
 	int m_orderNumber = 0;								//生成された注文の番号。
 	int m_generationNum = 0;							//生成された注文の数。
 	int m_dishName[m_orderNumLimit] = { 0,0,0,0,0 };	//料理の名前。
+	int m_foodType[m_orderNumLimit] = { 0,0,0,0,0 };	//料理に必要な材料の種類。
 
-	float m_sheet_x = 700.f;							//シートのX座標。
+	float m_sheet_x = 540.f;							//シートのX座標。
 	float m_sheet_y = 330.f;							//シートのY座標。
 	float m_sheet_z = 0.f;								//シートのZ座標。
 	float m_moveLimit[m_orderNumLimit] = { -540.f ,-400.f  ,-260.f  ,-120.f  ,20.f };	//移動上限値。
@@ -72,6 +87,8 @@ private://todo 絶　初期化する。
 	bool m_order = false;								//注文を承ったか否か。
 	bool m_foodSheetGenerationFlag[m_orderNumLimit] = { false };				//食べ物シートを生成したか否か。
 	bool m_cuisineSheetFlag[m_orderNumLimit] = { false };			//料理の画像を生成したか否か。
+	bool m_timeOver = false;			//時間制限を超えてしまった場合trueになる。
+	bool m_cuisineDecision[m_orderNumLimit] = { false };		//料理が決定したかどうか。
 	
 	CVector3 m_position[m_orderNumLimit] = { CVector3::Zero(),CVector3::Zero(),CVector3::Zero(),CVector3::Zero(),CVector3::Zero() };					//座標。
 	CVector3 m_scale[m_orderNumLimit] = { CVector3::One(),CVector3::One(),CVector3::One(),CVector3::One(),CVector3::One() };							//スケール。
@@ -82,14 +99,13 @@ private://todo 絶　初期化する。
 	CQuaternion m_rotation[m_orderNumLimit] = { CQuaternion::Identity(),CQuaternion::Identity(),CQuaternion::Identity(),CQuaternion::Identity(),CQuaternion::Identity() };	    	//回転。
 
 	OrderSheet* m_orderSheet[m_orderNumLimit] = {nullptr};			//オーダーシート。
-	FoodSheetGenerations* m_foodSheetGenerations = nullptr;			//食べ物のシート。
+	FoodSheetGenerations* m_foodSheetGenerations[m_orderNumLimit] = { nullptr };			//食べ物のシート。
 	CookingList* m_cookingList = nullptr;							//料理リスト。
 	TimeLimitGauge* m_timeLimitGauge[m_orderNumLimit] = { nullptr };//時間制限ゲージ。
 
 	SpriteRender* m_spriteRenderCuisine[m_orderNumLimit] = { nullptr };					//料理の画像生成用スプライト。	
 	SpriteRender* m_spriteRenderFoods[m_orderNumLimit] = { nullptr };					//食べ物の画像生成用スプライト。
 	SpriteRender* m_spriteRenderCuisineMethod[m_orderNumLimit] = { nullptr };			//料理の画像生成用スプライト。
-
 
 };
 

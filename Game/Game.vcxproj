@@ -26,7 +26,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -158,6 +158,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerGenerations.cpp" />
     <ClCompile Include="Pot.cpp" />
+    <ClCompile Include="Random.cpp" />
     <ClCompile Include="RenderTarget.cpp" />
     <ClCompile Include="SceneItemManager.cpp" />
     <ClCompile Include="Score.cpp" />
@@ -254,6 +255,7 @@
     <ClInclude Include="PlayerGenerations.h" />
     <ClInclude Include="Pot.h" />
     <ClInclude Include="Primitive.h" />
+    <ClInclude Include="Random.h" />
     <ClInclude Include="RenderTarget.h" />
     <ClInclude Include="SceneItemManager.h" />
     <ClInclude Include="Score.h" />

@@ -103,6 +103,9 @@
     <Filter Include="Assets\sprite\kitchenWare">
       <UniqueIdentifier>{76e78d03-38a6-42a8-ac09-1280327cb7a3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\graphics\random">
+      <UniqueIdentifier>{9c8bc033-0289-4752-84ef-f0230cef6a48}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -327,7 +330,6 @@
     <ClCompile Include="OrderSheet.cpp">
       <Filter>Game\2D\Stage\Order</Filter>
     </ClCompile>
-    <ClCompile Include="CookingList.cpp" />
     <ClCompile Include="FoodSheetGenerations.cpp">
       <Filter>Game\2D\Stage\Order</Filter>
     </ClCompile>
@@ -339,6 +341,12 @@
     </ClCompile>
     <ClCompile Include="PlayerGenerations.cpp">
       <Filter>Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Random.cpp">
+      <Filter>Engine\graphics\random</Filter>
+    </ClCompile>
+    <ClCompile Include="CookingList.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -593,7 +601,6 @@
     <ClInclude Include="OrderSheet.h">
       <Filter>Game\2D\Stage\Order</Filter>
     </ClInclude>
-    <ClInclude Include="CookingList.h" />
     <ClInclude Include="OrderGenerations.h">
       <Filter>Game\2D\Stage\Order</Filter>
     </ClInclude>
@@ -605,6 +612,12 @@
     </ClInclude>
     <ClInclude Include="PlayerGenerations.h">
       <Filter>Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>Engine\graphics\random</Filter>
+    </ClInclude>
+    <ClInclude Include="CookingList.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

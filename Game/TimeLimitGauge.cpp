@@ -104,7 +104,11 @@ void TimeLimitGauge::Update()
 
 	m_spriteRender->SetScale(m_scale);			//拡大処理。
 
-	if (m_scale.x <= 0.f && m_timeLimitFlag == false) {		//拡大率が０のとき。
+	if (m_scale.x <= 0.f && m_timeLimitFlag == false) {		//拡大率が０のとき。且つフラグがfalseのとき。
 		m_timeLimitFlag = true;			//フラグを返す。
+	}
+
+	if (m_scale.x > 0.f && m_timeLimitFlag == true) {		//拡大率が０より大きいとき。且つフラグがtrueのとき。
+		m_timeLimitFlag = false;		//フラグを返す。
 	}
 }

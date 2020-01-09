@@ -111,7 +111,7 @@ void SkinModel::InitDirectionLight()
 	m_directionLight.color[0] = { 0.4f,0.4f,0.4f,1.f };
 
 	//ínñ ÇÃè∆ÇËï‘Çµ
-	m_directionLight.direction[1] = { 1.0f,-1.0f,1.0f,0.0f };
+	/*m_directionLight.direction[1] = { 1.0f,-1.0f,1.0f,0.0f };
 	m_directionLight.direction[1].Normalize();
 	m_directionLight.color[1] = { 0.1f,0.1f,0.1f,1.f };
 
@@ -126,7 +126,7 @@ void SkinModel::InitDirectionLight()
 
 	m_directionLight.direction[4] = { 0.f,0.f,1.0f,0.0f };
 	m_directionLight.color[4] = { 0.3f,0.3f,0.3f,1.f };
-	
+	*/
 	m_directionLight.specPos = 0.0f;
 	m_directionLight.ambientLig = { 0.5f, 0.5f, 0.5f, 1.0f };
 	/*for (int i = 0; i < directionLightNum; i++)

@@ -50,6 +50,15 @@ public:
 	{
 		m_scale = scale;
 	}
+
+	/// <summary>
+	/// 拡大率を変えるX軸の
+	/// </summary>
+	/// <param name="scale_x">X軸の拡大率</param>
+	void SetScale(int scale_x)
+	{
+		m_scale_x = scale_x;
+	}
 	
 	/// <summary>
 	/// ゲージの状態。
@@ -61,6 +70,15 @@ public:
 		en10Then,		//１０％以上のとき。
 		en10Less		//１０％未満のとき。
 	};
+
+	/// <summary>
+	/// ゲージの状態を取得する。
+	/// </summary>
+	/// <returns>ゲージの状態</returns>
+	int GetGaugeState()
+	{
+		return m_gaugeState;
+	}
 
 	/// <summary>
 	/// タイムリミットフラグを取得する。
