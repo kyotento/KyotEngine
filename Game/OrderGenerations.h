@@ -7,8 +7,9 @@
 #include "FoodSheetGenerations.h"
 #include "CookingList.h"
 #include "TimeLimitGauge.h"
-#include "Delivery.h"]
+#include "Delivery.h"
 
+class Delivery;
 class OrderGenerations : public GameObject
 {
 public:
@@ -67,12 +68,16 @@ public:
 
 	void PositionUpdate(int genenum);
 
-	void GetDelivery(Delivery* delivery)
-	{
-		m_delivery = delivery;
-	}
+	///// <summary>
+	///// 受け渡し口のインスタンスを設定する。
+	///// </summary>
+	///// <param name="delivery">受け渡し口のインスタンス</param>
+	//void SetDelivery(Delivery* delivery)
+	//{
+	//	m_delivery = delivery;
+	//}
 
-private://todo 絶　初期化する。
+private:
 
 	static const int m_orderNumLimit = 5;				//注文の上限値。
 
@@ -80,6 +85,7 @@ private://todo 絶　初期化する。
 	int m_generationNum = 0;							//生成された注文の数。
 	int m_dishName[m_orderNumLimit] = { 0,0,0,0,0 };	//料理の名前。
 	int m_foodType[m_orderNumLimit] = { 0,0,0,0,0 };	//料理に必要な材料の種類。
+	int m_deliveryCuisine = CookingList::encookingListNum;		//受け取った料理を保存する。
 
 	float m_sheet_x = 540.f;							//シートのX座標。
 	float m_sheet_y = 330.f;							//シートのY座標。
@@ -113,7 +119,7 @@ private://todo 絶　初期化する。
 	SpriteRender* m_spriteRenderFoods[m_orderNumLimit] = { nullptr };					//食べ物の画像生成用スプライト。
 	SpriteRender* m_spriteRenderCuisineMethod[m_orderNumLimit] = { nullptr };			//料理の画像生成用スプライト。
 
-	Delivery* m_delivery = nullptr;			//提出口のインスタンスを取得する。
+	Delivery* m_delivery = nullptr;			//受け渡し口のインスタンスを取得する。
 
 };
 

@@ -115,6 +115,8 @@
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Belongings.cpp" />
     <ClCompile Include="Fire.cpp" />
+    <ClCompile Include="Font.cpp" />
+    <ClCompile Include="FontRender.cpp" />
     <ClCompile Include="FoodBox.cpp" />
     <ClCompile Include="FoodSheetGenerations.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -207,6 +209,8 @@
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Belongings.h" />
     <ClInclude Include="Fire.h" />
+    <ClInclude Include="Font.h" />
+    <ClInclude Include="FontRender.h" />
     <ClInclude Include="FoodBox.h" />
     <ClInclude Include="FoodSheetGenerations.h" />
     <ClInclude Include="Game.h" />

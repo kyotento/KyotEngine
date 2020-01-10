@@ -241,6 +241,9 @@ void OrderGenerations::Update()
 	Generations();
 	//移動処理。
 	Move();
+
+	m_delivery = FindGO<Delivery>("delivery");				//受け渡し口のインスタンスを検索する。
+	m_deliveryCuisine = m_delivery->GetDeliveryDishCuisine();		//納品された料理を検索して代入する。
 }
 
 //todo 配列ごと消すときにやること

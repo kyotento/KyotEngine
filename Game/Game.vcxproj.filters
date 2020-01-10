@@ -106,6 +106,9 @@
     <Filter Include="Engine\graphics\random">
       <UniqueIdentifier>{9c8bc033-0289-4752-84ef-f0230cef6a48}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\graphics\font">
+      <UniqueIdentifier>{4f285f5e-8107-4d9e-a6c5-7b19e8dc3e57}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -347,6 +350,12 @@
     </ClCompile>
     <ClCompile Include="CookingList.cpp">
       <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Engine\graphics\font</Filter>
+    </ClCompile>
+    <ClCompile Include="FontRender.cpp">
+      <Filter>Engine\graphics\font</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -618,6 +627,12 @@
     </ClInclude>
     <ClInclude Include="CookingList.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>Engine\graphics\font</Filter>
+    </ClInclude>
+    <ClInclude Include="FontRender.h">
+      <Filter>Engine\graphics\font</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
