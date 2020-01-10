@@ -38,6 +38,14 @@ int Belongings::GetPotFoosType(Belongings* powt)
 
 	return	pot->GetPutSoupFoods();
 }
+
+int Belongings::GetGetPotDishCuisine(Belongings* powt)
+{
+	Pot* pot = (Pot*)powt;
+	
+	return pot->GetPotDishCuisine();
+}
+
 void Belongings::SetPotFoodType(Belongings* powt, int fooType)
 {
 	Pot* pot = (Pot*)powt;
@@ -137,6 +145,20 @@ void Belongings::DeleteGauge()
 {
 	DeleteGO(m_gauge);
 	DeleteGO(m_check);
+}
+
+//‚¨ŽM‚ÉÚ‚Á‚Ä‚¢‚é—¿—‚ðŽw’è‚·‚éB
+void Belongings::SetDishCuisine(Belongings* belongings, int dishCuisine)
+{
+	Dish* dish = (Dish*)belongings;
+	dish->SetDishCuisine(dishCuisine);			//‚¨ŽM‚ÉÚ‚Á‚Ä‚¢‚é—¿—‚ðŽw’è‚·‚éB
+}
+
+//‚¨ŽM‚ÉÚ‚Á‚Ä‚¢‚é—¿—‚ðŽæ“¾‚·‚éB
+int Belongings::GetDishCuisine(Belongings* belongings)
+{
+	Dish* dish = (Dish*)belongings;
+	return dish->GetDishCuisine();
 }
 
 void Belongings::Update()

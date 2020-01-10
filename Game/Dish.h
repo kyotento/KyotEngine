@@ -77,9 +77,28 @@ public:
 		return m_dishListNum;
 	}
 
+	/// <summary>
+	/// お皿に載っている料理を設定する。
+	/// </summary>
+	/// <param name="dishCuisine">お皿に載っている料理</param>
+	void SetDishCuisine(int dishCuisine)
+	{
+		m_dishCuisine = dishCuisine;
+	}
+
+	/// <summary>
+	/// お皿に載っている料理を検索する。
+	/// </summary>
+	/// <returns>お皿に載っている料理</returns>
+	int GetDishCuisine()
+	{
+		return m_dishCuisine;
+	}
+
 private:
 
 	int m_dishListNum = 0;						//リストのお皿の数。
+	int m_dishCuisine = 0;						//お皿に載っている料理。
 
 	DishState m_dishState = endefault;			//お皿の状態。
 	DishState m_oldDishState = endefault;		//お皿の状態(1フレーム前)。

@@ -72,10 +72,20 @@ public:
 		return m_putSoupFoods;
 	}
 
+	/// <summary>
+	/// お鍋に入っているお皿に載る予定の料理を取得。
+	/// </summary>
+	/// <returns>お鍋に入っているお皿に載る予定の料理</returns>
+	int GetPotDishCuisine()
+	{
+		return m_potDishCuisine;
+	}
+
 private:
 
 	int m_putSoupFoods = 0;			//お鍋に入っている食べ物の種類。
 	float m_dangerStartTimer = 0;	//危険マークが出るまでのタイマー。
+	int m_potDishCuisine = 0;		//お鍋に入っているお皿に載る予定の料理。
 
 	bool m_checkFlag = false;		//チェックマークが生成されているかどうか。
 	bool m_dangerFlag = false;		//危険マークが生成されているかどうか。

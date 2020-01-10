@@ -79,7 +79,6 @@ void Player::Update()
 //プレイヤーの移動処理。
 void Player::Movement(int a)
 {
-	
 	m_stickPower.x = g_pad[a].GetLStickXF();		//左スティックのX軸の傾き。
 	m_stickPower.y = 0.f;							//左スティックのY軸。
 	m_stickPower.z = g_pad[a].GetLStickYF();		//左スティックのZ軸の傾き。
@@ -104,7 +103,6 @@ void Player::Movement(int a)
 	}
 
 	m_skinModelRender->SetPosition(m_position);			//モデルの座標を更新。
-
 }
 
 //プレイヤーの回転処理。
@@ -417,6 +415,7 @@ void Player::NoRidePutDishs()
 
 	if (userIndexNum == ObjectAbove::enDelivery) {					//受け渡し口のとき。
 		m_objectAbove->PutThings(m_belongings);						//設置物の座標にオブジェクトの座標を代入。
+		m_objectAbove->SetDeliveryDishCuisine(m_belongings->GetDishCuisine(m_belongings));			//お皿に載っている料理の情報を受け渡し口に送る。
 		DeleteGO(m_belongings);										//お皿を消す。
 		m_objectAbove->SetState(ObjectAbove::en_onObject);			//受け渡し口の状態を変更する。
 		m_playerState = enIdle;										//プレイヤーの状態を待機状態に。
@@ -508,6 +507,7 @@ void Player::PutObjects(int controllerNum)
 						if (m_cacth->GetPotState() == Belongings::enComplete) {				//乗っているものの状態が完成状態だった時。
 							m_cacth->DeleteSoup(m_cacth);			//鍋の中のスープを消す。
 							m_belongings->PutDishs(m_belongings, m_cacth->GetFoodTypeState());	//お皿にスープを置く。
+							m_belongings->SetDishCuisine(m_belongings, m_cacth->GetGetPotDishCuisine(m_cacth));		//鍋に入っている料理の情報をお皿に送る。
 						}
 					}
 				}

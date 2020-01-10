@@ -7,6 +7,7 @@
 #include "FoodSheetGenerations.h"
 #include "CookingList.h"
 #include "TimeLimitGauge.h"
+#include "Delivery.h"]
 
 class OrderGenerations : public GameObject
 {
@@ -66,6 +67,11 @@ public:
 
 	void PositionUpdate(int genenum);
 
+	void GetDelivery(Delivery* delivery)
+	{
+		m_delivery = delivery;
+	}
+
 private://todo 絶　初期化する。
 
 	static const int m_orderNumLimit = 5;				//注文の上限値。
@@ -106,6 +112,8 @@ private://todo 絶　初期化する。
 	SpriteRender* m_spriteRenderCuisine[m_orderNumLimit] = { nullptr };					//料理の画像生成用スプライト。	
 	SpriteRender* m_spriteRenderFoods[m_orderNumLimit] = { nullptr };					//食べ物の画像生成用スプライト。
 	SpriteRender* m_spriteRenderCuisineMethod[m_orderNumLimit] = { nullptr };			//料理の画像生成用スプライト。
+
+	Delivery* m_delivery = nullptr;			//提出口のインスタンスを取得する。
 
 };
 

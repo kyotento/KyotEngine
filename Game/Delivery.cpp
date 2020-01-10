@@ -35,7 +35,6 @@ bool Delivery::Start()
 
 void Delivery::Update()
 {
-
 	if (m_state == ObjectAbove::en_onObject)			//‰½‚©æ‚Á‚Ä‚¢‚é‚Æ‚«B
 	{
 		m_TimeAdvanced = true;
@@ -54,5 +53,4 @@ void Delivery::Update()
 			m_StateChangeTime = 0.f;
 		}
 	}
-
 }

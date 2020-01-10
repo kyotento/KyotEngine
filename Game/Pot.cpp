@@ -192,6 +192,13 @@ void Pot::Update()
 		m_gauge->SetPosition(m_gaugePos);				//ゲージの座標を指定。
 	}
 
+	if (m_putSoupFoods == Belongings::enTomato) {
+		m_potDishCuisine = CookingList::enTomatoSoup;
+	}
+	if (m_putSoupFoods == Belongings::enOnion) {
+		m_potDishCuisine = CookingList::enOnionSoup;
+	}
+
 	StateChange();										//状態変化。
 	Vector2DUpdate();									//2Dの座標更新。
 	Danger2D();											//危険マーク描画処理。

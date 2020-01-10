@@ -5,6 +5,7 @@
 #include "StageObject.h"
 #include "Gauge.h"
 #include "Check.h"
+#include "CookingList.h"
 
 class Kitchen;
 
@@ -44,6 +45,8 @@ public:
 
 	int GetPotFoosType(Belongings* pot);
 
+	int GetGetPotDishCuisine(Belongings* pot);
+
 	void SetPotFoodType(Belongings* pot,int foodType);
 
 	/// <summary>
@@ -80,6 +83,20 @@ public:
 	/// <param name="numberOfTimer">分割回数</param>
 	/// <param name="checkGeneration">チェックマークを生成するか</param>
 	void GaugeGeneration(bool enlargedDivision, float time, float numberOfTimer = 0.f, bool checkGeneration = true);
+
+	/// <summary>
+	/// お皿に載っている料理の状態を設定する。
+	/// </summary>
+	/// <param name="belongings">お皿</param>
+	/// <param name="dishCuisine">料理名</param>
+	void SetDishCuisine(Belongings* belongings, int dishCuisine);
+
+	/// <summary>
+	/// お皿に載っている料理を取得する。
+	/// </summary>
+	/// <param name="belongings"></param>
+	/// <returns></returns>
+	int GetDishCuisine(Belongings* belongings);
 
 	/// <summary>
 	/// ゲージの座標更新関数。

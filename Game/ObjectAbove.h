@@ -53,6 +53,24 @@ public:
 		m_belongings = belongngs;
 	}
 
+
+	/// <summary>
+	/// ‰^‚Î‚ê‚Ä‚«‚½‚¨M‚Ìó‘Ô‚ğİ’è‚·‚éB
+	/// </summary>
+	/// <param name="deliveryDishCuisine">‰^‚Î‚ê‚Ä‚«‚½‚¨M‚Ìó‘Ô‚ğ‚ğŠi”[‚·‚é</param>
+	void SetDeliveryDishCuisine(int deliveryDishCuisine)
+	{
+		m_deliveryDishCuisine = deliveryDishCuisine;
+	}
+
+	/// <summary>
+	/// ‰^‚Î‚ê‚Ä‚«‚½‚¨M‚Ìó‘Ô‚ğæ“¾‚·‚éB
+	/// </summary>
+	/// <returns></returns>
+	int GetDeliveryDishCuisine()
+	{
+		return m_deliveryDishCuisine;
+	}
 	///// <summary>
 	///// ‚¨M‚Ì”‚ğw’è‚·‚éB
 	///// </summary>
@@ -118,6 +136,7 @@ public:
 
 protected:
 
+	int m_deliveryDishCuisine = CookingList::encookingListNum;		//‰^‚Î‚ê‚Ä‚«‚½‚¨M‚Ìó‘Ô‚ğŠi”[‚·‚éB
 
 	Gauge* m_gauge = nullptr;					//ƒQ[ƒWB
 
