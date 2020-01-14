@@ -327,9 +327,3 @@ void OrderGenerations::Update()
 	m_deliveryCuisine = m_delivery->GetDeliveryDishCuisine();		//納品された料理を検索して代入する。
 }
 
-//todo 配列ごと消すときにやること
-/*
-	生成フラグを返す。
-	配列の空いたところを詰める。
-	m_foodPosYをリセットする。
-*/

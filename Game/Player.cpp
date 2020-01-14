@@ -551,9 +551,9 @@ void Player::PickUpObjects(int controllerNum)
 							m_cacth = m_belongings;							//一度m_cacthに避難。
 							m_belongings->PutDishFromKitchen(m_cacth, (Kitchen*)m_objectAbove);		//お皿を一つとる。
 							m_belongings = NewGO<Dish>(0, "dish");			//新しくお皿を生成する。
+							m_belongings->SetPosition(m_ray);
 							m_toHave = true;								//物を持つフラグ。
 							m_playerState = enIdleHave;						//ステート変更。
-							//todo 絶　一瞬お皿が初期座標に生成されるバグを治す。　
 						}
 					}
 				}

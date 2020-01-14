@@ -567,7 +567,6 @@ public:
 	*/
 	void SetRotation(const CMatrix& m);
 
-	//todo oooooooooooooo
 	/// <summary>
 	/// fromベクトルからtoベクトルに回転させるクォータニオンを作成。
 	/// </summary>
