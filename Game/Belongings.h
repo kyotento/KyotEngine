@@ -187,7 +187,6 @@ public:
 		return m_potState;
 	}
 
-
 protected:		
 
 	float m_checkDeleteTimer = 0.f;			//チェックマークを消すタイマー。

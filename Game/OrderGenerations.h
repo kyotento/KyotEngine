@@ -60,6 +60,12 @@ public:
 	void JudgmentDeleteOrder();
 
 	/// <summary>
+	/// 注文票を消した後の処理。
+	/// </summary>
+	/// <param name="genenum">処理している配列の番号</param>
+	void DeleteOrderAfter(int genenum);
+
+	/// <summary>
 	/// 時間制限を超えた注文の処理。
 	/// </summary>
 	/// <param name="genenum">処理している配列の番号</param>
@@ -71,6 +77,10 @@ public:
 	/// <param name="genenum">処理している配列の番号</param>
 	void ShakeOrder(int genenum);
 
+	/// <summary>
+	/// 画像の座標更新処理。
+	/// </summary>
+	/// <param name="genenum">処理している配列の番号</param>
 	void PositionUpdate(int genenum);
 
 	///// <summary>

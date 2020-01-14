@@ -3,7 +3,7 @@
 
 //#define SPRITE_TEST		//3DのSpriteのテストをするときに定義する。
 //#define OVERCOOKED_ONE_SPECIFCATION			//overcooked1の仕様にしたい場合定義する。
-//todo 持っているものの回転をプレイヤー依存にする。
+
 //todo プレイヤーを複数出す仕組みを作る。
 //todo　包丁を描画しないように。
 namespace {

@@ -98,7 +98,7 @@ public:
 private:
 
 	int m_dishListNum = 0;						//リストのお皿の数。
-	int m_dishCuisine = 0;						//お皿に載っている料理。
+	int m_dishCuisine = CookingList::encookingListNum;			//お皿に載っている料理。
 
 	DishState m_dishState = endefault;			//お皿の状態。
 	DishState m_oldDishState = endefault;		//お皿の状態(1フレーム前)。
