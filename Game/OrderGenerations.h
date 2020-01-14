@@ -55,6 +55,11 @@ public:
 	void DeleteOrder(int genenum);
 
 	/// <summary>
+	/// 消す注文シートを判定する処理。
+	/// </summary>
+	void JudgmentDeleteOrder();
+
+	/// <summary>
 	/// 時間制限を超えた注文の処理。
 	/// </summary>
 	/// <param name="genenum">処理している配列の番号</param>
@@ -83,9 +88,10 @@ private:
 
 	int m_orderNumber = 0;								//生成された注文の番号。
 	int m_generationNum = 0;							//生成された注文の数。
-	int m_dishName[m_orderNumLimit] = { 0,0,0,0,0 };	//料理の名前。
+	int m_dishName[m_orderNumLimit] = { CookingList::encookingListNum, CookingList::encookingListNum, CookingList::encookingListNum, CookingList::encookingListNum, CookingList::encookingListNum };	//料理の名前。
 	int m_foodType[m_orderNumLimit] = { 0,0,0,0,0 };	//料理に必要な材料の種類。
 	int m_deliveryCuisine = CookingList::encookingListNum;		//受け取った料理を保存する。
+	int m_kari[m_orderNumLimit] = { CookingList::encookingListNum ,CookingList::encookingListNum ,CookingList::encookingListNum ,CookingList::encookingListNum ,CookingList::encookingListNum };
 
 	float m_sheet_x = 540.f;							//シートのX座標。
 	float m_sheet_y = 330.f;							//シートのY座標。

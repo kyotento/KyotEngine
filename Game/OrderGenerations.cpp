@@ -3,9 +3,11 @@
 
 namespace {
 	int cuisinePriority = 5;		//料理画像の実行優先度。
+	int deleteOrderNum = 5;
 
 	float cuisineSize = 50.f;		//料理の画像のサイズ。
 	float foodSize = 30.f;			//食べ物の画像のサイズ。
+	float k = 1.f;					//拡大率を格納する。
 }
 
 OrderGenerations::OrderGenerations()
@@ -78,7 +80,6 @@ void OrderGenerations::Move()
 			/// <summary>
 			/// 常に呼ばれる処理はここに書く。
 			/// </summary>
-			DeleteOrder(m_orderNum);			//シートを消す処理。
 			TimeLimitOrder(m_orderNum);			//時間制限を超えてしまった注文の処理。
 		//	ShakeOrder(m_orderNum);				//注文票を揺らす処理。
 		//	PositionUpdate(m_orderNum);			//座標更新。
@@ -172,25 +173,54 @@ void OrderGenerations::Order(int genenum)
 	}
 }
 
+void OrderGenerations::JudgmentDeleteOrder()
+{
+	if (m_deliveryCuisine != CookingList::encookingListNum) {			//何か納品されたとき。
+		for (int i = 0; i < m_orderNumLimit; i++) {			//注文シートの上限値分ループする。
+			if (m_deliveryCuisine == m_dishName[i]) {		//配列に格納された料理と一致した時。
+				m_kari[i] = m_dishName[i];		//ゲージ拡大率判定用配列に格納。
+			}
+		}
+		//一度すべての注文を確認したうえでゲージの拡大率を比べて一番小さいものを消すため２回に処理を分けている。
+		for (int i = 0; i < m_orderNumLimit; i++) {			//注文シートの上限値分ループする。
+			if (m_kari[i] == m_deliveryCuisine) {		//配列に格納された料理と一致した時。
+				if (m_timeLimitGauge[i] != nullptr) {			//ゲージが生成されているとき。
+					if (k > m_timeLimitGauge[i]->GetScale_X()) {		//もしｋよりもスケールが小さいとき。
+						k = m_timeLimitGauge[i]->GetScale_X();			//kに値を代入。
+						deleteOrderNum = i;		//配列番号を代入。
+					}
+				}
+			}
+		}
+		if (deleteOrderNum != m_orderNumLimit) {		//消す配列が指定されていたら(変更があった場合)。
+			DeleteOrder(deleteOrderNum);				//一致した配列の注文シートを消す。
+		}
+	//	m_deliveryCuisine = CookingList::encookingListNum;
+		m_delivery->SetDeliveryDishCuisine(CookingList::encookingListNum);			//受け渡し口の受け取った料理をリセットする。
+		k = 1.f;			//拡大率をリセット。
+		if (deleteOrderNum != m_orderNumLimit) {			//消す配列が指定されていたら(変更があった場合)。
+			m_dishName[deleteOrderNum] = CookingList::encookingListNum;		//消した配列をリセット。
+		}
+		m_kari[CookingList::encookingListNum, CookingList::encookingListNum, CookingList::encookingListNum, CookingList::encookingListNum, CookingList::encookingListNum];
+	}
+}
+
 //注文票を消す処理。
 void OrderGenerations::DeleteOrder(int genenum)
 {
-	if (m_timeLimitGauge[genenum] != nullptr) {				//ゲージが生成されているとき。
-		if (m_timeLimitGauge[genenum]->GetTimeLimitFlag() == true) {			//todo 仮　時間制限が来た時。
-			DeleteGO(m_timeLimitGauge[genenum]);				//ゲージを消す
-			m_timeLimitGauge[genenum] = nullptr;				//ゲージのインスタンスを破棄。
-			DeleteGO(m_orderSheet[genenum]);					//注文シートを消す。
-			m_orderSheet[genenum] = nullptr;					//注文シートのインスタンスを破棄。
-			DeleteGO(m_foodSheetGenerations[genenum]);			//食べ物シートを消す。
-			m_foodSheetGenerations[genenum] = nullptr;			//食べ物シートのインスタンスを破棄。
-			DeleteGO(m_spriteRenderCuisine[genenum]);			//料理の画像を消す。
-			m_spriteRenderCuisine[genenum] = nullptr;			//料理の画像のインスタンスを破棄。
-			DeleteGO(m_spriteRenderFoods[genenum]);				//食材の画像を消す。
-			m_spriteRenderFoods[genenum] = nullptr;				//食材の画像のインスタンスを破棄
-			DeleteGO(m_spriteRenderCuisineMethod[genenum]);		//調理方法の画像を消す。
-			m_spriteRenderCuisineMethod[genenum] = nullptr;		//調理方法の画像のインスタンスを破棄。
-		}
-	}
+	DeleteGO(m_timeLimitGauge[genenum]);				//ゲージを消す
+	m_timeLimitGauge[genenum] = nullptr;				//ゲージのインスタンスを破棄。
+	DeleteGO(m_orderSheet[genenum]);					//注文シートを消す。
+	m_orderSheet[genenum] = nullptr;					//注文シートのインスタンスを破棄。
+	DeleteGO(m_foodSheetGenerations[genenum]);			//食べ物シートを消す。
+	m_foodSheetGenerations[genenum] = nullptr;			//食べ物シートのインスタンスを破棄。
+	DeleteGO(m_spriteRenderCuisine[genenum]);			//料理の画像を消す。
+	m_spriteRenderCuisine[genenum] = nullptr;			//料理の画像のインスタンスを破棄。
+	DeleteGO(m_spriteRenderFoods[genenum]);				//食材の画像を消す。
+	m_spriteRenderFoods[genenum] = nullptr;				//食材の画像のインスタンスを破棄
+	DeleteGO(m_spriteRenderCuisineMethod[genenum]);		//調理方法の画像を消す。
+	m_spriteRenderCuisineMethod[genenum] = nullptr;		//調理方法の画像のインスタンスを破棄。
+
 }
 
 //じかんせいげんをこえてしまった注文の処理。
@@ -241,8 +271,10 @@ void OrderGenerations::Update()
 	Generations();
 	//移動処理。
 	Move();
+	//注文シートを消す処理。
+	JudgmentDeleteOrder();
 
-	m_delivery = FindGO<Delivery>("delivery");				//受け渡し口のインスタンスを検索する。
+	m_delivery = FindGO<Delivery>("delivery");						//受け渡し口のインスタンスを検索する。
 	m_deliveryCuisine = m_delivery->GetDeliveryDishCuisine();		//納品された料理を検索して代入する。
 }
 

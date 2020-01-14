@@ -59,6 +59,15 @@ public:
 	{
 		m_scale_x = scale_x;
 	}
+
+	/// <summary>
+	/// X軸の拡大率を取得する。
+	/// </summary>
+	/// <returns>拡大率X</returns>
+	float GetScale_X()
+	{
+		return m_scale_x;
+	}
 	
 	/// <summary>
 	/// ゲージの状態。
