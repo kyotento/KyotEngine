@@ -12,6 +12,7 @@ Gauge::~Gauge()
 {
 	DeleteGO(m_skinModelRender);
 	DeleteGO(m_skinModelRenderGauge);
+	m_skinModelRender = nullptr;
 }
 
 bool Gauge::Start()
