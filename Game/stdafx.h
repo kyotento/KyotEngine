@@ -48,6 +48,9 @@
 const float FRAME_BUFFER_W = 1280.0f;				//フレームバッファの幅。
 const float FRAME_BUFFER_H = 720.0f;				//フレームバッファの高さ。
 
+const float SCREENWIDTH_W = 1280.0f;				//2D空間の幅。		//todo　途中から作ったのですべてに使えてるわけではない
+const float SCREENHEIGHT_H = 720.0f;				//2D空間の高さ。
+
 static const int MAX_BONE = 512;	//!<ボーンの最大数。
 
 #include <xaudio2.h>

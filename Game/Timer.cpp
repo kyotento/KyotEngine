@@ -15,6 +15,7 @@ Timer::Timer()
 
 Timer::~Timer()
 {
+	DeleteGO(m_spriteRender);
 }
 
 bool Timer::Start()
@@ -30,6 +31,6 @@ bool Timer::Start()
 
 void Timer::Update()
 {
-	/*m_timer -= 1.f;*/
+	m_timer -= gametime().GetFrameDeltaTime();				//éûä‘åoâﬂÅB
 
 }

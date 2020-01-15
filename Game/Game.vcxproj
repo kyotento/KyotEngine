@@ -162,6 +162,7 @@
     <ClCompile Include="PlayerGenerations.cpp" />
     <ClCompile Include="Pot.cpp" />
     <ClCompile Include="Random.cpp" />
+    <ClCompile Include="RenderContext.cpp" />
     <ClCompile Include="RenderTarget.cpp" />
     <ClCompile Include="SceneItemManager.cpp" />
     <ClCompile Include="Score.cpp" />
@@ -262,6 +263,7 @@
     <ClInclude Include="Pot.h" />
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="Random.h" />
+    <ClInclude Include="RenderContext.h" />
     <ClInclude Include="RenderTarget.h" />
     <ClInclude Include="SceneItemManager.h" />
     <ClInclude Include="Score.h" />
