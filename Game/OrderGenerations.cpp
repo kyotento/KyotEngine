@@ -268,7 +268,7 @@ void OrderGenerations::TimeLimitOrder(int genenum)
 	if (m_timeLimitGauge[genenum] != nullptr) {				//ゲージが生成されているとき。
 		if (m_timeLimitGauge[genenum]->GetTimeLimitFlag() == true) {			//時間制限が来た時。
 			m_timeLimitGauge[genenum]->SetScale(1.f);				//画像のスケールを１に戻す。
-			//todo ここでペナルティを設定する。
+			//todo ここでスコアにペナルティを設定する。
 		}
 	}
 }

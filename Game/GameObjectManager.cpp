@@ -155,7 +155,6 @@ void GameObjectManager::Execute()
 		}
 	}
 
-
 	g_graphicsEngine->EndRender();
 
 }

@@ -2,8 +2,10 @@
 #include "Timer.h"
 
 namespace {
-	float x = 540.f;
-	float y = -260.f;
+	float x = 565.f;		//X座標。
+	float y = -285.f;		//Y座標。
+
+	float spriteScale = 150.f;		//画像のサイズ。
 }
 
 Timer::Timer()
@@ -18,7 +20,7 @@ Timer::~Timer()
 bool Timer::Start()
 {
 	m_spriteRender = NewGO<SpriteRender>(0, "sprite");
-	m_spriteRender->Init(L"Assets/sprite/Timer.dds", 200.f, 200.f);			//初期化。
+	m_spriteRender->Init(L"Assets/sprite/Timer.dds", spriteScale, spriteScale);			//初期化。
 	m_position2D.x = x;														//X座標を指定。
 	m_position2D.y = y;														//Y座標を指定。
 	m_spriteRender->SetPosition(m_position2D);								//座標を指定。

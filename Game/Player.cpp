@@ -129,7 +129,6 @@ void Player::Rotation()
 	if (m_belongings != nullptr && m_toHave == true) {			//何か持っちるとき。
 		m_belongings->SetRotation(m_rotation);					//持っているものの回転を更新する。
 	}
-
 }
 
 //プレイヤーのrayがオブジェクトに衝突した時の処理。

@@ -51,18 +51,20 @@ public:
 
 		return y;
 	}
-	/*!
-	 *@brief	符号付き整数型のランダム値を取得。
-	 *@return	符号付き整数型のランダム値を返す。
-	 */
+
+	/// <summary>
+	/// 符号付き整数型のランダム値を取得。
+	/// </summary>
+	/// <returns>符号付き整数型のランダム値</returns>
 	__inline long GetRandSInt()
 	{
 		(long)(GetRandInt() >> 1);
 	}
-	/*!
-	 * @brief	倍精度小数点型のランダム値を取得。
-	 *@retrn	0.0～1.0のランダム値を返す。
-	 */
+
+	/// <summary>
+	/// 倍精度小数点型のランダム値を取得。
+	/// </summary>
+	/// <returns>0.0～1.0のランダム値を返す</returns>
 	__inline double GetRandDouble()
 	{
 		return GetRandInt()*(1.0 / 4294967295.0);

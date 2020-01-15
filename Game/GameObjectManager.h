@@ -5,6 +5,7 @@
 #include "ShadowMap.h"
 #include "Sprite.h"
 #include "Random.h"
+#include "GameTime.h"
 class GameObjectManager /*: public Noncopy*/
 {
 public:
@@ -279,6 +280,15 @@ public:
 		return m_random;
 	}
 
+	/// <summary>
+	/// ゲームのタイマーを取得する。
+	/// </summary>
+	/// <returns>ゲームタイム</returns>
+	GameTime& GetGameTime()
+	{
+		return m_gameTime;
+	}
+
 private:
 
 	DirectX::Model*		m_modelDx;						//!<DirectXTKが提供するモデルクラス。
@@ -291,17 +301,18 @@ private:
 	void Start();
 	void Update();
 
-	typedef std::list<GameObject*>	GameObjectList;                     //リストの親分。
-	std::vector<GameObjectList>	m_gameObjectListArray;					//ゲームオブジェクトの優先度付きリスト。
-	GameObjectList	m_deleteObjectArray[2];					//削除するオブジェクトのリスト。削除処理を行っている最中にDeleteGameObjectが呼ばれる可能性が高いので、ダブルバッファ化。
+	typedef std::list<GameObject*>	GameObjectList;             //リストの親分。
+	std::vector<GameObjectList>	m_gameObjectListArray;			//ゲームオブジェクトの優先度付きリスト。
+	GameObjectList	m_deleteObjectArray[2];						//削除するオブジェクトのリスト。削除処理を行っている最中にDeleteGameObjectが呼ばれる可能性が高いので、ダブルバッファ化。
 
 	D3D11_VIEWPORT m_frameBufferViewports;								//フレームバッファのビューポート。
 	ID3D11RenderTargetView* m_frameBufferRenderTargetView = nullptr;	//フレームバッファのレンダリングターゲットビュー。
 	ID3D11DepthStencilView* m_frameBufferDepthStencilView = nullptr;	//フレームバッファのデプスステンシルビュー。
 
-	RenderTarget m_mainRenderTarget;		//メインレンダリングターゲット。
+	RenderTarget m_mainRenderTarget;				//メインレンダリングターゲット。
 	Sprite m_copyMainRtToFrameBufferSprite;			//メインレンダリングターゲットに描かれた絵をフレームバッファにコピーするためのスプライト。
-	Random m_random;			//ランダム関数。
+	Random m_random;								//ランダム関数。
+	GameTime m_gameTime;							//ゲームタイム。
 
 };
 
@@ -355,8 +366,17 @@ static inline void QueryGOs(const char* objectName, std::function<bool(T*go)>fun
 /// <summary>
 /// 乱数を取得。
 /// </summary>
-/// <returns></returns>
+/// <returns>乱数クラス</returns>
 static inline Random& random()
 {
 	return IGameObjectManager().GetRandom();
+}
+
+/// <summary>
+/// ゲームタイマーを取得。
+/// </summary>
+/// <returns>ゲームタイマークラス</returns>
+static inline GameTime& gametime()
+{
+	return IGameObjectManager().GetGameTime();
 }

@@ -109,6 +109,9 @@
     <Filter Include="Engine\graphics\font">
       <UniqueIdentifier>{4f285f5e-8107-4d9e-a6c5-7b19e8dc3e57}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\graphics\timer">
+      <UniqueIdentifier>{d3ec9200-eb85-4672-bad6-be34da0f584f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -356,6 +359,9 @@
     </ClCompile>
     <ClCompile Include="FontRender.cpp">
       <Filter>Engine\graphics\font</Filter>
+    </ClCompile>
+    <ClCompile Include="GameTime.cpp">
+      <Filter>Engine\graphics\timer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -633,6 +639,9 @@
     </ClInclude>
     <ClInclude Include="FontRender.h">
       <Filter>Engine\graphics\font</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTime.h">
+      <Filter>Engine\graphics\timer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

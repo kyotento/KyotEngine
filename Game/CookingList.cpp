@@ -13,8 +13,6 @@ CookingList::~CookingList()
 
 bool CookingList::Start()
 {
-	//todo âºÅB
-//	m_dishName = enTomatoSoup;
 
 	return true;
 }
