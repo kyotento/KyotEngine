@@ -11,14 +11,14 @@ FontRender::~FontRender()
 {
 }
 
-void FontRender::PostRender(RenderContext& rc)
+void FontRender::PostRender()
 {
 	//描画開始。
-	m_font.Begin(rc);
+	m_font.Begin();
 
 	const wchar_t* text = nullptr;			//テキスト。
 	if (m_text.c_str() != nullptr) {
-		text = m_text.c_str();
+		text = m_text.c_str();		//先頭ポインタを代入。
 	}
 
 	//描画処理。
@@ -32,6 +32,5 @@ void FontRender::PostRender(RenderContext& rc)
 	);
 	
 	//描画終了。
-	m_font.End(rc);
-
+	m_font.End();
 }

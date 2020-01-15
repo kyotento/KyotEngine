@@ -246,6 +246,14 @@ public:
 		}
 	}
 
+	//void PostRenderWrapper(RenderContext& rc)
+	//{
+	//	if (m_activeflag && m_startflag && !m_deadflag && !m_isRegistDeadList)
+	//	{
+	//		PostRender(rc);
+	//	}
+	//}
+
 	/// <summary>
 	/// アップデートフィルター。
 	/// </summary>

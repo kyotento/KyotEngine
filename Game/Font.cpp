@@ -4,9 +4,9 @@
 
 Font::Font()
 {
-	m_spriteBatch = GraphicsEngine().GetSpriteBatch();
-	m_spriteFont = GraphicsEngine().GetSpriteFont();
-	auto& ge = GraphicsEngine();
+	m_spriteBatch = g_graphicsEngine->GetSpriteBatch();
+	m_spriteFont = g_graphicsEngine->GetSpriteFont();
+	auto& ge = g_graphicsEngine;
 	//拡大行列を作成。
 	m_scaleMat.MakeScaling(
 		{
@@ -23,10 +23,8 @@ Font::~Font()
 }
 
 //描画開始。
-void Font::Begin(RenderContext& rc)
+void Font::Begin()
 {
-	rc.PushRenderState();			//レンダリングステートを退避。
-
 	m_spriteBatch->Begin(DirectX::SpriteSortMode_Deferred,
 		nullptr,
 		nullptr,
@@ -38,11 +36,9 @@ void Font::Begin(RenderContext& rc)
 }
 
 //描画終了。
-void Font::End(RenderContext& rc) 
+void Font::End() 
 {
 	m_spriteBatch->End();
-
-	rc.PopRenderState(true);			//レンダリングステートを復活！！。
 }
 
 //描画処理。
@@ -57,8 +53,8 @@ void Font::Draw(wchar_t const* text,const CVector2& position,
 
 	//座標系をSpriteと合わせる。
 	CVector2 pos = position;		//画像の座標。
-	float frameBufferHalfW = SCREENWIDTH_W;			//2Dの幅を半分に。
-	float frameBufferHalfH = SCREENHEIGHT_H;		//2Dの高さを半分に。
+	float frameBufferHalfW = SCREENWIDTH_W * 0.5f;			//2Dの幅を半分に。
+	float frameBufferHalfH = SCREENHEIGHT_H * 0.5f;		//2Dの高さを半分に。
 	//座標に代入。
 	pos.x += frameBufferHalfW;
 	pos.y = -pos.y + frameBufferHalfH;

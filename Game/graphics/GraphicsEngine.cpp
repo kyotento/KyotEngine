@@ -74,6 +74,7 @@ void GraphicsEngine::Init(HWND hWnd)
 	sd.SampleDesc.Quality = 0;							//MSAAなし。0でいい。
 	sd.Windowed = TRUE;									//ウィンドウモード。TRUEでよい。
 
+
 														//利用するDirectXの機能セット。DirectX10以上に対応しているGPUを利用可能とする。
 														//この配列はD3D11CreateDeviceAndSwapChainの引数として使う。
 	D3D_FEATURE_LEVEL featureLevels[] =
@@ -102,6 +103,7 @@ void GraphicsEngine::Init(HWND hWnd)
 		&m_featureLevel,								//使用される機能セットの格納先。
 		&m_pd3dDeviceContext							//作成したD3Dデバイスコンテキストのアドレスの格納先。
 	);
+
 
 	//書き込み先になるレンダリングターゲットを作成。
 	ID3D11Texture2D* pBackBuffer = NULL;
@@ -139,8 +141,13 @@ void GraphicsEngine::Init(HWND hWnd)
 	desc.DepthClipEnable = true;
 	desc.MultisampleEnable = true;
 
+
 	//ラスタライザとビューポートを初期化。
 	m_pd3dDevice->CreateRasterizerState(&desc, &m_rasterizerState);
+
+	//フォント用のデータの初期化。
+	m_spriteBatch = std::make_unique<DirectX::SpriteBatch>(m_pd3dDeviceContext);
+	m_spriteFont = std::make_unique<DirectX::SpriteFont>(m_pd3dDevice, L"Assets/font/myfile.spritefont");
 
 	D3D11_VIEWPORT viewport;
 	viewport.Width = FRAME_BUFFER_W;

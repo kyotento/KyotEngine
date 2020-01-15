@@ -57,7 +57,7 @@ void OrderGenerations::Move()
 		if (m_orderSheet[m_orderNum] != nullptr) {				//シートが生成されていたら。
 		//	if (m_cuisineSheetFlag[m_orderNum] == false) {		//注文シートが生成されていないとき(一度も座標が上限値に達していないとき)。
 				if (m_position[m_orderNum].x > m_moveLimit[m_orderNum]) {		//座標が上限値に達していなかったら。
-					m_position[m_orderNum].x -= 20.f;			//X座標を更新。	
+					m_position[m_orderNum].x -= 10.f;			//X座標を更新。	
 					m_position[m_orderNum].y = m_sheet_y;		//Y座標を更新。
 					m_position[m_orderNum].z = m_sheet_z;		//Z座標を更新。
 				}

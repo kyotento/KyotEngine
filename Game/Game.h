@@ -39,5 +39,7 @@ private:
 	OrderGenerations* m_orderGenerations = nullptr;			//注文シート。
 	PlayerGenerations* m_playerGenerations = nullptr;		//プレイヤー生成クラス。
 
+	FontRender* m_fontRender = nullptr;		//仮。
+
 };
 

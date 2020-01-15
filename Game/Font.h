@@ -22,14 +22,12 @@ public:
 	/// <summary>
 	/// 描画開始。
 	/// </summary>
-	/// <param name="rt">レンダーコンテキスト</param>
-	void Begin(RenderContext& rc);
+	void Begin();
 
 	/// <summary>
 	/// 描画終了。
 	/// </summary>
-	/// <param name="rt">レンダーコンテキスト</param>
-	void End(RenderContext& rc);
+	void End();
 
 	/// <summary>
 	/// 描画処理。

@@ -13,7 +13,7 @@ Game::~Game()
 bool Game::Start()
 {
 	m_title = NewGO<Title>(0, "title");			//タイトルを生成する。
-	camera2d.SetUpdateCameraMatrix(0);			//2Dカメラを平行投影に。	
+	camera2d.SetUpdateCameraMatrix(0);			//2Dカメラを平行投影に。
 	return true;
 }
 
@@ -31,6 +31,12 @@ void Game::Update()
 		m_timer = NewGO<Timer>(0, "timer");												//タイマー生成。
 		m_score = NewGO<Score>(0, "score");												//スコア生成。
 		m_orderGenerations = NewGO<OrderGenerations>(0, "orderGenerations");			//注文シート生成。
+
+		m_fontRender = NewGO<FontRender>(0, "fontrender");
+		m_fontRender->SetText(L"ふぁあああああああ");
+		m_fontRender->SetPosition({ 0.f, 0.f });
+		m_fontRender->SetScale(1);
+
 		m_titleDeleteFlag = false;														//生成したのでフラグを返す。
 	}
 }

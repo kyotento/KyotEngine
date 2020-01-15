@@ -1,7 +1,8 @@
 #pragma once
 #include "Font.h"
+#include "GameObject.h"
 
-class FontRender
+class FontRender : public GameObject
 {
 public:
 	FontRender();
@@ -64,8 +65,7 @@ public:
 	/// <summary>
 	/// フォントの描画処理の流れを作成
 	/// </summary>
-	/// <param name="rc">レンダーコンテキスト</param>
-	void PostRender(RenderContext& rc);
+	void PostRender();
 
 private:
 
