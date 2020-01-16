@@ -32,6 +32,14 @@ public:
 		}
 	}
 
+	//void SetTexts(const char* text, int minuit, int second)
+	//{
+	//	if (wcscmp(m_text.c_str(), (wchar_t*)text) != 0) {
+	//		m_text = (wchar_t*)std::printf(text, minuit, second);
+	//		/*m_text = (wchar_t*)swprintf_s(text, minuit, second);*/
+	//	}
+	//}
+
 	/// <summary>
 	/// フォントの座標を指定する。
 	/// </summary>
@@ -45,7 +53,7 @@ public:
 	/// フォントのスケールを指定する。
 	/// </summary>
 	/// <param name="scale">フォントのスケール</param>
-	void SetScale(int  scale)
+	void SetScale(float  scale)
 	{
 		m_scale = scale;
 	}
@@ -60,6 +68,15 @@ public:
 	void SetRotation(float rot)
 	{
 		m_rotation = rot;
+	}
+
+	/// <summary>
+	/// フォントの色を指定する。
+	/// </summary>
+	/// <param name="color">色</param>
+	void SetColor(CVector4 color)
+	{
+		m_color = color;
 	}
 
 	/// <summary>

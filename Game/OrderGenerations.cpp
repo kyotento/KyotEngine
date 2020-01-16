@@ -20,7 +20,6 @@ OrderGenerations::~OrderGenerations()
 
 bool OrderGenerations::Start()
 {
-//	m_foodSheetGenerations = NewGO<FoodSheetGenerations>(0, "foodSheet");
 	m_cookingList = NewGO<CookingList>(0, "cookingList");
 
 	return true;

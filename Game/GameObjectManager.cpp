@@ -155,6 +155,15 @@ void GameObjectManager::Execute()
 		}
 	}
 
+	//FontRenderを使わないフォントのレンダリング。
+	for (GameObjectList objList : m_gameObjectListArray)
+	{
+		for (GameObject* object : objList)
+		{
+			object->AfterFontRenderWrapper();
+		}
+	}
+
 	g_graphicsEngine->EndRender();
 
 }
