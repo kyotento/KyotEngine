@@ -90,6 +90,15 @@ public:
 	}
 
 	/// <summary>
+	/// タイムリミットフラグを指定する
+	/// </summary>
+	/// <param name="flag">タイムリミットフラグ</param>
+	void SetTimeLimitFlag(bool flag)
+	{
+		m_timeLimitFlag = flag;
+	}
+
+	/// <summary>
 	/// タイムリミットフラグを取得する。
 	/// </summary>
 	/// <returns>タイムリミットフラグ</returns>

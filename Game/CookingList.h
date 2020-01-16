@@ -53,6 +53,15 @@ public:
 		return m_foodtype;
 	}
 
+	/// <summary>
+	/// 料理に必要な材料の数を取得する。
+	/// </summary>
+	/// <returns>料理に必要な材料の数</returns>
+	int GetMaterialNum()
+	{
+		return m_materialNum;
+	}
+
 private:
 
 	int m_materialNum = 0;		//料理に必要な材料の数。

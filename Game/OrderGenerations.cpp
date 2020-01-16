@@ -5,9 +5,14 @@ namespace {
 	int cuisinePriority = 5;		//料理画像の実行優先度。
 	int deleteOrderNum = 5;
 
+	int penalty = -10;				//時間制限以内に料理を持ってこれなかったときのスコアペナルティ。
+	int foodScore = 60;				//料理を出したときのスコア。
+	int chip = 0;					//チップ。
+
 	float cuisineSize = 50.f;		//料理の画像のサイズ。
 	float foodSize = 30.f;			//食べ物の画像のサイズ。
 	float gaugeScale = 1.f;			//拡大率を格納する。
+	float sheetMoveSpeed = 20.f;	//画像の移動速度。
 }
 
 OrderGenerations::OrderGenerations()
@@ -21,6 +26,7 @@ OrderGenerations::~OrderGenerations()
 bool OrderGenerations::Start()
 {
 	m_cookingList = NewGO<CookingList>(0, "cookingList");			//料理リストを生成。
+	m_score = FindGO<Score>("score");								//スコアクラスのインスタンスを取得。
 
 	return true;
 }
@@ -57,9 +63,9 @@ void OrderGenerations::Move()
 		if (m_orderSheet[m_orderNum] != nullptr) {				//シートが生成されていたら。
 		//	if (m_cuisineSheetFlag[m_orderNum] == false) {		//注文シートが生成されていないとき(一度も座標が上限値に達していないとき)。
 				if (m_position[m_orderNum].x > m_moveLimit[m_orderNum]) {		//座標が上限値に達していなかったら。
-					m_position[m_orderNum].x -= 10.f;			//X座標を更新。	
-					m_position[m_orderNum].y = m_sheet_y;		//Y座標を更新。
-					m_position[m_orderNum].z = m_sheet_z;		//Z座標を更新。
+					m_position[m_orderNum].x -= sheetMoveSpeed;		//X座標を更新。	
+					m_position[m_orderNum].y = m_sheet_y;			//Y座標を更新。
+					m_position[m_orderNum].z = m_sheet_z;			//Z座標を更新。
 				}
 				m_orderSheet[m_orderNum]->SetPosition(m_position[m_orderNum]);		//シートの座標を更新。
 		//	}
@@ -190,7 +196,7 @@ void OrderGenerations::JudgmentDeleteOrder()
 			if (m_kari[i] == m_deliveryCuisine) {				//配列に格納された料理と一致した時。
 				if (m_timeLimitGauge[i] != nullptr) {			//ゲージが生成されているとき。
 					if (gaugeScale > m_timeLimitGauge[i]->GetScale_X()) {		//もしｋよりもスケールが小さいとき。
-						gaugeScale = m_timeLimitGauge[i]->GetScale_X();			//kに値を代入。
+						gaugeScale = m_timeLimitGauge[i]->GetScale_X();			//gaugeScaleに値を代入。
 						deleteOrderNum = i;										//配列番号を代入。
 					}
 				}
@@ -198,6 +204,24 @@ void OrderGenerations::JudgmentDeleteOrder()
 		}
 
 		if (deleteOrderNum != m_orderNumLimit) {		//消す配列が指定されていたら(変更があった場合)。
+
+			if (m_timeLimitGauge[deleteOrderNum]->GetGaugeState() == TimeLimitGauge::en66Then){
+				chip = 18;
+			}
+			if(m_timeLimitGauge[deleteOrderNum]->GetGaugeState() == TimeLimitGauge::en33Then) {
+				chip = 12;
+			}
+			if(m_timeLimitGauge[deleteOrderNum]->GetGaugeState() == TimeLimitGauge::en10Then
+				|| m_timeLimitGauge[deleteOrderNum]->GetGaugeState() == TimeLimitGauge::en10Less) {	
+				chip = 6;
+			}
+
+			foodScore += chip;
+
+			m_score->AddScore(foodScore);
+
+			foodScore = 60.f;
+
 			DeleteOrder(deleteOrderNum);				//一致した配列の注文シートを消す。
 		}
 		m_delivery->SetDeliveryDishCuisine(CookingList::encookingListNum);			//受け渡し口の受け取った料理をリセットする。
@@ -267,13 +291,15 @@ void OrderGenerations::DeleteOrderAfter(int genenum)
 	}
 }
 
-//じかんせいげんをこえてしまった注文の処理。
+//時間制限をこえてしまった注文の処理。
 void OrderGenerations::TimeLimitOrder(int genenum)
 {
 	if (m_timeLimitGauge[genenum] != nullptr) {				//ゲージが生成されているとき。
 		if (m_timeLimitGauge[genenum]->GetTimeLimitFlag() == true) {			//時間制限が来た時。
 			m_timeLimitGauge[genenum]->SetScale(1.f);				//画像のスケールを１に戻す。
-			//todo ここでスコアにペナルティを設定する。
+			m_timeLimitGauge[genenum]->SetTimeLimitFlag(false);
+			//スコアにペナルティを加算する。
+			m_score->AddScore(penalty);
 		}
 	}
 }

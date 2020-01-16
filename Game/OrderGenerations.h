@@ -8,6 +8,7 @@
 #include "CookingList.h"
 #include "TimeLimitGauge.h"
 #include "Delivery.h"
+#include "Score.h"
 
 class Delivery;
 class OrderGenerations : public GameObject
@@ -137,6 +138,7 @@ private:
 	SpriteRender* m_spriteRenderCuisineMethod[m_orderNumLimit] = { nullptr };			//料理の画像生成用スプライト。
 
 	Delivery* m_delivery = nullptr;			//受け渡し口のインスタンスを取得する。
+	Score* m_score = nullptr;				//スコア。
 
 };
 

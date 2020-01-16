@@ -102,14 +102,19 @@ void TimeLimitGauge::Update()
 	//状態を変更する。
 	StateChange();
 
+	m_scale.x = m_scale_x;			//スケールを代入。
+
 	m_spriteRender->SetPosition(m_position);		//座標更新。
 	m_spriteRender->SetScale(m_scale);				//拡大処理。
+
+
+	if (m_scale.x > 0.f && m_timeLimitFlag == true) {		//拡大率が０より大きいとき。且つフラグがtrueのとき。
+		m_timeLimitFlag = false;		//フラグを返す。
+	}
 
 	if (m_scale.x <= 0.f && m_timeLimitFlag == false) {		//拡大率が０のとき。且つフラグがfalseのとき。
 		m_timeLimitFlag = true;			//フラグを返す。
 	}
 
-	if (m_scale.x > 0.f && m_timeLimitFlag == true) {		//拡大率が０より大きいとき。且つフラグがtrueのとき。
-		m_timeLimitFlag = false;		//フラグを返す。
-	}
+
 }

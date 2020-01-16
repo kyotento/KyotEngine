@@ -33,8 +33,6 @@ bool Score::Start()
 
 void Score::Update()
 {
-	//todo âºÅB
-	m_score += 1;
 }
 
 void Score::AfterFontRender()
