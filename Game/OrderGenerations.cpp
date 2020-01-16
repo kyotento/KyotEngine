@@ -7,7 +7,7 @@ namespace {
 
 	float cuisineSize = 50.f;		//料理の画像のサイズ。
 	float foodSize = 30.f;			//食べ物の画像のサイズ。
-	float gaugeScale = 1.f;					//拡大率を格納する。
+	float gaugeScale = 1.f;			//拡大率を格納する。
 }
 
 OrderGenerations::OrderGenerations()
@@ -20,7 +20,7 @@ OrderGenerations::~OrderGenerations()
 
 bool OrderGenerations::Start()
 {
-	m_cookingList = NewGO<CookingList>(0, "cookingList");
+	m_cookingList = NewGO<CookingList>(0, "cookingList");			//料理リストを生成。
 
 	return true;
 }
@@ -203,7 +203,7 @@ void OrderGenerations::JudgmentDeleteOrder()
 		m_delivery->SetDeliveryDishCuisine(CookingList::encookingListNum);			//受け渡し口の受け取った料理をリセットする。
 		gaugeScale = 1.f;			//拡大率をリセット。
 
-		for (int i = 0; i < m_orderNumLimit; i++) {
+		for (int i = 0; i < m_orderNumLimit; i++) {					//注文シートの配列分ループする。
 			m_kari[i] = CookingList::encookingListNum;				//配列をリセットする。
 		}
 	}
@@ -225,6 +225,7 @@ void OrderGenerations::DeleteOrder(int genenum)
 	DeleteGO(m_spriteRenderCuisineMethod[genenum]);		//調理方法の画像を消す。
 	m_spriteRenderCuisineMethod[genenum] = nullptr;		//調理方法の画像のインスタンスを破棄。
 
+	//注文票を消した後の処理。
 	DeleteOrderAfter(genenum);
 
 }
@@ -243,7 +244,7 @@ void OrderGenerations::DeleteOrderAfter(int genenum)
 			m_spriteRenderCuisine[i] = m_spriteRenderCuisine[i + 1];
 			m_spriteRenderFoods[i] = m_spriteRenderFoods[i + 1];
 			m_spriteRenderCuisineMethod[i] = m_spriteRenderCuisineMethod[i + 1];
-			m_dishName[i] = m_dishName[i + 1];			//注文荒れた料理を格納。
+			m_dishName[i] = m_dishName[i + 1];			//注文された料理を格納。
 		}	
 
 		if (m_dishName[i + 1] == CookingList::encookingListNum || i >= (Limit += 1)) {		//次の配列がnullのとき、又は配列の一番後ろのとき。
@@ -258,7 +259,7 @@ void OrderGenerations::DeleteOrderAfter(int genenum)
 
 			m_generationNum -= 1;		//生成数を減算する。
 			m_orderNumber -= 1;			//注文番号を変更する。
-			m_cuisineSheetFlag[i] = false;			//食べ物シートを生成していない状態に。
+			m_cuisineSheetFlag[i] = false;					//食べ物シートを生成していない状態に。
 			m_foodSheetGenerationFlag[i] = false;			//食べ物シートを生成していない状態に。
 			m_cuisineDecision[i] = false;					//料理が決定していない状態に。
 			i = m_orderNumLimit;		//ループしないように上限値を代入。
@@ -306,6 +307,7 @@ void OrderGenerations::ShakeOrder(int genenum)
 void OrderGenerations::PositionUpdate(int genenum)
 {
 	if (m_cuisineSheetFlag[genenum] == true) {			//食べ物シートが生成されていたら。
+		//各画像の座標を更新する。
 		m_foodSheetPosition[genenum].x = m_position[genenum].x;
 		m_foodSheetGenerations[genenum]->SetPosition(m_foodSheetPosition[genenum]);
 		m_timeLimitGaugePosition[genenum].x = m_position[genenum].x ;
@@ -328,7 +330,7 @@ void OrderGenerations::Update()
 	JudgmentDeleteOrder();
 
 	m_delivery = FindGO<Delivery>("delivery");						//受け渡し口のインスタンスを検索する。
-	if (m_orderGenerationFlag) {
+	if (m_orderGenerationFlag) {										//注文シートを一通り生成し終えたなら。
 		m_deliveryCuisine = m_delivery->GetDeliveryDishCuisine();		//納品された料理を検索して代入する。
 	}
 }

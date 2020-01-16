@@ -11,6 +11,16 @@ Belongings::Belongings()
 
 Belongings::~Belongings()
 {
+	if (m_skinModelRender != nullptr) {
+		DeleteGO(m_skinModelRender);			//スキンモデルを消す。
+		m_skinModelRender = nullptr;
+	}
+
+	if (m_gauge != nullptr) {
+		DeleteGO(m_gauge);				//ゲージを消す。
+		m_gauge = nullptr;
+	}
+
 }
 
 bool Belongings::Start()
