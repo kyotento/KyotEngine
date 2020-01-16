@@ -16,6 +16,7 @@
 #include "Gauge.h"
 #include "math/Vector.h"
 #include "SoupBase.h"
+
 /// <summary>
 /// プレイヤーの基底クラス。
 /// </summary>

@@ -7,7 +7,7 @@ namespace {
 
 	float cuisineSize = 50.f;		//料理の画像のサイズ。
 	float foodSize = 30.f;			//食べ物の画像のサイズ。
-	float k = 1.f;					//拡大率を格納する。
+	float gaugeScale = 1.f;					//拡大率を格納する。
 }
 
 OrderGenerations::OrderGenerations()
@@ -37,6 +37,7 @@ void OrderGenerations::Generations()
 	}
 
 	if (m_order) {			//注文フラグがtrueなら。
+		m_orderGenerationFlag = false;				//生成し終えてないのでフラグをfalseに。
 		m_orderSheet[m_orderNumber] = NewGO<OrderSheet>(0, "orderSheet");		//配列m_order番目に注文シートを生成。
 		m_position[m_orderNumber].x = m_sheet_x;		//X座標を指定。
 		m_position[m_orderNumber].y = m_sheet_y;		//Y座標を指定。
@@ -148,6 +149,7 @@ void OrderGenerations::Order(int genenum)
 			m_spriteRenderCuisineMethod[genenum]->SetPosition(m_kitchenWarePosition[genenum]);						//座標更新。
 
 			m_cuisineSheetFlag[genenum] = true;			//料理の画像が生成されたのでフラグを返す。
+			m_orderGenerationFlag = true;				//一通り生成されたのでフラグを返す。
 		}
 
 		if (m_cookingList->GetCookingList() == CookingList::enOnionSoup){		//作成するものが玉ねぎスープのとき。
@@ -168,6 +170,7 @@ void OrderGenerations::Order(int genenum)
 			m_spriteRenderCuisineMethod[genenum]->SetPosition(m_kitchenWarePosition[genenum]);						//座標更新。
 
 			m_cuisineSheetFlag[genenum] = true;			//料理の画像が生成されたのでフラグを返す。
+			m_orderGenerationFlag = true;				//一通り生成されたのでフラグを返す。
 		}
 	}
 }
@@ -183,12 +186,12 @@ void OrderGenerations::JudgmentDeleteOrder()
 		}
 
 		//一度すべての注文を確認したうえでゲージの拡大率を比べて一番小さいものを消すため２回に処理を分けている。
-		for (int i = 0; i < m_orderNumLimit; i++) {			//注文シートの上限値分ループする。
-			if (m_kari[i] == m_deliveryCuisine) {		//配列に格納された料理と一致した時。
+		for (int i = 0; i < m_orderNumLimit; i++) {				//注文シートの上限値分ループする。
+			if (m_kari[i] == m_deliveryCuisine) {				//配列に格納された料理と一致した時。
 				if (m_timeLimitGauge[i] != nullptr) {			//ゲージが生成されているとき。
-					if (k > m_timeLimitGauge[i]->GetScale_X()) {		//もしｋよりもスケールが小さいとき。
-						k = m_timeLimitGauge[i]->GetScale_X();			//kに値を代入。
-						deleteOrderNum = i;		//配列番号を代入。
+					if (gaugeScale > m_timeLimitGauge[i]->GetScale_X()) {		//もしｋよりもスケールが小さいとき。
+						gaugeScale = m_timeLimitGauge[i]->GetScale_X();			//kに値を代入。
+						deleteOrderNum = i;										//配列番号を代入。
 					}
 				}
 			}
@@ -198,9 +201,11 @@ void OrderGenerations::JudgmentDeleteOrder()
 			DeleteOrder(deleteOrderNum);				//一致した配列の注文シートを消す。
 		}
 		m_delivery->SetDeliveryDishCuisine(CookingList::encookingListNum);			//受け渡し口の受け取った料理をリセットする。
-		k = 1.f;			//拡大率をリセット。
+		gaugeScale = 1.f;			//拡大率をリセット。
 
-		m_kari[CookingList::encookingListNum, CookingList::encookingListNum, CookingList::encookingListNum, CookingList::encookingListNum, CookingList::encookingListNum];
+		for (int i = 0; i < m_orderNumLimit; i++) {
+			m_kari[i] = CookingList::encookingListNum;				//配列をリセットする。
+		}
 	}
 }
 
@@ -230,7 +235,7 @@ void OrderGenerations::DeleteOrderAfter(int genenum)
 	for (int i = genenum; i < m_orderNumLimit; i++) {			//注文シートの上限値分ループする。ループを、消去した注文シートの配列からに。
 		int Limit = m_orderNumLimit;
 	//	if (i <= (Limit -= 2)) {		//配列の上限値より1小さい値の場合。
-		if(m_orderSheet[i+1] != nullptr && i <= (Limit -= 2)){			//次の配列がnullでないとき、且つ一番後ろの配列でないとき。
+		if(m_dishName[i+1] != CookingList::encookingListNum && i <= (Limit -= 2)){			//次の配列がnullでないとき、且つ一番後ろの配列でないとき。
 			//各画像の配列をずらす。
 			m_orderSheet[i] = m_orderSheet[i + 1];
 			m_timeLimitGauge[i] = m_timeLimitGauge[i + 1];
@@ -241,7 +246,7 @@ void OrderGenerations::DeleteOrderAfter(int genenum)
 			m_dishName[i] = m_dishName[i + 1];			//注文荒れた料理を格納。
 		}	
 
-		if (m_orderSheet[i + 1] == nullptr || i >= (Limit += 1)) {		//次の配列がnullのとき、又は配列の一番後ろのとき。
+		if (m_dishName[i + 1] == CookingList::encookingListNum || i >= (Limit += 1)) {		//次の配列がnullのとき、又は配列の一番後ろのとき。
 			//各画像のインスタンスを破棄。
 			m_orderSheet[i] = nullptr;
 			m_timeLimitGauge[i] = nullptr;
@@ -323,6 +328,8 @@ void OrderGenerations::Update()
 	JudgmentDeleteOrder();
 
 	m_delivery = FindGO<Delivery>("delivery");						//受け渡し口のインスタンスを検索する。
-	m_deliveryCuisine = m_delivery->GetDeliveryDishCuisine();		//納品された料理を検索して代入する。
+	if (m_orderGenerationFlag) {
+		m_deliveryCuisine = m_delivery->GetDeliveryDishCuisine();		//納品された料理を検索して代入する。
+	}
 }
 

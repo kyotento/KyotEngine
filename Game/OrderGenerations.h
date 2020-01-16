@@ -83,14 +83,14 @@ public:
 	/// <param name="genenum">処理している配列の番号</param>
 	void PositionUpdate(int genenum);
 
-	///// <summary>
-	///// 受け渡し口のインスタンスを設定する。
-	///// </summary>
-	///// <param name="delivery">受け渡し口のインスタンス</param>
-	//void SetDelivery(Delivery* delivery)
-	//{
-	//	m_delivery = delivery;
-	//}
+	/// <summary>
+	/// 一通り画像が生成されたかどうかを返す。
+	/// </summary>
+	/// <returns>一通り画像が生成されたか</returns>
+	bool GetOrderGenerationFlag()
+	{
+		return m_orderGenerationFlag;
+	}
 
 private:
 
@@ -113,6 +113,7 @@ private:
 	float m_orderTimer = 10.f;							//todo 仮　注文が来るタイマー。
 
 	bool m_order = false;								//注文を承ったか否か。
+	bool m_orderGenerationFlag = false;					//一通り注文シートを生成し終えたかどうか。
 	bool m_foodSheetGenerationFlag[m_orderNumLimit] = { false };				//食べ物シートを生成したか否か。
 	bool m_cuisineSheetFlag[m_orderNumLimit] = { false };			//料理の画像を生成したか否か。
 	bool m_timeOver = false;			//時間制限を超えてしまった場合trueになる。

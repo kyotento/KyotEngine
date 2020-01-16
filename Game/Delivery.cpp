@@ -39,6 +39,7 @@ void Delivery::Update()
 	{
 		m_TimeAdvanced = true;
 		m_state = en_default;
+
 	}
 
 	if (m_TimeAdvanced)

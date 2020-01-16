@@ -30,7 +30,7 @@ void Game::Update()
 		m_stage_1 = NewGO<Stage_1>(0, "stage_1");										//ステージ１生成。
 		m_timer = NewGO<Timer>(0, "timer");												//タイマー生成。
 		m_score = NewGO<Score>(0, "score");												//スコア生成。
-		m_orderGenerations = NewGO<OrderGenerations>(0, "orderGenerations");			//注文シート生成。
+		m_orderGenerations = NewGO<OrderGenerations>(0, "ordergenerations");			//注文シート生成。
 
 		m_fontRender = NewGO<FontRender>(0, "fontrender");
 		m_fontRender->SetText(L"ふぁあああああああ");

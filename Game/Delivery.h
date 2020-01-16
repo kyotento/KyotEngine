@@ -26,23 +26,6 @@ public:
 		m_dishHold = dishHold;
 	}
 
-	///// <summary>
-	///// ‰^‚Î‚ê‚Ä‚«‚½‚¨M‚Ìó‘Ô‚ğİ’è‚·‚éB
-	///// </summary>
-	///// <param name="deliveryDishCuisine">‰^‚Î‚ê‚Ä‚«‚½‚¨M‚Ìó‘Ô‚ğ‚ğŠi”[‚·‚é</param>
-	//void SetDeliveryDishCuisine(int deliveryDishCuisine)
-	//{
-	//	m_deliveryDishCuisine = deliveryDishCuisine;
-	//}
-
-	///// <summary>
-	///// ‰^‚Î‚ê‚Ä‚«‚½‚¨M‚Ìó‘Ô‚ğæ“¾‚·‚éB
-	///// </summary>
-	///// <returns></returns>
-	//int GetDeliveryDishCuisine()
-	//{
-	//	return m_deliveryDishCuisine;
-	//}
 
 private:
 
@@ -51,6 +34,7 @@ private:
 	float m_StateChangeTime = 0.f;
 
 	bool m_TimeAdvanced = false;
+	bool GetDishTimingFlag = false;				//‚¨M‚Ìó‘Ô‚ğó‚¯æ‚éƒ^ƒCƒ~ƒ“ƒO‚ğw’èB
 
 	DishHold* m_dishHold = nullptr;
 
