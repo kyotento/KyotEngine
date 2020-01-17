@@ -31,7 +31,8 @@ bool Timer::Start()
 	m_fontPosition.x = m_position2D.x -= 70.f;			//フォントのX座標を指定。
 	m_fontPosition.y = m_position2D.y += 20.f;			//フォントのY座標を指定。
 
-	UnitChange();
+	UnitChange();			//00:00と表示するための計算を行う。
+
 	return true;
 }
 
@@ -47,6 +48,10 @@ void Timer::Update()
 	if (m_startCountDown->GetGameStartFlag()) {					////ゲーム更新処理を開始していたら。
 		m_timer -= gametime().GetFrameDeltaTime();				//時間経過。
 		UnitChange();											//00:00と表示するための計算。
+
+		if (m_timer <= 0.f) {			//時間制限が来たとき。
+			m_startCountDown->SetGameStartFlag(false);
+		}
 	}
 }
 

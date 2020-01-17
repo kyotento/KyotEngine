@@ -37,8 +37,8 @@ void StartCountdown::ScaleUpdate()
 	}
 
 	//todo 分けた意味ない説。
-	m_scaleReady = { m_scale,m_scale,m_scale };	
-	m_scaleStart = { m_scale,m_scale,m_scale };
+	m_scaleReady = { m_scale,m_scale,m_scale };			//Readyのスケールを変更。
+	m_scaleStart = { m_scale,m_scale,m_scale };			//Startのスケールを変更。
 
 }
 

@@ -26,7 +26,7 @@ private:
 	int m_second = 0;				//秒。
 	int m_minute = 0;				//分。
 
-	float m_timer = 200.f;			//タイマー。
+	float m_timer = 300.f;			//タイマー。
 	float m_fontScale = 1.5f;		//フォントのスケール。
 
 	CVector2 m_fontPosition = CVector2::Zero();					//フォントの座標。

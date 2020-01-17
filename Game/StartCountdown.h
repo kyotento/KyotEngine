@@ -35,7 +35,7 @@ public:
 
 private:
 
-	float m_scale = 0.f;
+	float m_scale = 0.f;									//各画像のスケールを変更するための値。
 	float m_deleteTimer = 0.f;								//画像を消すタイマー。
 
 	bool m_newReady = false;								//Readyが生成されたか。
