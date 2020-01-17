@@ -50,7 +50,8 @@ void Timer::Update()
 		UnitChange();											//00:00と表示するための計算。
 
 		if (m_timer <= 0.f) {			//時間制限が来たとき。
-			m_startCountDown->SetGameStartFlag(false);
+			m_startCountDown->SetGameStartFlag(false);			//ゲームの更新処理を終了する。
+			m_gameOver = NewGO<GameOver>(0, "gameover");		//ゲームを終了する。
 		}
 	}
 }

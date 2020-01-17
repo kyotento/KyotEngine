@@ -38,18 +38,18 @@ bool Result::Start()
 	m_spriteRenderSheet->SetScale(m_scaleSheet);												//スケールを初期化。
 
 	m_positionStar[0] = m_positionSheet;			//一つ目の星の座標にシートの座標を代入。
-	m_positionStar[0].x -= 140.f;					//左に移動する。
-	m_positionStar[0].y -= 140.f;					//下に移動する。
+	m_positionStar[0].x -= 80.f;					//左に移動する。
+	m_positionStar[0].y -= 90.f;					//下に移動する。
 
 	for (int i = 0; i < m_starNum; i++) {			//生成する星の数分ループする。
 		m_spriteRenderStar[i] = NewGO<SpriteRender>(1, "sprite");								//スプライトクラスを生成。
-		m_spriteRenderStar[i]->Init(L"Assets/sprite/black_star", m_star_w, m_star_h);			//星の初期化(はじめは黒い星)。
+		m_spriteRenderStar[i]->Init(L"Assets/sprite/black_star.dds", m_star_w, m_star_h);		//星の初期化(はじめは黒い星)。
 		m_spriteRenderStar[i]->SetPosition(m_positionStar[i]);									//座標を初期化。
 		m_spriteRenderStar[i]->SetScale(m_scaleStar[i]);										//スケールを初期化。
 
 		if (i <= m_starNum - 1) {					//次の配列が存在したら。
 			m_positionStar[i + 1] = m_positionStar[i];											//次の星の座標に前の星の座標を代入。
-			m_positionStar[i + 1].x += 140.f;													//右に移動する。
+			m_positionStar[i + 1].x += 80.f;													//右に移動する。
 		}
 	}
 

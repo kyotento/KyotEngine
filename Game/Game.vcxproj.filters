@@ -118,6 +118,9 @@
     <Filter Include="Assets\sprite\start">
       <UniqueIdentifier>{2aa0ff94-19ae-47ff-bb47-b921ec180969}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\sprite\end">
+      <UniqueIdentifier>{2320be92-88e0-457f-b1ec-2a5acd503104}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -376,6 +379,9 @@
       <Filter>Game\2D\Stage</Filter>
     </ClCompile>
     <ClCompile Include="StartCountdown.cpp">
+      <Filter>Game\2D\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOver.cpp">
       <Filter>Game\2D\Stage</Filter>
     </ClCompile>
   </ItemGroup>
@@ -667,6 +673,9 @@
     <ClInclude Include="StartCountdown.h">
       <Filter>Game\2D\Stage</Filter>
     </ClInclude>
+    <ClInclude Include="GameOver.h">
+      <Filter>Game\2D\Stage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">
@@ -832,6 +841,9 @@
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\start\start.png">
       <Filter>Assets\sprite\start</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\end\TimeUp.png">
+      <Filter>Assets\sprite\end</Filter>
     </ImageContentTask>
   </ItemGroup>
   <ItemGroup>

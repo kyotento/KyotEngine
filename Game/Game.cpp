@@ -20,9 +20,7 @@ bool Game::Start()
 
 void Game::Update()
 {
-	//PhysicsWorld().SetDebugDrawMode(1);
-	
-	//中でやってることは仮。
+	//todo 中でやってることは仮。
 	if (m_titleDeleteFlag)			//タイトルが消えた時。
 	{
 	//	m_player = NewGO<Player>(0, "player");
@@ -32,11 +30,6 @@ void Game::Update()
 		m_timer = NewGO<Timer>(0, "timer");												//タイマー生成。
 		m_score = NewGO<Score>(0, "score");												//スコア生成。
 		m_orderGenerations = NewGO<OrderGenerations>(0, "ordergenerations");			//注文シート生成。
-
-		m_fontRender = NewGO<FontRender>(0, "fontrender");
-		m_fontRender->SetText(L"ふぁあああああああ");
-		m_fontRender->SetPosition({ 0.f, 0.f });
-		m_fontRender->SetScale(1);
 
 		m_titleDeleteFlag = false;														//生成したのでフラグを返す。
 	}

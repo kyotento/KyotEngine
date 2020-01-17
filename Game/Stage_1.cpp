@@ -8,6 +8,7 @@ Stage_1::Stage_1()
 
 Stage_1::~Stage_1()
 {
+	
 }
 
 bool Stage_1::Start()
