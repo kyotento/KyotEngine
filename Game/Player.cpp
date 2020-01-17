@@ -28,6 +28,7 @@ Player::Player()
 Player::~Player()
 {
 	DeleteGO(m_skinModelRender);
+	DeleteGO(m_knife);
 }
 
 #ifdef SPRITE_TEST
@@ -36,6 +37,8 @@ SkinModelRender* m_skinModelRender2;
 
 bool Player::Start()
 {
+	m_startCountDown = FindGO<StartCountdown>("startcountdown");			//ゲーム開始前の更新処理。
+
 	m_skinModelRender->Init(L"Assets/modelData/Chef/chef_1.cmo", m_animationClips, enanimationClip_Num, "PSMain", "VSMain", false);
 	m_skinModelRender->SetPosition(m_position);
 	m_skinModelRender->SetRotation(m_rotation);
@@ -48,21 +51,25 @@ bool Player::Start()
 	m_skinModelRender2->Init(L"Assets/modelData/karikkari.cmo", nullptr, 0, "PSMain", "VSMain", true, false);
 #endif
 
-	m_knife = NewGO<Knife>(0, "knife");
+	m_knife = NewGO<Knife>(0, "knife");			//包丁を生成。
+	m_knife->SetPosition(m_position);			//座標を更新。
 
 	return true;
 }
 
 void Player::Update()
 {
-	Movement(m_controllerNumber);					//プレイヤーの移動処理。
-	Rotation();										//プレイヤーの回転処理。
-	ForwardDirectionRay(m_controllerNumber);		//プレイヤーの前方方向にrayを飛ばす処理。
-	ActionProcessing(m_controllerNumber);			//プレ親―の状態による動作処理。
+	if (m_startCountDown->GetGameStartFlag()) {			//ゲーム更新処理を開始していたら。
+		Movement(m_controllerNumber);					//プレイヤーの移動処理。
+		Rotation();										//プレイヤーの回転処理。
+		ForwardDirectionRay(m_controllerNumber);		//プレイヤーの前方方向にrayを飛ばす処理。
+		ActionProcessing(m_controllerNumber);			//プレ親―の状態による動作処理。
 
-	if (m_playerState != enanimationClip_Cut) {		//もし切っている状態じゃないとき。
-		m_knife->SetPosition(m_position);			//ナイフの座標を指定。
+		if (m_playerState != enanimationClip_Cut) {		//もし切っている状態じゃないとき。
+			m_knife->SetPosition(m_position);			//ナイフの座標を指定。
+		}
 	}
+
 #ifdef SPRITE_TEST
 
 //	m_x += 0.1f;
@@ -583,12 +590,12 @@ void Player::HoldingKnife()
 
 	CMatrix boneRot;						//ボーンの行列を保持するやつ。
 	boneRot = m_bone->GetMatrix();			//ボーンの行列を代入。
-	Bonepos.x = boneRot.m[3][0];				//X軸。
-	Bonepos.y = boneRot.m[3][1];				//Y軸。
-	Bonepos.z = boneRot.m[3][2];				//Z軸。
+	Bonepos.x = boneRot.m[3][0];			//X軸。
+	Bonepos.y = boneRot.m[3][1];			//Y軸。
+	Bonepos.z = boneRot.m[3][2];			//Z軸。
 
-	CQuaternion Bonerote;			//骨の回転を引き抜くよ。
-	Bonerote.SetRotation(boneRot);		//ボーンの行列から回転行列を抽出。
+	CQuaternion Bonerote;					//骨の回転を引き抜くよ。
+	Bonerote.SetRotation(boneRot);			//ボーンの行列から回転行列を抽出。
 
 	m_knife->SetPosition(Bonepos);			//包丁に骨の座標を代入。
 	m_knife->SetRotation(Bonerote);			//包丁に骨の回転を代入。

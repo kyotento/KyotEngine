@@ -2,10 +2,10 @@
 #include "OrderGenerations.h"
 
 namespace {
-	int cuisinePriority = 5;		//料理画像の実行優先度。
-	int deleteOrderNum = 5;
+	static int cuisinePriority = 5;		//料理画像の実行優先度。
+	int deleteOrderNum = 5;			//消すシートの配列番号を保持する。
 
-	int penalty = -10;				//時間制限以内に料理を持ってこれなかったときのスコアペナルティ。
+	int penalty = -30;				//時間制限以内に料理を持ってこれなかったときのスコアペナルティ。
 	int foodScore = 60;				//料理を出したときのスコア。
 	int chip = 0;					//チップ。
 
@@ -27,6 +27,7 @@ bool OrderGenerations::Start()
 {
 	m_cookingList = NewGO<CookingList>(0, "cookingList");			//料理リストを生成。
 	m_score = FindGO<Score>("score");								//スコアクラスのインスタンスを取得。
+	m_startCountDown = FindGO<StartCountdown>("startcountdown");	//StartCountdownのインスタンスを取得。
 
 	return true;
 }
@@ -205,25 +206,19 @@ void OrderGenerations::JudgmentDeleteOrder()
 
 		if (deleteOrderNum != m_orderNumLimit) {		//消す配列が指定されていたら(変更があった場合)。
 
-			if (m_timeLimitGauge[deleteOrderNum]->GetGaugeState() == TimeLimitGauge::en66Then){
-				chip = 18;
+			if (m_timeLimitGauge[deleteOrderNum]->GetGaugeState() == TimeLimitGauge::en66Then){			//消す配列のゲージの状態がen66Thenのとき。
+				chip = 12;			//チップを指定(スコアの20％分)。
 			}
-			if(m_timeLimitGauge[deleteOrderNum]->GetGaugeState() == TimeLimitGauge::en33Then) {
-				chip = 12;
-			}
-			if(m_timeLimitGauge[deleteOrderNum]->GetGaugeState() == TimeLimitGauge::en10Then
-				|| m_timeLimitGauge[deleteOrderNum]->GetGaugeState() == TimeLimitGauge::en10Less) {	
-				chip = 6;
+			if(m_timeLimitGauge[deleteOrderNum]->GetGaugeState() == TimeLimitGauge::en33Then) {			//消す配列のゲージの状態がen33Thenのとき。
+				chip = 6;			//チップを指定(スコアの10％分)。
 			}
 
-			foodScore += chip;
-
-			m_score->AddScore(foodScore);
-
-			foodScore = 60.f;
-
+			foodScore += chip;							//スコアにチップを加算。
+			m_score->AddScore(foodScore);				//スコアを加算。
+			foodScore = 60.f;							//スコアを基本値に戻す。
 			DeleteOrder(deleteOrderNum);				//一致した配列の注文シートを消す。
 		}
+
 		m_delivery->SetDeliveryDishCuisine(CookingList::encookingListNum);			//受け渡し口の受け取った料理をリセットする。
 		gaugeScale = 1.f;			//拡大率をリセット。
 
@@ -309,6 +304,7 @@ void OrderGenerations::ShakeOrder(int genenum)
 {
 	if (m_timeLimitGauge[genenum] != nullptr) {
 		if (m_timeLimitGauge[genenum]->GetGaugeState() == TimeLimitGauge::en10Less) {		//ゲージの状態が拡大率１０パーセント以下のとき。
+			//todo 仮　カリカリの仮。
 			//for (int i = 0; i <= 3; i++) {
 			//	if (i == 0) {
 			//		m_position[genenum].x += 5.f;
@@ -348,16 +344,20 @@ void OrderGenerations::PositionUpdate(int genenum)
 
 void OrderGenerations::Update()
 {
-	//生成処理。
-	Generations();
-	//移動処理。
-	Move();
-	//注文シートを消す処理。
-	JudgmentDeleteOrder();
+	if (m_startCountDown->GetGameStartFlag()) {			//ゲーム更新処理を開始していたら。
+		//生成処理。
+		Generations();
+		//移動処理。
+		Move();
+		//注文シートを消す処理。
+		JudgmentDeleteOrder();
 
-	m_delivery = FindGO<Delivery>("delivery");						//受け渡し口のインスタンスを検索する。
-	if (m_orderGenerationFlag) {										//注文シートを一通り生成し終えたなら。
-		m_deliveryCuisine = m_delivery->GetDeliveryDishCuisine();		//納品された料理を検索して代入する。
+		if (m_delivery == nullptr) {										//受け渡し口のインスタンスがないなら。
+			m_delivery = FindGO<Delivery>("delivery");						//受け渡し口のインスタンスを検索する。
+		}
+		if (m_orderGenerationFlag) {										//注文シートを一通り生成し終えたなら。
+			m_deliveryCuisine = m_delivery->GetDeliveryDishCuisine();		//納品された料理を検索して代入する。
+		}
 	}
 }
 

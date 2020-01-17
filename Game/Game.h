@@ -7,6 +7,7 @@
 #include "Score.h"
 #include "OrderGenerations.h"
 #include "PlayerGenerations.h"
+#include "StartCountdown.h"
 
 class Title;
 class Game : public GameObject
@@ -38,6 +39,7 @@ private:
 	Score* m_score = nullptr;					//スコア。
 	OrderGenerations* m_orderGenerations = nullptr;			//注文シート。
 	PlayerGenerations* m_playerGenerations = nullptr;		//プレイヤー生成クラス。
+	StartCountdown* m_startCountDown = nullptr;				//ゲームが始まる前の処理。
 
 	FontRender* m_fontRender = nullptr;		//仮。
 

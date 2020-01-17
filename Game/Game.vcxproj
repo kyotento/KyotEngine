@@ -164,6 +164,7 @@
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="RenderContext.cpp" />
     <ClCompile Include="RenderTarget.cpp" />
+    <ClCompile Include="Result.cpp" />
     <ClCompile Include="SceneItemManager.cpp" />
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="ShadowMap.cpp" />
@@ -180,6 +181,7 @@
     <ClCompile Include="StageObject.cpp" />
     <ClCompile Include="StageSelect.cpp" />
     <ClCompile Include="Stage_1.cpp" />
+    <ClCompile Include="StartCountdown.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -265,6 +267,7 @@
     <ClInclude Include="Random.h" />
     <ClInclude Include="RenderContext.h" />
     <ClInclude Include="RenderTarget.h" />
+    <ClInclude Include="Result.h" />
     <ClInclude Include="SceneItemManager.h" />
     <ClInclude Include="Score.h" />
     <ClInclude Include="ShadowMap.h" />
@@ -281,6 +284,7 @@
     <ClInclude Include="StageObject.h" />
     <ClInclude Include="StageSelect.h" />
     <ClInclude Include="Stage_1.h" />
+    <ClInclude Include="StartCountdown.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="system\system.h" />
     <ClInclude Include="TimeLimitGauge.h" />
@@ -362,6 +366,15 @@
     <ImageContentTask Include="Assets\sprite\gauge\gauge_2.png" />
     <ImageContentTask Include="Assets\sprite\gauge\gauge_3.png" />
     <ImageContentTask Include="Assets\sprite\gauge\gauge_4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\result\black_star.png" />
+    <ImageContentTask Include="Assets\sprite\result\result_sheet.png" />
+    <ImageContentTask Include="Assets\sprite\result\star.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\start\ready.png" />
+    <ImageContentTask Include="Assets\sprite\start\start.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

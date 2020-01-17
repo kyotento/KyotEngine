@@ -9,6 +9,7 @@
 #include "TimeLimitGauge.h"
 #include "Delivery.h"
 #include "Score.h"
+#include "StartCountdown.h"
 
 class Delivery;
 class OrderGenerations : public GameObject
@@ -128,10 +129,11 @@ private:
 
 	CQuaternion m_rotation[m_orderNumLimit] = { CQuaternion::Identity(),CQuaternion::Identity(),CQuaternion::Identity(),CQuaternion::Identity(),CQuaternion::Identity() };	    	//回転。
 
-	OrderSheet* m_orderSheet[m_orderNumLimit] = {nullptr};			//オーダーシート。
+	OrderSheet* m_orderSheet[m_orderNumLimit] = {nullptr};									//オーダーシート。
 	FoodSheetGenerations* m_foodSheetGenerations[m_orderNumLimit] = { nullptr };			//食べ物のシート。
-	CookingList* m_cookingList = nullptr;							//料理リスト。
-	TimeLimitGauge* m_timeLimitGauge[m_orderNumLimit] = { nullptr };//時間制限ゲージ。
+	CookingList* m_cookingList = nullptr;													//料理リスト。
+	TimeLimitGauge* m_timeLimitGauge[m_orderNumLimit] = { nullptr };						//時間制限ゲージ。
+	StartCountdown* m_startCountDown = nullptr;												//ゲーム開始前の処理。
 
 	SpriteRender* m_spriteRenderCuisine[m_orderNumLimit] = { nullptr };					//料理の画像生成用スプライト。	
 	SpriteRender* m_spriteRenderFoods[m_orderNumLimit] = { nullptr };					//食べ物の画像生成用スプライト。

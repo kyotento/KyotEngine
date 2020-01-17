@@ -16,6 +16,7 @@
 #include "Gauge.h"
 #include "math/Vector.h"
 #include "SoupBase.h"
+#include "StartCountdown.h"
 
 /// <summary>
 /// プレイヤーの基底クラス。
@@ -240,6 +241,7 @@ protected:
 	ObjectAbove* m_objectAbove = nullptr;		//物を置くことができるオブジェクト。
 	Gauge* m_gauge = nullptr;					//ゲージ。
 	SoupBase* m_soupBase = nullptr;				//スープ。
+	StartCountdown* m_startCountDown = nullptr;	//ゲーム開始前の処理。
 
 
 private:

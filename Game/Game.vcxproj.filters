@@ -112,6 +112,12 @@
     <Filter Include="Engine\graphics\timer">
       <UniqueIdentifier>{d3ec9200-eb85-4672-bad6-be34da0f584f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\sprite\result">
+      <UniqueIdentifier>{6a8801a9-46f2-48c6-9219-6c3c891727b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\sprite\start">
+      <UniqueIdentifier>{2aa0ff94-19ae-47ff-bb47-b921ec180969}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -365,6 +371,12 @@
     </ClCompile>
     <ClCompile Include="RenderContext.cpp">
       <Filter>Engine\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Result.cpp">
+      <Filter>Game\2D\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="StartCountdown.cpp">
+      <Filter>Game\2D\Stage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -649,6 +661,12 @@
     <ClInclude Include="RenderContext.h">
       <Filter>Engine\graphics</Filter>
     </ClInclude>
+    <ClInclude Include="Result.h">
+      <Filter>Game\2D\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="StartCountdown.h">
+      <Filter>Game\2D\Stage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">
@@ -799,6 +817,21 @@
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\gauge\gauge_4.png">
       <Filter>Assets\sprite\gauge</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\result\black_star.png">
+      <Filter>Assets\sprite\result</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\result\result_sheet.png">
+      <Filter>Assets\sprite\result</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\result\star.png">
+      <Filter>Assets\sprite\result</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\start\ready.png">
+      <Filter>Assets\sprite\start</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\start\start.png">
+      <Filter>Assets\sprite\start</Filter>
     </ImageContentTask>
   </ItemGroup>
   <ItemGroup>

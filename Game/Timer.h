@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "StartCountdown.h"
 
 class Timer : public GameObject
 {
@@ -39,8 +40,10 @@ private:
 
 	SpriteRender* m_spriteRender = nullptr;			//2Dを描画するためのクラス。
 	FontRender* m_fontRender = nullptr;				//フォントを描画するためのクラス。
+	StartCountdown* m_startCountDown = nullptr;		//ゲーム開始前の処理。
 
-	Font m_font;
+	Font m_font;			//フォントクラス。
+
 
 };
 
