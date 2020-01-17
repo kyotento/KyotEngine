@@ -357,10 +357,26 @@ static inline T* FindGO(const char* objectName)
 	return IGameObjectManager().FIndGameObject<T>(objectName);
 }
 
+/// <summary>
+/// ゲームオブジェクトを検索し、一致するもののインスタンスを渡す。
+/// </summary>
 template<class T>
 static inline void QueryGOs(const char* objectName, std::function<bool(T*go)>func)
 {
 	return IGameObjectManager().FindGameObjects<T>(objectName, func);
+}
+
+
+/// <summary>
+/// ゲームオブジェクトを名前指定で消去。
+/// </summary>
+/// <param name="objectName">消去するゲームオブジェクトの名前</param>
+static inline void DeleteGOs(const char* objectName)
+{
+	QueryGOs<GameObject>(objectName, [](auto go) {
+		DeleteGO(go);
+		return true;
+	});
 }
 
 /// <summary>

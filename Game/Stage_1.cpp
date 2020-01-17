@@ -8,7 +8,16 @@ Stage_1::Stage_1()
 
 Stage_1::~Stage_1()
 {
-	
+	DeleteGOs("desk");
+	DeleteGOs("dish");
+	DeleteGOs("dishhold");
+	DeleteGOs("gasstove");
+	DeleteGOs("pot");
+	DeleteGOs("dustbox");
+	DeleteGOs("cuttingdesk");
+	DeleteGOs("kitchen");
+	DeleteGOs("delivery");
+	DeleteGOs("tomatobox");
 }
 
 bool Stage_1::Start()

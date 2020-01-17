@@ -28,8 +28,8 @@ bool Timer::Start()
 	m_position2D.y = y;														//Y座標を指定。
 	m_spriteRender->SetPosition(m_position2D);								//座標を指定。
 
-	m_fontPosition.x = m_position2D.x -= 70.f;			//フォントのX座標を指定。
-	m_fontPosition.y = m_position2D.y += 20.f;			//フォントのY座標を指定。
+	m_fontPosition.x = m_position2D.x -= 90.f;			//フォントのX座標を指定。
+	m_fontPosition.y = m_position2D.y += 30.f;			//フォントのY座標を指定。
 
 	UnitChange();			//00:00と表示するための計算を行う。
 

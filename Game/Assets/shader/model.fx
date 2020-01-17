@@ -205,7 +205,8 @@ float4 PSMain( PSInput In ) : SV_Target0
 	{
 		for(int i = 0; i < directionLightNum; i++) {
 			//ディレクションライトの拡散反射光を計算する。
-			lig += max(0.0f, dot(In.Normal * -1.0f, directionLight.direction[i])) * directionLight.color[i];
+			
+			//lig += max(0.0f, dot(In.Normal * -1.0f, directionLight.direction[i])) * directionLight.color[i];
 			//反射ベクトルRを求める。
 			float3 R = directionLight.direction[i] + 2 * dot(In.Normal, -directionLight.direction[i]) * In.Normal;
 
@@ -244,8 +245,18 @@ float4 PSMain( PSInput In ) : SV_Target0
 		}
 	}
 
+	
 	//　環境光を当てる。
 	lig += float3(environmentpow);
+
+	float t = max(0.0f, dot(In.Normal * -1.0f, directionLight.direction[0]));
+
+	if (t < 0.3f) {
+		lig *= 0.9f;
+	}
+	else {
+		lig *= 1.5f;
+	}
 
 	float4 finalColor = float4(0.0f, 0.0f, 0.0f, 1.0f);
 	finalColor.xyz = albedoColor.xyz * lig;

@@ -25,8 +25,8 @@ bool Score::Start()
 	m_position2D.y = y;														//Y座標を指定。
 	m_spriteRender->SetPosition(m_position2D);								//座標を設定。
 
-	m_fontPosition.x = m_position2D.x -= 25.f;			//フォントのX座標を指定。
-	m_fontPosition.y = m_position2D.y += 30.f;			//フォントのY座標を指定。
+	m_fontPosition.x = m_position2D.x -= 29.f;			//フォントのX座標を指定。
+	m_fontPosition.y = m_position2D.y += 45.f;			//フォントのY座標を指定。
 
 	return true;
 }
