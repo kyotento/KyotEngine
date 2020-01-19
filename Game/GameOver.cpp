@@ -1,5 +1,9 @@
 #include "stdafx.h"
 #include "GameOver.h"
+#include "Stage_1.h"
+#include "Player.h"
+#include "Timer.h"
+#include "OrderGenerations.h"
 
 namespace {
 	float m_size_w = 900.f;
@@ -39,7 +43,30 @@ void GameOver::ScaleUpdate()
 //フィールドのものをすべて消す処理。
 void GameOver::DeleteField()
 {
+	//生成されたPlayerを消す処理。
+	Player* m_player = nullptr;
+	m_player = FindGO<Player>("player");
+	if (m_player != nullptr) {
+		DeleteGOs("player");
+	}
 
+	Timer* m_timer = nullptr;
+	m_timer = FindGO<Timer>("timer");
+	if (m_timer != nullptr) {
+		DeleteGO(m_timer);
+	}
+
+	OrderGenerations* m_orderGenerations = nullptr;
+	m_orderGenerations = FindGO<OrderGenerations>("ordergenerations");
+	if (m_orderGenerations != nullptr) {
+		DeleteGO(m_orderGenerations);
+	}
+
+	//Stage_1* m_starge_1 = nullptr;
+	//m_starge_1 = FindGO<Stage_1>("stage_1");
+	//if (m_starge_1 != nullptr) {
+	//	DeleteGO(m_starge_1);
+	//}
 }
 
 void GameOver::Update()

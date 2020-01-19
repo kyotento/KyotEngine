@@ -21,6 +21,15 @@ OrderGenerations::OrderGenerations()
 
 OrderGenerations::~OrderGenerations()
 {
+	DeleteGO(m_cookingList);							//料理リストを消す。
+	for (int i = 0; i < m_orderNumLimit; i++) {
+		DeleteGO(m_orderSheet[i]);						//注文シートを消す。
+		DeleteGO(m_foodSheetGenerations[i]);			//食べ物シートを消す。
+		DeleteGO(m_timeLimitGauge[i]);					//ゲージを消す。
+		DeleteGO(m_spriteRenderCuisine[i]);				//料理の画像を消す。
+		DeleteGO(m_spriteRenderFoods[i]);				//食べ物の画像を消す。
+		DeleteGO(m_spriteRenderCuisineMethod[i]);		//調理方法の画像を消す。
+	}	
 }
 
 bool OrderGenerations::Start()
@@ -213,6 +222,9 @@ void OrderGenerations::JudgmentDeleteOrder()
 				chip = 6;			//チップを指定(スコアの10％分)。
 			}
 
+			m_score->AddProfit(foodScore);				//チップ加算前のスコアを加算。
+			m_score->AddChip(chip);						//チップを加算。
+
 			foodScore += chip;							//スコアにチップを加算。
 			m_score->AddScore(foodScore);				//スコアを加算。
 			foodScore = 60.f;							//スコアを基本値に戻す。
@@ -295,6 +307,7 @@ void OrderGenerations::TimeLimitOrder(int genenum)
 			m_timeLimitGauge[genenum]->SetTimeLimitFlag(false);
 			//スコアにペナルティを加算する。
 			m_score->AddScore(penalty);
+			m_score->AddPenalty(penalty);			//ペナルティを加算。
 		}
 	}
 }

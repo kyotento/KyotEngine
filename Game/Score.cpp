@@ -28,6 +28,11 @@ bool Score::Start()
 	m_fontPosition.x = m_position2D.x -= 29.f;			//フォントのX座標を指定。
 	m_fontPosition.y = m_position2D.y += 45.f;			//フォントのY座標を指定。
 
+	//todo　実際は選択されたステージごとに異なる。(仕組みを作る)。
+	m_starOne = 200;
+	m_starTwo = 300;
+	m_starThree = 600;
+
 	return true;
 }
 
