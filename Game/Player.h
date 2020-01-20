@@ -243,6 +243,8 @@ protected:
 	SoupBase* m_soupBase = nullptr;				//スープ。
 	StartCountdown* m_startCountDown = nullptr;	//ゲーム開始前の処理。
 
+	Sound* m_cuttingSound = nullptr;			//食べ物を切る音。
+
 
 private:
 

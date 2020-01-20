@@ -377,6 +377,16 @@
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\end\TimeUp.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="Assets\sound\BGM\result.wav" />
+    <Media Include="Assets\sound\BGM\stage_1.wav" />
+    <Media Include="Assets\sound\BGM\title_overcooked.wav" />
+    <Media Include="Assets\sound\soundEffect\cutting.wav" />
+    <Media Include="Assets\sound\soundEffect\cuttings.wav" />
+    <Media Include="Assets\sound\soundEffect\decision3.wav" />
+    <Media Include="Assets\sound\soundEffect\end.wav" />
+    <Media Include="Assets\sound\soundEffect\offer.wav" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.targets" />

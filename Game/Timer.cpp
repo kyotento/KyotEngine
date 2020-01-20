@@ -16,6 +16,7 @@ Timer::Timer()
 Timer::~Timer()
 {
 	DeleteGO(m_spriteRender);
+	DeleteGO(m_sound);
 }
 
 bool Timer::Start()
@@ -32,6 +33,12 @@ bool Timer::Start()
 	m_fontPosition.y = m_position2D.y += 30.f;			//フォントのY座標を指定。
 
 	UnitChange();			//00:00と表示するための計算を行う。
+
+	//todo 実際はステージごとにBGMを変える。
+	//BGM。
+	m_sound = NewGO<Sound>(0, "sound");
+	m_sound->Init(L"Assets/sound/bgm/stage_1.wav", true);
+	m_sound->Play();
 
 	return true;
 }

@@ -222,9 +222,12 @@ void OrderGenerations::JudgmentDeleteOrder()
 				chip = 6;			//チップを指定(スコアの10％分)。
 			}
 
+			Sound* sound = NewGO<Sound>(0, "sound");
+			sound->Init(L"Assets/sound/soundEffect/offer.wav",false);
+			sound->Play();
+
 			m_score->AddProfit(foodScore);				//チップ加算前のスコアを加算。
 			m_score->AddChip(chip);						//チップを加算。
-
 			foodScore += chip;							//スコアにチップを加算。
 			m_score->AddScore(foodScore);				//スコアを加算。
 			foodScore = 60.f;							//スコアを基本値に戻す。
@@ -301,9 +304,9 @@ void OrderGenerations::DeleteOrderAfter(int genenum)
 //時間制限をこえてしまった注文の処理。
 void OrderGenerations::TimeLimitOrder(int genenum)
 {
-	if (m_timeLimitGauge[genenum] != nullptr) {				//ゲージが生成されているとき。
+	if (m_timeLimitGauge[genenum] != nullptr) {									//ゲージが生成されているとき。
 		if (m_timeLimitGauge[genenum]->GetTimeLimitFlag() == true) {			//時間制限が来た時。
-			m_timeLimitGauge[genenum]->SetScale(1.f);				//画像のスケールを１に戻す。
+			m_timeLimitGauge[genenum]->SetScale(1.f);							//画像のスケールを１に戻す。
 			m_timeLimitGauge[genenum]->SetTimeLimitFlag(false);
 			//スコアにペナルティを加算する。
 			m_score->AddScore(penalty);
@@ -313,6 +316,7 @@ void OrderGenerations::TimeLimitOrder(int genenum)
 }
 
 //注文票を揺らす処理。
+//todo 仮すぎる仮。
 void OrderGenerations::ShakeOrder(int genenum)
 {
 	if (m_timeLimitGauge[genenum] != nullptr) {

@@ -17,7 +17,7 @@ bool Sound::Start() {
 
 void Sound::Update() {
 	if (!m_isInited)	return;
-	if (m_roofFlag)
+	if (m_roopFlag)
 		effect->Play(true);
 	if (!isPlaying() && m_isInited) {
 		//OutputDebugStringA("Delete Sound effect");
@@ -26,7 +26,7 @@ void Sound::Update() {
 }
 
 void Sound::Init(const wchar_t* filepath, bool roopflag) {
-	m_roofFlag = roopflag;
+	m_roopFlag = roopflag;
 	soundEffect = std::make_unique<DirectX::SoundEffect>(ISoundEngine().audEngine.get(), filepath);
 	char hoge[256];
 	sprintf(hoge, "filePath = %s Engine Addr = %lx\n", ISoundEngine().audEngine.get(), filepath);
@@ -53,7 +53,7 @@ void Sound::Play() {
 	effect->SetVolume(volume);
 	effect->SetPan(pan);
 	effect->SetPitch(pitch);
-	effect->Play(m_roofFlag);
+	effect->Play(m_roopFlag);
 }
 
 void Sound::Stop() {
@@ -72,6 +72,6 @@ bool Sound::isPlaying() {
 void Sound::SetVolume(float vol) {
 	if (!m_isInited)	return;
 	volume = vol * 1.f/8.f;
-	if (m_roofFlag)
+	if (m_roopFlag)
 		effect->SetVolume(volume);
 }

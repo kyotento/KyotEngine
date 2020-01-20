@@ -20,6 +20,7 @@ Sprite::Sprite()
 
 Sprite::~Sprite()
 {
+	m_texture->Release();
 }
 
 

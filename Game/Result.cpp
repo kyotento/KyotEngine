@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Result.h"
 #include "Stage_1.h"
+#include "PlayerGenerations.h"
+#include "Title.h"
 namespace {
 	int score = 0;							//取得したスコアを格納する。
 	int getStar = 0;						//獲得した星の数。
@@ -60,13 +62,17 @@ bool Result::Start()
 
 	score = m_score->GetScore();				//スコアを取得。
 
+	//BGM。
+	Sound* sound = NewGO<Sound>(0, "sound");				//サウンドクラス。
+	sound->Init(L"Assets/sound/bgm/result.wav", false);		//初期化。
+	sound->Play();											//再生。
+
 	return true;
 }
 
 //スコアに応じて星を変更する。
 void Result::ChangeStar()
 {
-
 	if (score < m_score->GetStarOne()) {			//スコアが星１のボーダーよりも少ないとき。
 		getStar = 0;								//星の数を０に。
 	}
@@ -106,11 +112,22 @@ void Result::ChangeStar()
 void Result::Update()
 {
 	if (m_deleteOKFlag){			//消すことができる状態になった時。
-		if (g_pad[0].IsPress(enButtonB)) {			//Bボタンを押したとき。
+		if (g_pad[0].IsTrigger(enButtonB)) {			//Bボタンを押したとき。
 
-			Stage_1* m_stage_1 = nullptr;
-			m_stage_1 = FindGO<Stage_1>("stage_1");
-		//	DeleteGO(m_stage_1);		//ステージ１を消す。	
+			Sound* sound = NewGO<Sound>(0, "sound");								//サウンド。
+			sound->Init(L"Assets/sound/soundEffect/decision3.wav", false);			//初期化。
+			sound->Play();															//再生。
+
+			Title* title = NewGO<Title>(0, "title");
+
+			Stage_1* m_stage_1 = nullptr;				//ステージ１．
+			m_stage_1 = FindGO<Stage_1>("stage_1");		//ステージ１のインスタンスを取得する。
+			DeleteGO(m_stage_1);						//ステージ１を消す。	
+
+			PlayerGenerations* playerGenerations = nullptr;						//プレイヤー生成クラス。
+			playerGenerations = FindGO<PlayerGenerations>("playergenrations");	//プレイヤー生成クラスのインスタンスを取得。
+			DeleteGO(playerGenerations);										//プレイヤー生成クラスを消す。
+
 			DeleteGO(m_score);			//スコアクラスを消す。
 			DeleteGO(this);				//このクラスを消す。
 		}
@@ -208,14 +225,13 @@ void Result::AfterFontRender()
 	}
 
 	//todo 間に合わせ程度の仮。
-	if (m_timer >= 3.5f) {
+	if (m_timer >= 4.5f) {
 		//タイトルへ。
 		m_font.Begin();			//描画開始。
 		wchar_t text7[64];														//テキストに使う配列。
-		swprintf_s(text7, L"Bボタンでタイトルへ(きんじつこうかい)");				//テキストを指定。
+		swprintf_s(text7, L"Bボタンでタイトルへ");				//テキストを指定。
 		m_font.Draw(text7, { 0.f,-300.f }, m_colorFont, 0.0f, m_scaleFont);		//更新処理。
 		m_font.End();			//描画終了。
 		m_deleteOKFlag = true;				//ゲームを終了することができるように。
 	}
-
 }

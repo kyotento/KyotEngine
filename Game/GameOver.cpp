@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Timer.h"
 #include "OrderGenerations.h"
+#include "StartCountDown.h"
 
 namespace {
 	float m_size_w = 900.f;
@@ -25,6 +26,11 @@ bool GameOver::Start()
 	m_spriteRender->Init(L"Assets/sprite/TimeUp.dds", m_size_w, m_size_h);		//初期化。
 	m_spriteRender->SetPosition(m_position);									//画像を生成。
 	m_spriteRender->SetScale(m_scale);											//スケールを更新。
+
+	//かんかんかんかん！。
+	Sound* sound = NewGO<Sound>(0, "sound");									//サウンドクラス。
+	sound->Init(L"Assets/sound/soundEffect/end.wav", false);					//初期化。
+	sound->Play();																//再生。
 
 	return true;
 }
@@ -49,16 +55,24 @@ void GameOver::DeleteField()
 		DeleteGOs("player");
 	}
 
+	//タイマーを消す。
 	Timer* m_timer = nullptr;
 	m_timer = FindGO<Timer>("timer");
 	if (m_timer != nullptr) {
 		DeleteGO(m_timer);
 	}
 
+	//注文シート生成クラスを消す。
 	OrderGenerations* m_orderGenerations = nullptr;
 	m_orderGenerations = FindGO<OrderGenerations>("ordergenerations");
 	if (m_orderGenerations != nullptr) {
 		DeleteGO(m_orderGenerations);
+	}
+
+	//カウントダウンクラスを消す。
+	StartCountdown* m_startCountDown = FindGO<StartCountdown>("startcountdown");
+	if (m_startCountDown != nullptr) {
+		DeleteGO(m_startCountDown);
 	}
 }
 

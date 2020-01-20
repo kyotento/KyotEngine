@@ -29,6 +29,9 @@ Player::~Player()
 {
 	DeleteGO(m_skinModelRender);
 	DeleteGO(m_knife);
+	if (m_cuttingSound != nullptr) {
+		m_cuttingSound->Stop();
+	}
 }
 
 #ifdef SPRITE_TEST
@@ -67,6 +70,13 @@ void Player::Update()
 
 		if (m_playerState != enanimationClip_Cut) {		//もし切っている状態じゃないとき。
 			m_knife->SetPosition(m_position);			//ナイフの座標を指定。
+		}
+	}
+
+	if (m_cuttingSound != nullptr) {					//もしもサウンドが生成されているとき。
+		if (m_playerState != enanimationClip_Cut) {		//状態が切っている状態じゃないとき。
+			m_cuttingSound->Stop();					//サウンドを消す。
+			m_cuttingSound = nullptr;
 		}
 	}
 
@@ -441,7 +451,7 @@ void Player::PutDirtyDishs()
 //物を置く処理。
 void Player::PutObjects(int controllerNum)
 {
-	//todo 仮？。持ったものをおけるようになるまでのタイマー。
+	//todo 仮 持ったものをおけるようになるまでのタイマー。
 	m_putTimer -= 0.1f;
 
 	if (g_pad[controllerNum].IsTrigger(enButtonA) && m_putTimer <= 0.f)		//Aボタンを押したときかつ、物を持ってから一定時間が経過した時。
@@ -571,6 +581,13 @@ void Player::PickUpObjects(int controllerNum)
 void Player::CuttingObject()
 {
 	m_objectAbove->TakeThings(m_belongings);		//置いてあるオブジェクトを検索。
+
+	if (m_cuttingSound == nullptr) {			//サウンドが生成されていないとき。
+		//食べ物を切る音。
+		m_cuttingSound = NewGO<Sound>(0, "sound");									//サウンド。
+		m_cuttingSound->Init(L"Assets/sound/soundEffect/cuttings.wav", true);		//初期化。
+		m_cuttingSound->Play();														//更新処理。
+	}
 
 	m_belongings->GaugeGeneration(true, 1.f, 5.f);				//ゲージを生成する。
 }

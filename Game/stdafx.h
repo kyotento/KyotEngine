@@ -47,6 +47,7 @@
 #include "SpriteRender.h"
 #include "SkinModelRender.h"
 #include "FontRender.h"
+#include "sound/CSound.h"
 
 const float FRAME_BUFFER_W = 1280.0f;				//フレームバッファの幅。
 const float FRAME_BUFFER_H = 720.0f;				//フレームバッファの高さ。

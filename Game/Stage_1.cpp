@@ -7,19 +7,22 @@ Stage_1::Stage_1()
 }
 
 Stage_1::~Stage_1()
-{
-	DeleteGOs("desk");
+{	
 	DeleteGOs("dish");
+	DeleteGOs("desk");
 	DeleteGOs("dishhold");
 	DeleteGOs("gasstove");
+
 	DeleteGOs("pot");
 	DeleteGOs("dustbox");
 	DeleteGOs("cuttingdesk");
 	DeleteGOs("kitchen");
+
 	DeleteGOs("delivery");
 	DeleteGOs("tomatobox");
 	DeleteGOs("onionbox");
 	DeleteGOs("knife");
+
 }
 
 bool Stage_1::Start()
@@ -164,5 +167,4 @@ bool Stage_1::Start()
 
 void Stage_1::Update()
 {
-
 }

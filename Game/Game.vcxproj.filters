@@ -130,6 +130,12 @@
     <Filter Include="Assets\sound">
       <UniqueIdentifier>{dc8c1a64-d141-49fc-8a94-cf39373065ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\sound\bgm">
+      <UniqueIdentifier>{494669e9-bbb3-4bb0-96d9-e62563f88d46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\sound\soundEffect">
+      <UniqueIdentifier>{e4ab1d4f-90bd-460c-a583-26c680848952}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -847,5 +853,31 @@
     <None Include="Assets\level\stage_1.tkl">
       <Filter>Assets\level</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Assets\sound\BGM\title_overcooked.wav">
+      <Filter>Assets\sound\bgm</Filter>
+    </Media>
+    <Media Include="Assets\sound\BGM\stage_1.wav">
+      <Filter>Assets\sound\bgm</Filter>
+    </Media>
+    <Media Include="Assets\sound\soundEffect\decision3.wav">
+      <Filter>Assets\sound\soundEffect</Filter>
+    </Media>
+    <Media Include="Assets\sound\BGM\result.wav">
+      <Filter>Assets\sound\bgm</Filter>
+    </Media>
+    <Media Include="Assets\sound\soundEffect\end.wav">
+      <Filter>Assets\sound\soundEffect</Filter>
+    </Media>
+    <Media Include="Assets\sound\soundEffect\cutting.wav">
+      <Filter>Assets\sound\soundEffect</Filter>
+    </Media>
+    <Media Include="Assets\sound\soundEffect\cuttings.wav">
+      <Filter>Assets\sound\soundEffect</Filter>
+    </Media>
+    <Media Include="Assets\sound\soundEffect\offer.wav">
+      <Filter>Assets\sound\soundEffect</Filter>
+    </Media>
   </ItemGroup>
 </Project>

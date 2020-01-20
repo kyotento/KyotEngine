@@ -161,7 +161,7 @@ public:
 	void DeleteGameObject(GameObject* gameobject)
 	{
 
-		if (gameobject != nullptr && gameobject->GetRegistration())
+		if (gameobject != nullptr && gameobject->GetRegistration() && !gameobject->IsDead())
 		{
 
 			gameobject->SetDeadFlag(true);
@@ -389,14 +389,19 @@ static inline void DeleteGO(const char* objectName)
 	GameObject* go = FindGO<GameObject>(objectName);
 	IGameObjectManager().DeleteGameObject(go);
 }
-
+#include "GameObject.h"
 /// <summary>
 /// ゲームオブジェクトを名前指定で消去。
 /// </summary>
 /// <param name="objectName">消去するゲームオブジェクトの名前</param>
 static inline void DeleteGOs(const char* objectName)
 {
+	
 	QueryGOs<GameObject>(objectName, [](auto go) {
+		if (go->GetPriority() == 221) {
+			int i = 0;
+			i++;
+		}
 		DeleteGO(go);
 		return true;
 	});

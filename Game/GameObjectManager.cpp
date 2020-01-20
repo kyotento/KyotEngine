@@ -212,14 +212,18 @@ void GameObjectManager::ExecuteDeleteGameObjects()
 			GameObjectPriority priority = go->GetPriority();
 			GameObjectList& goExecList = m_gameObjectListArray.at(priority);
 			auto it = std::find(goExecList.begin(), goExecList.end(), go);
+
+			auto index = std::distance(goExecList.begin(), it);
+
+
 			if (it != goExecList.end()) {
 				//削除リストから除外された。
 				(*it)->SetRegistDeadList(false);
 				if ((*it)->GetNewGameObjectManager()) {
 					delete (*it);
 				}
+				goExecList.erase(it);
 			}
-			goExecList.erase(it);
 		}
 		goList.clear();
 	}
