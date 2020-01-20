@@ -2,8 +2,8 @@
 #include "Timer.h"
 
 namespace {
-	float x = 565.f;		//X座標。
-	float y = -285.f;		//Y座標。
+	float x = 555.f;		//X座標。
+	float y = -275.f;		//Y座標。
 
 	float spriteScale = 150.f;		//画像のサイズ。
 }

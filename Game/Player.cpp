@@ -21,8 +21,6 @@ Player::Player()
 	m_animationClips[enanimationClip_IdleHave].Load(L"Assets/animData/chef_idleHave.tka");		//物を持った状態で待機。
 	m_animationClips[enanimationClip_RunHave].Load(L"Assets/animData/chef_runHave.tka");		//物を持った状態で移動。
 
-	//キャラコンの初期化。
-	m_characon.Init(playerCollidedRadius, playerCollidedHeight, m_characonPos);
 }
 
 Player::~Player()
@@ -46,6 +44,11 @@ bool Player::Start()
 	m_skinModelRender->SetPosition(m_position);
 	m_skinModelRender->SetRotation(m_rotation);
 	m_skinModelRender->PlayAnimation(enanimationClip_Idle);
+
+	//キャラコンの座標を指定(m_positionは外部から指定)。
+	m_characonPos = m_position;
+	//キャラコンの初期化。
+	m_characon.Init(playerCollidedRadius, playerCollidedHeight, m_characonPos);
 
 	//todo　仮　2Dのテスト。
 	

@@ -54,6 +54,15 @@ public:
 	void Rotation();
 
 	/// <summary>
+	/// プレイヤーの座標を指定する。
+	/// </summary>
+	/// <param name="pos"></param>
+	void SetPosition(CVector3 pos)
+	{
+		m_position = pos;
+	}
+
+	/// <summary>
 	/// プレイヤーの動作処理。
 	/// </summary>
 	/// <param name="controllerNum">コントローラー番号</param>
