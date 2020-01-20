@@ -1,5 +1,4 @@
 #pragma once
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory>
@@ -12,6 +11,9 @@
 #include <map>
 #include <functional>
 #include <algorithm>
+
+//btÇÊÇËÇ‡â∫Ç…èëÇ≠Ç∆operator-Ç™Ç†Ç¢Ç‹Ç¢Ç…Ç»ÇÈÇÊ(^^)ÅB
+#include "DirectXTK\Inc\Audio.h"
 
 #include "btBulletDynamicsCommon.h"
 #include "BulletCollision\CollisionDispatch\btGhostObject.h"

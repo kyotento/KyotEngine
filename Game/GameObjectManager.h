@@ -1,5 +1,6 @@
 #pragma once
 #define _CGAMEOBJECTMANAGER_H_
+//#define _SOUNDENGNE_	//サウンドエンジンを使用するときに定義。
 #include "GameObject.h"
 #include "util/Util.h"
 #include "ShadowMap.h"
@@ -180,7 +181,7 @@ public:
 	/// <param name="ObjectName">オブジェクトの名前</param>
 	/// <returns>オブジェクト</returns>
 	template<class T>
-	T* FIndGameObject(const char* ObjectName)
+	T* FindGameObject(const char* ObjectName)
 	{
 		unsigned int nameKey = Util::MakeHash(ObjectName);
 		for (auto goList : m_gameObjectListArray)
@@ -289,6 +290,17 @@ public:
 		return m_gameTime;
 	}
 
+#ifdef _SOUNDENGNE_
+	/// <summary>
+	/// サウンドエンジンを取得する。
+	/// </summary>
+	/// <returns>サウンドエンジン</returns>
+	SoundEngine& GetSoundEngine()
+	{
+		return m_soundEngine;
+	}
+#endif
+
 private:
 
 	DirectX::Model*		m_modelDx;						//!<DirectXTKが提供するモデルクラス。
@@ -313,7 +325,9 @@ private:
 	Sprite m_copyMainRtToFrameBufferSprite;			//メインレンダリングターゲットに描かれた絵をフレームバッファにコピーするためのスプライト。
 	Random m_random;								//ランダム関数。
 	GameTime m_gameTime;							//ゲームタイム。
-
+#ifdef _SOUNDENGNE_
+	SoundEngine m_soundEngine;						//サウンドエンジン。
+#endif
 };
 
 /// <summary>
@@ -354,7 +368,7 @@ static inline void DeleteGO(GameObject* gameobject)
 template<class T>
 static inline T* FindGO(const char* objectName)
 {
-	return IGameObjectManager().FIndGameObject<T>(objectName);
+	return IGameObjectManager().FindGameObject<T>(objectName);
 }
 
 /// <summary>
@@ -366,6 +380,15 @@ static inline void QueryGOs(const char* objectName, std::function<bool(T*go)>fun
 	return IGameObjectManager().FindGameObjects<T>(objectName, func);
 }
 
+/// <summary>
+/// DleteGOs用DeleteGO。
+/// </summary>
+/// <param name="objectName">オブジェクトの名前</param>
+static inline void DeleteGO(const char* objectName)
+{
+	GameObject* go = FindGO<GameObject>(objectName);
+	IGameObjectManager().DeleteGameObject(go);
+}
 
 /// <summary>
 /// ゲームオブジェクトを名前指定で消去。
@@ -396,3 +419,14 @@ static inline GameTime& gametime()
 {
 	return IGameObjectManager().GetGameTime();
 }
+
+#ifdef _SOUNDENGNE_
+/// <summary>
+/// サウンドエンジンを取得。
+/// </summary>
+/// <returns>サウンドエンジン</returns>
+static inline SoundEngine& soundEngine()
+{
+	return IGameObjectManager().GetSoundEngine();
+}
+#endif

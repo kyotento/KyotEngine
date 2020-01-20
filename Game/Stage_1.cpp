@@ -18,6 +18,8 @@ Stage_1::~Stage_1()
 	DeleteGOs("kitchen");
 	DeleteGOs("delivery");
 	DeleteGOs("tomatobox");
+	DeleteGOs("onionbox");
+	DeleteGOs("knife");
 }
 
 bool Stage_1::Start()

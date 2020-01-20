@@ -1,8 +1,10 @@
 #include "stdafx.h"
 #include "Result.h"
+#include "Stage_1.h"
 namespace {
 	int score = 0;							//取得したスコアを格納する。
 	int getStar = 0;						//獲得した星の数。
+	float starScale = 2.f;					//星のスケールを変更する時に使う。
 
 	float m_sheet_w = 360.f;				//シートの画像の幅。
 	float m_sheet_h = 540.f;				//シートの画像の高さ。
@@ -61,6 +63,7 @@ bool Result::Start()
 	return true;
 }
 
+//スコアに応じて星を変更する。
 void Result::ChangeStar()
 {
 
@@ -83,15 +86,35 @@ void Result::ChangeStar()
 	for (int i = 0; i < getStar; i++) {				//獲得した星の数分ループする。
 		if (m_changeStarFlag[i] == false) {			//星画像を変更していなかったとき。
 			m_spriteRenderStar[i]->Init(L"Assets/sprite/star.dds", m_star_w, m_star_h);			//星のモデル変更。
+			m_scaleStar[i] = { starScale,starScale,starScale };
+			m_spriteRenderStar[i]->SetScale(m_scaleStar[i]);
 			m_changeStarFlag[i] = true;				//星の画像を変更したのでフラグを返す。
 		}
 	}
 
 	//todo 星変更のときにはじめ拡大している状態で描画しておき、縮小して元のサイズに戻すアニメーションを実装する。
+
+	for (int i = 0; i < getStar; i++) {				//獲得した星の数分ループする。　
+		if (starScale > 1.f) {											//スケールが１より大きいとき。
+			starScale -= 0.03f;											//スケールを縮小する。
+			m_scaleStar[i] = { starScale,starScale,starScale };			//スケールに代入。
+			m_spriteRenderStar[i]->SetScale(m_scaleStar[i]);			//スケールを更新。	
+		}
+	}
 }
 
 void Result::Update()
 {
+	if (m_deleteOKFlag){			//消すことができる状態になった時。
+		if (g_pad[0].IsPress(enButtonB)) {			//Bボタンを押したとき。
+
+			Stage_1* m_stage_1 = nullptr;
+			m_stage_1 = FindGO<Stage_1>("stage_1");
+		//	DeleteGO(m_stage_1);		//ステージ１を消す。	
+			DeleteGO(m_score);			//スコアクラスを消す。
+			DeleteGO(this);				//このクラスを消す。
+		}
+	}
 
 }
 
@@ -133,7 +156,7 @@ void Result::AfterFontRender()
 		//チップ加算前のスコア。
 		m_font.Begin();			//描画開始。
 		wchar_t text2[64];														//テキストに使う配列。
-		swprintf_s(text2, L"%d", m_score->GetProfit());						//テキストを指定。
+		swprintf_s(text2, L"%d", m_score->GetProfit());							//テキストを指定。
 		m_positionFont.y -= 50.f;												//Y座標を指定。
 		m_font.Draw(text2, m_positionFont, m_colorFont, 0.0f, m_scaleFont);		//更新処理。
 		m_font.End();			//描画終了。
@@ -143,7 +166,7 @@ void Result::AfterFontRender()
 		//チップ。
 		m_font.Begin();			//描画開始。
 		wchar_t text3[64];														//テキストに使う配列。
-		swprintf_s(text3, L"%d", m_score->GetChip());						//テキストを指定。
+		swprintf_s(text3, L"%d", m_score->GetChip());							//テキストを指定。
 		m_positionFont.y -= 25.f;												//Y座標を指定。
 		m_font.Draw(text3, m_positionFont, m_colorFont, 0.0f, m_scaleFont);		//更新処理。
 		m_font.End();			//描画終了。
@@ -171,16 +194,28 @@ void Result::AfterFontRender()
 		m_font.End();			//描画終了。
 	}
 	if (m_timer >= 2.5f) {
-		ChangeStar();
+		ChangeStar();			//スコアに応じて星を変更する。
 	}
 
 	if (m_timer >= 3.f) {
 		//次の星までのスコア。
 		m_font.Begin();			//描画開始。
 		wchar_t text6[64];														//テキストに使う配列。
-		swprintf_s(text6, L"%d", NexStarNum());						//テキストを指定。
+		swprintf_s(text6, L"%d", NexStarNum());									//テキストを指定。
 		m_positionFont.y -= 150.f;												//Y座標を指定。
 		m_font.Draw(text6, m_positionFont, m_colorFont, 0.0f, m_scaleFont);		//更新処理。
 		m_font.End();			//描画終了。
 	}
+
+	//todo 間に合わせ程度の仮。
+	if (m_timer >= 3.5f) {
+		//タイトルへ。
+		m_font.Begin();			//描画開始。
+		wchar_t text7[64];														//テキストに使う配列。
+		swprintf_s(text7, L"Bボタンでタイトルへ(きんじつこうかい)");				//テキストを指定。
+		m_font.Draw(text7, { 0.f,-300.f }, m_colorFont, 0.0f, m_scaleFont);		//更新処理。
+		m_font.End();			//描画終了。
+		m_deleteOKFlag = true;				//ゲームを終了することができるように。
+	}
+
 }

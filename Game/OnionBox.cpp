@@ -9,6 +9,13 @@ OnionBox::OnionBox()
 
 OnionBox::~OnionBox()
 {
+	if (m_skinModelRender != nullptr) {
+		DeleteGO(m_skinModelRender);
+	}
+	if (m_skinModelRenderCollidion != nullptr) {
+		DeleteGO(m_skinModelRenderCollidion);
+	}
+	DeleteGOs("onion");				//ã ÇÀÇ¨ÇÇ∑Ç◊Çƒè¡Ç∑ÅB
 }
 
 bool OnionBox::Start()

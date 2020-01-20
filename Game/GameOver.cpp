@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "GameOver.h"
-#include "Stage_1.h"
 #include "Player.h"
 #include "Timer.h"
 #include "OrderGenerations.h"
@@ -61,12 +60,6 @@ void GameOver::DeleteField()
 	if (m_orderGenerations != nullptr) {
 		DeleteGO(m_orderGenerations);
 	}
-
-	//Stage_1* m_starge_1 = nullptr;
-	//m_starge_1 = FindGO<Stage_1>("stage_1");
-	//if (m_starge_1 != nullptr) {
-	//	DeleteGO(m_starge_1);
-	//}
 }
 
 void GameOver::Update()

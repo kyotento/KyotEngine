@@ -34,6 +34,7 @@ private:
 	float m_timer = 0.f;					//タイマー。
 
 	bool m_changeStarFlag[m_starNum] = { false };			//星を変更したかどうか。
+	bool m_deleteOKFlag = false;							//ゲームを終了することができる状態か。
 
 	CVector3 m_positionSheet = CVector3::Zero();															//シートの座標。
 	CVector3 m_positionStar[m_starNum] = { CVector3::Zero(),CVector3::Zero(),CVector3::Zero() };			//星の座標。

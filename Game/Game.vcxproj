@@ -170,10 +170,8 @@
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="ShadowMap.cpp" />
     <ClCompile Include="SkinModelRender.cpp" />
+    <ClCompile Include="sound\CSound.cpp" />
     <ClCompile Include="sound\SoundEngine.cpp" />
-    <ClCompile Include="sound\SoundSource.cpp" />
-    <ClCompile Include="sound\WaveFile.cpp" />
-    <ClCompile Include="sound\WaveFileBank.cpp" />
     <ClCompile Include="SoupBase.cpp" />
     <ClCompile Include="SpBuffer.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -274,10 +272,8 @@
     <ClInclude Include="Score.h" />
     <ClInclude Include="ShadowMap.h" />
     <ClInclude Include="SkinModelRender.h" />
+    <ClInclude Include="sound\CSound.h" />
     <ClInclude Include="sound\SoundEngine.h" />
-    <ClInclude Include="sound\SoundSource.h" />
-    <ClInclude Include="sound\WaveFile.h" />
-    <ClInclude Include="sound\WaveFileBank.h" />
     <ClInclude Include="SoupBase.h" />
     <ClInclude Include="SpBuffer.h" />
     <ClInclude Include="Sprite.h" />

@@ -7,8 +7,16 @@ TomatoBox::TomatoBox()
 }
 
 
+
 TomatoBox::~TomatoBox()
 {
+	if (m_skinModelRender != nullptr) {
+		DeleteGO(m_skinModelRender);
+	}
+	if (m_skinModelRenderCollidion != nullptr) {
+		DeleteGO(m_skinModelRenderCollidion);
+	}
+	DeleteGOs("tomato");
 }
 
 bool TomatoBox::Start()
