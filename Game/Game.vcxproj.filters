@@ -124,9 +124,6 @@
     <Filter Include="Engine\graphics\skinModel">
       <UniqueIdentifier>{b4842a6e-8156-4b27-90d8-71976bee73b5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\graphics\sound">
-      <UniqueIdentifier>{44c0afb0-15f8-4581-948f-9b34ac7b7578}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Assets\sound">
       <UniqueIdentifier>{dc8c1a64-d141-49fc-8a94-cf39373065ec}</UniqueIdentifier>
     </Filter>

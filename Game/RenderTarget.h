@@ -63,13 +63,15 @@ public:
 	{
 		return &m_viewport;
 	}
+
 private:
-	ID3D11Texture2D*			m_renderTargetTex = nullptr;		//!<レンダリングターゲットとなるテクスチャ。
-	ID3D11RenderTargetView*		m_renderTargetView = nullptr;		//!<レンダーターゲットビュー。
-	ID3D11ShaderResourceView*	m_renderTargetSRV = nullptr;		//!<レンダリングターゲットのSRV
-	ID3D11Texture2D*			m_depthStencilTex = nullptr;		//!<デプスステンシルとなるテクスチャ。
-	ID3D11DepthStencilView*		m_depthStencilView = nullptr;		//!<デプスステンシルビュー。
-	D3D11_VIEWPORT				m_viewport;							//!<ビューポート。
+
+	ID3D11Texture2D*			m_renderTargetTex = nullptr;		//レンダリングターゲットとなるテクスチャ。
+	ID3D11RenderTargetView*		m_renderTargetView = nullptr;		//レンダーターゲットビュー。
+	ID3D11ShaderResourceView*	m_renderTargetSRV = nullptr;		//レンダリングターゲットのSRV
+	ID3D11Texture2D*			m_depthStencilTex = nullptr;		//デプスステンシルとなるテクスチャ。
+	ID3D11DepthStencilView*		m_depthStencilView = nullptr;		//デプスステンシルビュー。
+	D3D11_VIEWPORT				m_viewport;							//ビューポート。
 
 };
 

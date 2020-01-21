@@ -77,7 +77,6 @@ void GameOver::DeleteField()
 	}
 
 	//ポットを消す。
-	//Pot* pot = FindGO<Pot>("pot");
 	DeleteGOs("pot");
 
 }
@@ -100,5 +99,4 @@ void GameOver::Update()
 
 		DeleteGO(this);				//クラスを消す。
 	}
-
 }

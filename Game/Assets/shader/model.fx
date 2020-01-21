@@ -244,7 +244,6 @@ float4 PSMain( PSInput In ) : SV_Target0
 			}
 		}
 	}
-
 	
 	//@ŠÂ‹«Œõ‚ğ“–‚Ä‚éB
 	lig += float3(environmentpow);

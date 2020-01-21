@@ -125,14 +125,14 @@ void Result::Update()
 			m_stage_1 = FindGO<Stage_1>("stage_1");		//ステージ１のインスタンスを取得する。
 			DeleteGO(m_stage_1);						//ステージ１を消す。	
 
-			PlayerGenerations* playerGenerations = nullptr;						//プレイヤー生成クラス。
-			playerGenerations = FindGO<PlayerGenerations>("playergenrations");	//プレイヤー生成クラスのインスタンスを取得。
-			DeleteGO(playerGenerations);										//プレイヤー生成クラスを消す。
+			PlayerGenerations* playerGenerations = nullptr;							//プレイヤー生成クラス。
+			playerGenerations = FindGO<PlayerGenerations>("playergenrations");		//プレイヤー生成クラスのインスタンスを取得。
+			DeleteGO(playerGenerations);											//プレイヤー生成クラスを消す。
 
 			DeleteGOs("dishdirty");			//汚れたお皿を消す。
 
-			DeleteGO(m_score);			//スコアクラスを消す。
-			DeleteGO(this);				//このクラスを消す。
+			DeleteGO(m_score);				//スコアクラスを消す。
+			DeleteGO(this);					//このクラスを消す。
 		}
 	}
 

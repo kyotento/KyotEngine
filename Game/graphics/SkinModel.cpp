@@ -195,7 +195,7 @@ void SkinModel::Draw(EnRenderMode renderMode, CMatrix viewMatrix, CMatrix projMa
 	d3dDeviceContext->UpdateSubresource(m_cb, 0, nullptr, &vsCb, 0, 0);
 	//視点を設定。
 	m_directionLight.eyePos = g_camera3D.GetPosition();
-	//鏡面反射光の絞りを設定。
+	//鏡面反射光の絞りを設定。//各クラスで指定するように変更。
 	//m_directionLight.specPos = 2.f;
 	
 	//ライト用の定数バッファを更新。

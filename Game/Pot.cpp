@@ -172,13 +172,13 @@ void Pot::Danger2D()
 		//危険音。
 		m_sound = NewGO<Sound>(0, "sound");								//サウンドクラスを生成。
 		m_sound->Init(L"Assets/sound/soundEffect/danger.wav", true);	//初期化。
-		m_sound->SetVolume(0.5f);
+		m_sound->SetVolume(0.5f);										//素材の音が大きかったので音量を変更。
 		m_sound->Play();												//再生。
 	}
 	if (m_danger != nullptr) {							//危険マークが生成されているとき。
-		checkPos = m_position;		//ゲージの座標にお鍋の座標に代入。
-		checkPos.y += 100.f;		//Y軸を少し上げてやる。
-		checkPos.z -= 70.f;			//少し手前に。
+		checkPos = m_position;							//ゲージの座標にお鍋の座標に代入。
+		checkPos.y += 100.f;							//Y軸を少し上げてやる。
+		checkPos.z -= 70.f;								//少し手前に。
 		m_danger->SetPosition(checkPos);				//座標更新。
 	}
 }
@@ -187,17 +187,17 @@ void Pot::Danger2D()
 void Pot::Fire2D()
 {
 	if (m_fireFlag == false && m_dangerStartTimer > 10.f) {		//火事マークが生成されていない、且つタイマーが経過していた時。	
-		m_fire = NewGO<Fire>(0, "fire");				//画像を生成。
-		DeleteGO(m_danger);								//危険マークを消す。
-		m_danger = nullptr;								//危険マークのインスタンスを消す。
-		m_dangerFlag = false;							//生成されてないのでフラグを返す。
-		m_fireFlag = true;								//生成フラグを返す。
-		m_sound->Stop();								//危険音を止める。
+		m_fire = NewGO<Fire>(0, "fire");			//画像を生成。
+		DeleteGO(m_danger);							//危険マークを消す。
+		m_danger = nullptr;							//危険マークのインスタンスを消す。
+		m_dangerFlag = false;						//生成されてないのでフラグを返す。
+		m_fireFlag = true;							//生成フラグを返す。
+		m_sound->Stop();							//危険音を止める。
 	}
-	if (m_fire != nullptr) {							//火事マークが生成されているとき。
-		checkPos = m_position;		//ゲージの座標にお鍋の座標に代入。
-		checkPos.y += 100.f;		//Y軸を少し上げてやる。
-		checkPos.z -= 70.f;			//少し手前に。
+	if (m_fire != nullptr) {						//火事マークが生成されているとき。
+		checkPos = m_position;						//ゲージの座標にお鍋の座標に代入。
+		checkPos.y += 100.f;						//Y軸を少し上げてやる。
+		checkPos.z -= 70.f;							//少し手前に。
 		m_fire->SetPosition(checkPos);				//座標を更新。
 	}
 }
@@ -206,8 +206,8 @@ void Pot::Update()
 {
 	m_skinModelRender->SetPosition(m_position);		//座標を更新。
 	m_skinModelRender->SetRotation(m_rotation);		//回転を更新。
-	m_soupPos.x = m_position.x;		//鍋のX座標をスープのX座標に代入。
-	m_soupPos.z = m_position.z;		//鍋のZ座標をスープのZ座標に代入。
+	m_soupPos.x = m_position.x;						//鍋のX座標をスープのX座標に代入。
+	m_soupPos.z = m_position.z;						//鍋のZ座標をスープのZ座標に代入。
 
 	if (m_soupBase != nullptr) {						//スープが生成されていたら。
 		m_soupBase->SetPosition(m_soupPos);				//スープの座標を指定。
@@ -216,11 +216,11 @@ void Pot::Update()
 		m_gauge->SetPosition(m_gaugePos);				//ゲージの座標を指定。
 	}
 
-	if (m_putSoupFoods == Belongings::enTomato) {
-		m_potDishCuisine = CookingList::enTomatoSoup;
+	if (m_putSoupFoods == Belongings::enTomato) {			//スープがトマトのとき。
+		m_potDishCuisine = CookingList::enTomatoSoup;		//状態を変更。
 	}
-	if (m_putSoupFoods == Belongings::enOnion) {
-		m_potDishCuisine = CookingList::enOnionSoup;
+	if (m_putSoupFoods == Belongings::enOnion) {			//スープが玉ねぎのとき。
+		m_potDishCuisine = CookingList::enOnionSoup;		//状態を変更。
 	}
 
 	StateChange();										//状態変化。

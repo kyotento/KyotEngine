@@ -12,6 +12,13 @@ public:
 	void Render();
 	void RenderAfterPostEffect();
 
+	///// <summary>
+	///// ブレンドアニメーション。
+	///// </summary>
+	///// <param name="filePath">ファイルパス１</param>
+	///// <param name="filePath2"></param>
+	//void BlendAnimation(const wchar_t* filePath, const wchar_t* filePath2);
+
 	/// <summary>
 	/// 初期化。
 	/// </summary>
@@ -22,7 +29,10 @@ public:
 	/// <param name="vsmain">頂点シェーダー</param>
 	/// <param name="drawAfterPostEffect">2Dとして描画するかどうか</param>
 	/// <param name="SetShadowReciever">影をかけるかどうか</param>
-	/// drawAfterPostEffectをtrueにした場合、そのスキンモデルの回転は初期化してはならない(してもいいけど2Dとしては表示されない。)
+	/// <remarks>
+	/// drawAfterPostEffectをtrueにした場合、そのスキンモデルの回転は初期化してはならない
+	/// (してもいいけど2Dとしては表示されない。)
+	/// </remarks>
 	void Init(const wchar_t* filePath,
 		AnimationClip* animationClips = nullptr,
 		int numAnimationClips = 0,
