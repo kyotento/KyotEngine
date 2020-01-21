@@ -220,6 +220,17 @@ float4 PSMain( PSInput In ) : SV_Target0
 			lig += directionLight.color[i].xyz * pow(specPower, 2) * specPow;
 		}
 	}
+	//　環境光を当てる。
+	lig += float3(environmentpow);
+
+	float t = max(0.0f, dot(In.Normal * -1.0f, directionLight.direction[0]));
+
+	if (t < 0.3f) {
+		lig *= 0.9f;
+	}
+	else {
+		lig *= 1.5f;
+	}
 
 	if (isShadowReciever == 1) {	//シャドウレシーバー。
 	//LVP空間から見た時の最も手前の深度値をシャドウマップから取得する。
@@ -240,22 +251,12 @@ float4 PSMain( PSInput In ) : SV_Target0
 
 			if (zInLVP > zInShadowMap + 0.001f) {// + 0.001fしているのは、シャドウアクネを回避するため。
 				//影が落ちているので、光を弱くする
-				lig *= 0.4f;
+				lig *= 0.7f;
 			}
 		}
 	}
 	
-	//　環境光を当てる。
-	lig += float3(environmentpow);
-
-	float t = max(0.0f, dot(In.Normal * -1.0f, directionLight.direction[0]));
-
-	if (t < 0.3f) {
-		lig *= 0.9f;
-	}
-	else {
-		lig *= 1.5f;
-	}
+	
 
 	float4 finalColor = float4(0.0f, 0.0f, 0.0f, 1.0f);
 	finalColor.xyz = albedoColor.xyz * lig;

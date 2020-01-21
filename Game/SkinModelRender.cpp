@@ -76,3 +76,4 @@ void SkinModelRender::InitAnimation(AnimationClip* animationClips, int numAnimat
 		m_animation.Init(m_skinModel, m_animationClips, m_numAnimationClips);
 	}
 }
+

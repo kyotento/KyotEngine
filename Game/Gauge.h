@@ -59,6 +59,15 @@ public:
 	}
 
 	/// <summary>
+	/// ゲージの値を設定する。
+	/// </summary>
+	/// <param name="gaugeMax">ゲージが最大かどうかを指定する</param>
+	void SetGaugeMax(bool gaugeMax)
+	{
+		m_gaugeMax = gaugeMax;
+	}
+
+	/// <summary>
 	/// ゲージの拡大率を半分にする。
 	/// </summary>
 	void GaugeHalf()

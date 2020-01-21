@@ -45,6 +45,7 @@ void Pot::Soup()
 	if (m_potState == enTwo) {							//食べ物が二つ入っている状態。
 		m_soupPos.y += 25.f;							//食べ物が入ったように見せるためにY座標を上げる。
 		m_gauge->GaugeHalf();							//ゲージのスケールを半分にする。
+		m_gauge->SetGaugeMax(false);				
 		m_potState = enThree;							//食べ物が三つ入った状態にする。
 	}
 

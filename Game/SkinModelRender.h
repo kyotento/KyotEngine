@@ -12,13 +12,6 @@ public:
 	void Render();
 	void RenderAfterPostEffect();
 
-	///// <summary>
-	///// ブレンドアニメーション。
-	///// </summary>
-	///// <param name="filePath">ファイルパス１</param>
-	///// <param name="filePath2"></param>
-	//void BlendAnimation(const wchar_t* filePath, const wchar_t* filePath2);
-
 	/// <summary>
 	/// 初期化。
 	/// </summary>
@@ -135,4 +128,5 @@ private:
 	AnimationClip* m_animationClips = nullptr;				//アニメーションクリップ。
 
 	SkinModel m_skinModel;
+	SkinModel m_skinModel2;
 };
