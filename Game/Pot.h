@@ -101,5 +101,6 @@ private:
 	Check* m_check = nullptr;				//チェックマーク。
 	Danger* m_danger = nullptr;				//危険マーク。
 	Fire* m_fire = nullptr;					//火事マーク。
+	Sound* m_sound = nullptr;				//サウンド。
 
 };

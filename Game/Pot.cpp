@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Pot.h"
+#include "StartCountdown.h"
 
 namespace {
 	CVector3 checkPos;		//チェックマークの座標。
@@ -13,6 +14,17 @@ Pot::Pot()
 
 Pot::~Pot()
 {
+	if (m_skinModelRender != nullptr) {
+		DeleteGO(m_skinModelRender);			//スキンモデルを消す。
+		m_skinModelRender = nullptr;
+	}
+
+	if (m_gauge != nullptr) {
+		DeleteGO(m_gauge);				//ゲージを消す。
+		m_gauge = nullptr;
+	}
+
+	DeleteLikeSoup();
 }
 
 bool Pot::Start()
@@ -30,10 +42,10 @@ bool Pot::Start()
 //スープが投入されたときの処理。
 void Pot::Soup()
 {
-	if (m_potState == enTwo) {						//食べ物が二つ入っている状態。
-		m_soupPos.y += 25.f;						//食べ物が入ったように見せるためにY座標を上げる。
-		m_gauge->GaugeHalf();						//ゲージのスケールを半分にする。
-		m_potState = enThree;						//食べ物が三つ入った状態にする。
+	if (m_potState == enTwo) {							//食べ物が二つ入っている状態。
+		m_soupPos.y += 25.f;							//食べ物が入ったように見せるためにY座標を上げる。
+		m_gauge->GaugeHalf();							//ゲージのスケールを半分にする。
+		m_potState = enThree;							//食べ物が三つ入った状態にする。
 	}
 
 	if (m_potState == enOne) {							//食べ物が一つ入っている状態のとき。
@@ -44,16 +56,17 @@ void Pot::Soup()
 
 	if (m_potState == enZero) {							//ポットに何も入っていないとき。
 		m_soupBase = NewGO<SoupBase>(0, "soup");		//スープの部分を生成する。	
-		m_soupPos.x = m_position.x;		//鍋のX座標をスープのX座標に代入。
-		m_soupPos.z = m_position.z;		//鍋のZ座標をスープのZ座標に代入。
+		m_soupPos.x = m_position.x;						//鍋のX座標をスープのX座標に代入。
+		m_soupPos.z = m_position.z;						//鍋のZ座標をスープのZ座標に代入。
 		m_soupBase->SetPosition(m_soupPos);				//スープの座標を設定する。
 		m_soupBase->DecideTheSoupType(m_putSoupFoods);	//生成するスープを決める。
 		m_potState = enOne;								//ポットに食べ物が一つ入っている状態に。
+
 		m_gauge = NewGO<Gauge>(0, "gauge");				//ゲージを生成する。
-		m_gaugePos = m_position;		//ゲージの座標にお鍋の座標に代入。
-		m_gaugePos.x -= 50.f;			//左に寄せる。
-		m_gaugePos.y += 100.f;			//Y軸を少し上げてやる。
-		m_gaugePos.z -= 70.f;			//少し手前に。
+		m_gaugePos = m_position;						//ゲージの座標にお鍋の座標に代入。
+		m_gaugePos.x -= 50.f;							//左に寄せる。
+		m_gaugePos.y += 100.f;							//Y軸を少し上げてやる。
+		m_gaugePos.z -= 70.f;							//少し手前に。
 		m_gauge->SetPosition(m_gaugePos);				//ゲージの座標を指定。
 	}
 }
@@ -73,6 +86,7 @@ void Pot::DeleteLikeSoup()
 	}
 	if (m_danger != nullptr) {		//生成されていたら。
 		DeleteGO(m_danger);			//危険マークを消す。
+		m_sound->Stop();			//音を止める。
 		m_danger = nullptr;			//nullに。
 		m_dangerFlag = false;		//生成されていないのでfalseに変更する。
 	}
@@ -101,7 +115,7 @@ void Pot::StateChange()
 		m_gauge = nullptr;							//ゲージのインスタンスをnullに。
 		if (m_checkFlag == false) {					//チェックマークが生成されていないなら。
 			m_check = NewGO<Check>(0, "check");		//チェックマークを生成。		
-			m_check->SetPosition(checkPos);				//座標更新。
+			m_check->SetPosition(checkPos);			//座標更新。
 			m_checkFlag = true;						//チェック生成フラグをtrueに。
 		}
 		if (m_check != nullptr) {					//チェックマークのインスタンスが生成されているなr。
@@ -120,11 +134,14 @@ void Pot::StateChange()
 //ゲージの拡大処理。(お鍋がコンロの上にある時のみ呼ばれる)。
 void Pot::PotGaugeExpansion()
 {
-	if (m_gauge != nullptr) {							//ゲージが生成されていたら。
-		m_gauge->Expansion(10.f);						//ゲージの拡大処理。
-	}
-	if (m_check != nullptr || m_danger != nullptr) {
-		m_dangerStartTimer += 1.f / 60.f;		//todo　実際はgetFrameDeltaTime。
+	StartCountdown* startCountDown = FindGO<StartCountdown>("startcountdown");
+	if (startCountDown->GetGameStartFlag()) {			//ゲーム更新処理を開始していたら。
+		if (m_gauge != nullptr) {							//ゲージが生成されていたら。
+			m_gauge->Expansion(10.f);						//ゲージの拡大処理。
+		}
+		if (m_check != nullptr || m_danger != nullptr) {
+			m_dangerStartTimer += gametime().GetFrameDeltaTime();
+		}
 	}
 }
 
@@ -151,6 +168,12 @@ void Pot::Danger2D()
 		DeleteGO(m_check);								//チェックマークを消す。
 		m_check = nullptr;								//チェックマークのインスタンスを消す。
 		m_dangerFlag = true;							//生成フラグを返す。
+
+		//危険音。
+		m_sound = NewGO<Sound>(0, "sound");								//サウンドクラスを生成。
+		m_sound->Init(L"Assets/sound/soundEffect/danger.wav", true);	//初期化。
+		m_sound->SetVolume(0.5f);
+		m_sound->Play();												//再生。
 	}
 	if (m_danger != nullptr) {							//危険マークが生成されているとき。
 		checkPos = m_position;		//ゲージの座標にお鍋の座標に代入。
@@ -169,6 +192,7 @@ void Pot::Fire2D()
 		m_danger = nullptr;								//危険マークのインスタンスを消す。
 		m_dangerFlag = false;							//生成されてないのでフラグを返す。
 		m_fireFlag = true;								//生成フラグを返す。
+		m_sound->Stop();								//危険音を止める。
 	}
 	if (m_fire != nullptr) {							//火事マークが生成されているとき。
 		checkPos = m_position;		//ゲージの座標にお鍋の座標に代入。

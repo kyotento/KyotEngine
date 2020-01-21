@@ -80,17 +80,17 @@ void OrderGenerations::Move()
 				m_orderSheet[m_orderNum]->SetPosition(m_position[m_orderNum]);		//シートの座標を更新。
 		//	}
 
-			if (m_position[m_orderNum].x <= m_moveLimit[m_orderNum]) {	//座標が上限値に達した時。
-				if (m_cuisineDecision[m_orderNum] == false) {			//料理が決定していないとき。
+			if (m_position[m_orderNum].x <= m_moveLimit[m_orderNum]) {				//座標が上限値に達した時。
+				if (m_cuisineDecision[m_orderNum] == false) {						//料理が決定していないとき。
 					m_dishName[m_orderNum] = m_cookingList->OrderSetting();			//料理をランダムに決める。
 					m_cookingList->CookingInformations();							//料理の情報を格納。
 					m_foodType[m_orderNum] = m_cookingList->GetFoodType();			//料理に必要な食べ物の種類を取得。
-					m_cuisineDecision[m_orderNum] = true;				//料理が決定したのでフラグを返す。
+					m_cuisineDecision[m_orderNum] = true;							//料理が決定したのでフラグを返す。
 				}
 
-				FoodSheetGeneration(m_foodType[m_orderNum], m_orderNum);		//食べ物シートを生成する。
-				FoodSheetPosUpdate(m_orderNum);							//食べ物シートの座標更新処理。
-				m_timeLimitGauge[m_orderNum]->ChangeScale();			//ゲージの拡大処理。
+				FoodSheetGeneration(m_foodType[m_orderNum], m_orderNum);			//食べ物シートを生成する。
+				FoodSheetPosUpdate(m_orderNum);										//食べ物シートの座標更新処理。
+				m_timeLimitGauge[m_orderNum]->ChangeScale();						//ゲージの拡大処理。
 			}
 			
 			/// <summary>
@@ -111,7 +111,7 @@ void OrderGenerations::FoodSheetGeneration(int FoodTypeNum, int genenum)
 	m_foodSheetPosition[genenum].y = m_foodPosY[genenum];
 	m_foodSheetPosition[genenum].z = m_position[genenum].z;
 
-	if (m_foodSheetGenerationFlag[genenum] == false) {		//食べ物シートを生成していなかったら。
+	if (m_foodSheetGenerationFlag[genenum] == false) {			//食べ物シートを生成していなかったら。
 		m_foodSheetGenerations[genenum] = NewGO<FoodSheetGenerations>(0, "foodsheetgenerations");
 		m_foodSheetGenerations[genenum]->FoodSheetGeneration(FoodTypeNum);			//食べ物シートを生成。
 		m_foodSheetGenerations[genenum]->SetPosition(m_position[genenum]);			//生成されたシートの座標を指定してやる。
@@ -123,7 +123,7 @@ void OrderGenerations::FoodSheetGeneration(int FoodTypeNum, int genenum)
 		m_timeLimitGaugePosition[genenum].y += 20.f;								//少し上に。
 		m_timeLimitGauge[genenum]->SetPosition(m_timeLimitGaugePosition[genenum]);	//座標更新処理。
 
-		m_foodSheetGenerationFlag[genenum] = true;			//生成したのでフラグを返す。
+		m_foodSheetGenerationFlag[genenum] = true;				//生成したのでフラグを返す。
 	}
 }
 
@@ -311,6 +311,11 @@ void OrderGenerations::TimeLimitOrder(int genenum)
 			//スコアにペナルティを加算する。
 			m_score->AddScore(penalty);
 			m_score->AddPenalty(penalty);			//ペナルティを加算。
+
+			//失敗音を鳴らす。
+			Sound* sound = NewGO<Sound>(0, "sound");							//サウンドクラス。
+			sound->Init(L"Assets/sound/soundEffect/failure.wav", false);		//初期化。
+			sound->Play();														//再生。
 		}
 	}
 }

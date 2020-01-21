@@ -4,6 +4,7 @@
 #include "Timer.h"
 #include "OrderGenerations.h"
 #include "StartCountDown.h"
+#include "Pot.h"
 
 namespace {
 	float m_size_w = 900.f;
@@ -74,6 +75,11 @@ void GameOver::DeleteField()
 	if (m_startCountDown != nullptr) {
 		DeleteGO(m_startCountDown);
 	}
+
+	//ポットを消す。
+	//Pot* pot = FindGO<Pot>("pot");
+	DeleteGOs("pot");
+
 }
 
 void GameOver::Update()

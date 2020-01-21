@@ -879,5 +879,11 @@
     <Media Include="Assets\sound\soundEffect\offer.wav">
       <Filter>Assets\sound\soundEffect</Filter>
     </Media>
+    <Media Include="Assets\sound\soundEffect\danger.wav">
+      <Filter>Assets\sound\soundEffect</Filter>
+    </Media>
+    <Media Include="Assets\sound\soundEffect\failure.wav">
+      <Filter>Assets\sound\soundEffect</Filter>
+    </Media>
   </ItemGroup>
 </Project>

@@ -20,5 +20,8 @@ private:
 	Pad* m_pad = nullptr;						//コントローラPadクラス。
 	Game* m_game = nullptr;						//Gameクラス。
 
+	FontRender* m_fontRender = nullptr;			//フォント生成クラス。
+	FontRender* m_fontRender2 = nullptr;		//フォント生成クラス。
+
 };
 

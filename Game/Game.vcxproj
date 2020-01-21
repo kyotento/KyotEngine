@@ -383,8 +383,10 @@
     <Media Include="Assets\sound\BGM\title_overcooked.wav" />
     <Media Include="Assets\sound\soundEffect\cutting.wav" />
     <Media Include="Assets\sound\soundEffect\cuttings.wav" />
+    <Media Include="Assets\sound\soundEffect\danger.wav" />
     <Media Include="Assets\sound\soundEffect\decision3.wav" />
     <Media Include="Assets\sound\soundEffect\end.wav" />
+    <Media Include="Assets\sound\soundEffect\failure.wav" />
     <Media Include="Assets\sound\soundEffect\offer.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

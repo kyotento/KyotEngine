@@ -3,6 +3,7 @@
 #include "Stage_1.h"
 #include "PlayerGenerations.h"
 #include "Title.h"
+
 namespace {
 	int score = 0;							//取得したスコアを格納する。
 	int getStar = 0;						//獲得した星の数。
@@ -127,6 +128,8 @@ void Result::Update()
 			PlayerGenerations* playerGenerations = nullptr;						//プレイヤー生成クラス。
 			playerGenerations = FindGO<PlayerGenerations>("playergenrations");	//プレイヤー生成クラスのインスタンスを取得。
 			DeleteGO(playerGenerations);										//プレイヤー生成クラスを消す。
+
+			DeleteGOs("dishdirty");			//汚れたお皿を消す。
 
 			DeleteGO(m_score);			//スコアクラスを消す。
 			DeleteGO(this);				//このクラスを消す。
