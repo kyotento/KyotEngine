@@ -67,5 +67,4 @@ void DishHold::Update()
 	{
 		m_dishDirty = nullptr;
 	}
-
 }
