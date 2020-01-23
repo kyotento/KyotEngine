@@ -23,6 +23,11 @@ public:
 	void Magnification(float time, float numberOfTimes);
 
 	/// <summary>
+	/// ゲージの拡大率に応じてフラグを返す。
+	/// </summary>
+	void ChangeGaugeMax();
+
+	/// <summary>
 	/// ゲージのX軸拡大率。
 	/// </summary>
 	/// <returns>拡大率X軸</returns>

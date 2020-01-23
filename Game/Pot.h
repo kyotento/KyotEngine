@@ -34,11 +34,6 @@ public:
 	void DeleteLikeSoup();
 
 	/// <summary>
-	/// 画像の座標更新関数。
-	/// </summary>
-	void Vector2DUpdate();
-
-	/// <summary>
 	/// 危険マーク2D描画処理。
 	/// </summary>
 	void Danger2D();
@@ -47,6 +42,16 @@ public:
 	/// 火事マーク2D描画処理。
 	/// </summary>
 	void Fire2D();
+
+	/// <summary>
+	/// ゲージの座標更新処理。
+	/// </summary>
+	void GeugePosUpdate();
+
+	/// <summary>
+	/// お鍋に入っているお皿に載る予定の料理変更する。
+	/// </summary>
+	void ChangeCuisine();
 
 	/// <summary>
 	/// お皿に入っている食べ物の種類を設定する。
@@ -93,7 +98,6 @@ private:
 
 	CVector3 m_soupPos = CVector3::Zero();			//スープの座標。
 	CVector3 m_gaugePos = CVector3::Zero();			//ゲージの座標。
-
 
 	SoupBase* m_soupBase = nullptr;			//スープ部分。
 	Gauge* m_gauge = nullptr;				//ゲージ。

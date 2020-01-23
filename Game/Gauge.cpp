@@ -71,12 +71,10 @@ void Gauge::Magnification(float time, float numberOfTimes)
 	}
 }
 
-void Gauge::Update()
+// ゲージの拡大率に応じてフラグを返す。
+void Gauge::ChangeGaugeMax()
 {
-	CVector3 oldPosition = m_position;
-	m_skinModelRenderGauge->SetPosition(m_position);	//ゲージの座標を更新。
-
-	if (m_gaugeMax == false && m_x >= 1.f)		
+	if (m_gaugeMax == false && m_x >= 1.f)
 	{
 		m_gaugeMax = true;
 	}
@@ -85,6 +83,14 @@ void Gauge::Update()
 	{
 		m_gaugeMax = false;
 	}
+}
+
+void Gauge::Update()
+{
+	CVector3 oldPosition = m_position;
+	m_skinModelRenderGauge->SetPosition(m_position);	//ゲージの座標を更新。
+
+	ChangeGaugeMax();				// ゲージの拡大率に応じてフラグを返す。
 
 #ifdef GAUGE_TEST
 

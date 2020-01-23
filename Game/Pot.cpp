@@ -3,6 +3,8 @@
 #include "StartCountdown.h"
 
 namespace {
+	float gaugeExpantionTime = 10.f;
+
 	CVector3 checkPos;		//チェックマークの座標。
 }
 
@@ -15,16 +17,16 @@ Pot::Pot()
 Pot::~Pot()
 {
 	if (m_skinModelRender != nullptr) {
-		DeleteGO(m_skinModelRender);			//スキンモデルを消す。
+		DeleteGO(m_skinModelRender);		//スキンモデルを消す。
 		m_skinModelRender = nullptr;
 	}
 
 	if (m_gauge != nullptr) {
-		DeleteGO(m_gauge);				//ゲージを消す。
+		DeleteGO(m_gauge);					//ゲージを消す。
 		m_gauge = nullptr;
 	}
 
-	DeleteLikeSoup();
+	DeleteLikeSoup();						//スープを消す処理。
 }
 
 bool Pot::Start()
@@ -42,20 +44,23 @@ bool Pot::Start()
 //スープが投入されたときの処理。
 void Pot::Soup()
 {
-	if (m_potState == enTwo) {							//食べ物が二つ入っている状態。
+	//食べ物が二つ入っている状態。
+	if (m_potState == enTwo) {							
 		m_soupPos.y += 25.f;							//食べ物が入ったように見せるためにY座標を上げる。
 		m_gauge->GaugeHalf();							//ゲージのスケールを半分にする。
 		m_gauge->SetGaugeMax(false);				
 		m_potState = enThree;							//食べ物が三つ入った状態にする。
 	}
 
-	if (m_potState == enOne) {							//食べ物が一つ入っている状態のとき。
+	//食べ物が一つ入っている状態のとき。
+	if (m_potState == enOne) {							
 		m_soupPos.y += 25.f;							//食べ物が入ったように見せるためにY座標を上げる。
 		m_potState = enTwo;								//ポットに食べ物が二つ入っている状態。
 		m_gauge->GaugeHalf();							//ゲージのスケールを半分にする。
 	}
 
-	if (m_potState == enZero) {							//ポットに何も入っていないとき。
+	//ポットに何も入っていないとき。
+	if (m_potState == enZero) {							
 		m_soupBase = NewGO<SoupBase>(0, "soup");		//スープの部分を生成する。	
 		m_soupPos.x = m_position.x;						//鍋のX座標をスープのX座標に代入。
 		m_soupPos.z = m_position.z;						//鍋のZ座標をスープのZ座標に代入。
@@ -99,7 +104,6 @@ void Pot::DeleteLikeSoup()
 
 	m_checkFlag = false;			//チェックマークフラグをfalseに。
 	m_dangerStartTimer = 0.f;		//タイマーをリセット。
-
 }
 
 //状態変化。
@@ -136,25 +140,14 @@ void Pot::StateChange()
 void Pot::PotGaugeExpansion()
 {
 	StartCountdown* startCountDown = FindGO<StartCountdown>("startcountdown");
-	if (startCountDown->GetGameStartFlag()) {			//ゲーム更新処理を開始していたら。
+	if (startCountDown->GetGameStartFlag()) {				//ゲーム更新処理を開始していたら。
 		if (m_gauge != nullptr) {							//ゲージが生成されていたら。
-			m_gauge->Expansion(10.f);						//ゲージの拡大処理。
+			m_gauge->Expansion(gaugeExpantionTime);			//ゲージの拡大処理。
 		}
 		if (m_check != nullptr || m_danger != nullptr) {
-			m_dangerStartTimer += gametime().GetFrameDeltaTime();
+			m_dangerStartTimer += gametime().GetFrameDeltaTime();		//タイマーを更新。
 		}
 	}
-}
-
-//2Dの座標更新関数。
-void Pot::Vector2DUpdate()
-{
-	//ゲージの座標更新。
-	m_gaugePos = m_position;		//ゲージの座標にお鍋の座標に代入。
-	m_gaugePos.x -= 50.f;			//左に寄せる。
-	m_gaugePos.y += 100.f;			//Y軸を少し上げてやる。
-	m_gaugePos.z -= 70.f;			//少し手前に。
-
 }
 
 //危険マーク描画処理。
@@ -203,8 +196,15 @@ void Pot::Fire2D()
 	}
 }
 
-void Pot::Update()
+//ゲージの座標更新処理。
+void Pot::GeugePosUpdate()
 {
+	//ゲージの座標更新。
+	m_gaugePos = m_position;		//ゲージの座標にお鍋の座標に代入。
+	m_gaugePos.x -= 50.f;			//左に寄せる。
+	m_gaugePos.y += 100.f;			//Y軸を少し上げてやる。
+	m_gaugePos.z -= 70.f;			//少し手前に。
+
 	m_skinModelRender->SetPosition(m_position);		//座標を更新。
 	m_skinModelRender->SetRotation(m_rotation);		//回転を更新。
 	m_soupPos.x = m_position.x;						//鍋のX座標をスープのX座標に代入。
@@ -216,16 +216,24 @@ void Pot::Update()
 	if (m_gauge != nullptr) {							//ゲージが生成されていたら。
 		m_gauge->SetPosition(m_gaugePos);				//ゲージの座標を指定。
 	}
+}
 
+// お鍋に入っているお皿に載る予定の料理変更する。
+void Pot::ChangeCuisine()
+{
 	if (m_putSoupFoods == Belongings::enTomato) {			//スープがトマトのとき。
 		m_potDishCuisine = CookingList::enTomatoSoup;		//状態を変更。
 	}
 	if (m_putSoupFoods == Belongings::enOnion) {			//スープが玉ねぎのとき。
 		m_potDishCuisine = CookingList::enOnionSoup;		//状態を変更。
 	}
+}
 
-	StateChange();										//状態変化。
-	Vector2DUpdate();									//2Dの座標更新。
-	Danger2D();											//危険マーク描画処理。
-	Fire2D();											//火事マーク描画処理。
+void Pot::Update()
+{
+	GeugePosUpdate();			//ゲージの座標更新処理。
+	ChangeCuisine();			//お鍋に入っているお皿に載る予定の料理変更する。		
+	StateChange();				//状態変化。
+	Danger2D();					//危険マーク描画処理。
+	Fire2D();					//火事マーク描画処理。
 }

@@ -24,5 +24,4 @@ bool Fire::Start()
 void Fire::Update()
 {
 	m_skinModelRender->SetPosition(m_position);
-
 }
