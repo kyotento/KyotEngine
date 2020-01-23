@@ -17,20 +17,6 @@ Gauge::~Gauge()
 
 bool Gauge::Start()
 {
-	////ゲージ基盤。
-	//m_spriteRender = NewGO<SpriteRender>(3, "sprite");
-	//m_spriteRender->Init(L"Assets/sprite/gauge_sheet.dds", 72, 18, true);
-	//m_spriteRender->SetPosition(m_position);
-	//m_spriteRender->SetScale({1.f,1.f,1.f});
-	//m_spriteRender->SetPivot(m_pivot);
-
-	////ゲージ。
-	//m_spriteRenderGauge = NewGO<SpriteRender>(2, "sprite");
-	//m_spriteRenderGauge->Init(L"Assets/sprite/gauge.dds", 66, 16, true);
-	//m_spriteRenderGauge->SetPosition(m_position);
-	//m_spriteRenderGauge->SetScale({ m_x,1.f,1.f });
-	//m_spriteRenderGauge->SetPivot(m_pivot);
-
 #ifdef GAUGE_TEST
 
 	////ゲージの基盤。
@@ -40,6 +26,7 @@ bool Gauge::Start()
 	m_skinModelRender->SetScale({ 1.f,1.f,1.f });
 
 #endif
+
 	//ゲージ。
 	m_skinModelRenderGauge = NewGO<SkinModelRender>(2, "skinModel");
 	m_skinModelRenderGauge->Init(L"Assets/modelData/2D/Gauge/Gauge.cmo", nullptr, 0, "PSMain", "VSMain", true, false);
@@ -87,11 +74,6 @@ void Gauge::Magnification(float time, float numberOfTimes)
 void Gauge::Update()
 {
 	CVector3 oldPosition = m_position;
-#ifdef GAUGE_TEST
-
-	m_skinModelRender->SetPosition(m_position);			//座標を更新。
-
-#endif
 	m_skinModelRenderGauge->SetPosition(m_position);	//ゲージの座標を更新。
 
 	if (m_gaugeMax == false && m_x >= 1.f)		
@@ -103,4 +85,10 @@ void Gauge::Update()
 	{
 		m_gaugeMax = false;
 	}
+
+#ifdef GAUGE_TEST
+
+	m_skinModelRender->SetPosition(m_position);			//座標を更新。
+
+#endif
 }

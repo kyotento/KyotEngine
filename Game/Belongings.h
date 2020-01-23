@@ -8,7 +8,6 @@
 #include "CookingList.h"
 
 class Kitchen;
-
 class Belongings : public StageObject
 {
 public:
@@ -43,10 +42,25 @@ public:
 	/// <param name="belongings">置いてある持てるもの</param>
 	void SetSoupBase(Belongings* puttingBelongings);
 
+	/// <summary>
+	/// お鍋に入っている食べ物の種類を検索する。
+	/// </summary>
+	/// <param name="pot">検索をかけるお鍋</param>
+	/// <returns>お鍋に入っている食べ物の種類</returns>
 	int GetPotFoosType(Belongings* pot);
 
+	/// <summary>
+	/// お鍋に入っている盛りつける料理を検索。
+	/// </summary>
+	/// <param name="pot">検索をかけるお鍋</param>
+	/// <returns>お鍋に入っている料理</returns>
 	int GetGetPotDishCuisine(Belongings* pot);
 
+	/// <summary>
+	/// お鍋に入れる食べ物の種類を設定する。
+	/// </summary>
+	/// <param name="pot">検索をかけるお鍋</param>
+	/// <param name="foodType">お鍋に入れる食べ物の種類</param>
 	void SetPotFoodType(Belongings* pot,int foodType);
 
 	/// <summary>
@@ -56,7 +70,7 @@ public:
 	void DeleteSoup(Belongings* belongings);
 
 	/// <summary>
-	/// ポットのゲージ拡大処理。
+	/// お鍋のゲージ拡大処理。
 	/// </summary>
 	/// <param name="belongings">持てるもの(鍋)</param>
 	void PotGaugeExpansion(Belongings* belongings);
@@ -208,9 +222,6 @@ protected:
 	Check* m_check = nullptr;
 
 private:
-
-
-
 
 };
 

@@ -199,8 +199,8 @@ public:
 
 protected:
 
-	int userIndexNum = 0;									//当たっているインデックスを代入。
-	int m_controllerNumber = 0;								//todo 仮　プレイヤー１のコントローラー番号。
+	int m_userIndexNum = 0;									//当たっているインデックスを代入。
+	int m_controllerNumber = 0;								//プレイヤーのコントローラー番号。(外部から設定する)。
 
 	bool m_toHave = false;									//何かを持っているかどうか。
 	bool m_knifeflag = false;								//ナイフがNewされたかどうか。
@@ -243,9 +243,8 @@ protected:
 	OnionBox* m_onionBox = nullptr;				//玉ねぎの箱。
 	Knife* m_knife = nullptr;					//ナイフ。
 	Skeleton* m_skelton = nullptr;				//サンズ(スケルトン)。
-	Belongings* m_belongings = nullptr;			//持つことができるもの。
+	Belongings* m_belongings = nullptr;			//持つことができるもの。(持ったものを一時的に保持する)。
 	Belongings* m_cacth = nullptr;				//物を置くことのできるオブジェクトに乗ってある、持つことのできるオブジェクトを検索したものを格納するためのもの。
-	Belongings* m_putSoup = nullptr;
 	Tomato* m_tomato = nullptr;					//トマト。
 	ObjectAbove* m_objectAbove = nullptr;		//物を置くことができるオブジェクト。
 	Gauge* m_gauge = nullptr;					//ゲージ。
@@ -254,13 +253,10 @@ protected:
 
 	Sound* m_cuttingSound = nullptr;			//食べ物を切る音。
 
-
 private:
 
+	//画像テスト用。
 	float m_x = 1.f;
-
 	CVector3 m_testScale = CVector3::One();
-
-
 };
 

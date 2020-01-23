@@ -197,7 +197,7 @@ PSInput VSMainSkin( VSInputNmTxWeights In )
 //--------------------------------------------------------------------------------------
 float4 PSMain( PSInput In ) : SV_Target0
 {
-	float4 albedoColor = g_albedoTexture.Sample(g_sampler, In.TexCoord);
+	float4 albedoColor = g_albedoTexture.Sample(g_sampler, In.TexCoord); //todo In.TexCodeがテクスチャのUV値。CBufferを使って送る。
 	float3 lig = 0.0f;
 
 		//鏡面反射光。

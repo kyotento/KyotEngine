@@ -3,6 +3,10 @@
 #include "Pot.h" 
 #include "Dish.h"
 
+namespace {
+	float cleckDeleteTiming = 0.5f;			//クリックアイコンが生成されてから消えるまでの時間。
+}
+
 Belongings::Belongings()
 {
 
@@ -11,16 +15,15 @@ Belongings::Belongings()
 
 Belongings::~Belongings()
 {
-	if (m_skinModelRender != nullptr) {
-		DeleteGO(m_skinModelRender);			//スキンモデルを消す。
-		m_skinModelRender = nullptr;
+	//モデルが衛星されていないとき処理を行わない。
+	if (m_skinModelRender == nullptr) {
+		return;
 	}
 
-	if (m_gauge != nullptr) {
-		DeleteGO(m_gauge);				//ゲージを消す。
-		m_gauge = nullptr;
-	}
+	DeleteGO(m_skinModelRender);			//スキンモデルを消す。
+	m_skinModelRender = nullptr;
 
+	DeleteGauge();
 }
 
 bool Belongings::Start()
@@ -42,26 +45,28 @@ void Belongings::DeleteSoup(Belongings* belongings)
 	pot->DeleteLikeSoup();
 }
 
+// お鍋に入っている食べ物の種類を検索する。
 int Belongings::GetPotFoosType(Belongings* powt)
 {
 	Pot* pot = (Pot*)powt;
-
 	return	pot->GetPutSoupFoods();
 }
 
+// お鍋に入っている盛りつける料理を検索。
 int Belongings::GetGetPotDishCuisine(Belongings* powt)
 {
 	Pot* pot = (Pot*)powt;
-	
 	return pot->GetPotDishCuisine();
 }
 
-void Belongings::SetPotFoodType(Belongings* powt, int fooType)
+// お鍋に入れる食べ物の種類を設定する。
+void Belongings::SetPotFoodType(Belongings* powt, int foodType)
 {
 	Pot* pot = (Pot*)powt;
-	pot->SetPutSoupFoods(fooType);
+	pot->SetPutSoupFoods(foodType);
 }
 
+// お鍋のゲージ拡大処理。
 void Belongings::PotGaugeExpansion(Belongings* belongings)
 {
 	Pot* pot = (Pot*)belongings;
@@ -88,9 +93,9 @@ void Belongings::GaugeGeneration(bool enlargedDivision, float time, float number
 	if (m_GaugeGenerationFlag == false) {			//ゲージが生成されていなければ。
 		m_gauge = NewGO<Gauge>(0, "gauge");			//ゲージを生成する。
 		m_gaugePos = m_position;					//ゲージの座標にモデルの座標を代入。
-		m_gaugePos.x -= 50.f;						//左に寄せる。
-		m_gaugePos.y += 100.f;						//Y軸を少し上げてやる。
-		m_gaugePos.z -= 70.f;						//少し手前に寄せる。	
+		m_gaugePos.x -= 50.f;						
+		m_gaugePos.y += 100.f;						
+		m_gaugePos.z -= 70.f;							
 		m_gauge->SetPosition(m_gaugePos);			//ゲージの座標を更新。
 		m_GaugeGenerationFlag = true;				//ゲージが生成されたのでフラグを返す。
 	}
@@ -118,9 +123,9 @@ void Belongings::GaugeGeneration(bool enlargedDivision, float time, float number
 		if (checkGeneration) {						//ちぇっくまーくを生成する処理のとき。
 			m_check = NewGO<Check>(0, "check");		//チェックマークを生成する。
 			m_gaugePos = m_position;
-			m_gaugePos.y += 100.f;			//Y軸を少し上げてやる。
+			m_gaugePos.y += 100.f;			
 			m_gaugePos.z -= 70.f;
-			m_check->SetPosition(m_gaugePos);
+			m_check->SetPosition(m_gaugePos);		//座標更新。
 		}
 	}
 }
@@ -131,30 +136,35 @@ void Belongings::GaugePosUpdate()
 	if (m_gauge != nullptr)
 	{
 		m_gaugePos = m_position;
-		m_gaugePos.x -= 50.f;			//左に寄せる。
-		m_gaugePos.y += 100.f;			//Y軸を少し上げてやる。
+		m_gaugePos.x -= 50.f;			
+		m_gaugePos.y += 100.f;			
 		m_gaugePos.z -= 70.f;
-		m_gauge->SetPosition(m_gaugePos);
+		m_gauge->SetPosition(m_gaugePos);			//座標更新。
 	}
 
 	if (m_check != nullptr) {
 		m_gaugePos = m_position;
-		m_gaugePos.y += 100.f;			//Y軸を少し上げてやる。
+		m_gaugePos.y += 100.f;			
 		m_gaugePos.z -= 70.f;
-		m_check->SetPosition(m_gaugePos);
-		m_checkDeleteTimer += 1.f / 60.f;
+		m_check->SetPosition(m_gaugePos);							//座標更新。
+		m_checkDeleteTimer += gametime().GetFrameDeltaTime();		//タイマーを更新。
 
-		if (m_checkDeleteTimer >= 0.5f) {
-			DeleteGO(m_check);
+		if (m_checkDeleteTimer >= cleckDeleteTiming) {				//一定時間経過した時。
+			DeleteGO(m_check);			//アイコンを消す。
 			m_check = nullptr;
 		}
 	}
 }
 
+//ゲージのを消す処理。
 void Belongings::DeleteGauge()
 {
-	DeleteGO(m_gauge);
-	DeleteGO(m_check);
+	if (m_gauge != nullptr) {
+		DeleteGO(m_gauge);
+	}
+	if (m_check != nullptr) {
+		DeleteGO(m_check);
+	}
 }
 
 //お皿に載っている料理を指定する。

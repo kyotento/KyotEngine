@@ -14,13 +14,14 @@ bool Game::Start()
 {
 	m_title = NewGO<Title>(0, "title");			//タイトルを生成する。
 	camera2d.SetUpdateCameraMatrix(0);			//2Dカメラを平行投影に。
+
 	return true;
 }
-
 
 void Game::Update()
 {
 	//todo 中でやってることは仮。
+	//実際はステージセレクト画面へ。
 	if (m_titleDeleteFlag)			//タイトルが消えた時。
 	{
 		m_startCountDown = NewGO<StartCountdown>(0, "startcountdown");					//ゲーム開始前の処理。

@@ -81,12 +81,6 @@ protected:
 
 	PhysicsStaticObject m_physicsStaticObject;					//静的物理オブジェクト。
 											
-
 private:
-
-
-
-
-
 };
 
