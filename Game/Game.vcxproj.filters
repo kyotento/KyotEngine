@@ -133,6 +133,24 @@
     <Filter Include="Assets\sound\soundEffect">
       <UniqueIdentifier>{e4ab1d4f-90bd-460c-a583-26c680848952}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\2D\Fade">
+      <UniqueIdentifier>{1eb64cc7-5905-4d17-bfa9-e2067cb65378}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\sprite\fade">
+      <UniqueIdentifier>{04b516ea-72cc-4ba8-89f3-df6384ce1d4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Field\StageSelect">
+      <UniqueIdentifier>{f43382f7-b325-4a31-b716-c4e241095886}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\modelData\player">
+      <UniqueIdentifier>{46f4fe83-0b65-4bb8-9f62-5867c4b25e96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\modelData\StageSelect">
+      <UniqueIdentifier>{6c676af3-ee0f-4525-a286-79fb12cb7774}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\modelData\Belongings">
+      <UniqueIdentifier>{2a635d39-ef85-40e3-ae98-bd2e03af87f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -232,9 +250,6 @@
     </ClCompile>
     <ClCompile Include="StageObject.cpp">
       <Filter>Game\Field\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="StageSelect.cpp">
-      <Filter>Game\Field</Filter>
     </ClCompile>
     <ClCompile Include="physics\PhysicsStaticObject.cpp">
       <Filter>Engine\physics</Filter>
@@ -390,6 +405,15 @@
     <ClCompile Include="sound\CSound.cpp">
       <Filter>Engine\sound</Filter>
     </ClCompile>
+    <ClCompile Include="Fade.cpp">
+      <Filter>Game\2D\Fade</Filter>
+    </ClCompile>
+    <ClCompile Include="StageSelect.cpp">
+      <Filter>Game\Field\StageSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="Flag.cpp">
+      <Filter>Game\Field\StageSelect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -509,9 +533,6 @@
     </ClInclude>
     <ClInclude Include="Primitive.h">
       <Filter>Engine\physics</Filter>
-    </ClInclude>
-    <ClInclude Include="StageSelect.h">
-      <Filter>Game\Field</Filter>
     </ClInclude>
     <ClInclude Include="CIndexBuffer.h">
       <Filter>Engine\physics</Filter>
@@ -676,12 +697,18 @@
     <ClInclude Include="sound\SoundEngine.h">
       <Filter>Engine\sound</Filter>
     </ClInclude>
+    <ClInclude Include="Fade.h">
+      <Filter>Game\2D\Fade</Filter>
+    </ClInclude>
+    <ClInclude Include="StageSelect.h">
+      <Filter>Game\Field\StageSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="Flag.h">
+      <Filter>Game\Field\StageSelect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Chef\chef_1.FBX">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Desk\Desk.FBX">
@@ -691,9 +718,6 @@
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\DustBox\DustBox.FBX">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Chef\chef_2.FBX">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\cutting_board\cutting_board.FBX">
@@ -723,22 +747,10 @@
     <MeshContentTask Include="Assets\modelData\Gas_stove\gas_stove.FBX">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Food\Tomato\Tomato.FBX">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Knife\Knife.FBX">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Food\Onion\onion.FBX">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\cutting_board\cutting_desk.FBX">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Food\Tomato\TomatoCutting.FBX">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Pot\Pot.FBX">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Pot\SoupBase\tomato\soupBase_tomato.FBX">
@@ -747,19 +759,10 @@
     <MeshContentTask Include="Assets\modelData\Pot\SoupBase\onion\soupBase_onion.FBX">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Dish\Dish.FBX">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Cuisine\tomato_soup.FBX">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Cuisine\onion_soup.FBX">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Dish\DirtyDish.FBX">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Food\Onion\CuttingOnion.FBX">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\karikkari.FBX">
@@ -779,6 +782,39 @@
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\2D\Danger\danger.FBX">
       <Filter>Assets\modelData\2D</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Chef\chef_2.FBX">
+      <Filter>Assets\modelData\player</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Chef\chef_1.FBX">
+      <Filter>Assets\modelData\player</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Flag\Flag.FBX">
+      <Filter>Assets\modelData\StageSelect</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Food\Tomato\Tomato.FBX">
+      <Filter>Assets\modelData\Belongings</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Pot\Pot.FBX">
+      <Filter>Assets\modelData\Belongings</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Food\Onion\onion.FBX">
+      <Filter>Assets\modelData\Belongings</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Dish\DirtyDish.FBX">
+      <Filter>Assets\modelData\Belongings</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Dish\Dish.FBX">
+      <Filter>Assets\modelData\Belongings</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Food\Tomato\TomatoCutting.FBX">
+      <Filter>Assets\modelData\Belongings</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Food\Onion\CuttingOnion.FBX">
+      <Filter>Assets\modelData\Belongings</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\bus\bus.FBX">
+      <Filter>Assets\modelData\StageSelect</Filter>
     </MeshContentTask>
   </ItemGroup>
   <ItemGroup>
@@ -845,9 +881,18 @@
     <ImageContentTask Include="Assets\sprite\end\TimeUp.png">
       <Filter>Assets\sprite\end</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\fade\fadeCover.png">
+      <Filter>Assets\sprite\fade</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\fade\fadePunching.png">
+      <Filter>Assets\sprite\fade</Filter>
+    </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\level\stage_1.tkl">
+      <Filter>Assets\level</Filter>
+    </None>
+    <None Include="Assets\level\StageSelect.tkl">
       <Filter>Assets\level</Filter>
     </None>
   </ItemGroup>

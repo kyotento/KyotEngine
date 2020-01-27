@@ -114,7 +114,9 @@
     <ClCompile Include="DustBox.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Belongings.cpp" />
+    <ClCompile Include="Fade.cpp" />
     <ClCompile Include="Fire.cpp" />
+    <ClCompile Include="Flag.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FontRender.cpp" />
     <ClCompile Include="FoodBox.cpp" />
@@ -211,7 +213,9 @@
     <ClInclude Include="DustBox.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Belongings.h" />
+    <ClInclude Include="Fade.h" />
     <ClInclude Include="Fire.h" />
+    <ClInclude Include="Flag.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FontRender.h" />
     <ClInclude Include="FoodBox.h" />
@@ -298,6 +302,7 @@
     <MeshContentTask Include="Assets\modelData\2D\Fire\fire.FBX" />
     <MeshContentTask Include="Assets\modelData\2D\Gauge\Gauge.FBX" />
     <MeshContentTask Include="Assets\modelData\2D\Gauge\GaugeSheet.FBX" />
+    <MeshContentTask Include="Assets\modelData\bus\bus.FBX" />
     <MeshContentTask Include="Assets\modelData\Chef\chef_1.FBX" />
     <MeshContentTask Include="Assets\modelData\Chef\chef_2.FBX" />
     <MeshContentTask Include="Assets\modelData\ColidionBox\collidionBox.FBX" />
@@ -312,6 +317,7 @@
     <MeshContentTask Include="Assets\modelData\Dish\DirtyDish.FBX" />
     <MeshContentTask Include="Assets\modelData\Dish\Dish.FBX" />
     <MeshContentTask Include="Assets\modelData\DustBox\DustBox.FBX" />
+    <MeshContentTask Include="Assets\modelData\Flag\Flag.FBX" />
     <MeshContentTask Include="Assets\modelData\FoodBox\Onion\OnionBox.FBX" />
     <MeshContentTask Include="Assets\modelData\FoodBox\Tomato\TomatoBox.FBX" />
     <MeshContentTask Include="Assets\modelData\Food\Onion\CuttingOnion.FBX" />
@@ -335,6 +341,7 @@
     <ImageContentTask Include="Assets\sprite\Title.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\level\StageSelect.tkl" />
     <None Include="Assets\level\stage_1.tkl" />
   </ItemGroup>
   <ItemGroup>
@@ -388,6 +395,10 @@
     <Media Include="Assets\sound\soundEffect\end.wav" />
     <Media Include="Assets\sound\soundEffect\failure.wav" />
     <Media Include="Assets\sound\soundEffect\offer.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\fade\fadeCover.png" />
+    <ImageContentTask Include="Assets\sprite\fade\fadePunching.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

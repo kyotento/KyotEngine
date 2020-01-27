@@ -25,5 +25,4 @@ bool CuttingBoard::Start()
 void CuttingBoard::Update()
 {
 
-
 }

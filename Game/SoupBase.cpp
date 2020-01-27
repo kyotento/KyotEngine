@@ -35,7 +35,6 @@ void SoupBase::DecideTheSoupType(int FoodType)
 
 void SoupBase::Update()
 {
-
 	m_skinModelRender->SetPosition(m_position);
 	m_skinModelRender->SetRotation(m_rotation);
 }

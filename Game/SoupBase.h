@@ -28,7 +28,5 @@ public:
 
 private:
 
-//	CVector3 m_position = CVector3::Zero();		//ç¿ïWÅB
-
 };
 
