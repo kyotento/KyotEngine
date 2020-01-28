@@ -52,15 +52,18 @@ void Timer::UnitChange()
 
 void Timer::Update()
 {
-	if (m_startCountDown->GetGameStartFlag()) {					////ゲーム更新処理を開始していたら。
-		m_timer -= gametime().GetFrameDeltaTime();				//時間経過。
-		UnitChange();											//00:00と表示するための計算。
-
-		if (m_timer <= 0.f) {			//時間制限が来たとき。
-			m_startCountDown->SetGameStartFlag(false);			//ゲームの更新処理を終了する。
-			m_gameOver = NewGO<GameOver>(0, "gameover");		//ゲームを終了する。
-		}
+	if (!m_startCountDown->GetGameStartFlag()) {					////ゲーム更新処理を開始していたら。
+		return;
 	}
+
+	m_timer -= gametime().GetFrameDeltaTime();				//時間経過。
+	UnitChange();											//00:00と表示するための計算。
+
+	if (m_timer <= 0.f) {			//時間制限が来たとき。
+		m_startCountDown->SetGameStartFlag(false);			//ゲームの更新処理を終了する。
+		m_gameOver = NewGO<GameOver>(0, "gameover");		//ゲームを終了する。
+	}
+
 }
 
 void Timer::AfterFontRender()

@@ -4,10 +4,11 @@
 //todo カバー画像なしでFadeを表現できるようにする。(現時点では仮)。
 
 namespace {
-	float w = 1280.f;				//画像の幅。
-	float h = 720.f;				//画像の高さ。
-	float scalePunching = 10.f;		//拡大縮小処理をする画像のスケール。
-	float interval = 0.f;			
+	float w = 1280.f;					//画像の幅。
+	float h = 720.f;					//画像の高さ。
+	float scalePunching = 10.f;			//拡大縮小処理をする画像のスケール。
+	float interval = 0.f;				//フェードアウトが完了してっからフェードイン開始までのラグ。
+	float fadeOutSizeLimit = 0.3f;		//フェードアウト時の最小スケール。
 }	
 
 Fade::Fade()
@@ -47,18 +48,18 @@ void Fade::ImageGeneration(float scale)
 		m_newPunching = true;				//画像が生成されたのでフラグを返す。
 	}
 
-	//if (scalePunching <= 2.f) {
-	//	if (m_newCover == false) {				//画像が生成されていないとき。
-	//		//カバー画像を生成する処理諸々。
-	//		m_spriteRenderCover = NewGO<SpriteRender>(0, "spriterender");
-	//		m_spriteRenderCover->Init(L"Assets/sprite/fadeCover.dds", w, h);
-	//		m_spriteRenderCover->SetPosition(m_position);
-	//		m_scaleCover = { 1.f,1.f,1.f };
-	//		m_spriteRenderCover->SetScale(m_scaleCover);
-	//		m_spriteRenderCover->SetRotation(m_rotation);
-	//		m_newCover = true;					//画像が生成されたのでフラグを返す。
-	//	}
-	//}
+	if (scalePunching <= 1.5f) {
+		if (m_newCover == false) {				//画像が生成されていないとき。
+			//カバー画像を生成する処理諸々。
+			m_spriteRenderCover = NewGO<SpriteRender>(0, "spriterender");
+			m_spriteRenderCover->Init(L"Assets/sprite/fadeCover.dds", w, h);
+			m_spriteRenderCover->SetPosition(m_position);
+			m_scaleCover = { 1.f,1.f,1.f };
+			m_spriteRenderCover->SetScale(m_scaleCover);
+			m_spriteRenderCover->SetRotation(m_rotation);
+			m_newCover = true;					//画像が生成されたのでフラグを返す。
+		}
+	}
 }
 
 //フェードインする。
@@ -77,7 +78,7 @@ void Fade::FadeIn()
 //フェードアウトする。
 void Fade::FadeOut()
 {
-	if (scalePunching <= 0.1f) {
+	if (scalePunching <= fadeOutSizeLimit) {
 		return;
 	}
 	m_fadeState = enFadeOut;				//状態をFadeOutに変更する。
@@ -95,11 +96,11 @@ void Fade::PlayFade(/*float FadeInterval*/)
 		FadeOut();			//フェードアウトする。
 	}
 
-	if (scalePunching <= 0.1f) {
+	if (scalePunching <= fadeOutSizeLimit) {
 		interval += gametime().GetFrameDeltaTime();
 	}
 
-	if (/*scalePunching <= 0.1f*/interval >= 3.f /*|| m_fadeState == enFadeIn*/) {
+	if (/*scalePunching <= 0.1f*/interval >= 1.f /*|| m_fadeState == enFadeIn*/) {
 		FadeIn();			//フェードインする。
 		if (scalePunching >= 10.f) {
 			DeleteGO(this);
