@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "Fade.h"
 #include "Bus.h"
+#include "GameCamera.h"
 
 Game::Game()
 {
@@ -28,6 +29,7 @@ void Game::Update()
 	{
 //		Fade* m_fade = NewGO<Fade>(0, "fade");
 	//	m_fade->PlayFade(1.f);
+		GameCamera* m_gamecamera = NewGO<GameCamera>(0, "gamecamera");
 		m_startCountDown = NewGO<StartCountdown>(0, "startcountdown");					//ゲーム開始前の処理。
 		m_playerGenerations = NewGO<PlayerGenerations>(0, "playergnerations");			//プレイヤー生成処理。
 		m_stage_1 = NewGO<Stage_1>(0, "stage_1");										//ステージ１生成。。

@@ -420,6 +420,9 @@
     <ClCompile Include="graphics\Camera.cpp">
       <Filter>Engine\graphics\camera</Filter>
     </ClCompile>
+    <ClCompile Include="GameCamera.cpp">
+      <Filter>Engine\graphics\camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -713,6 +716,9 @@
       <Filter>Game\Field\StageSelect</Filter>
     </ClInclude>
     <ClInclude Include="graphics\Camera.h">
+      <Filter>Engine\graphics\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCamera.h">
       <Filter>Engine\graphics\camera</Filter>
     </ClInclude>
   </ItemGroup>

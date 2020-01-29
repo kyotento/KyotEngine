@@ -123,6 +123,7 @@
     <ClCompile Include="FoodBox.cpp" />
     <ClCompile Include="FoodSheetGenerations.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameCamera.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="GameOver.cpp" />
@@ -223,6 +224,7 @@
     <ClInclude Include="FoodBox.h" />
     <ClInclude Include="FoodSheetGenerations.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameCamera.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="GameOver.h" />
