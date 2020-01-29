@@ -103,12 +103,12 @@ void Player::Movement(int a)
 	{
 		m_oldPosition = m_position;			//プレイヤーの座標をバックアップ。
 
-		m_move = m_stickPower * m_moveSpeed;			//移動速度の計算。
-		m_move.y -= m_fallSpeed;					//落下速度の計算。
+		m_move = m_stickPower * m_moveSpeed;				//移動速度の計算。
+		m_move.y -= m_fallSpeed;							//落下速度の計算。
 		m_position = m_characon.Execute(1.0, m_move);		//キャラコンに移動速度を代入。
 
 		if (m_toHave == false) {		//何も持っていないとき。
-			m_playerState = enRun;	//移動状態。
+			m_playerState = enRun;		//移動状態。
 		}
 	}
 

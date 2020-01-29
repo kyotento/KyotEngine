@@ -29,6 +29,24 @@ public:
 	}
 
 	/// <summary>
+	/// ターゲットを指定する。
+	/// </summary>
+	/// <param name="target">ターゲット</param>
+	void SetTarget(CVector3 target)
+	{
+		m_target = target;
+	}
+
+	/// <summary>
+	/// ターゲットを取得する。
+	/// </summary>
+	/// <returns>ターゲット</returns>
+	CVector3 GetTarget()
+	{
+		return m_target;
+	}
+
+	/// <summary>
 	/// 回転を指定する。
 	/// </summary>
 	/// <param name="rot">回転</param>

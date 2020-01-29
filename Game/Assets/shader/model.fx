@@ -248,7 +248,7 @@ float4 PSMain( PSInput In ) : SV_Target0
 			
 			//lig += max(0.0f, dot(In.Normal * -1.0f, directionLight.direction[i])) * directionLight.color[i];
 			//反射ベクトルRを求める。
-			float3 R = directionLight.direction[i] + 2 * dot(In.Normal, -directionLight.direction[i]) * In.Normal;
+			float3 R = directionLight.direction[i] + 2 * dot(normal, -directionLight.direction[i]) * normal;
 
 			//始点からライトを当てる物体に伸びるベクトルEを求める。
 			float3 E = normalize(In.worldPos - eyePos);
@@ -263,7 +263,7 @@ float4 PSMain( PSInput In ) : SV_Target0
 	//　環境光を当てる。
 	lig += float3(environmentpow);
 
-	float t = max(0.0f, dot(In.Normal * -1.0f, directionLight.direction[0]));
+	float t = max(0.0f, dot(normal * -1.0f, directionLight.direction[0]));
 
 	if (t < 0.3f) {
 		lig *= 0.9f;

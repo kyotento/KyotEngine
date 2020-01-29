@@ -33,6 +33,24 @@ bool StageSelect::Start()
 			m_flag->SetRotation(objData.rotation);
 		}
 
+		//バス。
+		if (objData.EqualObjectName(L"bus") == true)
+		{
+			m_bus = NewGO<Bus>(0, "bus");
+			m_bus->SetPosition(objData.position);
+			m_bus->SetScale(objData.scale);
+			m_bus->SetRotation(objData.rotation);
+		}
+
+		//橋。
+		if (objData.EqualObjectName(L"bridge") == true)
+		{
+			m_bridge = NewGO<Bridge>(0, "bridge");
+			m_bridge->SetPosition(objData.position);
+			m_bridge->SetScale(objData.scale);
+			m_bridge->SetRotation(objData.rotation);
+		}
+
 		return true;
 	});
 

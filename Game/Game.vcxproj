@@ -99,6 +99,7 @@
     </MeshContentTask>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bridge.cpp" />
     <ClCompile Include="Bus.cpp" />
     <ClCompile Include="character\CharacterController.cpp" />
     <ClCompile Include="Check.cpp" />
@@ -197,6 +198,7 @@
     <ClCompile Include="TomatoBox.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bridge.h" />
     <ClInclude Include="Bus.h" />
     <ClInclude Include="character\CharacterController.h" />
     <ClInclude Include="Check.h" />
@@ -306,6 +308,8 @@
     <MeshContentTask Include="Assets\modelData\2D\Fire\fire.FBX" />
     <MeshContentTask Include="Assets\modelData\2D\Gauge\Gauge.FBX" />
     <MeshContentTask Include="Assets\modelData\2D\Gauge\GaugeSheet.FBX" />
+    <MeshContentTask Include="Assets\modelData\bridge\beidge.FBX" />
+    <MeshContentTask Include="Assets\modelData\bridge\CollidionBridge.FBX" />
     <MeshContentTask Include="Assets\modelData\bus\bus.FBX" />
     <MeshContentTask Include="Assets\modelData\Chef\chef_1.FBX" />
     <MeshContentTask Include="Assets\modelData\Chef\chef_2.FBX" />
@@ -322,6 +326,7 @@
     <MeshContentTask Include="Assets\modelData\Dish\Dish.FBX" />
     <MeshContentTask Include="Assets\modelData\DustBox\DustBox.FBX" />
     <MeshContentTask Include="Assets\modelData\Flag\Flag.FBX" />
+    <MeshContentTask Include="Assets\modelData\floor.FBX" />
     <MeshContentTask Include="Assets\modelData\FoodBox\Onion\OnionBox.FBX" />
     <MeshContentTask Include="Assets\modelData\FoodBox\Tomato\TomatoBox.FBX" />
     <MeshContentTask Include="Assets\modelData\Food\Onion\CuttingOnion.FBX" />
