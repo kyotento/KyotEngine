@@ -135,6 +135,16 @@ public:
 	}
 
 	/// <summary>
+	/// 法線マップ。
+	/// </summary>
+	/// <param name="srv"></param>
+	void SetNormalMap(ID3D11ShaderResourceView* srv) {
+		m_normalMapSRV = srv;
+	}
+
+	void InitNormalMap(const wchar_t* filePath);
+
+	/// <summary>
 	/// マテリアルに対してクエリを行う。
 	/// </summary>
 	/// <param name="func">お問い合わせ関数</param>
@@ -185,19 +195,21 @@ private:
 		CMatrix mLightView;		//todo ライトビュー行列。
 		CMatrix mLightProj;		//todo ライトプロジェクション行列。
 		int isShadowReciever;
+		int isHasNormalMap;		//法線マップを保持している？
 	};
 
 	bool m_isShadowReciever = true;			//シャドウレシーバーフラグ。
 
-	EnFbxUpAxis			m_enFbxUpAxis = enFbxUpAxisZ;	//FBXの上方向。
-	ID3D11Buffer*		m_cb = nullptr;					//定数バッファ。
-	Skeleton			m_skeleton;						//スケルトン。
-	CMatrix				m_worldMatrix;					//ワールド行列。
-	DirectX::Model*		m_modelDx;						//DirectXTKが提供するモデルクラス。
-	ID3D11SamplerState* m_samplerState = nullptr;		//サンプラステート。
-	ID3D11Buffer*		m_lightConstantBuffer = nullptr;//ライト用の定数バッファ。
-	DirectionLight		m_directionLight;				//ディレクションライト。
+	EnFbxUpAxis			m_enFbxUpAxis = enFbxUpAxisZ;		//FBXの上方向。
+	ID3D11Buffer*		m_cb = nullptr;						//定数バッファ。
+	Skeleton			m_skeleton;							//スケルトン。
+	CMatrix				m_worldMatrix;						//ワールド行列。
+	DirectX::Model*		m_modelDx;							//DirectXTKが提供するモデルクラス。
+	ID3D11SamplerState* m_samplerState = nullptr;			//サンプラステート。
+	ID3D11Buffer*		m_lightConstantBuffer = nullptr;	//ライト用の定数バッファ。
+	DirectionLight		m_directionLight;					//ディレクションライト。
 	ID3D11ShaderResourceView* m_shadowMapSRV = nullptr;
+	ID3D11ShaderResourceView* m_normalMapSRV = nullptr;		//法線マップ。
 
 	const char* m_vsmain;
 	const char* m_psmain;

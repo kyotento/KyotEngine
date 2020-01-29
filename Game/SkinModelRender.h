@@ -32,6 +32,8 @@ public:
 		const char* psmain = "PSMain", const char* vsmain = "VSMain", 
 		bool drawAfterPostEffect = false, bool SetShadowReciever = true);
 
+	void InitNormalMap(const wchar_t* filePath);
+
 	/// <summary>
 	/// アニメーションの初期化。
 	/// </summary>

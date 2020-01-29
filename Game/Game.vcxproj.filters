@@ -151,6 +151,9 @@
     <Filter Include="Assets\modelData\Belongings">
       <UniqueIdentifier>{2a635d39-ef85-40e3-ae98-bd2e03af87f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\graphics\camera">
+      <UniqueIdentifier>{e182b89a-c673-4ab4-b9bf-9dfd280962e4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -194,9 +197,6 @@
     </ClCompile>
     <ClCompile Include="system\system.cpp">
       <Filter>Engine\system</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics\Camera.cpp">
-      <Filter>Engine\graphics</Filter>
     </ClCompile>
     <ClCompile Include="physics\RigidBody.cpp">
       <Filter>Engine\physics</Filter>
@@ -414,6 +414,12 @@
     <ClCompile Include="Flag.cpp">
       <Filter>Game\Field\StageSelect</Filter>
     </ClCompile>
+    <ClCompile Include="Bus.cpp">
+      <Filter>Game\Field\StageSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\Camera.cpp">
+      <Filter>Engine\graphics\camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -460,9 +466,6 @@
     </ClInclude>
     <ClInclude Include="system\system.h">
       <Filter>Engine\system</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\Camera.h">
-      <Filter>Engine\graphics</Filter>
     </ClInclude>
     <ClInclude Include="physics\RigidBody.h">
       <Filter>Engine\physics</Filter>
@@ -706,6 +709,12 @@
     <ClInclude Include="Flag.h">
       <Filter>Game\Field\StageSelect</Filter>
     </ClInclude>
+    <ClInclude Include="Bus.h">
+      <Filter>Game\Field\StageSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\Camera.h">
+      <Filter>Engine\graphics\camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">
@@ -886,6 +895,9 @@
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\fade\fadePunching.png">
       <Filter>Assets\sprite\fade</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\modelData\bus\bus_normal_Normal.png">
+      <Filter>Assets\modelData\StageSelect</Filter>
     </ImageContentTask>
   </ItemGroup>
   <ItemGroup>

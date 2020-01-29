@@ -99,6 +99,7 @@
     </MeshContentTask>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bus.cpp" />
     <ClCompile Include="character\CharacterController.cpp" />
     <ClCompile Include="Check.cpp" />
     <ClCompile Include="CookingList.cpp" />
@@ -195,6 +196,7 @@
     <ClCompile Include="TomatoBox.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bus.h" />
     <ClInclude Include="character\CharacterController.h" />
     <ClInclude Include="Check.h" />
     <ClInclude Include="CIndexBuffer.h" />
@@ -399,6 +401,9 @@
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\fade\fadeCover.png" />
     <ImageContentTask Include="Assets\sprite\fade\fadePunching.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\modelData\bus\bus_normal_Normal.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

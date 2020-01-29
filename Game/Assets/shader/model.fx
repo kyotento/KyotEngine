@@ -11,6 +11,8 @@ Texture2D<float4> g_albedoTexture : register(t0);
 StructuredBuffer<float4x4> boneMatrix : register(t1);
 //シャドウマップ。
 Texture2D<float4> g_shadowMap : register(t2);	
+//	法線マップ。
+Texture2D<float4> g_normalMap : register(t3);		
 
 /////////////////////////////////////////////////////////////
 // SamplerState
@@ -30,6 +32,7 @@ cbuffer VSPSCb : register(b0){
 	float4x4 mLightView;	//ライトビュー行列。
 	float4x4 mLightProj;	//ライトプロジェクション行列。
 	int isShadowReciever;	//シャドウレシーバーフラグ。
+	int isHasNormalMap;		//法線マップを保持している？
 };
 
 static const int directionLightNum = 1;		//ディレクションライトの数。
@@ -142,6 +145,19 @@ PSInput VSMain( VSInputNmTxVcTangent In )
 	//psInput.TexCoord = In.TexCoord;
 	////法線はそのままピクセルシェーダーに渡す。
 	//psInput.Normal = In.Normal;
+
+
+	//UV座標はそのままピクセルシェーダーに渡す。
+	psInput.TexCoord = In.TexCoord;
+	//法線をワールド行列で変換する。
+	//法線がfloat3の3要素のベクトルなので、回転と拡大の変換だけが行われる。
+	psInput.Normal = mul(mWorld, In.Normal);
+	//拡大成分が入っているかもしれないので、正規化しとこ。
+	psInput.Normal = normalize(psInput.Normal);
+	//接ベクトルも回す。
+	psInput.Tangent = mul(mWorld, In.Tangent);
+	psInput.Tangent = normalize(psInput.Tangent);
+
 	return psInput;
 }
 
@@ -200,7 +216,31 @@ float4 PSMain( PSInput In ) : SV_Target0
 	float4 albedoColor = g_albedoTexture.Sample(g_sampler, In.TexCoord); //todo In.TexCodeがテクスチャのUV値。CBufferを使って送る。
 	float3 lig = 0.0f;
 
-		//鏡面反射光。
+
+	//法線を計算する。
+	float3 normal = 0;
+
+	if (isHasNormalMap == 1) {	//１なら法線マップが設定されている。
+	//1 従法線の計算。
+		float3 biNormal = cross(In.Normal, In.Tangent);
+		//2 従法線を正規化。
+		normalize(biNormal);
+
+		normal = g_normalMap.Sample(g_sampler, In.TexCoord);
+
+		//元は0～1。
+		//-1.0～1.0の範囲に変換する。
+		normal = (normal * 2.0f) - 1.0f;
+
+		normal = In.Tangent * normal.x + biNormal * normal.y + In.Normal * normal.z;
+	}
+
+	else {
+	//ない。
+	normal = In.Normal;
+	}
+
+	//鏡面反射光。
 	//ディレクションライトの鏡面反射光を計算する。
 	{
 		for(int i = 0; i < directionLightNum; i++) {
@@ -255,8 +295,7 @@ float4 PSMain( PSInput In ) : SV_Target0
 			}
 		}
 	}
-	
-	
+
 
 	float4 finalColor = float4(0.0f, 0.0f, 0.0f, 1.0f);
 	finalColor.xyz = albedoColor.xyz * lig;

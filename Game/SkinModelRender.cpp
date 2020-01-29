@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "SkinModelRender.h"
 
+//todo 法線マップ。
+ID3D11ShaderResourceView* g_normalMapSRV = nullptr;
+
 SkinModelRender::SkinModelRender()
 {
 
@@ -62,6 +65,27 @@ void SkinModelRender::Init(const wchar_t* filePath,
 	InitAnimation(animationClips, numAnimationClips);			//アニメーションの初期化。
 	ChangeDrawAfterPostEffect(drawAfterPostEffect);				//2Dとして描画するかどうか。
 	m_skinModel.SetShadowReciever(SetShadowReciever);			//影がかかるかどうか。
+}
+
+void SkinModelRender::InitNormalMap(const wchar_t* filePath)
+{
+	//m_skinModel.InitNormalMap(filePath);
+	//ファイル名を使って、テクスチャをロードして、ShaderResrouceViewを作成する。
+	DirectX::CreateDDSTextureFromFileEx(
+		g_graphicsEngine->GetD3DDevice(),
+		filePath,	//ロードするテクスチャのパス。
+		0,
+		D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE,
+		0,
+		0,
+		false,
+		nullptr,
+		&g_normalMapSRV						//作成されたSRVのアドレスの格納先。
+	);
+
+	//モデルに法線マップを設定する。
+	m_skinModel.SetNormalMap(g_normalMapSRV);
+	
 }
 
 void SkinModelRender::ChangeDrawAfterPostEffect(bool drawAfterPostEffect) 

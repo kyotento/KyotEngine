@@ -2,7 +2,9 @@
 #include "SkinModel.h"
 #include "SkinModelDataManager.h"
 #include "SkinModelEffect.h"
-
+//
+////todo 法線マップ。
+//ID3D11ShaderResourceView* g_normalMapSRV = nullptr;
 SkinModel::~SkinModel()
 {
 	if (m_cb != nullptr) {
@@ -21,6 +23,7 @@ SkinModel::~SkinModel()
 	}
 
 }
+
 void SkinModel::Init(const wchar_t* filePath,/* EnFbxUpAxis enFbxUpAxis,*/ const char* entryPS, const char* entryVS/*, bool ShadowReciever = true*/)
 {
 	m_psmain = entryPS;
@@ -46,6 +49,7 @@ void SkinModel::Init(const wchar_t* filePath,/* EnFbxUpAxis enFbxUpAxis,*/ const
 
 	//m_enFbxUpAxis = enFbxUpAxis;
 }
+
 void SkinModel::InitSkeleton(const wchar_t* filePath)
 {
 	//スケルトンのデータを読み込む。
@@ -69,6 +73,7 @@ void SkinModel::InitSkeleton(const wchar_t* filePath)
 #endif
 	}
 }
+
 void SkinModel::InitConstantBuffer()
 {
 	//作成するバッファのサイズをsizeof演算子で求める。
@@ -91,6 +96,7 @@ void SkinModel::InitConstantBuffer()
 	bufferDesc.ByteWidth = sizeof(DirectionLight);				//DirectionLightは16byteの倍数になっているので、切り上げはやらない。
 	g_graphicsEngine->GetD3DDevice()->CreateBuffer(&bufferDesc, NULL, &m_lightConstantBuffer);
 }
+
 void SkinModel::InitSamplerState()
 {
 	//テクスチャのサンプリング方法を指定するためのサンプラステートを作成。
@@ -168,6 +174,7 @@ void SkinModel::UpdateWorldMatrix(CVector3 position, CQuaternion rotation, CVect
 	//スケルトンの更新。
 	m_skeleton.Update(m_worldMatrix);
 }
+
 void SkinModel::Draw(EnRenderMode renderMode, CMatrix viewMatrix, CMatrix projMatrix)
 {
 	DirectX::CommonStates state(g_graphicsEngine->GetD3DDevice());
@@ -183,6 +190,7 @@ void SkinModel::Draw(EnRenderMode renderMode, CMatrix viewMatrix, CMatrix projMa
 	//ライトのカメラビュー、プロジェクション行列を送る。
 	vsCb.mLightProj = shadowMap->GetLightProjMatrix();
 	vsCb.mLightView = shadowMap->GetLighViewMatrix();
+
 	//シャドウマップを生成するかどうかを決める。
 	if (m_isShadowReciever) {			//フラグがtrueのとき。
 		vsCb.isShadowReciever = 1;		//影を生成する。
@@ -190,6 +198,15 @@ void SkinModel::Draw(EnRenderMode renderMode, CMatrix viewMatrix, CMatrix projMa
 	else {								//フラグがfalseのとき。
 		vsCb.isShadowReciever = 0;		//影を生成しない。
 	}
+
+	//法線マップを使用するかどうかのフラグを送る。
+	if (m_normalMapSRV != nullptr) {
+		vsCb.isHasNormalMap = true;
+	}
+	else {
+		vsCb.isHasNormalMap = false;
+	}
+
 //	vsCb.ambientLight = g_graphicsEngine->GetAmbientLight();
 	//メインメモリの内容をVRAMにコピー（VRAM：：　GPUがアクセスするメモリ）。
 	d3dDeviceContext->UpdateSubresource(m_cb, 0, nullptr, &vsCb, 0, 0);
@@ -216,6 +233,11 @@ void SkinModel::Draw(EnRenderMode renderMode, CMatrix viewMatrix, CMatrix projMa
 		modelMaterial->SetRenderMode(renderMode);
 	});
 
+	if (m_normalMapSRV != nullptr) {
+		//法線マップが設定されていたらをレジスタt3に設定する。
+		d3dDeviceContext->PSSetShaderResources(3, 1, &m_normalMapSRV);
+	}
+
 	//描画。
 	m_modelDx->Draw(
 		d3dDeviceContext,
@@ -224,4 +246,22 @@ void SkinModel::Draw(EnRenderMode renderMode, CMatrix viewMatrix, CMatrix projMa
 		viewMatrix,
 		projMatrix
 	);
+}
+
+void SkinModel::InitNormalMap(const wchar_t* filePath)
+{
+	//DirectX::CreateDDSTextureFromFileEx(
+	//	g_graphicsEngine->GetD3DDevice(),
+	//	filePath,	//ロードするテクスチャのパス。
+	//	0,
+	//	D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE,
+	//	0,
+	//	0,
+	//	false,
+	//	nullptr,
+	//	&m_normalMapSRV						//作成されたSRVのアドレスの格納先。
+	//);
+
+	//モデルに法線マップを設定する。
+	//m_unityChanModelDraw.SetNormalMap(m_normalMapSRV);
 }
