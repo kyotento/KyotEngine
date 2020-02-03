@@ -28,8 +28,8 @@ void Game::Update()
 	//実際はステージセレクト画面へ。
 	if (m_titleDeleteFlag)			//タイトルが消えた時。
 	{
-//		Fade* m_fade = NewGO<Fade>(0, "fade");
-	//	m_fade->PlayFade(1.f);
+		//Fade* m_fade = NewGO<Fade>(0, "fade");
+		//m_fade->PlayFade();
 
 		GameCamera* m_gamecamera = NewGO<GameCamera>(0, "gamecamera");
 
@@ -39,7 +39,7 @@ void Game::Update()
 		m_timer = NewGO<Timer>(0, "timer");												//タイマー生成
 		m_score = NewGO<Score>(0, "score");												//スコア生成。
 		m_orderGenerations = NewGO<OrderGenerations>(0, "ordergenerations");			//注文シート生成。
-		Bus* bus = NewGO<Bus>(0, "bus");
+		//Bus* bus = NewGO<Bus>(0, "bus");
 
 	//	StageSelect* stageSelect = NewGO<StageSelect>(0, "stageselect");
 

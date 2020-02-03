@@ -6,9 +6,10 @@
 namespace {
 	float w = 1280.f;					//画像の幅。
 	float h = 720.f;					//画像の高さ。
-	float scalePunching = 10.f;			//拡大縮小処理をする画像のスケール。
+	float scalePunching = 30.f;			//拡大縮小処理をする画像のスケール。
 	float interval = 0.f;				//フェードアウトが完了してっからフェードイン開始までのラグ。
-	float fadeOutSizeLimit = 0.3f;		//フェードアウト時の最小スケール。
+	float fadeOutSizeLimit = 0.1f;		//フェードアウト時の最小スケール。
+	float fadeSpeed = 30.f;				//フェードの速度。
 }	
 
 Fade::Fade()
@@ -38,7 +39,7 @@ void Fade::ImageGeneration(float scale)
 {
 	if (m_newPunching == false) {			//画像が生成されていないとき。
 		//拡大縮小処理する画像を生成する処理諸々。
-		m_spriteRenderPunching = NewGO<SpriteRender>(0, "spriternder");
+		m_spriteRenderPunching = NewGO<SpriteRender>(10, "spriternder");
 		m_spriteRenderPunching->Init(L"Assets/sprite/fadePunching.dds", w, h);
 		m_spriteRenderPunching->SetPosition(m_position);
 		scalePunching = scale;
@@ -51,7 +52,7 @@ void Fade::ImageGeneration(float scale)
 	if (scalePunching <= 1.5f) {
 		if (m_newCover == false) {				//画像が生成されていないとき。
 			//カバー画像を生成する処理諸々。
-			m_spriteRenderCover = NewGO<SpriteRender>(0, "spriterender");
+			m_spriteRenderCover = NewGO<SpriteRender>(10, "spriterender");
 			m_spriteRenderCover->Init(L"Assets/sprite/fadeCover.dds", w, h);
 			m_spriteRenderCover->SetPosition(m_position);
 			m_scaleCover = { 1.f,1.f,1.f };
@@ -67,7 +68,7 @@ void Fade::FadeIn()
 {
 	m_fadeState = enFadeIn;					//状態をFadeInに変更する。
 //	ImageGeneration(0.1f);
-	scalePunching += 10.f* gametime().GetFrameDeltaTime();
+	scalePunching += fadeSpeed * gametime().GetFrameDeltaTime();
 	m_scalePunching = { scalePunching,scalePunching,scalePunching };
 	m_spriteRenderPunching->SetScale(m_scalePunching);
 	if (scalePunching >= 1.f) {
@@ -82,9 +83,12 @@ void Fade::FadeOut()
 		return;
 	}
 	m_fadeState = enFadeOut;				//状態をFadeOutに変更する。
-	ImageGeneration(10.f);					//画像を変更する。
+	ImageGeneration(30.f);					//画像を変更する。
 	//画像のスケールを縮小する。
-	scalePunching -= 10.f* gametime().GetFrameDeltaTime();			
+	scalePunching -= fadeSpeed* gametime().GetFrameDeltaTime();	
+	if (scalePunching <= fadeOutSizeLimit) {
+		scalePunching = fadeOutSizeLimit;
+	}
 	m_scalePunching = { scalePunching,scalePunching,scalePunching };
 	m_spriteRenderPunching->SetScale(m_scalePunching);
 }
@@ -102,7 +106,7 @@ void Fade::PlayFade(/*float FadeInterval*/)
 
 	if (/*scalePunching <= 0.1f*/interval >= 1.f /*|| m_fadeState == enFadeIn*/) {
 		FadeIn();			//フェードインする。
-		if (scalePunching >= 10.f) {
+		if (scalePunching >= 30.f) {
 			DeleteGO(this);
 		}
 	}

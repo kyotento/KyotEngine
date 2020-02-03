@@ -24,6 +24,7 @@ Result::Result()
 
 Result::~Result()
 {
+	starScale = 2.f;
 	if (m_spriteRenderSheet != nullptr) {				//シートが生成されているとき。
 		DeleteGO(m_spriteRenderSheet);					//シートを消す。
 	}
