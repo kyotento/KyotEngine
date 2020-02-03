@@ -410,7 +410,7 @@
     <ImageContentTask Include="Assets\sprite\fade\fadePunching.png" />
   </ItemGroup>
   <ItemGroup>
-    <ImageContentTask Include="Assets\modelData\bus\bus_normal_Normal.png" />
+    <Image Include="Assets\modelData\bus\bus_Normal.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

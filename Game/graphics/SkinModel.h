@@ -135,11 +135,20 @@ public:
 	}
 
 	/// <summary>
-	/// 法線マップ。
+	/// 法線マップを設定。
 	/// </summary>
-	/// <param name="srv"></param>
+	/// <param name="srv">シェーダーリソースビュー</param>
 	void SetNormalMap(ID3D11ShaderResourceView* srv) {
 		m_normalMapSRV = srv;
+	}
+
+	/// <summary>
+	/// スペキュラマップを設定。
+	/// </summary>
+	/// <param name="srv">シェーダーリソースビュー</param>
+	void SetSpecularMap(ID3D11ShaderResourceView* srv)
+	{
+		m_specMapSRV = srv;
 	}
 
 	void InitNormalMap(const wchar_t* filePath);
@@ -195,7 +204,8 @@ private:
 		CMatrix mLightView;		//todo ライトビュー行列。
 		CMatrix mLightProj;		//todo ライトプロジェクション行列。
 		int isShadowReciever;
-		int isHasNormalMap;		//法線マップを保持している？
+		int isHasNormalMap;		//法線マップを保持しているかどうか。
+		int isHasSpecuraMap;	//スペキュラマップを保持しているかどうか。
 	};
 
 	bool m_isShadowReciever = true;			//シャドウレシーバーフラグ。
@@ -210,6 +220,7 @@ private:
 	DirectionLight		m_directionLight;					//ディレクションライト。
 	ID3D11ShaderResourceView* m_shadowMapSRV = nullptr;
 	ID3D11ShaderResourceView* m_normalMapSRV = nullptr;		//法線マップ。
+	ID3D11ShaderResourceView* m_specMapSRV = nullptr;		//スペキュラマップ。
 
 	const char* m_vsmain;
 	const char* m_psmain;

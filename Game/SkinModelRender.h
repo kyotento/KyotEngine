@@ -32,7 +32,23 @@ public:
 		const char* psmain = "PSMain", const char* vsmain = "VSMain", 
 		bool drawAfterPostEffect = false, bool SetShadowReciever = true);
 
+	/// <summary>
+	/// 法線マップの初期化
+	/// </summary>
+	/// <param name="filePath">法線マップのファイルパス</param>
+	/// <remarks>
+	/// 初期化を行った場合のみ処理が行われる。
+	/// </remarks>
 	void InitNormalMap(const wchar_t* filePath);
+
+	/// <summary>
+	/// スペキュラマップの初期化。
+	/// </summary>
+	/// <param name="filePath">スペキュラマップのファイルパス</param>
+	/// <remarks>
+	/// 初期化を行った場合のみ処理が行われる。
+	/// </remarks>
+	void InitSpecMap(const wchar_t* filePath);
 
 	/// <summary>
 	/// アニメーションの初期化。

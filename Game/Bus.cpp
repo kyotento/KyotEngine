@@ -32,7 +32,7 @@ bool Bus::Start()
 	//バスのモデル生成諸々。
 	m_skinModelRender = NewGO<SkinModelRender>(0, "skinmodel");
 	m_skinModelRender->Init(L"Assets/modelData/bus/bus.cmo");
-	m_skinModelRender->InitNormalMap(L"Assets/sprite/bus_normal_Normal.dds");
+	m_skinModelRender->InitNormalMap(L"Assets/sprite/bus_Normal.dds");
 	m_skinModelRender->SetPosition(m_position);
 	m_skinModelRender->SetScale(m_scale);
 	m_skinModelRender->SetRotation(m_rotation);

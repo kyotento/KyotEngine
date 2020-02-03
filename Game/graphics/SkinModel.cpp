@@ -2,9 +2,8 @@
 #include "SkinModel.h"
 #include "SkinModelDataManager.h"
 #include "SkinModelEffect.h"
-//
-////todo 法線マップ。
-//ID3D11ShaderResourceView* g_normalMapSRV = nullptr;
+
+
 SkinModel::~SkinModel()
 {
 	if (m_cb != nullptr) {
@@ -205,6 +204,14 @@ void SkinModel::Draw(EnRenderMode renderMode, CMatrix viewMatrix, CMatrix projMa
 	}
 	else {
 		vsCb.isHasNormalMap = false;
+	}	
+
+	//スペキュラマップを使用するかどうかのフラグを送る。
+	if (m_specMapSRV != nullptr) {
+		vsCb.isHasSpecuraMap = true;
+	}
+	else {
+		vsCb.isHasSpecuraMap = false;
 	}
 
 //	vsCb.ambientLight = g_graphicsEngine->GetAmbientLight();
@@ -236,6 +243,10 @@ void SkinModel::Draw(EnRenderMode renderMode, CMatrix viewMatrix, CMatrix projMa
 	if (m_normalMapSRV != nullptr) {
 		//法線マップが設定されていたらをレジスタt3に設定する。
 		d3dDeviceContext->PSSetShaderResources(3, 1, &m_normalMapSRV);
+	}
+	if (m_specMapSRV != nullptr) {
+		//スペキュラマップが設定されていたらレジスタt4に設定する。
+		d3dDeviceContext->PSSetShaderResources(4, 1, &m_specMapSRV);
 	}
 
 	//描画。

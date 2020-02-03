@@ -920,9 +920,6 @@
     <ImageContentTask Include="Assets\sprite\fade\fadePunching.png">
       <Filter>Assets\sprite\fade</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\modelData\bus\bus_normal_Normal.png">
-      <Filter>Assets\modelData\StageSelect</Filter>
-    </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\level\stage_1.tkl">
@@ -963,5 +960,10 @@
     <Media Include="Assets\sound\soundEffect\failure.wav">
       <Filter>Assets\sound\soundEffect</Filter>
     </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\modelData\bus\bus_Normal.png">
+      <Filter>Assets\modelData\StageSelect</Filter>
+    </Image>
   </ItemGroup>
 </Project>

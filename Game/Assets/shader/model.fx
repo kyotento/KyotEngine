@@ -2,6 +2,8 @@
 /// モデルシェーダー。
 /// </summary>
 
+//todo if文をなくす。
+
 /////////////////////////////////////////////////////////////
 // Shader Resource View
 /////////////////////////////////////////////////////////////
@@ -12,7 +14,9 @@ StructuredBuffer<float4x4> boneMatrix : register(t1);
 //シャドウマップ。
 Texture2D<float4> g_shadowMap : register(t2);	
 //	法線マップ。
-Texture2D<float4> g_normalMap : register(t3);		
+Texture2D<float4> g_normalMap : register(t3);	
+//スペキュラマップ。
+Texture2D<float4> g_specMap : register(t4);
 
 /////////////////////////////////////////////////////////////
 // SamplerState
@@ -32,7 +36,8 @@ cbuffer VSPSCb : register(b0){
 	float4x4 mLightView;	//ライトビュー行列。
 	float4x4 mLightProj;	//ライトプロジェクション行列。
 	int isShadowReciever;	//シャドウレシーバーフラグ。
-	int isHasNormalMap;		//法線マップを保持している？
+	int isHasNormalMap;		//法線マップを保持しているかどうか。
+	int isHasSpecuraMap;	//スペキュラマップを保持しているかどうか。
 };
 
 static const int directionLightNum = 1;		//ディレクションライトの数。
@@ -85,7 +90,7 @@ struct PSInput{
 	float4 Position 	: SV_POSITION;
 	float3 Normal		: NORMAL;
 	float3 Tangent		: TANGENT;
-	float2 TexCoord 	: TEXCOORD0;
+	float2 TexCoord 	: TEXCOORD0;	//UV座標。
 	float3 worldPos		: TEXCOORD1;	//ワールド座標。
 	float4 posInLVP		: TEXCOORD2;	//ライトビュープロジェクション空間での座標。
 };
@@ -140,12 +145,6 @@ PSInput VSMain( VSInputNmTxVcTangent In )
 	psInput.Normal = normalize(mul(mWorld, In.Normal));
 	////法線をそのままピクセルシェーダーに渡す。
 	psInput.Tangent = normalize(mul(mWorld, In.Tangent));
-
-	////UV座標はそのままピクセルシェーダーに渡す。
-	//psInput.TexCoord = In.TexCoord;
-	////法線はそのままピクセルシェーダーに渡す。
-	//psInput.Normal = In.Normal;
-
 
 	//UV座標はそのままピクセルシェーダーに渡す。
 	psInput.TexCoord = In.TexCoord;
@@ -225,7 +224,6 @@ float4 PSMain( PSInput In ) : SV_Target0
 		float3 biNormal = cross(In.Normal, In.Tangent);
 		//2 従法線を正規化。
 		normalize(biNormal);
-
 		normal = g_normalMap.Sample(g_sampler, In.TexCoord);
 
 		//元は0～1。
@@ -238,6 +236,28 @@ float4 PSMain( PSInput In ) : SV_Target0
 	else {
 	//ない。
 	normal = In.Normal;
+	}
+
+	//スペキュラマップ。
+	for (int i = 0; i < directionLightNum; i++) {
+		//① ライトを当てる面から視点に伸びるベクトルtoEyeDirを求める。
+		//	 視点の座標は定数バッファで渡されている。LightCbを参照するように。
+		float3 toEyeDir = normalize(eyePos - In.worldPos);
+		//② １で求めたtoEyeDirの反射ベクトルを求める。
+		float3 reflectEyeDir = -toEyeDir + 2 * dot(normal, toEyeDir) * normal;
+		//③ ２で求めた反射ベクトルとディレクションライトの方向との内積を取って、スペキュラの強さを計算する。
+		float t = max(0.0f, dot(-directionLight.direction[i], reflectEyeDir));
+		//④ pow関数を使って、スペキュラを絞る。絞りの強さは定数バッファで渡されている。
+		//	 LightCbを参照するように。
+		float specPower = 1.0f;
+		if (isHasSpecuraMap) {
+			//スペキュラマップがある。
+			specPower = g_specMap.Sample(g_sampler, In.TexCoord).r;
+
+			//⑤ スペキュラ反射が求まったら、ligに加算する。
+			//鏡面反射を反射光に加算する。
+			lig += pow(t, 2.0f) * directionLight.color[i] * specPower *  7.0f;
+		}
 	}
 
 	//鏡面反射光。
@@ -326,7 +346,7 @@ PSInput_ShadowMap VSMain_ShadowMap(VSInputNmTxVcTangent In)
 	psInput.Position = pos;
 	return psInput;
 }
-//todo スキン有りモデル用の頂点シェーダーを作る(シャドウマップ生成)
+//スキン有りモデル用の頂点シェーダーを作る(シャドウマップ生成)
 
 /// <summary>
 /// ピクセルシェーダーのエントリ関数。

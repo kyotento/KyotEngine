@@ -1,8 +1,10 @@
 #include "stdafx.h"
 #include "SkinModelRender.h"
 
-//todo 法線マップ。
+//法線マップ。
 ID3D11ShaderResourceView* g_normalMapSRV = nullptr;
+//スペキュラマップ。
+ID3D11ShaderResourceView* g_specMapSRV = nullptr;
 
 SkinModelRender::SkinModelRender()
 {
@@ -36,7 +38,7 @@ void SkinModelRender::Update()
 void SkinModelRender::Render()
 {
 	if (m_drawAfterPostEffect == false) {			//ポストエフェクト前に書くなら。	
-		//todo シャドウマップをレジスタに渡す。
+		//シャドウマップをレジスタに渡す。
 		m_skinModel.SetShadowMap(IGameObjectManager().GetShadowMap()->GetShadowMapSRV());
 		//todo InitされなかったらDrawを呼ばないようにする。 
 		m_skinModel.Draw(enRenderMode_Normal, g_camera3D.GetViewMatrix(), g_camera3D.GetProjectionMatrix());
@@ -67,6 +69,7 @@ void SkinModelRender::Init(const wchar_t* filePath,
 	m_skinModel.SetShadowReciever(SetShadowReciever);			//影がかかるかどうか。
 }
 
+//法線マップ。
 void SkinModelRender::InitNormalMap(const wchar_t* filePath)
 {
 	//m_skinModel.InitNormalMap(filePath);
@@ -86,6 +89,27 @@ void SkinModelRender::InitNormalMap(const wchar_t* filePath)
 	//モデルに法線マップを設定する。
 	m_skinModel.SetNormalMap(g_normalMapSRV);
 	
+}
+
+//スペキュラマップ。
+void SkinModelRender::InitSpecMap(const wchar_t* filePath)
+{
+	//ファイル名を使って、テクスチャをロードして、ShaderResrouceViewを作成する。
+	DirectX::CreateDDSTextureFromFileEx(
+		g_graphicsEngine->GetD3DDevice(), 
+		filePath,
+		0,
+		D3D11_USAGE_DEFAULT, 
+		D3D11_BIND_SHADER_RESOURCE, 
+		0,
+		0,
+		false,
+		nullptr,
+		&g_specMapSRV
+	);
+
+	//モデルにスペキュラマップを設定する。
+	m_skinModel.SetSpecularMap(g_specMapSRV);
 }
 
 void SkinModelRender::ChangeDrawAfterPostEffect(bool drawAfterPostEffect) 
