@@ -26,6 +26,10 @@ void PhysicsWorld::Release()
 void PhysicsWorld::Init()
 {
 	Release();
+
+	//デバッグワイヤーフレームの準備。
+	m_dwf.Prepare();
+
 	//物理エンジンを初期化。
 	///collision configuration contains default setup for memory, collision setup. Advanced users can create their own configuration.
 	collisionConfig = new btDefaultCollisionConfiguration();
@@ -47,6 +51,8 @@ void PhysicsWorld::Init()
 		);
 
 	dynamicWorld->setGravity(btVector3(0, -10, 0));
+
+	dynamicWorld->setDebugDrawer(&m_dwf);
 }
 void PhysicsWorld::Update()
 {
@@ -60,3 +66,9 @@ void PhysicsWorld::RemoveRigidBody(RigidBody& rb)
 {
 	dynamicWorld->removeRigidBody(rb.GetBody());
 }
+
+void PhysicsWorld::DebugDraw()
+{
+	dynamicWorld->debugDrawWorld();
+}
+

@@ -108,6 +108,7 @@
     <ClCompile Include="CuttingBoard.cpp" />
     <ClCompile Include="CuttingDesk.cpp" />
     <ClCompile Include="Danger.cpp" />
+    <ClCompile Include="DebugWireframe.cpp" />
     <ClCompile Include="Delivery.cpp" />
     <ClCompile Include="Desk.cpp" />
     <ClCompile Include="Dish.cpp" />
@@ -210,6 +211,7 @@
     <ClInclude Include="CuttingDesk.h" />
     <ClInclude Include="CVertexBuffer.h" />
     <ClInclude Include="Danger.h" />
+    <ClInclude Include="DebugWireframe.h" />
     <ClInclude Include="Delivery.h" />
     <ClInclude Include="Desk.h" />
     <ClInclude Include="Dish.h" />

@@ -429,6 +429,9 @@
     <ClCompile Include="Bridge.cpp">
       <Filter>Game\StageSelect</Filter>
     </ClCompile>
+    <ClCompile Include="DebugWireframe.cpp">
+      <Filter>Engine\physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -729,6 +732,9 @@
     </ClInclude>
     <ClInclude Include="Bridge.h">
       <Filter>Game\StageSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugWireframe.h">
+      <Filter>Engine\physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,8 +1,8 @@
 #pragma once
-
+#include "DebugWireframe.h"
 
 class RigidBody;
-
+class DebugWireframe;
 class PhysicsWorld
 {
 	btDefaultCollisionConfiguration*		collisionConfig = nullptr;
@@ -47,6 +47,13 @@ public:
 	{
 		dynamicWorld->contactTest(colObj, resultCallback);
 	}
+
+	void DebugDraw();
+
+private:
+
+	DebugWireframe m_dwf;			//デバッグワイヤーフレーム。
+
 };
 
 extern PhysicsWorld g_physics;

@@ -80,6 +80,8 @@ public:
 		vec = _v.vec;
 		return *this;
 	}
+	
+
 	CVector3() {}
 	/*!
 	* @brief	コンストラクタ。

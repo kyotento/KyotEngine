@@ -220,9 +220,9 @@ float4 PSMain( PSInput In ) : SV_Target0
 	float3 normal = 0;
 
 	if (isHasNormalMap == 1) {	//１なら法線マップが設定されている。
-	//1 従法線の計算。
+		//従法線の計算。
 		float3 biNormal = cross(In.Normal, In.Tangent);
-		//2 従法線を正規化。
+		//従法線を正規化。
 		normalize(biNormal);
 		normal = g_normalMap.Sample(g_sampler, In.TexCoord);
 
@@ -238,6 +238,7 @@ float4 PSMain( PSInput In ) : SV_Target0
 	normal = In.Normal;
 	}
 
+	if (isHasSpecuraMap) {
 	//スペキュラマップ。
 	for (int i = 0; i < directionLightNum; i++) {
 		//① ライトを当てる面から視点に伸びるベクトルtoEyeDirを求める。
@@ -248,15 +249,13 @@ float4 PSMain( PSInput In ) : SV_Target0
 		//③ ２で求めた反射ベクトルとディレクションライトの方向との内積を取って、スペキュラの強さを計算する。
 		float t = max(0.0f, dot(-directionLight.direction[i], reflectEyeDir));
 		//④ pow関数を使って、スペキュラを絞る。絞りの強さは定数バッファで渡されている。
-		//	 LightCbを参照するように。
 		float specPower = 1.0f;
-		if (isHasSpecuraMap) {
-			//スペキュラマップがある。
-			specPower = g_specMap.Sample(g_sampler, In.TexCoord).r;
+		//スペキュラマップがある。
+		specPower = g_specMap.Sample(g_sampler, In.TexCoord).r;
 
-			//⑤ スペキュラ反射が求まったら、ligに加算する。
-			//鏡面反射を反射光に加算する。
-			lig += pow(t, 2.0f) * directionLight.color[i] * specPower *  7.0f;
+		//⑤ スペキュラ反射が求まったら、ligに加算する。
+		//鏡面反射を反射光に加算する。
+		lig += pow(t, 2.0f) * directionLight.color[i] * specPower *  7.0f;
 		}
 	}
 

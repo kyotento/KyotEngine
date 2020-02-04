@@ -50,6 +50,22 @@ void Pot::Soup()
 		m_gauge->GaugeHalf();							//ゲージのスケールを半分にする。
 		m_gauge->SetGaugeMax(false);				
 		m_potState = enThree;							//食べ物が三つ入った状態にする。
+		if (m_check != nullptr) {		//生成されていたら。
+			DeleteGO(m_check);			//チェックマークを消す。
+			m_check = nullptr;			//nullに。
+			m_checkFlag = false;
+		}
+		if (m_danger != nullptr) {		//生成されていたら。
+			DeleteGO(m_danger);			//危険マークを消す。
+			m_sound->Stop();			//音を止める。
+			m_danger = nullptr;			//nullに。
+			m_dangerFlag = false;		//生成されていないのでfalseに変更する。
+		}
+		if (m_fire != nullptr) {		//生成されていたら。
+			DeleteGO(m_fire);			//火事マークを消す。
+			m_fire = nullptr;			//nullに。
+			m_fireFlag = false;			//生成されていないのでfalseに変更する。
+		}
 	}
 
 	//食べ物が一つ入っている状態のとき。
@@ -57,6 +73,23 @@ void Pot::Soup()
 		m_soupPos.y += 25.f;							//食べ物が入ったように見せるためにY座標を上げる。
 		m_potState = enTwo;								//ポットに食べ物が二つ入っている状態。
 		m_gauge->GaugeHalf();							//ゲージのスケールを半分にする。
+		m_gauge->SetGaugeMax(false);
+		if (m_check != nullptr) {		//生成されていたら。
+			DeleteGO(m_check);			//チェックマークを消す。
+			m_check = nullptr;			//nullに。
+			m_checkFlag = false;
+		}
+		if (m_danger != nullptr) {		//生成されていたら。
+			DeleteGO(m_danger);			//危険マークを消す。
+			m_sound->Stop();			//音を止める。
+			m_danger = nullptr;			//nullに。
+			m_dangerFlag = false;		//生成されていないのでfalseに変更する。
+		}
+		if (m_fire != nullptr) {		//生成されていたら。
+			DeleteGO(m_fire);			//火事マークを消す。
+			m_fire = nullptr;			//nullに。
+			m_fireFlag = false;			//生成されていないのでfalseに変更する。
+		}
 	}
 
 	//ポットに何も入っていないとき。
@@ -114,18 +147,28 @@ void Pot::StateChange()
 	checkPos.y += 100.f;			//Y軸を少し上げてやる。
 	checkPos.z -= 70.f;				//少し手前に。
 
+	//if (m_gauge!= nullptr && m_gauge->GetGaugeMax() && m_potState != enThree) {
+	//	Check2D();
+	//}
+
+	switch (m_potState)
+	{
+	case enOne: 
+		if (m_gauge != nullptr && m_gauge->GetGaugeMax()) {
+			Check2D();
+		}
+		break;
+	case enTwo:
+		if (m_gauge != nullptr && m_gauge->GetGaugeMax()) {
+			Check2D();
+		}
+	}
+
 	if (m_potState == enComplete)					//鍋の中身が完成しているとき。
 	{
 		DeleteGO(m_gauge);							//ゲージを消す。
 		m_gauge = nullptr;							//ゲージのインスタンスをnullに。
-		if (m_checkFlag == false) {					//チェックマークが生成されていないなら。
-			m_check = NewGO<Check>(0, "check");		//チェックマークを生成。		
-			m_check->SetPosition(checkPos);			//座標更新。
-			m_checkFlag = true;						//チェック生成フラグをtrueに。
-		}
-		if (m_check != nullptr) {					//チェックマークのインスタンスが生成されているなr。
-			m_check->SetPosition(checkPos);			//座標を更新。
-		}
+		Check2D();									//チェックマーク生成。
 	}
 
 	if (m_potState == enThree)						//食べ物が３個入っているとき。
@@ -147,6 +190,19 @@ void Pot::PotGaugeExpansion()
 		if (m_check != nullptr || m_danger != nullptr) {
 			m_dangerStartTimer += gametime().GetFrameDeltaTime();		//タイマーを更新。
 		}
+	}
+}
+
+//チェックマーク生成処理。
+void Pot::Check2D()
+{
+	if (m_checkFlag == false) {					//チェックマークが生成されていないなら。
+		m_check = NewGO<Check>(0, "check");		//チェックマークを生成。		
+		m_check->SetPosition(checkPos);			//座標更新。
+		m_checkFlag = true;						//チェック生成フラグをtrueに。
+	}
+	if (m_check != nullptr) {					//チェックマークのインスタンスが生成されているなr。
+		m_check->SetPosition(checkPos);			//座標を更新。
 	}
 }
 

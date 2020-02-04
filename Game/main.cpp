@@ -41,5 +41,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		//カメラの更新。
 		g_camera3D.Update();
 		camera2d.Update();
+
+	//	g_physics.DebugDraw();
 	}
 }

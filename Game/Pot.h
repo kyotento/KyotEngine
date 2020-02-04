@@ -34,6 +34,11 @@ public:
 	void DeleteLikeSoup();
 
 	/// <summary>
+	/// チェックマークを生成する処理。
+	/// </summary>
+	void Check2D();
+
+	/// <summary>
 	/// 危険マーク2D描画処理。
 	/// </summary>
 	void Danger2D();
