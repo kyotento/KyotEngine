@@ -157,6 +157,12 @@
     <Filter Include="Game\StageSelect">
       <UniqueIdentifier>{f43382f7-b325-4a31-b716-c4e241095886}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\graphics\bloom">
+      <UniqueIdentifier>{ccde2d25-1575-45ea-b89f-4a8306fb4207}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\graphics\effect">
+      <UniqueIdentifier>{98ef2006-b6d1-4095-8014-7eb6dbed2cf9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -333,9 +339,6 @@
     <ClCompile Include="DishDirty.cpp">
       <Filter>Game\Field\Objects\Belongings</Filter>
     </ClCompile>
-    <ClCompile Include="Effect.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Score.cpp">
       <Filter>Game\2D\Stage</Filter>
     </ClCompile>
@@ -432,6 +435,15 @@
     <ClCompile Include="DebugWireframe.cpp">
       <Filter>Engine\physics</Filter>
     </ClCompile>
+    <ClCompile Include="Bloom.cpp">
+      <Filter>Engine\graphics\bloom</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>Engine\graphics\effect</Filter>
+    </ClCompile>
+    <ClCompile Include="PostEffect.cpp">
+      <Filter>Engine\graphics\bloom</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -517,9 +529,6 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Noncopy.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Effect.h">
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="SpBuffer.h">
@@ -735,6 +744,15 @@
     </ClInclude>
     <ClInclude Include="DebugWireframe.h">
       <Filter>Engine\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Bloom.h">
+      <Filter>Engine\graphics\bloom</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>Engine\graphics\effect</Filter>
+    </ClInclude>
+    <ClInclude Include="PostEffect.h">
+      <Filter>Engine\graphics\bloom</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

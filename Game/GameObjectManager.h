@@ -301,6 +301,15 @@ public:
 	}
 #endif
 
+	/// <summary>
+	/// メインレンダリングターゲットを取得する。
+	/// </summary>
+	/// <returns>メインレンダリングターゲット</returns>
+	RenderTarget* GetMainRenderTarget()
+	{
+		return &m_mainRenderTarget;
+	}
+
 private:
 
 	DirectX::Model*		m_modelDx;						//!<DirectXTKが提供するモデルクラス。

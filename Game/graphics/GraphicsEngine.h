@@ -4,6 +4,7 @@
  *@brief	グラフィックスエンジン。
  */
 
+
 enum EnRenderMode
 {
 	enRenderMode_Invalid,			//不正レンダリングモード。
@@ -12,6 +13,7 @@ enum EnRenderMode
 	enRenderMode_Num,				//レンダリングモードの数。
 };
 
+class RenderTarget;
 class GraphicsEngine
 {
 public:
@@ -72,6 +74,15 @@ public:
 	{
 		return m_spriteFont.get();
 	}
+
+	/// <summary>
+/// レンダリングターゲットの切り替え。
+/// </summary>
+/// <param name="renderTarget">レンダリングターゲット</param>
+/// <param name="viewport">ビューポート</param>
+	void ChangeRenderTarget(RenderTarget* renderTarget, D3D11_VIEWPORT* viewport);
+	void ChangeRenderTarget(ID3D11RenderTargetView* renderTarget, ID3D11DepthStencilView* depthStensil, D3D11_VIEWPORT* viewport);
+
 
 
 private:
