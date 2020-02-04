@@ -164,6 +164,8 @@ void GameObjectManager::Execute()
 		}
 	}
 
+//	g_physics.DebugDraw();
+
 	g_graphicsEngine->EndRender();
 
 }

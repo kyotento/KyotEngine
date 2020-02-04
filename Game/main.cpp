@@ -32,6 +32,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		for (auto& pad : g_pad) {
 			pad.Update();
 		}
+
 		//物理エンジンの更新。
 		g_physics.Update();
 		//	Executeを更新。
@@ -42,6 +43,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		g_camera3D.Update();
 		camera2d.Update();
 
-	//	g_physics.DebugDraw();
+
 	}
 }
