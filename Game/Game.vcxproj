@@ -413,6 +413,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\bus\bus_Normal.png" />
+    <ImageContentTask Include="Assets\modelData\bus\bus_spec.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

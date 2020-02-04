@@ -926,6 +926,9 @@
     <ImageContentTask Include="Assets\sprite\fade\fadePunching.png">
       <Filter>Assets\sprite\fade</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="Assets\modelData\bus\bus_spec.png">
+      <Filter>Assets\modelData\StageSelect</Filter>
+    </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\level\stage_1.tkl">
