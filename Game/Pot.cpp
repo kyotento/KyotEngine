@@ -51,20 +51,26 @@ void Pot::Soup()
 		m_gauge->SetGaugeMax(false);				
 		m_potState = enThree;							//食べ物が三つ入った状態にする。
 		if (m_check != nullptr) {		//生成されていたら。
+			m_dangerStartTimer = 0.f;
 			DeleteGO(m_check);			//チェックマークを消す。
 			m_check = nullptr;			//nullに。
 			m_checkFlag = false;
 		}
 		if (m_danger != nullptr) {		//生成されていたら。
+			m_dangerStartTimer = 0.f;
 			DeleteGO(m_danger);			//危険マークを消す。
 			m_sound->Stop();			//音を止める。
 			m_danger = nullptr;			//nullに。
 			m_dangerFlag = false;		//生成されていないのでfalseに変更する。
+			m_checkFlag = false;
 		}
 		if (m_fire != nullptr) {		//生成されていたら。
+			m_dangerStartTimer = 0.f;
 			DeleteGO(m_fire);			//火事マークを消す。
 			m_fire = nullptr;			//nullに。
 			m_fireFlag = false;			//生成されていないのでfalseに変更する。
+			m_checkFlag = false;
+			m_dangerFlag = false;		//生成されていないのでfalseに変更する。
 		}
 	}
 
@@ -75,20 +81,26 @@ void Pot::Soup()
 		m_gauge->GaugeHalf();							//ゲージのスケールを半分にする。
 		m_gauge->SetGaugeMax(false);
 		if (m_check != nullptr) {		//生成されていたら。
+			m_dangerStartTimer = 0.f;
 			DeleteGO(m_check);			//チェックマークを消す。
 			m_check = nullptr;			//nullに。
 			m_checkFlag = false;
 		}
 		if (m_danger != nullptr) {		//生成されていたら。
+			m_dangerStartTimer = 0.f;
 			DeleteGO(m_danger);			//危険マークを消す。
 			m_sound->Stop();			//音を止める。
 			m_danger = nullptr;			//nullに。
 			m_dangerFlag = false;		//生成されていないのでfalseに変更する。
+			m_checkFlag = false;
 		}
 		if (m_fire != nullptr) {		//生成されていたら。
+			m_dangerStartTimer = 0.f;
 			DeleteGO(m_fire);			//火事マークを消す。
 			m_fire = nullptr;			//nullに。
 			m_fireFlag = false;			//生成されていないのでfalseに変更する。
+			m_checkFlag = false;
+			m_dangerFlag = false;		//生成されていないのでfalseに変更する。
 		}
 	}
 
