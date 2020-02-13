@@ -146,7 +146,7 @@ int Result::NexStarNum()
 		return m_score->GetStarOne() - score;		//星１のボーダーからスコアを減算したものを返す。
 	}
 
-	if (score < m_score->GetStarOne()) {			//スコアが星１のボーダーよりも少ないとき。
+	if (score >= m_score->GetStarOne() && score < m_score->GetStarTwo()) {			//スコアが星１のボーダーよりも少ないとき。
 		return m_score->GetStarTwo() - score;									//星２のボーダーからスコアを減算したものを返す。
 	}
 
@@ -157,7 +157,6 @@ int Result::NexStarNum()
 	if (score >= m_score->GetStarThree()) {			//星３のとき。
 		return 0;									//0を返す。
 	}
-
 }
 
 void Result::AfterFontRender()
@@ -223,7 +222,7 @@ void Result::AfterFontRender()
 		m_font.Begin();			//描画開始。
 		wchar_t text6[64];														//テキストに使う配列。
 		swprintf_s(text6, L"%d", NexStarNum());									//テキストを指定。
-		m_positionFont.y -= 150.f;												//Y座標を指定。
+		m_positionFont.y -= 153.f;												//Y座標を指定。
 		m_font.Draw(text6, m_positionFont, m_colorFont, 0.0f, m_scaleFont);		//更新処理。
 		m_font.End();			//描画終了。
 	}

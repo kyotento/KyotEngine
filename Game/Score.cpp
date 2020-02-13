@@ -2,10 +2,10 @@
 #include "Score.h"
 
 namespace {
-	float x = -565.f;			//画像のX座標。
-	float y = -285.f;			//画像のY座標。
+ 	const float x = -565.f;			//画像のX座標。
+	const float y = -285.f;			//画像のY座標。
 
-	float spriteScale = 150.f;	//画像のスケール。
+	const float spriteScale = 150.f;	//画像のスケール。
 }
 
 Score::Score()
@@ -29,7 +29,7 @@ bool Score::Start()
 	m_fontPosition.y = m_position2D.y += 45.f;			//フォントのY座標を指定。
 
 	//todo　実際は選択されたステージごとに異なる。(仕組みを作る)。
-	m_starOne = 200;
+	m_starOne = 150;
 	m_starTwo = 300;
 	m_starThree = 600;
 

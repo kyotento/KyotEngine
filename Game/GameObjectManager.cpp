@@ -114,8 +114,8 @@ void GameObjectManager::Execute()
 			object->RenderWrapper();
 		}
 	}
-	//やるとしたらここでポストエフェクト。
 
+	//ブラーをかける。
 	g_graphicsEngine->DrawPostEffect();
 
 	//２Dのレンダリング。
