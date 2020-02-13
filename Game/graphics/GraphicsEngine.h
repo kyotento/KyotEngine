@@ -3,7 +3,7 @@
 /*!
  *@brief	グラフィックスエンジン。
  */
-
+#include "../PostEffect.h"
 
 enum EnRenderMode
 {
@@ -12,6 +12,7 @@ enum EnRenderMode
 	enRenderMode_Normal,			//通常レンダリングモード。
 	enRenderMode_Num,				//レンダリングモードの数。
 };
+
 
 class RenderTarget;
 class GraphicsEngine
@@ -76,14 +77,20 @@ public:
 	}
 
 	/// <summary>
+	/// ポストエフェクトこDrawを呼ぶ。
+	/// </summary>
+	void DrawPostEffect()
+	{
+		m_postEffect.Draw();
+	}
+
+	/// <summary>
 /// レンダリングターゲットの切り替え。
 /// </summary>
 /// <param name="renderTarget">レンダリングターゲット</param>
 /// <param name="viewport">ビューポート</param>
 	void ChangeRenderTarget(RenderTarget* renderTarget, D3D11_VIEWPORT* viewport);
 	void ChangeRenderTarget(ID3D11RenderTargetView* renderTarget, ID3D11DepthStencilView* depthStensil, D3D11_VIEWPORT* viewport);
-
-
 
 private:
 	D3D_FEATURE_LEVEL		m_featureLevel;				//Direct3D デバイスのターゲットとなる機能セット。
@@ -94,6 +101,8 @@ private:
 	ID3D11RasterizerState*	m_rasterizerState = NULL;	//ラスタライザステート。
 	ID3D11Texture2D*		m_depthStencil = NULL;		//デプスステンシル。
 	ID3D11DepthStencilView* m_depthStencilView = NULL;	//デプスステンシルビュー。
+
+	PostEffect m_postEffect;							//ポストエフェクト。
 
 	std::unique_ptr<DirectX::SpriteBatch>	m_spriteBatch;				//スプライトバッチ。
 	std::unique_ptr<DirectX::SpriteFont>	m_spriteFont;				//スプライトフォント。

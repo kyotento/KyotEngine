@@ -114,7 +114,7 @@ void SkinModel::InitDirectionLight()
 	m_directionLight.direction[0] = { -1.0f,-1.0f,1.0f,0.0f };
 	m_directionLight.direction[0].Normalize();
 	m_directionLight.color[0] = { 0.4f,0.4f,0.4f,1.f };
-
+	
 	//ínñ ÇÃè∆ÇËï‘Çµ
 	/*m_directionLight.direction[1] = { 1.0f,-1.0f,1.0f,0.0f };
 	m_directionLight.direction[1].Normalize();

@@ -13,6 +13,11 @@ public:
 	void Update();
 
 	/// <summary>
+	/// 初期化。
+	/// </summary>
+	void Init();
+
+	/// <summary>
 	/// 描画処理。
 	/// </summary>
 	void Draw();
@@ -24,6 +29,7 @@ public:
 	/// <param name="vsShader">頂点シェーダー</param>
 	/// <param name="psShader">ピクセルシェーダー</param>
 	void DrawFullScreenQuadPrimitive(ID3D11DeviceContext* deviceContext, Shader& vsShader, Shader& psShader);
+
 
 
 private:

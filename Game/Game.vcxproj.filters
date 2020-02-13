@@ -444,6 +444,12 @@
     <ClCompile Include="PostEffect.cpp">
       <Filter>Engine\graphics\bloom</Filter>
     </ClCompile>
+    <ClCompile Include="GaussianBlur.cpp">
+      <Filter>Engine\graphics\bloom</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstantBufferGPU.cpp">
+      <Filter>Engine\graphics\bloom</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -752,6 +758,12 @@
       <Filter>Engine\graphics\effect</Filter>
     </ClInclude>
     <ClInclude Include="PostEffect.h">
+      <Filter>Engine\graphics\bloom</Filter>
+    </ClInclude>
+    <ClInclude Include="GaussianBlur.h">
+      <Filter>Engine\graphics\bloom</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstantBufferGPU.h">
       <Filter>Engine\graphics\bloom</Filter>
     </ClInclude>
   </ItemGroup>

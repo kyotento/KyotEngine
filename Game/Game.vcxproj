@@ -104,6 +104,7 @@
     <ClCompile Include="Bus.cpp" />
     <ClCompile Include="character\CharacterController.cpp" />
     <ClCompile Include="Check.cpp" />
+    <ClCompile Include="ConstantBufferGPU.cpp" />
     <ClCompile Include="CookingList.cpp" />
     <ClCompile Include="Cuisine.cpp" />
     <ClCompile Include="CuttingBoard.cpp" />
@@ -135,6 +136,7 @@
     <ClCompile Include="Gauge.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="GaussianBlur.cpp" />
     <ClCompile Include="graphics\animation\Animation.cpp" />
     <ClCompile Include="graphics\animation\AnimationClip.cpp" />
     <ClCompile Include="graphics\animation\AnimationPlayController.cpp" />
@@ -208,6 +210,7 @@
     <ClInclude Include="Check.h" />
     <ClInclude Include="CIndexBuffer.h" />
     <ClInclude Include="ConstantBuffer.h" />
+    <ClInclude Include="ConstantBufferGPU.h" />
     <ClInclude Include="CookingList.h" />
     <ClInclude Include="Cuisine.h" />
     <ClInclude Include="CuttingBoard.h" />
@@ -240,6 +243,7 @@
     <ClInclude Include="Gauge.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="GaussianBlur.h" />
     <ClInclude Include="GPUBuffer.h" />
     <ClInclude Include="graphics\animation\Animation.h" />
     <ClInclude Include="graphics\animation\AnimationClip.h" />

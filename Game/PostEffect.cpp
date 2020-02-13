@@ -22,6 +22,13 @@ void PostEffect::Update()
 
 }
 
+//‰Šú‰»B
+void PostEffect::Init()
+{
+	InitFullScreenQuadPrimitive();
+	m_bloom.Init();
+}
+
 //•`‰æˆ—B
 void PostEffect::Draw()
 {

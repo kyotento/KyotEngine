@@ -158,6 +158,9 @@ void GraphicsEngine::Init(HWND hWnd)
 	viewport.MaxDepth = 1.0f;
 	m_pd3dDeviceContext->RSSetViewports(1, &viewport);
 	m_pd3dDeviceContext->RSSetState(m_rasterizerState);
+
+	//ポストエフェクトの初期化。
+	m_postEffect.Init();
 }
 
 void GraphicsEngine::ChangeRenderTarget(RenderTarget* renderTarget, D3D11_VIEWPORT* viewport)

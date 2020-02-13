@@ -116,6 +116,7 @@ void GameObjectManager::Execute()
 	}
 	//やるとしたらここでポストエフェクト。
 
+	g_graphicsEngine->DrawPostEffect();
 
 	//２Dのレンダリング。
 	for (GameObjectList objList : m_gameObjectListArray)
