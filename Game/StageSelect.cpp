@@ -51,6 +51,15 @@ bool StageSelect::Start()
 			m_bridge->SetRotation(objData.rotation);
 		}
 
+		//êÏÅB
+		if (objData.EqualObjectName(L"river") == true)
+		{
+			m_river = NewGO<River>(0, "river");
+			m_river->SetPositon(objData.position);
+			m_river->SetScale(objData.scale);
+			m_river->SetRotation(objData.rotation);
+		}
+
 		return true;
 	});
 

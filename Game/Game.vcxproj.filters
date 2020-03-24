@@ -7,9 +7,6 @@
     <Filter Include="Assets\modelData">
       <UniqueIdentifier>{a27dfd5d-af93-4623-b084-aad00b7739c4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="character">
-      <UniqueIdentifier>{c57b7107-f9f3-4b72-8f3e-8644593ed533}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine">
       <UniqueIdentifier>{0ed07148-7ddc-4db6-8b56-aad9d60f1c53}</UniqueIdentifier>
     </Filter>
@@ -163,6 +160,9 @@
     <Filter Include="Engine\graphics\effect">
       <UniqueIdentifier>{98ef2006-b6d1-4095-8014-7eb6dbed2cf9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\character">
+      <UniqueIdentifier>{c57b7107-f9f3-4b72-8f3e-8644593ed533}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -220,7 +220,7 @@
       <Filter>Engine\physics</Filter>
     </ClCompile>
     <ClCompile Include="character\CharacterController.cpp">
-      <Filter>character</Filter>
+      <Filter>Engine\character</Filter>
     </ClCompile>
     <ClCompile Include="level\Level.cpp">
       <Filter>Engine\level</Filter>
@@ -450,6 +450,9 @@
     <ClCompile Include="ConstantBufferGPU.cpp">
       <Filter>Engine\graphics\bloom</Filter>
     </ClCompile>
+    <ClCompile Include="River.cpp">
+      <Filter>Game\StageSelect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -519,7 +522,7 @@
       <Filter>Engine\physics</Filter>
     </ClInclude>
     <ClInclude Include="character\CharacterController.h">
-      <Filter>character</Filter>
+      <Filter>Engine\character</Filter>
     </ClInclude>
     <ClInclude Include="level\Level.h">
       <Filter>Engine\level</Filter>
@@ -766,6 +769,9 @@
     <ClInclude Include="ConstantBufferGPU.h">
       <Filter>Engine\graphics\bloom</Filter>
     </ClInclude>
+    <ClInclude Include="River.h">
+      <Filter>Game\StageSelect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">
@@ -885,6 +891,12 @@
     <MeshContentTask Include="Assets\modelData\bridge\beidge.FBX">
       <Filter>Assets\modelData\StageSelect</Filter>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\river.FBX">
+      <Filter>Assets\modelData\StageSelect</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\2D\Button\B.FBX">
+      <Filter>Assets\modelData\2D</Filter>
+    </MeshContentTask>
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\Title.png">
@@ -958,6 +970,12 @@
     </ImageContentTask>
     <ImageContentTask Include="Assets\modelData\bus\bus_spec.png">
       <Filter>Assets\modelData\StageSelect</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\modelData\Chef\chef_Normal.png">
+      <Filter>Assets\modelData\player</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\modelData\Knife\knife_spec.png">
+      <Filter>Assets\modelData</Filter>
     </ImageContentTask>
   </ItemGroup>
   <ItemGroup>

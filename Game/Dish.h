@@ -12,7 +12,7 @@ public:
 	void Update();
 
 	/// <summary>
-	/// —¿—‚ÌŠÇ—B
+	/// —¿—‚Ì22ŠÇ—B
 	/// </summary>
 	void PutDish(int FoodType);
 

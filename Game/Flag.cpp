@@ -20,8 +20,25 @@ bool Flag::Start()
 	m_skinModelRender->SetPosition(m_position);
 	m_skinModelRender->SetScale(m_scale);
 	m_skinModelRender->SetRotation(m_rotation);
-
 	return true;
+}
+
+//Bボタンを生成する。
+void Flag::NewButton()
+{
+	m_skinModelRenderB = NewGO<SkinModelRender>(0, "skinmodel");
+	m_skinModelRenderB->Init(L"Assets/modelData/2D/Button/B.cmo", nullptr, 0, "PSMain", "VSMain", true, false);
+	m_position2D = m_position;
+	m_position2D.y += 200.f;
+	m_position2D.z -= 50.f;
+	m_skinModelRenderB->SetPosition(m_position2D);
+	m_skinModelRenderB->SetScale(m_scale2D);
+}
+
+//Bボタンを消す処理。
+void Flag::DeleteButton()
+{
+	DeleteGO(m_skinModelRenderB);
 }
 
 void Flag::Update()

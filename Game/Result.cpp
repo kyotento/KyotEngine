@@ -159,6 +159,7 @@ int Result::NexStarNum()
 	}
 }
 
+//todo カリカリの仮。
 void Result::AfterFontRender()
 {
 	m_timer += gametime().GetFrameDeltaTime();			//タイマーを加算。

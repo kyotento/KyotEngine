@@ -176,6 +176,7 @@
     <ClCompile Include="RenderContext.cpp" />
     <ClCompile Include="RenderTarget.cpp" />
     <ClCompile Include="Result.cpp" />
+    <ClCompile Include="River.cpp" />
     <ClCompile Include="SceneItemManager.cpp" />
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="ShadowMap.cpp" />
@@ -288,6 +289,7 @@
     <ClInclude Include="RenderContext.h" />
     <ClInclude Include="RenderTarget.h" />
     <ClInclude Include="Result.h" />
+    <ClInclude Include="River.h" />
     <ClInclude Include="SceneItemManager.h" />
     <ClInclude Include="Score.h" />
     <ClInclude Include="ShadowMap.h" />
@@ -313,6 +315,7 @@
     <ClInclude Include="VertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
+    <MeshContentTask Include="Assets\modelData\2D\Button\B.FBX" />
     <MeshContentTask Include="Assets\modelData\2D\Check\check.FBX" />
     <MeshContentTask Include="Assets\modelData\2D\Danger\danger.FBX" />
     <MeshContentTask Include="Assets\modelData\2D\Fire\fire.FBX" />
@@ -351,6 +354,7 @@
     <MeshContentTask Include="Assets\modelData\Pot\Pot.FBX" />
     <MeshContentTask Include="Assets\modelData\Pot\SoupBase\onion\soupBase_onion.FBX" />
     <MeshContentTask Include="Assets\modelData\Pot\SoupBase\tomato\soupBase_tomato.FBX" />
+    <MeshContentTask Include="Assets\modelData\river.FBX" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)\Assets\modelData\%(Filename).cmo</ContentOutput>
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)\Assets\modelData\%(Filename).cmo</ContentOutput>
@@ -421,6 +425,8 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\bus\bus_Normal.png" />
+    <ImageContentTask Include="Assets\modelData\Knife\knife_spec.png" />
+    <ImageContentTask Include="Assets\modelData\Chef\chef_Normal.png" />
     <ImageContentTask Include="Assets\modelData\bus\bus_spec.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

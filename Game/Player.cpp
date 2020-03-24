@@ -4,13 +4,13 @@
 //#define SPRITE_TEST		//3DのSpriteのテストをするときに定義する。
 //#define OVERCOOKED_ONE_SPECIFCATION			//overcooked1の仕様にしたい場合定義する。
 
-//todo プレイヤーを複数出す仕組みを作る。
 //todo　包丁を描画しないように。
 namespace {
 	const float playerCollidedRadius = 45.f;			//カプセルコライダーの半径。
 	const float playerCollidedHeight = 50.f;			//カプセルコライダーの高さ。
 }
 
+//コンストラクタ。
 Player::Player()
 {
 	m_skinModelRender = NewGO<SkinModelRender>(0, "skinmodel");
@@ -22,6 +22,7 @@ Player::Player()
 	m_animationClips[enanimationClip_RunHave].Load(L"Assets/animData/chef_runHave.tka");		//物を持った状態で移動。
 }
 
+//デストラクタ。
 Player::~Player()
 {
 	//モデルを消す。
@@ -36,12 +37,14 @@ Player::~Player()
 SkinModelRender* m_skinModelRender2;
 #endif
 
+//クラス生成時に一度だけ呼ばれる処理。
 bool Player::Start()
 {
 	m_startCountDown = FindGO<StartCountdown>("startcountdown");			//ゲーム開始前の更新処理。
 
 	//モデルの初期化諸々。
 	m_skinModelRender->Init(L"Assets/modelData/Chef/chef_1.cmo", m_animationClips, enanimationClip_Num, "PSMain", "VSMain", false);
+	m_skinModelRender->InitNormalMap(L"Assets/sprite/chef_Normal.dds");
 	m_skinModelRender->SetPosition(m_position);
 	m_skinModelRender->SetRotation(m_rotation);
 	m_skinModelRender->PlayAnimation(enanimationClip_Idle);
@@ -63,6 +66,7 @@ bool Player::Start()
 	return true;
 }
 
+//毎フレーム更新される処理。
 void Player::Update()
 {
 	//更新処理を開始していない場合処理を終了する。

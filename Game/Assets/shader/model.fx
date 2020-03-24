@@ -255,7 +255,7 @@ float4 PSMain( PSInput In ) : SV_Target0
 
 		//⑤ スペキュラ反射が求まったら、ligに加算する。
 		//鏡面反射を反射光に加算する。
-		lig += pow(t, 2.0f) * directionLight.color[i] * specPower *  7.0f;
+		lig += pow(t, 2.0f) * directionLight.color[i] * specPower *  15.0f;
 		}
 	}
 

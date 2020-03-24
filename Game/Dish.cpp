@@ -98,5 +98,4 @@ void Dish::Update()
 		model->SetPosition(m_position + CVector3::Up()*y*7.0f);		//Y座標を少し上げてやる。　	
 		y++;		//Yを更新。
 	}
-
 }

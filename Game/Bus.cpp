@@ -74,6 +74,35 @@ void Bus::Rotation()
 	}
 }
 
+//カメラを追従させる処理。
+void Bus::FollowCamera()
+{
+	m_gameCamera->SetTarget(m_position);
+	CVector3 cameraPos = m_position + camerapos;
+	m_gameCamera->SetPosition(cameraPos);
+}
+
+//旗に検索をかける処理諸々。
+void Bus::FlagSearch()
+{
+	//旗を全検索する。
+	QueryGOs<Flag>("flag", [&](Flag* flag)
+	{
+		for (int i = 0; i < FLAG_NUM; i++)
+		{
+			m_flag[i] = flag;
+		}
+		return true;
+	});
+
+	//for (int i = 0; i < FLAG_NUM; i++) {
+	//	if (m_flag[FLAG_NUM]->GetPosition - m_position) {
+
+	//	}
+	//}
+
+}
+
 void Bus::Update()
 {
 	//デバッグ。
@@ -83,11 +112,8 @@ void Bus::Update()
 	m_skinModelRender->SetRotation(m_rotation);
 
 #endif
-	//カメラを追従させる処理。
-	m_gameCamera->SetTarget(m_position);
-	CVector3 cameraPos = m_position + camerapos;
-	m_gameCamera->SetPosition(cameraPos);
 
+	FollowCamera();		//カメラを追従させる処理。
 	Move();				//移動処理。
 	Rotation();			//回転処理。
 }
