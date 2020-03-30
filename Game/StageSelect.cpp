@@ -24,10 +24,28 @@ bool StageSelect::Start()
 			return false;
 		}
 
-		//旗。
-		if (objData.EqualObjectName(L"Flag") == true)
+		//ステージ1用の旗。
+		if (objData.EqualObjectName(L"FlagStage1") == true)
 		{
-			m_flag = NewGO<Flag>(0, "flag");
+			m_flag = NewGO<Flag>(0, "flag1");
+			m_flag->SetPosition(objData.position);
+			m_flag->SetScale(objData.scale);
+			m_flag->SetRotation(objData.rotation);
+		}
+
+		//ステージ2用の旗。
+		if (objData.EqualObjectName(L"FlagStage2") == true)
+		{
+			m_flag = NewGO<Flag>(0, "flag2");
+			m_flag->SetPosition(objData.position);
+			m_flag->SetScale(objData.scale);
+			m_flag->SetRotation(objData.rotation);
+		}
+
+		//ステージ3用の旗。
+		if (objData.EqualObjectName(L"FlagStage3") == true)
+		{
+			m_flag = NewGO<Flag>(0, "flag3");
 			m_flag->SetPosition(objData.position);
 			m_flag->SetScale(objData.scale);
 			m_flag->SetRotation(objData.rotation);

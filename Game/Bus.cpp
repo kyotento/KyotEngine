@@ -6,6 +6,7 @@ namespace {
 	float a = 0;
 	const float fallSpeed = 9.8f;				//落下速度。 
 	const float moveSpeed = 10.f;				//移動速度。
+	const float judgmentDistance = 100.f;		//旗との判定距離。
 
 	const float playerCollidedRadius = 45.f;			//カプセルコライダーの半径。
 	const float playerCollidedHeight = 50.f;			//カプセルコライダーの高さ。
@@ -86,20 +87,30 @@ void Bus::FollowCamera()
 void Bus::FlagSearch()
 {
 	//旗を全検索する。
-	QueryGOs<Flag>("flag", [&](Flag* flag)
-	{
-		for (int i = 0; i < FLAG_NUM; i++)
-		{
-			m_flag[i] = flag;
-		}
-		return true;
-	});
-
-	//for (int i = 0; i < FLAG_NUM; i++) {
-	//	if (m_flag[FLAG_NUM]->GetPosition - m_position) {
-
+	//QueryGOs<Flag>("flag", [&](Flag* flag)
+	//{
+	//	for (int i = 0; i < FLAG_NUM; i++)
+	//	{
+	//		m_flag[i] = flag;
 	//	}
-	//}
+	//	return true;
+	//});
+
+	m_flag[0] = FindGO<Flag>("flag1");
+	m_flag[1] = FindGO<Flag>("flag2");
+	m_flag[2] = FindGO<Flag>("flag3");
+ 
+	for (int i = 0; i < FLAG_NUM; i++) {
+		CVector3 vectorLength;
+		vectorLength = m_position - m_flag[i]->GetPosition();		
+
+		if (vectorLength.Length() < judgmentDistance) {
+			m_flag[i]->NewButton();
+		}
+		else{
+			m_flag[i]->DeleteButton();
+		}
+	}
 
 }
 
@@ -116,4 +127,5 @@ void Bus::Update()
 	FollowCamera();		//カメラを追従させる処理。
 	Move();				//移動処理。
 	Rotation();			//回転処理。
+	FlagSearch();
 }

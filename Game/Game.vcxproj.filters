@@ -453,6 +453,9 @@
     <ClCompile Include="River.cpp">
       <Filter>Game\StageSelect</Filter>
     </ClCompile>
+    <ClCompile Include="StageSelectFloor.cpp">
+      <Filter>Game\StageSelect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -770,6 +773,9 @@
       <Filter>Engine\graphics\bloom</Filter>
     </ClInclude>
     <ClInclude Include="River.h">
+      <Filter>Game\StageSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="StageSelectFloor.h">
       <Filter>Game\StageSelect</Filter>
     </ClInclude>
   </ItemGroup>

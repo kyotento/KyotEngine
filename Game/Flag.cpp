@@ -26,6 +26,10 @@ bool Flag::Start()
 //Bボタンを生成する。
 void Flag::NewButton()
 {
+	if (m_skinModelRenderB != nullptr) {
+		return;
+	}
+
 	m_skinModelRenderB = NewGO<SkinModelRender>(0, "skinmodel");
 	m_skinModelRenderB->Init(L"Assets/modelData/2D/Button/B.cmo", nullptr, 0, "PSMain", "VSMain", true, false);
 	m_position2D = m_position;
@@ -38,7 +42,10 @@ void Flag::NewButton()
 //Bボタンを消す処理。
 void Flag::DeleteButton()
 {
-	DeleteGO(m_skinModelRenderB);
+	if (m_skinModelRenderB != nullptr) {
+		DeleteGO(m_skinModelRenderB);
+		m_skinModelRenderB = nullptr;
+	}
 }
 
 void Flag::Update()
