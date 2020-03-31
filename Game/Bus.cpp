@@ -86,32 +86,36 @@ void Bus::FollowCamera()
 //旗に検索をかける処理諸々。
 void Bus::FlagSearch()
 {
-	//旗を全検索する。
-	//QueryGOs<Flag>("flag", [&](Flag* flag)
-	//{
-	//	for (int i = 0; i < FLAG_NUM; i++)
-	//	{
-	//		m_flag[i] = flag;
-	//	}
-	//	return true;
-	//});
-
+	//旗のインスタンスを取得。
 	m_flag[0] = FindGO<Flag>("flag1");
 	m_flag[1] = FindGO<Flag>("flag2");
 	m_flag[2] = FindGO<Flag>("flag3");
+
+	//詳細画像生成用クラスのインスタンスを取得する。
+	m_stageSelectDetailed = FindGO<StageSelectDetailed>("stageselectdetailed");
  
+	//旗との距離判定をとる。
 	for (int i = 0; i < FLAG_NUM; i++) {
-		CVector3 vectorLength;
+		CVector3 vectorLength;			//旗とバスの距離格納用。
 		vectorLength = m_position - m_flag[i]->GetPosition();		
 
+		//一定距離以内だった場合。
 		if (vectorLength.Length() < judgmentDistance) {
 			m_flag[i]->NewButton();
+			m_stageSelectDetailed->NewDetailedImage(i);		//イメージ画像を生成。
 		}
+		//範囲外だった時。
 		else{
 			m_flag[i]->DeleteButton();
 		}
-	}
 
+	}
+	//すべての旗が範囲外のとき。
+	if ((m_position - m_flag[0]->GetPosition()).Length() > judgmentDistance
+		&& (m_position - m_flag[1]->GetPosition()).Length() > judgmentDistance
+		&& (m_position - m_flag[2]->GetPosition()).Length() > judgmentDistance) {
+		m_stageSelectDetailed->DeleteDetailedImage();
+	}
 }
 
 void Bus::Update()
@@ -127,5 +131,5 @@ void Bus::Update()
 	FollowCamera();		//カメラを追従させる処理。
 	Move();				//移動処理。
 	Rotation();			//回転処理。
-	FlagSearch();
+	FlagSearch();		//旗に検索をかける処理諸々。
 }

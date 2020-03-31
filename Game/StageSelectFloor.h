@@ -48,6 +48,7 @@ private:
 	SkinModelRender* m_skinModelRenderCollision = nullptr;		//明かり判定用モデル。
 
 	PhysicsStaticObject m_physicsStaticObject;					//静的物理オブジェクト。
+	PhysicsStaticObject m_physicsStaticObjectCollision;			//静的物理オブジェクト。
 
 };
 

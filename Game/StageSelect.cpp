@@ -21,7 +21,10 @@ bool StageSelect::Start()
 		//地面。
 		if (objData.EqualObjectName(L"floor") == true)
 		{
-			return false;
+			m_stageSelectFloor = NewGO<StageSelectFloor>(0, "stageselectfloor");
+			m_stageSelectFloor->SetPosition(objData.position);
+			m_stageSelectFloor->SetScale(objData.scale);
+			m_stageSelectFloor->SetRotation(objData.rotation);
 		}
 
 		//ステージ1用の旗。
@@ -80,6 +83,9 @@ bool StageSelect::Start()
 
 		return true;
 	});
+
+	//ステージの詳細画像生成処理用クラスを生成。
+	m_stageSelectDetailed = NewGO<StageSelectDetailed>(0, "stageselectdetailed");
 
 	return true;
 }

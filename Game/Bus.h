@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "GameCamera.h"
 #include "Flag.h"
+#include "StageSelectDetailed.h"
 
 #include "character/CharacterController.h"
 
@@ -77,6 +78,7 @@ private:
 	GameCamera* m_gameCamera = nullptr;						//カメラ。
 
 	Flag* m_flag[FLAG_NUM] = { nullptr };					//旗。
+	StageSelectDetailed* m_stageSelectDetailed = nullptr;	//ステージの詳細画像。
 
 	CharacterController m_characon;			//キャラコン。
 

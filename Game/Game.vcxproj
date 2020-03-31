@@ -190,6 +190,7 @@
     <ClCompile Include="StageBase.cpp" />
     <ClCompile Include="StageObject.cpp" />
     <ClCompile Include="StageSelect.cpp" />
+    <ClCompile Include="StageSelectDetailed.cpp" />
     <ClCompile Include="StageSelectFloor.cpp" />
     <ClCompile Include="Stage_1.cpp" />
     <ClCompile Include="StartCountdown.cpp" />
@@ -304,6 +305,7 @@
     <ClInclude Include="StageBase.h" />
     <ClInclude Include="StageObject.h" />
     <ClInclude Include="StageSelect.h" />
+    <ClInclude Include="StageSelectDetailed.h" />
     <ClInclude Include="StageSelectFloor.h" />
     <ClInclude Include="Stage_1.h" />
     <ClInclude Include="StartCountdown.h" />
@@ -357,6 +359,7 @@
     <MeshContentTask Include="Assets\modelData\Pot\SoupBase\onion\soupBase_onion.FBX" />
     <MeshContentTask Include="Assets\modelData\Pot\SoupBase\tomato\soupBase_tomato.FBX" />
     <MeshContentTask Include="Assets\modelData\river.FBX" />
+    <MeshContentTask Include="Assets\modelData\StageSelect\stageSelectCollision.FBX" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)\Assets\modelData\%(Filename).cmo</ContentOutput>
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)\Assets\modelData\%(Filename).cmo</ContentOutput>
@@ -427,6 +430,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\bus\bus_Normal.png" />
+    <ImageContentTask Include="Assets\sprite\StageSelect\Stage2.png" />
+    <ImageContentTask Include="Assets\sprite\StageSelect\Stage3.png" />
+    <ImageContentTask Include="Assets\sprite\StageSelect\Stage1.png" />
     <ImageContentTask Include="Assets\modelData\Knife\knife_spec.png" />
     <ImageContentTask Include="Assets\modelData\Chef\chef_Normal.png" />
     <ImageContentTask Include="Assets\modelData\bus\bus_spec.png" />
