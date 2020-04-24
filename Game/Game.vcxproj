@@ -188,6 +188,7 @@
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteRender.cpp" />
     <ClCompile Include="StageBase.cpp" />
+    <ClCompile Include="StageGeneration.cpp" />
     <ClCompile Include="StageObject.cpp" />
     <ClCompile Include="StageSelect.cpp" />
     <ClCompile Include="StageSelectDetailed.cpp" />
@@ -303,6 +304,7 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteRender.h" />
     <ClInclude Include="StageBase.h" />
+    <ClInclude Include="StageGeneration.h" />
     <ClInclude Include="StageObject.h" />
     <ClInclude Include="StageSelect.h" />
     <ClInclude Include="StageSelectDetailed.h" />

@@ -21,7 +21,7 @@ public:
 
 private:
 
-	Flag* m_flag = nullptr;					//旗。
+	Flag* m_flag[3] = { nullptr,nullptr,nullptr };					//旗。
 	Bus* m_bus = nullptr;					//バス。
 	Bridge* m_bridge = nullptr;				//橋。
 	River* m_river = nullptr;				//川。

@@ -9,7 +9,15 @@ StageSelect::StageSelect()
 
 StageSelect::~StageSelect()
 {
-	DeleteGOs("flag");
+	DeleteGO(m_stageSelectDetailed);
+	DeleteGO(m_stageSelectFloor);
+	for(int i = 0; i <= 2; i++) {
+		DeleteGO(m_flag[i]);
+	}
+	DeleteGO(m_bus);
+	DeleteGOs("bridge");
+	DeleteGO(m_river);
+
 }
 
 
@@ -30,28 +38,28 @@ bool StageSelect::Start()
 		//ステージ1用の旗。
 		if (objData.EqualObjectName(L"FlagStage1") == true)
 		{
-			m_flag = NewGO<Flag>(0, "flag1");
-			m_flag->SetPosition(objData.position);
-			m_flag->SetScale(objData.scale);
-			m_flag->SetRotation(objData.rotation);
+			m_flag[0] = NewGO<Flag>(0, "flag1");
+			m_flag[0]->SetPosition(objData.position);
+			m_flag[0]->SetScale(objData.scale);
+			m_flag[0]->SetRotation(objData.rotation);
 		}
 
 		//ステージ2用の旗。
 		if (objData.EqualObjectName(L"FlagStage2") == true)
 		{
-			m_flag = NewGO<Flag>(0, "flag2");
-			m_flag->SetPosition(objData.position);
-			m_flag->SetScale(objData.scale);
-			m_flag->SetRotation(objData.rotation);
+			m_flag[1] = NewGO<Flag>(0, "flag2");
+			m_flag[1]->SetPosition(objData.position);
+			m_flag[1]->SetScale(objData.scale);
+			m_flag[1]->SetRotation(objData.rotation);
 		}
 
 		//ステージ3用の旗。
 		if (objData.EqualObjectName(L"FlagStage3") == true)
 		{
-			m_flag = NewGO<Flag>(0, "flag3");
-			m_flag->SetPosition(objData.position);
-			m_flag->SetScale(objData.scale);
-			m_flag->SetRotation(objData.rotation);
+			m_flag[2] = NewGO<Flag>(0, "flag3");
+			m_flag[2]->SetPosition(objData.position);
+			m_flag[2]->SetScale(objData.scale);
+			m_flag[2]->SetRotation(objData.rotation);
 		}
 
 		//バス。

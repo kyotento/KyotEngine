@@ -8,8 +8,10 @@
 #include "OrderGenerations.h"
 #include "PlayerGenerations.h"
 #include "StartCountdown.h"
+#include "StageGeneration.h"
 
 class Title;
+class StageGeneration;
 class Game : public GameObject
 {
 public:
@@ -40,6 +42,7 @@ private:
 	OrderGenerations* m_orderGenerations = nullptr;			//注文シート。
 	PlayerGenerations* m_playerGenerations = nullptr;		//プレイヤー生成クラス。
 	StartCountdown* m_startCountDown = nullptr;				//ゲームが始まる前の処理。
+	StageGeneration* m_stageGeneration = nullptr;			//ステージを生成する処理。
 
 	FontRender* m_fontRender = nullptr;		//仮。
 

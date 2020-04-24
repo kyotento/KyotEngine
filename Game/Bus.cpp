@@ -27,8 +27,8 @@ Bus::~Bus()
 
 bool Bus::Start()
 {
-
-	m_gameCamera = FindGO<GameCamera>("gamecamera");
+	m_gameCamera = FindGO<GameCamera>("gamecamera");							//カメラクラスのインスタンスを取得。
+	m_stageGeneration = FindGO<StageGeneration>("stagegeneration");				//ステージ生成クラスのインスタンスを取得。
 
 	//バスのモデル生成諸々。
 	m_skinModelRender = NewGO<SkinModelRender>(0, "skinmodel");
@@ -41,7 +41,7 @@ bool Bus::Start()
 
 	m_resetPosition = m_position;			//初期座標をバックアップ。
 
-	m_characon.Init(playerCollidedRadius, playerCollidedHeight, m_position);
+	m_characon.Init(playerCollidedRadius, playerCollidedHeight, m_position);	//キャラコンの初期化。
 
 	return true;
 }
@@ -96,13 +96,14 @@ void Bus::FlagSearch()
  
 	//旗との距離判定をとる。
 	for (int i = 0; i < FLAG_NUM; i++) {
-		CVector3 vectorLength;			//旗とバスの距離格納用。
-		vectorLength = m_position - m_flag[i]->GetPosition();		
+
+		m_vectorLength = m_position - m_flag[i]->GetPosition();
 
 		//一定距離以内だった場合。
-		if (vectorLength.Length() < judgmentDistance) {
+		if (m_vectorLength.Length() < judgmentDistance) {
 			m_flag[i]->NewButton();
 			m_stageSelectDetailed->NewDetailedImage(i);		//イメージ画像を生成。
+			m_stageGeneration->StageGene(i);				//ステージに遷移する処理。
 		}
 		//範囲外だった時。
 		else{
@@ -115,6 +116,16 @@ void Bus::FlagSearch()
 		&& (m_position - m_flag[1]->GetPosition()).Length() > judgmentDistance
 		&& (m_position - m_flag[2]->GetPosition()).Length() > judgmentDistance) {
 		m_stageSelectDetailed->DeleteDetailedImage();
+	}
+}
+
+//ステージに遷移する処理。
+void Bus::StageTransition(int flagNum) 
+{
+	if (g_pad[0].IsTrigger(enButtonB)) {
+		if (flagNum == 0) {			//ステージ１を選択した時。
+
+		}
 	}
 }
 

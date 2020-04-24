@@ -462,6 +462,9 @@
     <ClCompile Include="StageSelectDetailed.cpp">
       <Filter>Game\StageSelect</Filter>
     </ClCompile>
+    <ClCompile Include="StageGeneration.cpp">
+      <Filter>Game\StageSelect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -785,6 +788,9 @@
       <Filter>Game\StageSelect</Filter>
     </ClInclude>
     <ClInclude Include="StageSelectDetailed.h">
+      <Filter>Game\StageSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="StageGeneration.h">
       <Filter>Game\StageSelect</Filter>
     </ClInclude>
   </ItemGroup>

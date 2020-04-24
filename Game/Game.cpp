@@ -38,9 +38,12 @@ void Game::Update()
 		//m_orderGenerations = NewGO<OrderGenerations>(0, "ordergenerations");			//注文シート生成。
 
 
-//ステージセレクト試作段階。
 		//Bus* bus = NewGO<Bus>(0, "bus");
+
+//ステージセレクト試作段階。
+
 		StageSelect* stageSelect = NewGO<StageSelect>(0, "stageselect");
+		m_stageGeneration = NewGO<StageGeneration>(0, "stagegeneration");			//ステージ生成クラス。
 
 		m_titleDeleteFlag = false;														//生成したのでフラグを返す。
 	}

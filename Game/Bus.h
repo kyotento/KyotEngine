@@ -3,6 +3,7 @@
 #include "GameCamera.h"
 #include "Flag.h"
 #include "StageSelectDetailed.h"
+#include "StageGeneration.h"
 
 #include "character/CharacterController.h"
 
@@ -34,6 +35,12 @@ public:
 	/// 旗を検索する処理。
 	/// </summary>
 	void FlagSearch();
+
+	/// <summary>
+	/// ステージ遷移する処理。
+	/// </summary>
+	/// <param name="flagNum">旗番号</param>
+	void StageTransition(int flagNum);
 
 	/// <summary>
 	/// 座標を指定する。
@@ -71,6 +78,7 @@ private:
 	CVector3 m_stickPower = CVector3::Zero();				//左スティックの傾き具合を保持するためのもの。
 	CVector3 m_move = CVector3::Zero();						//キャラコンの移動速度を計算したもの。(方向持ち)。
 	CVector3 m_resetPosition = CVector3::Zero();			//バスのリセット座標。
+	CVector3 m_vectorLength = CVector3::Zero();				//旗とバスの距離格納用。
 
 	CQuaternion m_rotation = CQuaternion::Identity();		//回転。
 
@@ -79,6 +87,7 @@ private:
 
 	Flag* m_flag[FLAG_NUM] = { nullptr };					//旗。
 	StageSelectDetailed* m_stageSelectDetailed = nullptr;	//ステージの詳細画像。
+	StageGeneration* m_stageGeneration = nullptr;			//ステージを生成するクラス。
 
 	CharacterController m_characon;			//キャラコン。
 

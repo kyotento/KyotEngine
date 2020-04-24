@@ -326,23 +326,7 @@ void OrderGenerations::ShakeOrder(int genenum)
 {
 	if (m_timeLimitGauge[genenum] != nullptr) {
 		if (m_timeLimitGauge[genenum]->GetGaugeState() == TimeLimitGauge::en10Less) {		//ゲージの状態が拡大率１０パーセント以下のとき。
-			//todo 仮　カリカリの仮。
-			//for (int i = 0; i <= 3; i++) {
-			//	if (i == 0) {
-			//		m_position[genenum].x += 5.f;
-			//	}
-			//	if (i == 1) {
-			//		m_position[genenum].x -= 5.f;
-			//	}
-			//	if (i == 2) {
-			//		m_position[genenum].x -= 5.f;
-			//	}
-			//	if (i == 3) {
-			//		m_position[genenum].x += 5.f;
-			//		i = 0;
-			//	}
-			//	m_orderSheet[genenum]->SetPosition(m_position[genenum]);			//生成されたシートの座標を指定してやる。
-			//}
+
 		}
 	}
 }
