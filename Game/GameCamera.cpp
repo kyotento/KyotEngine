@@ -20,6 +20,13 @@ bool GameCamera::Start()
 	return true;
 }
 
+//カメラの視点、注視点をリセットする。
+void GameCamera::CameraReset()
+{
+	m_position = { 0.0f, 900.0f, -600.0f };
+	m_target = { 0.0f,0.0f,0.0f };
+}
+
 void GameCamera::Update()
 {
 	g_camera3D.SetPosition(m_position);

@@ -5,6 +5,7 @@
 #include "Timer.h"
 #include "Score.h"
 #include "OrderGenerations.h"
+#include "GameCamera.h"
 
 class StageGeneration : public GameObject
 {
@@ -29,6 +30,7 @@ private:
 	Timer* m_timer = nullptr;							//タイマークラス。
 	Score* m_score = nullptr;							//スコアクラス。
 	OrderGenerations* m_orderGenerations = nullptr;		//注文シート生成クラス。
+	GameCamera* m_gamecamera = nullptr;					//ゲームカメラ。
 
 };
 

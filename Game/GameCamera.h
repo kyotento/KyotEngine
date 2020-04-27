@@ -11,6 +11,11 @@ public:
 	void Update();
 
 	/// <summary>
+	/// カメラの始点、注視点をリセットする。
+	/// </summary>
+	void CameraReset();
+
+	/// <summary>
 	/// 座標を指定。
 	/// </summary>
 	/// <param name="pos">座標</param>
