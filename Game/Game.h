@@ -33,6 +33,7 @@ public:
 private:
 
 	bool m_titleDeleteFlag = false;				//タイトルがDeleteされたか。
+	bool m_firstPlay = false;					//ループしていないか。
 
 	Title* m_title = nullptr;					//タイトル。
 	Player* m_player = nullptr;					//プレイヤーの基底クラス。

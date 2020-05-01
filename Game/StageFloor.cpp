@@ -9,7 +9,6 @@ StageFloor::StageFloor()
 
 StageFloor::~StageFloor()
 {
-	DeleteGO(m_skinModelRender);
 }
 
 bool StageFloor::Start()
@@ -21,7 +20,6 @@ bool StageFloor::Start()
 //ステージを生成する。
 void StageFloor::NewSelectFloor(int stageNum)
 {
-	m_skinModelRender = NewGO<SkinModelRender>(0, "skinmodelrender");
 
 	//todo ステージ増えたらここについかしていく。
 	if (stageNum == 1) {

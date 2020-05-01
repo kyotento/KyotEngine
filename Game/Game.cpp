@@ -31,8 +31,10 @@ void Game::Update()
 	//実際はステージセレクト画面へ。
 	if (m_titleDeleteFlag)			//タイトルが消えた時。
 	{
-		GameCamera* m_gamecamera = NewGO<GameCamera>(0, "gamecamera");
-
+		if (m_firstPlay == false) {			//ゲームループしたときにゲームカメラを再生成しないようにするためのフィルタ。
+			GameCamera* m_gamecamera = NewGO<GameCamera>(0, "gamecamera");
+			m_firstPlay = true;
+		}
 		//m_startCountDown = NewGO<StartCountdown>(0, "startcountdown");					//ゲーム開始前の処理。
 		//m_playerGenerations = NewGO<PlayerGenerations>(0, "playergnerations");			//プレイヤー生成処理。
 		//m_stage_1 = NewGO<Stage_1>(0, "stage_1");										//ステージ１生成。。
@@ -40,8 +42,6 @@ void Game::Update()
 		//m_score = NewGO<Score>(0, "score");												//スコア生成。
 		//m_orderGenerations = NewGO<OrderGenerations>(0, "ordergenerations");			//注文シート生成。
 
-
-		//Bus* bus = NewGO<Bus>(0, "bus");
 
 //ステージセレクト試作段階。
 
