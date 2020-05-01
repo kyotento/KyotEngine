@@ -465,6 +465,9 @@
     <ClCompile Include="StageGeneration.cpp">
       <Filter>Game\StageSelect</Filter>
     </ClCompile>
+    <ClCompile Include="StageFloor.cpp">
+      <Filter>Game\Field</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -793,6 +796,9 @@
     <ClInclude Include="StageGeneration.h">
       <Filter>Game\StageSelect</Filter>
     </ClInclude>
+    <ClInclude Include="StageFloor.h">
+      <Filter>Game\Field</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">
@@ -920,6 +926,9 @@
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\StageSelect\stageSelectCollision.FBX">
       <Filter>Assets\modelData\StageSelect</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Stage1Floor.FBX">
+      <Filter>Assets\modelData</Filter>
     </MeshContentTask>
   </ItemGroup>
   <ItemGroup>

@@ -10,6 +10,7 @@ Flag::Flag()
 Flag::~Flag()
 {
 	DeleteGO(m_skinModelRender);
+	DeleteGO(m_skinModelRenderB);
 }
 
 bool Flag::Start()

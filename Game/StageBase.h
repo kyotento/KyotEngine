@@ -17,6 +17,7 @@
 #include "Pot.h"
 #include "Belongings.h"
 #include "Dish.h"
+#include "StageFloor.h"
 
 class Desk;
 class DishHold;
@@ -28,6 +29,7 @@ class Delivery;
 class TomatoBox;
 class OnionBox;
 class Knife;
+class StageFloor;
 class StageBase : public GameObject
 {
 public:
@@ -63,6 +65,7 @@ protected:
 	Pot* m_pot = nullptr;					//鍋。
 	Belongings* m_belongings = nullptr;		//持つことのできるもの。
 	Dish* m_dish = nullptr;					//お皿。
+	StageFloor* m_stageFloor = nullptr;		//ステージの床。
 
 private:
 

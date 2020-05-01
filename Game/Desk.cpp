@@ -36,17 +36,4 @@ bool Desk::Start()
 
 void Desk::Update()
 {
-
-	switch (m_state)
-	{
-
-	en_default:
-
-		break;
-
-	en_onObject:
-
-		break;
-
-	}
 }

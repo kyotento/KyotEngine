@@ -8,6 +8,7 @@ Stage_1::Stage_1()
 
 Stage_1::~Stage_1()
 {	
+	DeleteGO(m_stageFloor);
 	DeleteGOs("dish");
 	DeleteGOs("desk");
 	DeleteGOs("dishhold");
@@ -22,7 +23,6 @@ Stage_1::~Stage_1()
 	DeleteGOs("tomatobox");
 	DeleteGOs("onionbox");
 	DeleteGOs("knife");
-
 }
 
 bool Stage_1::Start()
@@ -36,7 +36,12 @@ bool Stage_1::Start()
 			//ínñ ÅB
 			if (objData.EqualObjectName(L"kari_floor") == true)
 			{
-				return false;
+				m_stageFloor = NewGO<StageFloor>(0, "stagefloor");
+				m_stageFloor->NewSelectFloor(1);
+				m_stageFloor->SetPosition(objData.position);
+				m_stageFloor->SetScale(objData.scale);
+				m_stageFloor->SetRotation(objData.rotation);
+
 			}
 
 			//ä˜ÅB

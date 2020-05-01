@@ -188,6 +188,7 @@
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteRender.cpp" />
     <ClCompile Include="StageBase.cpp" />
+    <ClCompile Include="StageFloor.cpp" />
     <ClCompile Include="StageGeneration.cpp" />
     <ClCompile Include="StageObject.cpp" />
     <ClCompile Include="StageSelect.cpp" />
@@ -304,6 +305,7 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteRender.h" />
     <ClInclude Include="StageBase.h" />
+    <ClInclude Include="StageFloor.h" />
     <ClInclude Include="StageGeneration.h" />
     <ClInclude Include="StageObject.h" />
     <ClInclude Include="StageSelect.h" />
@@ -361,6 +363,7 @@
     <MeshContentTask Include="Assets\modelData\Pot\SoupBase\onion\soupBase_onion.FBX" />
     <MeshContentTask Include="Assets\modelData\Pot\SoupBase\tomato\soupBase_tomato.FBX" />
     <MeshContentTask Include="Assets\modelData\river.FBX" />
+    <MeshContentTask Include="Assets\modelData\Stage1Floor.FBX" />
     <MeshContentTask Include="Assets\modelData\StageSelect\stageSelectCollision.FBX" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)\Assets\modelData\%(Filename).cmo</ContentOutput>

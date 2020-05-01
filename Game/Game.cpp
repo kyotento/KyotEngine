@@ -18,6 +18,9 @@ bool Game::Start()
 {
 	m_title = NewGO<Title>(0, "title");			//タイトルを生成する。
 	camera2d.SetUpdateCameraMatrix(0);			//2Dカメラを平行投影に。
+	if (m_stageGeneration != nullptr) {
+		DeleteGO(m_stageGeneration);
+	}
 
 	return true;
 }
