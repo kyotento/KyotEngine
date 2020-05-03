@@ -1019,6 +1019,9 @@
     <ImageContentTask Include="Assets\sprite\StageSelect\Stage3.png">
       <Filter>Assets\sprite\StageSelect</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\StageSelect\StageSelect.png">
+      <Filter>Assets\sprite\StageSelect</Filter>
+    </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\level\stage_1.tkl">

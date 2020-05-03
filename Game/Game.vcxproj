@@ -435,6 +435,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\bus\bus_Normal.png" />
+    <ImageContentTask Include="Assets\sprite\StageSelect\StageSelect.png" />
     <ImageContentTask Include="Assets\sprite\StageSelect\Stage2.png" />
     <ImageContentTask Include="Assets\sprite\StageSelect\Stage3.png" />
     <ImageContentTask Include="Assets\sprite\StageSelect\Stage1.png" />

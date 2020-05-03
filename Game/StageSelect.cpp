@@ -17,7 +17,7 @@ StageSelect::~StageSelect()
 	DeleteGO(m_bus);
 	DeleteGOs("bridge");
 	DeleteGO(m_river);
-
+	DeleteGO(m_spriteRender);
 }
 
 
@@ -91,6 +91,12 @@ bool StageSelect::Start()
 
 		return true;
 	});
+
+	m_spriteRender = NewGO<SpriteRender>(0, "spriterender");
+	m_spriteRender->Init(L"Assets/sprite/StageSelect.dds", 1080, 720);
+	m_spriteRender->SetPosition(m_position);
+	m_spriteRender->SetScale(m_scale);
+	m_spriteRender->SetRotation(m_rotation);
 
 	//ステージの詳細画像生成処理用クラスを生成。
 	m_stageSelectDetailed = NewGO<StageSelectDetailed>(0, "stageselectdetailed");
