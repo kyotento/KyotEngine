@@ -168,7 +168,7 @@ public:
 			gameobject->SetRegistration(false);
 			gameobject->SetRegistDeadList(true);
 
-			m_deleteObjectArray[m_currentDeleteObjectBufferNo].push_back(gameobject);
+			m_deleteObjectArray.push_back(gameobject);
 			gameobject = nullptr;
 
 		}
@@ -261,16 +261,7 @@ public:
 	}
 
 
-	/// <summary>
-	/// マテリアルに対してクエリを行う。
-	/// </summary>
-	/// <param name="func">お問い合わせ関数</param>
-	void QueryMaterials(std::function<void(SkinModel*)> func)
-	{
-		m_modelDx->UpdateEffects([&](DirectX::IEffect* material) {
-			func(reinterpret_cast<SkinModel*>(material));
-		});
-	}
+	
 
 	/// <summary>
 	/// 乱数を取得する。
@@ -312,8 +303,6 @@ public:
 
 private:
 
-	DirectX::Model*		m_modelDx;						//!<DirectXTKが提供するモデルクラス。
-
 	ShadowMap m_shadowMap;			//シャドウマップ。
 
 	int priorityMax = 32;                           //優先度の上限値。
@@ -324,7 +313,7 @@ private:
 
 	typedef std::list<GameObject*>	GameObjectList;             //リストの親分。
 	std::vector<GameObjectList>	m_gameObjectListArray;			//ゲームオブジェクトの優先度付きリスト。
-	GameObjectList	m_deleteObjectArray[2];						//削除するオブジェクトのリスト。削除処理を行っている最中にDeleteGameObjectが呼ばれる可能性が高いので、ダブルバッファ化。
+	GameObjectList	m_deleteObjectArray;						//削除するオブジェクトのリスト。削除処理を行っている最中にDeleteGameObjectが呼ばれる可能性が高いので、ダブルバッファ化。
 
 	D3D11_VIEWPORT m_frameBufferViewports;								//フレームバッファのビューポート。
 	ID3D11RenderTargetView* m_frameBufferRenderTargetView = nullptr;	//フレームバッファのレンダリングターゲットビュー。
@@ -407,10 +396,6 @@ static inline void DeleteGOs(const char* objectName)
 {
 	
 	QueryGOs<GameObject>(objectName, [](auto go) {
-		if (go->GetPriority() == 221) {
-			int i = 0;
-			i++;
-		}
 		DeleteGO(go);
 		return true;
 	});

@@ -207,27 +207,21 @@ void GameObjectManager::ForwardRender()
 
 void GameObjectManager::ExecuteDeleteGameObjects()
 {
-	int preBufferNo = m_currentDeleteObjectBufferNo;
-	//バッファを切り替え。
-	m_currentDeleteObjectBufferNo = 1 ^ m_currentDeleteObjectBufferNo;
-	for (GameObjectList& goList : m_deleteObjectArray) {
-		for (GameObject* go : goList) {
-			GameObjectPriority priority = go->GetPriority();
-			GameObjectList& goExecList = m_gameObjectListArray.at(priority);
-			auto it = std::find(goExecList.begin(), goExecList.end(), go);
+	//削除リストをコピー。
+	auto delList = m_deleteObjectArray;
+	m_deleteObjectArray.clear();
+	for (GameObject* go : delList) {
+		GameObjectPriority priority = go->GetPriority();
+		GameObjectList& goExecList = m_gameObjectListArray.at(priority);
+		auto it = std::find(goExecList.begin(), goExecList.end(), go);
 
-			auto index = std::distance(goExecList.begin(), it);
-
-
-			if (it != goExecList.end()) {
-				//削除リストから除外された。
-				(*it)->SetRegistDeadList(false);
-				if ((*it)->GetNewGameObjectManager()) {
-					delete (*it);
-				}
-				goExecList.erase(it);
+		if (it != goExecList.end()) {
+			//削除リストから除外された。
+			(*it)->SetRegistDeadList(false);
+			if ((*it)->GetNewGameObjectManager()) {
+				delete (*it);
 			}
+			goExecList.erase(it);
 		}
-		goList.clear();
 	}
 }

@@ -69,6 +69,7 @@ bool Player::Start()
 //毎フレーム更新される処理。
 void Player::Update()
 {
+	return;
 	//更新処理を開始していない場合処理を終了する。
 	if (!m_startCountDown->GetGameStartFlag()) {			//ゲーム更新処理を開始していない場合。
 		return;
