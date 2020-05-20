@@ -1,8 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 
-//#define SPRITE_TEST		//3DのSpriteのテストをするときに定義する。
-//#define OVERCOOKED_ONE_SPECIFCATION			//overcooked1の仕様にしたい場合定義する。
+//#define OVERCOOKED_ONE_SPECIFCATION			//overcooked1の仕様にしたい場合定義する。(おそらくバグが発生する)。
 
 //todo　包丁を描画しないように。
 namespace {
@@ -54,12 +53,6 @@ bool Player::Start()
 	//キャラコンの初期化。
 	m_characon.Init(playerCollidedRadius, playerCollidedHeight, m_characonPos);
 
-	//todo　仮　2Dのテスト。	
-#ifdef SPRITE_TEST
-	m_skinModelRender2 = NewGO<SkinModelRender>(0, "karikkari");
-	m_skinModelRender2->Init(L"Assets/modelData/karikkari.cmo", nullptr, 0, "PSMain", "VSMain", true, false);
-#endif
-
 	m_knife = NewGO<Knife>(0, "knife");			//包丁を生成。
 	m_knife->SetPosition(m_position);			//座標を更新。
 
@@ -69,7 +62,6 @@ bool Player::Start()
 //毎フレーム更新される処理。
 void Player::Update()
 {
-	return;
 	//更新処理を開始していない場合処理を終了する。
 	if (!m_startCountDown->GetGameStartFlag()) {			//ゲーム更新処理を開始していない場合。
 		return;
@@ -84,17 +76,6 @@ void Player::Update()
 	if (m_playerState != enanimationClip_Cut) {		//もし切っている状態じゃないとき。
 		m_knife->SetPosition(m_position);			//ナイフの座標を指定。
 	}
-
-#ifdef SPRITE_TEST
-
-//	m_x += 0.1f;
-	m_testScale.x = m_x;
-
-	m_skinModelRender2->SetScale(m_testScale);
-	//m_skinModelRender2->SetPosition(m_position);
-
-#endif
-
 }
 
 //プレイヤーの移動処理。

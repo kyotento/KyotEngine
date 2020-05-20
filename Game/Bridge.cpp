@@ -10,7 +10,6 @@ Bridge::Bridge()
 Bridge::~Bridge()
 {
 	DeleteGO(m_skinModelRender);
-	DeleteGO(m_skinModelRenderCollidion);
 }
 
 

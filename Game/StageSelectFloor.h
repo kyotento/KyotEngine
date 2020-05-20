@@ -45,7 +45,7 @@ private:
 	CQuaternion m_rotation = CQuaternion::Identity();	//回転。
 
 	SkinModelRender* m_skinModelRender = nullptr;				//スキンモデル。
-	SkinModelRender* m_skinModelRenderCollision = nullptr;		//明かり判定用モデル。
+	SkinModelRender* m_skinModelRenderCollision = nullptr;		//当たり判定用モデル。
 
 	PhysicsStaticObject m_physicsStaticObject;					//静的物理オブジェクト。
 	PhysicsStaticObject m_physicsStaticObjectCollision;			//静的物理オブジェクト。

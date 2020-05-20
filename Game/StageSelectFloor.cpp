@@ -10,7 +10,6 @@ StageSelectFloor::StageSelectFloor()
 StageSelectFloor::~StageSelectFloor()
 {
 	DeleteGO(m_skinModelRender);
-	DeleteGO(m_skinModelRenderCollision);
 }
 
 

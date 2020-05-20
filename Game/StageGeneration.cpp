@@ -47,5 +47,7 @@ void StageGeneration::StageGene(int stageNum)
 
 		m_gamecamera = FindGO<GameCamera>("gamecamera");							//ゲームカメラのインスタンスを取得。
 		m_gamecamera->CameraReset();
+
+		DeleteGO(this);
 	}
 }

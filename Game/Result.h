@@ -49,7 +49,7 @@ private:
 	SpriteRender* m_spriteRenderStar[m_starNum] = { nullptr };		//星を生成する画像生成クラス。		
 
 	Score* m_score = nullptr;					//スコア。
-
+	
 	Font m_font;		//フォント。
 
 };
