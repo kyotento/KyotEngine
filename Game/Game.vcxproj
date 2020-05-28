@@ -419,6 +419,7 @@
   </ItemGroup>
   <ItemGroup>
     <Media Include="Assets\sound\BGM\result.wav" />
+    <Media Include="Assets\sound\BGM\StageSelectBGM.wav" />
     <Media Include="Assets\sound\BGM\stage_1.wav" />
     <Media Include="Assets\sound\BGM\title_overcooked.wav" />
     <Media Include="Assets\sound\soundEffect\cutting.wav" />

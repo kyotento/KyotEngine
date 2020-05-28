@@ -18,6 +18,7 @@ StageSelect::~StageSelect()
 	DeleteGOs("bridge");
 	DeleteGO(m_river);
 	DeleteGO(m_spriteRender);
+	DeleteGO(m_sound);
 }
 
 
@@ -92,11 +93,18 @@ bool StageSelect::Start()
 		return true;
 	});
 
+	//ステージセレクト画像描画処理。
 	m_spriteRender = NewGO<SpriteRender>(0, "spriterender");
 	m_spriteRender->Init(L"Assets/sprite/StageSelect.dds", 1080, 720);
 	m_spriteRender->SetPosition(m_position);
 	m_spriteRender->SetScale(m_scale);
 	m_spriteRender->SetRotation(m_rotation);
+
+	//BGM。
+	m_sound = NewGO<Sound>(0, "sound");
+	m_sound->Init(L"Assets/sound/BGM/StageSelectBGM.wav", true);
+	m_sound->Play();
+
 
 	//ステージの詳細画像生成処理用クラスを生成。
 	m_stageSelectDetailed = NewGO<StageSelectDetailed>(0, "stageselectdetailed");

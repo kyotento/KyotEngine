@@ -1062,6 +1062,9 @@
     <Media Include="Assets\sound\soundEffect\failure.wav">
       <Filter>Assets\sound\soundEffect</Filter>
     </Media>
+    <Media Include="Assets\sound\BGM\StageSelectBGM.wav">
+      <Filter>Assets\sound\bgm</Filter>
+    </Media>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\bus\bus_Normal.png">

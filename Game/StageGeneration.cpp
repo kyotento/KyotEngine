@@ -24,13 +24,18 @@ void StageGeneration::StageGene(int stageNum)
 	if (g_pad[0].IsTrigger(enButtonB)) {			//Bボタンを押したとき。
 
 		//todo　仮///////////////////////////////////
-		if (stageNum == 1) {
+		if (stageNum == 1) {		//ステージ２．
 			return;
 		}
-		if (stageNum == 2) {
+		if (stageNum == 2) {		//ステージ３．
 			return;
 		}
 		/////////////////////////////////////////////
+		 
+		//決定音。
+		Sound* se2 = NewGO<Sound>(0, "sound");
+		se2->Init(L"Assets/sound/soundEffect/decision3.wav", false);
+		se2->Play();
 
 		m_startCoundDown = NewGO<StartCountdown>(0, "startcountdown");				//カウントダウンクラスの生成。
 		m_playerGenerations = NewGO<PlayerGenerations>(0, "playergenerations");		//プレイヤー生成クラスの生成。

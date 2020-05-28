@@ -32,6 +32,7 @@ private:
 	StageSelectFloor* m_stageSelectFloor = nullptr;			//床。
 	StageSelectDetailed* m_stageSelectDetailed = nullptr;	//ステージの詳細画像；
 	SpriteRender* m_spriteRender = nullptr;					//スプライト。
+	Sound* m_sound = nullptr;								//BGM。
 
 	Level m_level;							//レベル。
 
