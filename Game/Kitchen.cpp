@@ -40,7 +40,7 @@ void Kitchen::DishWashing()
 	//お皿洗いの上に汚れたお皿があるとき。
 	//拡大処理をして拡大値が１になったら汚れたお皿を消して新しいお皿を生成する。
 
-	if (m_dishDirty != nullptr && m_dishDirty->GetDirtyDishNum() >= 0) {		//汚れたお皿が乗っているとき。
+	if (m_dishDirty != nullptr && m_dishDirty->GetDirtyDishNum() > 0) {		//汚れたお皿が乗っているとき。
 		m_dishDirty->GaugeUpdate();					//ゲージの拡大処理。
 
 		if (m_dishDirty->GetGauge() == nullptr) {		//ゲージの拡大が完了し、インスタンスが破棄されたとき。
