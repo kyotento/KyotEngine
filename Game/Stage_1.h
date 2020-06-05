@@ -1,3 +1,6 @@
+/// <summary>
+/// ステージ１。
+/// </summary>
 #pragma once
 #include "StageBase.h"
 #include "StageObject.h"

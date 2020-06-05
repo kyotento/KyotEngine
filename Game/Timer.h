@@ -1,3 +1,7 @@
+/// <summary>
+/// ゲームタイマー。
+/// </summary>
+
 #pragma once
 #include "GameObject.h"
 #include "StartCountdown.h"

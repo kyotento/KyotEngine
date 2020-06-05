@@ -1,3 +1,6 @@
+/// <summary>
+/// ‚¨M‚ğô‚¤‚Æ‚±‚ëB
+/// </summary>
 #pragma once
 #include "ObjectAbove.h"
 #include "DishDirty.h"

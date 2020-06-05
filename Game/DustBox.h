@@ -1,3 +1,6 @@
+/// <summary>
+/// ÉSÉ~î†ÅB
+/// </summary>
 #pragma once
 #include "StageObject.h"
 class DustBox : public StageObject

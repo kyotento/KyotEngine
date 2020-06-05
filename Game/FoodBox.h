@@ -1,11 +1,11 @@
+/// <summary>
+/// 食べ物入れの基底クラス。
+/// </summary>
 #pragma once
 #include "Tomato.h"
 #include "Onion.h"
 #include "Belongings.h"
 #include "ObjectAbove.h"
-/// <summary>
-/// 食べ物入れの基底クラス。
-/// </summary>
 class Tomato;
 class Onion;
 class Belongings;

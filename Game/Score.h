@@ -1,3 +1,7 @@
+/// <summary>
+/// ゲームのスコア表示。
+/// </summary>
+
 #pragma once
 #include "GameObject.h"
 

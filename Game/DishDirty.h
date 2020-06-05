@@ -1,6 +1,7 @@
 /// <summary>
 /// ‰˜‚ê‚½‚¨MB
 /// </summary>
+/// 
 #pragma once
 #include "Belongings.h"
 

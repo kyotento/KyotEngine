@@ -1,3 +1,6 @@
+/// <summary>
+/// チェックマーク２D。
+/// </summary>
 #pragma once
 #include "GameObject.h"
 

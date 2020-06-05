@@ -1,3 +1,6 @@
+/// <summary>
+/// ゲームクラス。
+/// </summary>
 #pragma once
 #include "Title.h"
 #include "Player.h"

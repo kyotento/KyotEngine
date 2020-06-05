@@ -1,3 +1,6 @@
+/// <summary>
+/// バス。(ステージセレクト画面ではPlayerのようなもの)。
+/// </summary>
 #pragma once
 #include "GameObject.h"
 #include "GameCamera.h"

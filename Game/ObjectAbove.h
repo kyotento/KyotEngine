@@ -1,10 +1,10 @@
+/// <summary>
+/// 物を置くことができるオブジェクトの基底クラス。
+/// </summary>
 #pragma once
 #include "StageObject.h"
 #include "Belongings.h"
 #include "Gauge.h"
-/// <summary>
-/// 物を置くことができるオブジェクトの基底クラス。
-/// </summary>
 
 class ObjectAbove : public StageObject
 {

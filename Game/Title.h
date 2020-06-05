@@ -1,3 +1,7 @@
+/// <summary>
+/// タイトル。
+/// </summary>
+
 #pragma once
 #include "Game.h"
 

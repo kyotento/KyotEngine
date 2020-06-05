@@ -1,3 +1,6 @@
+/// <summary>
+/// ステージの旗。
+/// </summary>
 #pragma once
 #include "GameObject.h"
 

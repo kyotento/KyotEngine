@@ -1,6 +1,8 @@
+/// <summary>
+/// トマトが入っているボックス。
+/// </summary>
 #pragma once
-#include "FoodBox.h"/*
-#include */
+#include "FoodBox.h"
 #include "Player.h"
 
 class Player;

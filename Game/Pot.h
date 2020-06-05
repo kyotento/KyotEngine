@@ -1,6 +1,7 @@
 /// <summary>
 /// ‚¨“çB
 /// </summary>
+
 #pragma once
 #include "Belongings.h"
 #include "SoupBase.h"

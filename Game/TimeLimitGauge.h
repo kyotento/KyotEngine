@@ -1,3 +1,7 @@
+/// <summary>
+/// 注文シートの時間制限用ゲージの処理。
+/// </summary>
+
 #pragma once
 #include "GameObject.h"
 

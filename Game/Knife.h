@@ -1,3 +1,6 @@
+/// <summary>
+/// •ï’šB
+/// </summary>
 #pragma once
 #include "StageObject.h"
 

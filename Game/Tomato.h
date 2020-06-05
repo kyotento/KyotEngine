@@ -1,3 +1,7 @@
+/// <summary>
+/// トマト。
+/// </summary>
+
 #pragma once
 #include "Belongings.h"
 

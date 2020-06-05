@@ -1,3 +1,6 @@
+/// <summary>
+/// ã¥ÅB
+/// </summary>
 #pragma once
 #include "GameObject.h"
 #include "physics/PhysicsStaticObject.h"

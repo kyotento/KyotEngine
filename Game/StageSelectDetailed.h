@@ -1,3 +1,6 @@
+/// <summary>
+/// 各ステージの詳細の画像。
+/// </summary>
 #pragma once
 
 class StageSelectDetailed : public GameObject

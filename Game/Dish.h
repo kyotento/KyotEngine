@@ -1,3 +1,7 @@
+/// <summary>
+/// Ç®éMÅB
+/// </summary>
+
 #pragma once
 #include "Belongings.h"
 #include "Cuisine.h"

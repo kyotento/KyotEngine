@@ -1,3 +1,6 @@
+/// <summary>
+/// 客が食器を返してくるところ。(汚れたお皿置き場)。
+/// </summary>
 #pragma once
 #include "ObjectAbove.h"
 #include "Dish.h"

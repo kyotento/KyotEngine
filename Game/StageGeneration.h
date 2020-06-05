@@ -1,3 +1,6 @@
+/// <summary>
+/// 各ステージを生成するクラス。
+/// </summary>
 #pragma once
 #include "Stage_1.h"
 #include "StartCountdown.h"

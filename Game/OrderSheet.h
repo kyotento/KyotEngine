@@ -1,3 +1,6 @@
+/// <summary>
+/// 注文シート。
+/// </summary>
 #pragma once
 #include "GameObject.h"
 

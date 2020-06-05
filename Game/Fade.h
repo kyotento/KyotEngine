@@ -1,3 +1,6 @@
+/// <summary>
+/// フェード。
+/// </summary>
 #pragma once
 #include "GameObject.h"
 

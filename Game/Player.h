@@ -1,3 +1,6 @@
+/// <summary>
+/// プレイヤークラス。
+/// </summary>
 #pragma once
 #include "character/CharacterController.h"
 #include "Desk.h"
@@ -18,9 +21,6 @@
 #include "SoupBase.h"
 #include "StartCountdown.h"
 
-/// <summary>
-/// プレイヤーの基底クラス。
-/// </summary>
 class Desk;
 class DishHold;
 class GasStove;

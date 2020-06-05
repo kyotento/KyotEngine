@@ -1,3 +1,6 @@
+/// <summary>
+/// プレイヤーを生成するクラス。
+/// </summary>
 #pragma once
 #include "GameObject.h"
 #include "Player.h"

@@ -5,6 +5,7 @@
 ///ステージ上に置かれるオブジェクトの基底クラス。 
 /// </summary>
 
+//todo 正直このクラス消したい。
 class StageObject : public GameObject
 {
 public:

@@ -1,3 +1,6 @@
+/// <summary>
+/// ƒRƒ“ƒB
+/// </summary>
 #pragma once
 #include "ObjectAbove.h"
 class GasStove : public ObjectAbove

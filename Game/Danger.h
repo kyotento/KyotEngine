@@ -1,3 +1,6 @@
+/// <summary>
+/// 危険マーク2D。
+/// </summary>
 #pragma once
 #include "GameObject.h"
 

@@ -1,3 +1,7 @@
+/// <summary>
+/// ゲージクラス。
+/// </summary>
+
 #pragma once
 
 class Gauge : public GameObject

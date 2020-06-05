@@ -1,3 +1,6 @@
+/// <summary>
+/// ステージセレクト画面を生成するクラス。
+/// </summary>
 #pragma once
 #include "level/Level.h"
 #include "GameObject.h"

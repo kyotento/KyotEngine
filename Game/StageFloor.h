@@ -1,3 +1,6 @@
+/// <summary>
+/// ステージの床。(クラス無しでの生成時、うまくモデルがDeleteされなかったため作成)。
+/// </summary>
 #pragma once
 #include "physics/PhysicsStaticObject.h"
 #include "StageObject.h"

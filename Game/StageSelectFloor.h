@@ -1,3 +1,6 @@
+/// <summary>
+/// ステージセレクト画面の床兼、床の当たり判定。
+/// </summary>
 #pragma once
 #include "physics/PhysicsStaticObject.h"
 

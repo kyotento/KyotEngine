@@ -1,3 +1,6 @@
+/// <summary>
+/// ゲームオーバークラス。
+/// </summary>
 #pragma once
 #include "GameOver.h"
 #include "Result.h"

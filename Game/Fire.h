@@ -1,3 +1,6 @@
+/// <summary>
+/// 火事マーク2D。
+/// </summary>
 #pragma once
 #include "GameObject.h"
 

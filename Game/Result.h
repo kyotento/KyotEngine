@@ -1,3 +1,7 @@
+/// <summary>
+/// ƒŠƒUƒ‹ƒgB
+/// </summary>
+
 #pragma once
 #include "GameObject.h"
 #include "Score.h"

@@ -1,3 +1,6 @@
+/// <summary>
+/// ‚Ü‚È”Â•t‚«‚ÌŠ÷B
+/// </summary>
 #pragma once
 #include "ObjectAbove.h"
 

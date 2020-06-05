@@ -1,3 +1,6 @@
+/// <summary>
+/// Š÷i‚½‚¾‚ÌŠ÷jB
+/// </summary>
 #pragma once
 #include "level/MapChip.h"
 #include "ObjectAbove.h"

@@ -1,3 +1,7 @@
+/// <summary>
+/// ã ÇÀÇ¨ÅB
+/// </summary>
+
 #pragma once
 #include "Belongings.h"
 
@@ -9,9 +13,6 @@ public:
 
 	bool Start();
 	void Update();
-
-//	void GaugeGeneration();
-
 
 private:
 

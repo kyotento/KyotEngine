@@ -1,3 +1,7 @@
+/// <summary>
+/// まな板。
+/// </summary>
+//todo おそらく使われないクラス。
 #pragma once
 #include "StageObject.h"
 class CuttingBoard : public StageObject

@@ -1,3 +1,6 @@
+/// <summary>
+/// 注文シートの食べ物部分を生成するクラス。
+/// </summary>
 #pragma once
 #include "GameObject.h"
 
