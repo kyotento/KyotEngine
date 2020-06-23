@@ -38,6 +38,7 @@ bool Bus::Start()
 	m_skinModelRender->SetPosition(m_position);
 	m_skinModelRender->SetScale(m_scale);
 	m_skinModelRender->SetRotation(m_rotation);
+	m_skinModelRender->SetSpecPower(4.f);
 
 	m_resetPosition = m_position;			//初期座標をバックアップ。
 

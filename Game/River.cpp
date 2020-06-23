@@ -27,5 +27,5 @@ bool River::Start()
 
 void River::Update()
 {
-	
+	m_skinModelRender->UVScroll(-1.f, 1.f, 5.f);		//UVスクロール。
 }

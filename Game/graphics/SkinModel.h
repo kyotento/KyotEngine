@@ -37,7 +37,9 @@ struct LightConstantBuffer
 	CVector3			environmentpow;		//環境光の強さ。
 };
 
-//UVスクロール。
+/// <summary>
+/// UVスクロール。
+/// </summary>
 struct UVScroll
 {
 	CVector2 uv;				//UVスクロールのUV値。
