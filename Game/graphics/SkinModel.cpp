@@ -21,6 +21,12 @@ SkinModel::~SkinModel()
 		m_lightConstantBuffer->Release();
 	}
 
+	//スキン無モデル用の定数バッファの開放。
+	if (m_uvConstantBuffer != nullptr)
+	{
+		m_uvConstantBuffer->Release();
+	}
+
 }
 
 void SkinModel::Init(const wchar_t* filePath,/* EnFbxUpAxis enFbxUpAxis,*/ const char* entryPS, const char* entryVS/*, bool ShadowReciever = true*/)
@@ -94,6 +100,11 @@ void SkinModel::InitConstantBuffer()
 	//作成するバッファのサイズを変更する。
 	bufferDesc.ByteWidth = sizeof(DirectionLight);				//DirectionLightは16byteの倍数になっているので、切り上げはやらない。
 	g_graphicsEngine->GetD3DDevice()->CreateBuffer(&bufferDesc, NULL, &m_lightConstantBuffer);
+
+	//スキン無しモデル用の定数バッファを作成。
+	bufferDesc.ByteWidth = (((bufferSize - 1) / 16) + 1) * 16;
+	g_graphicsEngine->GetD3DDevice()->CreateBuffer(&bufferDesc, NULL, &m_uvConstantBuffer);
+
 }
 
 void SkinModel::InitSamplerState()
@@ -221,13 +232,19 @@ void SkinModel::Draw(EnRenderMode renderMode, CMatrix viewMatrix, CMatrix projMa
 	m_directionLight.eyePos = g_camera3D.GetPosition();
 	//鏡面反射光の絞りを設定。//各クラスで指定するように変更。
 	//m_directionLight.specPos = 2.f;
+
+	//UV値を更新。
+	m_uvScroll.uv = m_uv;
 	
 	//ライト用の定数バッファを更新。
 	d3dDeviceContext->UpdateSubresource(m_lightConstantBuffer, 0, nullptr, &m_directionLight, 0, 0);
+	//PS用の定数バッファを更新。
+	d3dDeviceContext->UpdateSubresource(m_uvConstantBuffer, 0, nullptr, &m_uvScroll, 0, 0);
 	//定数バッファをGPUに転送。
 	d3dDeviceContext->VSSetConstantBuffers(0, 1, &m_cb);
 	d3dDeviceContext->PSSetConstantBuffers(0, 1, &m_cb);
 	d3dDeviceContext->PSSetConstantBuffers(1, 1, &m_lightConstantBuffer);
+	d3dDeviceContext->PSSetConstantBuffers(2, 1, &m_uvConstantBuffer);
 	//サンプラステートを設定。
 	d3dDeviceContext->PSSetSamplers(0, 1, &m_samplerState);
 	//ボーン行列をGPUに転送。

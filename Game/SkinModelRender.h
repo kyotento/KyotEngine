@@ -101,6 +101,32 @@ public:
 	}
 
 	/// <summary>
+	/// UVスクロールの移動値を設定。
+	/// </summary>
+	/// <param name="u">テクスチャのX座標</param>
+	/// <param name="v">テクスチャのY座標</param>
+	void UVScroll(float u, float v)
+	{
+		m_uv.x += u;
+		m_uv.y += v;
+		m_skinModel.SetUV(m_uv);
+	}
+
+	/// <summary>
+	/// UVスクロールの移動値とタイマーを設定。
+	/// </summary>
+	/// <param name="u">テクスチャのX座標</param>
+	/// <param name="v">テクスチャのY座標</param>
+	/// <param name="time">設定した座標に到達するまでの時間</param>
+	void UVScroll(float u, float v, float time)
+	{
+		float timer = time * 60.f;
+		m_uv.x += u / timer;
+		m_uv.y += v / timer;
+		m_skinModel.SetUV(m_uv);
+	}
+
+	/// <summary>
 	/// スキンモデルを持ってくる。
 	/// </summary>
 	/// <returns>スキンモデル</returns>
@@ -137,6 +163,8 @@ private:
 	const char* m_psmain;
 	const char* m_vsmain;
 
+	CVector2 m_uv = CVector2::Zero();						//テクスチャのUV値。
+
 	CVector3 m_position = CVector3::Zero();					//座標。
 	CVector3 m_scale = CVector3::One();						//拡大率。	
 
@@ -146,5 +174,4 @@ private:
 	AnimationClip* m_animationClips = nullptr;				//アニメーションクリップ。
 
 	SkinModel m_skinModel;
-	SkinModel m_skinModel2;
 };

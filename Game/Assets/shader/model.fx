@@ -69,6 +69,22 @@ struct VSInputNmTxVcTangent
     float3 Tangent  : TANGENT;				//接ベクトル。
     float2 TexCoord : TEXCOORD0;			//UV座標。
 };
+
+/// <summary>
+/// UVスクロール。
+/// </summary>
+struct UVScroll
+{
+	float2 uv : TEXCOORDO;			//UVスクロール用のUV値。
+};
+
+//UVスクロール用の定数バッファ。
+cbuffer UVScrollCostantBuffer : register(b2)
+{
+	UVScroll uvScroll;			//UVスクロールの頂点構造体。
+	float2			TextureCoord;			//テクスチャのUV値。
+};
+
 /*!
  * @brief	スキンありモデルの頂点構造体。
  */
@@ -212,7 +228,7 @@ PSInput VSMainSkin( VSInputNmTxWeights In )
 //--------------------------------------------------------------------------------------
 float4 PSMain( PSInput In ) : SV_Target0
 {
-	float4 albedoColor = g_albedoTexture.Sample(g_sampler, In.TexCoord); //todo In.TexCodeがテクスチャのUV値。CBufferを使って送る。
+	float4 albedoColor = g_albedoTexture.Sample(g_sampler, In.TexCoord + uvScroll.uv); //todo In.TexCodeがテクスチャのUV値。CBufferを使って送る。
 	float3 lig = 0.0f;
 
 

@@ -35,6 +35,8 @@ bool Delivery::Start()
 
 void Delivery::Update()
 {
+
+	m_skinModelRender->UVScroll(0.f, 1.f, 1.f);
 	if (m_state == ObjectAbove::en_onObject)			//‰½‚©æ‚Á‚Ä‚¢‚é‚Æ‚«B
 	{
 		m_TimeAdvanced = true;

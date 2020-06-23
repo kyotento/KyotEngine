@@ -37,6 +37,21 @@ struct LightConstantBuffer
 	CVector3			environmentpow;		//環境光の強さ。
 };
 
+//UVスクロール。
+struct UVScroll
+{
+	CVector2 uv;				//UVスクロールのUV値。
+};
+
+/// <summary>
+///	UVスクロールの頂点構造体。
+/// </summary>
+struct UVScrollCostantBuffer
+{
+	UVScroll uvScroll;						//UVスクロールの頂点構造体。
+	CVector2 TextureCoord;					//UV座標。
+};
+
 /*!
 *@brief	スキンモデルクラス。
 */
@@ -124,6 +139,15 @@ public:
 	void SetSpecPower(float specPow)
 	{
 		m_directionLight.specPos = specPow;
+	}
+
+	/// <summary>
+	/// テクスチャのUV値を更新し、UVスクロールさせる。
+	/// </summary>
+	/// <param name="uv">更新されるuv値</param>
+	void SetUV(CVector2 uv)
+	{
+		m_uv = uv;
 	}
 
 	/// <summary>
@@ -218,9 +242,13 @@ private:
 	ID3D11SamplerState* m_samplerState = nullptr;			//サンプラステート。
 	ID3D11Buffer*		m_lightConstantBuffer = nullptr;	//ライト用の定数バッファ。
 	DirectionLight		m_directionLight;					//ディレクションライト。
-	ID3D11ShaderResourceView* m_shadowMapSRV = nullptr;
+	ID3D11ShaderResourceView* m_shadowMapSRV = nullptr;		//シャドウマップ。
 	ID3D11ShaderResourceView* m_normalMapSRV = nullptr;		//法線マップ。
 	ID3D11ShaderResourceView* m_specMapSRV = nullptr;		//スペキュラマップ。
+	UVScroll			m_uvScroll;							//UVスクロールの頂点構造体。
+	ID3D11Buffer*		m_uvConstantBuffer = nullptr;		//UVスクロール用の定数バッファ。
+
+	CVector2 m_uv = CVector2::Zero();		//テクスチャのUV値。
 
 	const char* m_vsmain;
 	const char* m_psmain;
