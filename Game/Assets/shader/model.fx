@@ -235,6 +235,7 @@ float4 PSMain( PSInput In ) : SV_Target0
 	//法線を計算する。
 	float3 normal = 0;
 
+	//法線マップ。
 	if (isHasNormalMap == 1) {	//１なら法線マップが設定されている。
 		//従法線の計算。
 		float3 biNormal = cross(In.Normal, In.Tangent);
@@ -254,6 +255,7 @@ float4 PSMain( PSInput In ) : SV_Target0
 	normal = In.Normal;
 	}
 
+	//スペキュラマップによるスペキュラ反射。
 	if (isHasSpecuraMap) {
 	//スペキュラマップ。
 	for (int i = 0; i < directionLightNum; i++) {
@@ -275,7 +277,7 @@ float4 PSMain( PSInput In ) : SV_Target0
 		}
 	}
 
-	//鏡面反射光。
+	//鏡面反射光。(スペキュラマップ無し)今後消すかもしれない。
 	//ディレクションライトの鏡面反射光を計算する。
 	{
 		for(int i = 0; i < directionLightNum; i++) {
@@ -300,6 +302,7 @@ float4 PSMain( PSInput In ) : SV_Target0
 
 	float t = max(0.0f, dot(normal * -1.0f, directionLight.direction[0]));
 
+	//アニメ調の計算。
 	if (t < 0.3f) {
 		lig *= 0.9f;
 	}

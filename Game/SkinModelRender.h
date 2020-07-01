@@ -105,26 +105,15 @@ public:
 	/// </summary>
 	/// <param name="u">テクスチャのX座標</param>
 	/// <param name="v">テクスチャのY座標</param>
-	void UVScroll(float u, float v)
-	{
-		m_uv.x += u;
-		m_uv.y += v;
-		m_skinModel.SetUV(m_uv);
-	}
+	void UVScroll(float u, float v);
 
 	/// <summary>
 	/// UVスクロールの移動値とタイマーを設定。
 	/// </summary>
 	/// <param name="u">テクスチャのX座標</param>
 	/// <param name="v">テクスチャのY座標</param>
-	/// <param name="time">設定した座標に到達するまでの時間</param>
-	void UVScroll(float u, float v, float time)
-	{
-		float timer = time * 60.f;
-		m_uv.x += u / timer;
-		m_uv.y += v / timer;
-		m_skinModel.SetUV(m_uv);
-	}
+	/// <param name="time">設定したUV値に到達するまでの時間</param>
+	void UVScroll(float u, float v, float time);
 
 	/// <summary>
 	/// スキンモデルを持ってくる。

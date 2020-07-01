@@ -16,7 +16,7 @@ public:
 	}
 
 	/// <summary>
-	/// fpsを固定する。
+	/// １フレームの経過時間を取得する。
 	/// </summary>
 	/// <returns>1.0f/60.f</returns>
 	const float GetFrameDeltaTime() const
@@ -30,12 +30,22 @@ public:
 	/// <param name="deltaTime"></param>
 	void PushFrameDeltaTime(float deltaTime);
 
+	/// <summary>
+	/// フレームレートを取得する。
+	/// </summary>
+	/// <returns>フレームレート</returns>
+	const float GetFrameRate() const
+	{
+		return m_fps;
+	}
 
 private:
 
 	std::list<float> m_frameDeltaTimeQue;
 
-	float m_frameDeltaTime = 1.0f / 60.0f;		//1フレームの経過時間。60fps.
+	const float m_fps = 60.f;					//フレームレート。
+
+	float m_frameDeltaTime = 1.0f / m_fps;		//1フレームの経過時間。60fps.
 
 	/// <summary>
 	/// クラスのインスタンスを返す。

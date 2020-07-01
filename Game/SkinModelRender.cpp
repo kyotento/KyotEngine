@@ -125,3 +125,37 @@ void SkinModelRender::InitAnimation(AnimationClip* animationClips, int numAnimat
 	}
 }
 
+//UVスクロール。
+void SkinModelRender::UVScroll(float u, float v)
+{
+	//UV値を反映。
+	m_uv.x += u;
+	m_uv.y += v;
+
+	//設定上UV値が１を超えてしまっても正常に動くが、
+	//値が大きくなりすぎるのを防ぐため値が1を超えた場合０を代入し、初期化する。
+	if (m_uv.x >= 1.0f){
+		m_uv.x == 0.0f;
+	}
+	if (m_uv.y >= 1.0f) {
+		m_uv.y == 0.0f;
+	}
+	m_skinModel.SetUV(m_uv);
+}
+
+//UVスクロール。
+void SkinModelRender::UVScroll(float u, float v, float time)
+{
+	float timer = time * gametime().GetFrameRate();
+	m_uv.x += u / timer;
+	m_uv.y += v / timer;
+	//設定上UV値が１を超えてしまっても正常に動くが、
+	//値が大きくなりすぎるのを防ぐため値が1を超えた場合０を代入し、初期化する。
+	if (m_uv.x >= 1.0f) {
+		m_uv.x == 0.0f;
+	}
+	if (m_uv.y >= 1.0f) {
+		m_uv.y == 0.0f;
+	}
+	m_skinModel.SetUV(m_uv);
+}
